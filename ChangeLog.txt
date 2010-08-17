@@ -1,0 +1,54 @@
+SWT - Scilab Wavelet Toolbox
+Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
+__________________________________________________________________
+0.1.10
+  + Add scal2frq, centfrq, cwtplot, wavedecplot
+0.1.9
+  + Add denoise funtions: wden, wnoisest, wthresh, wnoise, thselect, ddencmp
+0.1.8
+  + bug fixes for scilab 5, transformation of the help files
+0.1.7
+   + works under scilab 5
+0.1.0-rc6
+   + Add FSfarras, dualfilt1, dualtree, idualtree, dualtree2D, idualtree2D, cplxdual2D, icplxdual2D, wnorm
+0.1.0-rc5.5
+   + Add wrev2, wrot3, wrev3, dwt3, idwt3
+0.1.0-rc5
+   + Add db11 to db20, sym2 to sym20, bior4.4 to bior6.8
+   + Add vaidyanathan, beyklin, bathlets, legendre wavelets
+   + Add legdwavf
+   + Add iconv, wcodemat
+   + Add stationary wavelet transform utilites, swt, iswt, swt2 and iswt2
+   + Add cwt, continuous wavelet waveform generation utilites
+   + Add alpha code of Scilab Time and Freqency Toolbox, see macros folder
+0.1.0-rc4
+   + Add coiflets, symlets and b-spline bi-orthogonal wavelet
+   + Add upcoef, upcoef2, upwlev and upwlev2
+   + Adjust function input parameter patterns to be more similiar with counterpart in Matlab Wavelets
+   + Add help pages and demos
+
+0.1.0-rc3
+   + Fix function swtdwt2Dex
+   + Modify loader.sce
+   + Remove data/image/lena.bmp.  (If you need, please use SIVP's data.  SIVP's website: http://sivp.sourceforge.net )
+   + Support BSD style make.
+
+0.1.0-rc2
+   + Fix function swtdwt2Dex
+   + Add version string in loader.sce
+
+0.1.0-rc1-windows
+   + Build .dll files for windows used.
+
+0.1.0-rc1 Initial release
+   + Discrete Fast Wavelet Transform, daubechies wavelets
+   + 1-D single level signal decomposition and reconstruction
+   + 1-D multi-level signal decompostition and reconstruction
+   + 2-D single level image decomposition and reconstruction
+   + 2-D multi-level image decomposition and reconstruction
+   + help pages for all the functions.
+   + home page
+   + nice photographs
+
+
+

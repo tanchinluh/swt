@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="biorwavf"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>biorwavf</refname><refpurpose>bi-orthogonal spline wavelets scaling filter  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>[RF,DF]=biorwavf(wname)</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>wname  </term>
+  
+            <listitem>
+    : wavelet name, 'bior1.1' to 'bior6.8'
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>RF  </term>
+  
+            <listitem>
+    : synthesis scaling filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>DF  </term>
+  
+            <listitem>
+    : analysis scaling filter
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  biorwavf is an utility function for obtaining twin scaling filters 
+  of bi-orthogonal spline wavelet including bior1.1, bior1.3, 
+  bior1.5, bior2.2, bior2.4, bior2.6, bior2.8, bior3.1, bior3.3,
+  bior3.5, bior3.7, bior3.9, bior4.4, bior5.5 and bior6.8. Although the twin filters 
+  have different length, zeros has been fed to keep two filters the 
+  same length.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  [RF,DF]=biorwavf('bior3.3');
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="dbwavf">dbwavf</link> 
+      </member>
+    
+      <member> 
+         <link linkend="rbiorwavf">rbiorwavf</link> 
+      </member>
+    
+      <member> 
+         <link linkend="coifwavf">coifwavf</link> 
+      </member>
+    
+      <member> 
+         <link linkend="legdwavf">legdwavf</link> 
+      </member>
+    
+      <member> 
+         <link linkend="symwavf">symwavf</link> 
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

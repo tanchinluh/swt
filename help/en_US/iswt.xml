@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="iswt"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>iswt</refname><refpurpose>Inverse Stationary Wavelet Transform  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>x0=iswt(SWA,SWD,wname])
+x0=iswt(SWA,SWD,Lo_R,Hi_R)
+x0=iswt(SWC,wname])
+x0=iswt(SWC,Lo_R,Hi_R)</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>SWA  </term>
+  
+            <listitem>
+    : approximation coefficient
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>SWD  </term>
+  
+            <listitem>
+    : detail coefficient
+  </listitem> 
+  
+         </varlistentry>  
+  
+         <varlistentry>
+  
+            <term>SWC  </term>
+  
+            <listitem>
+    : composite coefficient
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>wname  </term>
+  
+            <listitem>
+    : wavelet name
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>x0  </term>
+  
+            <listitem>
+    : reconstruced signal
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Lo_R  </term>
+  
+            <listitem>
+    : lowpass synthesis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Hi_R  </term>
+  
+            <listitem>
+    : highpass synthesis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  iswt is discrete inverse stationary wavelet transform utility.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  x=rand(1,100);
+  [SWA,SWD]=swt(x,3,'db2');
+  x0 = iswt(SWA,SWD,'db2');
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="swt">swt</link>  
+      </member>
+    
+      <member> 
+         <link linkend="swt2">swt2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="iswt2">iswt2</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

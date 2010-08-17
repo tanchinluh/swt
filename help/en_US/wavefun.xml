@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="wavefun"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>wavefun</refname><refpurpose>Wavelet and Scaling Functions  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>[PHI,PSI,XVAL]=wavefun(wname,ITER)
+[PHI1,PSI1,PHI2,PSI2,XVAL]=wavefun(wname,ITER)
+[PSI,XVAL]=wavefun(wname,ITER)</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>wname  </term>
+  
+            <listitem>
+    : wavelet name
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>ITER  </term>
+  
+            <listitem>
+    : iteration cycle, default is 8, 10 is used frequently 
+  </listitem> 
+  
+         </varlistentry>
+ 
+         <varlistentry>
+  
+            <term>PHI  </term>
+  
+            <listitem>
+    : scaling function, some wavelets do not have scaling function
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>PSI  </term>
+  
+            <listitem>
+    : wavelet function
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>XVAL  </term>
+  
+            <listitem>
+    : time domain grid
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+    wavefun is an utility to get scaling function phi and wavelet function psi. For orthogonal wavelets, both phi and psi are available. For biorthogonal wavelets, two scaling functions and wavelet function could be obtained. For some wavelets, only wavelet function is available. 
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+[phi,psi,xval]=wavefun('sym4',10);
+[phi1,psi1,phi2,psi2,xval]=wavefun('bior3.3',8);
+[psi,xval]=wavefun('mexh',8);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="wavefun2">wavefun2</link> 
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

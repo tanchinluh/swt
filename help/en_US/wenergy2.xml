@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="wenergy2"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>wenergy2</refname><refpurpose>Energy Statistics from two dimension multiple level decompostion   </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>[Ea,Ed]=wenergy(c,s)
+[Ea,Eh,Ev,Ed]=wenergy(c,s)</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>Ea  </term>
+  
+            <listitem>
+    : energy percentage of approximation coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Eh  </term>
+  
+            <listitem>
+    : energy percentage of horizontal detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Ec  </term>
+  
+            <listitem>
+    : energy percentage of vertical detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Ed  </term>
+  
+            <listitem>
+    : energy percentage of diagonal detail coefficent, vector
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>c  </term>
+  
+            <listitem>
+    : coefficent array
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>s  </term>
+  
+            <listitem>
+    : size array
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  wenergy2 is to calculate the energy percentage of approximation and detail coefficent for two dimension decompostion.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  x=rand(100,100);
+  [C,S]=wavedec2(x,3,'db2');
+  [Ea,Ed]=wenergy2(C,S);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="wavedec2">wavedec2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="waverec2">waverec2</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

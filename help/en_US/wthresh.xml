@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="wthresh"><info><pubdate>July 2010  </pubdate></info><refnamediv><refname>wtresh</refname><refpurpose>Soft or hard thresholding</refpurpose></refnamediv>
+  
+
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>Y = wthresh(X,SORH,T)
+
+  </synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+    <varlistentry>
+  
+            <term>X  </term>
+  
+            <listitem>
+    : input vector or matrix
+  </listitem> 
+  
+         </varlistentry>
+  
+ 
+
+      
+        
+  
+         <varlistentry>
+  
+            <term>SORH  </term>
+  
+            <listitem>
+            <para> 
+       : (if SORH = 's') - soft thresholding
+  </para>        <para>
+       : (if SORH = 'h') - hard thresholding
+       </para>  
+  </listitem> 
+  
+         </varlistentry>
+  
+        <varlistentry>
+  
+            <term>T  </term>
+  
+            <listitem>
+    : threshold value
+  </listitem> 
+  
+         </varlistentry>
+         
+        </variablelist>
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+doing either hard or soft thresholding
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+   // Generate signal and set threshold. 
+    y = linspace(-1,1,100); 
+    thr = 0.4;
+    
+    // Perform hard thresholding. 
+    ythard = wthresh(y,'h',thr);
+
+   // Perform soft thresholding. 
+   ytsoft = wthresh(y,'s',thr);
+
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Holger Nahrstaedt </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="wden">wden</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

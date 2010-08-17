@@ -1,0 +1,6 @@
++ Add more wavelets
++ Add more functions, wavelet packets and lifted scheme
++ Integrate WaveLab850 Code
+
+
+

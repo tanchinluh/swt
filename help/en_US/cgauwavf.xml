@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="cgauwavf"><info><pubdate>August 2007  </pubdate></info><refnamediv><refname>cgauwavf</refname><refpurpose>complex gauss wavelet  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>[PSI,X]= cgauwavf(LB,UB,N,P)</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>LB  </term>
+  
+            <listitem>
+    : low bound
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>UB  </term>
+  
+            <listitem>
+    : upper bound
+  </listitem> 
+  
+         </varlistentry>
+ 
+         <varlistentry>
+  
+            <term>N  </term>
+  
+            <listitem>
+    : number of	data points
+  </listitem> 
+  
+         </varlistentry>
+
+         <varlistentry>
+  
+            <term>P  </term>
+  
+            <listitem>
+    : Derivative times, 1 to 8
+  </listitem> 
+  
+         </varlistentry>
+ 
+         <varlistentry>
+  
+            <term>PSI  </term>
+  
+            <listitem>
+    : complex wavelet
+  </listitem> 
+  
+         </varlistentry>
+ 
+         <varlistentry>
+  
+            <term>X  </term>
+  
+            <listitem>
+    : time grid
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  cgauwavf is an utility to get complex gauss wavelet waveform. 
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  [PSI,X]=cgauwavf(-20,20,1001,8);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="sinus">sinus</link> 
+      </member>
+    
+      <member> 
+         <link linkend="mexihat">mexihat</link> 
+      </member>
+    
+      <member> 
+         <link linkend="morlet">morlet</link> 
+      </member>
+    
+      <member> 
+         <link linkend="DOGauss">DOGauss</link> 
+      </member>
+    
+      <member> 
+         <link linkend="gauswavf">gauswavf</link> 
+      </member>
+    
+      <member> 
+         <link linkend="cmorwavf">cmorwavf</link> 
+      </member>
+    
+      <member> 
+         <link linkend="poisson">poisson</link> 
+      </member>
+    
+      <member> 
+         <link linkend="fbspwavf">fbspwavf</link> 
+      </member>
+    
+      <member> 
+         <link linkend="cauwavf">cauwavf</link> 
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

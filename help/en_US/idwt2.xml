@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="idwt2"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>idwt2</refname><refpurpose>Two Dimension Inverse Discrete Fast Wavelet Transform  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>X=idwt2(CA,CH,CV,CD,wname,[S])
+X=idwt2(CA,CH,CV,CD,Lo_R,Hi_R,[S])</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>wname  </term>
+  
+            <listitem>
+    : wavelet name
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>X  </term>
+  
+            <listitem>
+    : reconstructed matrix
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Lo_R  </term>
+  
+            <listitem>
+    : lowpass synthesis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Hi_R  </term>
+  
+            <listitem>
+    : highpass syntheis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>S  </term>
+  
+            <listitem>
+    : restruction size of row and column
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>CA  </term>
+  
+            <listitem>
+    : approximation coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>CH  </term>
+  
+            <listitem>
+    : horizontal detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>CV  </term>
+  
+            <listitem>
+    : vertical detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>CD  </term>
+  
+            <listitem>
+    : diagnoal detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  idwt2 is for two dimension inverse discrete fast wavelet transform. Coefficent could be void vector as '[]' for either of CA, CH, CV or CD.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  x=rand(100,100);
+  [CA,CH,CV,CD]=dwt2(x,'db2','mode','asymh');
+  x0=idwt2(CA,CH,CV,CD,'db2',[100 100]);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="dwt">dwt</link>  
+      </member>
+    
+      <member> 
+         <link linkend="dwt2">dwt2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="dwt3">dwt3</link>  
+      </member>
+    
+      <member> 
+         <link linkend="idwt">idwt</link>  
+      </member>
+    
+      <member> 
+         <link linkend="idwt3">idwt3</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

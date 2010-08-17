@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="upcoef2"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>upcoef2</refname><refpurpose>Two Dimension Direct Restruction   </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>Y=upcoef2(type,x,wname,[N],[S])
+Y=upcoef2(type,x,Lo_R,Hi_R,[N],[S])</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+ 
+         <varlistentry>
+  
+            <term>x  </term>
+  
+            <listitem>
+    : input matrix
+  </listitem> 
+  
+         </varlistentry>
+ 
+         <varlistentry>
+  
+            <term>type  </term>
+  
+            <listitem>
+    : approximation or detail, 'a', 'h', 'v' or 'd'.
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>wname  </term>
+  
+            <listitem>
+    : wavelet name
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Y  </term>
+  
+            <listitem>
+    : reconstruction
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Lo_R  </term>
+  
+            <listitem>
+    : lowpass synthesis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Hi_R  </term>
+  
+            <listitem>
+    : highpass syntheis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>N  </term>
+  
+            <listitem>
+    : restruction level
+  </listitem> 
+  
+         </varlistentry>
+    
+         <varlistentry>
+  
+            <term>S  </term>
+  
+            <listitem>
+    : desired output size vector
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  upcoef2 is for upward two dimension reconstruction from any desired input matrix.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  x=rand(100,100);
+  [cA,cH,cV,cD]=dwt2(x2,'db2');
+  Y=upcoef2('a',cA,'db2',1);
+  Z=upcoef2('h',cH,'db2',3);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="wavedec2">wavedec2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="waverec2">waverec2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="wrcoef2">wrcoef2</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

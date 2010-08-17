@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="dyadup"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>dyadup</refname><refpurpose>dyadic upsampling  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>Y=dyadup(x,[EVEN_ODD])
+Y=dyadup(M,[EVEN_ODD],[type])
+Y=dyadup(M,[type],[EVEN_ODD])</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>x  </term>
+  
+            <listitem>
+    : double vector
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>M  </term>
+  
+            <listitem>
+    : double matrix
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>EVEN_ODD  </term>
+  
+            <listitem>
+    : even or odd integer
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>type  </term>
+  
+            <listitem>
+    : upsampling manner, 'r' for row, 'c' for column, and 'm' for row and column simutaneously.
+  </listitem> 
+  
+         </varlistentry>
+   
+         <varlistentry>
+  
+            <term>Y  </term>
+  
+            <listitem>
+    : upsampling result
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+    dyadup is an utility function for dyadic upsampling. if 
+    EVEN_ODD is even, zeors will be put between input entries and 
+    output length will be two times input length minus one. 
+    Otherwise, additional two zeros will be put at the head and tail 
+    of output so the output length will be two times input length 
+    plus one. Default is odd. Optional argumet type is especially 
+    for matrix input upsampling.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+a=rand(1,100);
+Y=dyadup(a);
+b=rand(25,25);
+Y=dyadup(b,'r',0);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="dyaddown">dyaddown</link> 
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

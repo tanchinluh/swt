@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="wrev3"><info><pubdate>December 2007  </pubdate></info><refnamediv><refname>wrev3</refname><refpurpose>3D matrix fliping  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>Y=wrev3(x,M)</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>x  </term>
+  
+            <listitem>
+    : double 3D matrix
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>M  </term>
+  
+            <listitem>
+    : 1 for row-wise (X), 2 for column-wise (Y), 3 for slice-wise (Z), , 4 for both row and column (XY), 5 for both row and slice (XZ), 6 for both column and slice (YZ) and 7 for three directions (XYZ).
+  </listitem> 
+  
+         </varlistentry>
+   
+         <varlistentry>
+  
+            <term>Y  </term>
+  
+            <listitem>
+    : fliping result
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+    wrev3 is a fliping utility function on time domain. 
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+a=rand(3,3,3);
+Y=wrev(a,2);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="wrev">wrev</link> 
+      </member>
+    
+      <member> 
+         <link linkend="wrev2">wrev2</link> 
+      </member>
+    
+      <member> 
+         <link linkend="wrot3">wrot3</link> 
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

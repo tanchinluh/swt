@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="idwt"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>idwt</refname><refpurpose>Inverse Discrete Fast Wavelet Transform  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>X=idwt(cA,cD,wname,[L])
+X=idwt(cA,cD,Lo_R,Hi_R,[L])</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>wname  </term>
+  
+            <listitem>
+    : wavelet name
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>x  </term>
+  
+            <listitem>
+    : reconstructed vector
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Lo_R  </term>
+  
+            <listitem>
+    : lowpass synthesis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Hi_R  </term>
+  
+            <listitem>
+    : highpass syntheis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>L  </term>
+  
+            <listitem>
+    : restruction length
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>cA  </term>
+  
+            <listitem>
+    : approximation coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>cD  </term>
+  
+            <listitem>
+    : detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  idwt is for inverse discrete fast wavelet transform. Coefficent could be void vector as '[]' for cA or cD.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  x=rand(1,100);
+  [cA,cD]=dwt(x,'db2','mode','asymh');
+  x0=idwt(cA,cD,'db2',100);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="dwt">dwt</link>  
+      </member>
+    
+      <member> 
+         <link linkend="dwt2">dwt2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="idwt2">idwt2</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

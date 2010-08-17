@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="wrcoef2"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>wrcoef2</refname><refpurpose>Restruction from single branch from two dimension multiple level decompstion   </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>X=wrcoef2(type,c,s,wname,[N])
+X=wrcoef2(type,c,s,Lo_R,Hi_R,[N])</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+ 
+         <varlistentry>
+  
+            <term>type  </term>
+  
+            <listitem>
+    : approximation or detail, 'a', 'h', 'v' or 'd'.
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>wname  </term>
+  
+            <listitem>
+    : wavelet name
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>X  </term>
+  
+            <listitem>
+    : reconstruction
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Lo_R  </term>
+  
+            <listitem>
+    : lowpass synthesis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Hi_R  </term>
+  
+            <listitem>
+    : highpass syntheis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>c  </term>
+  
+            <listitem>
+    : coefficent array
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>s  </term>
+  
+            <listitem>
+    : size array
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>N  </term>
+  
+            <listitem>
+    : restruction level
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  wrcoef2 is for reconstruciton from single branch of two dimension multiple level 
+  decompostion.	Extension mode is stored as a global variable and 
+  could be changed with dwtmode. If N is omitted, maximum level is 
+  used.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  x=rand(100,100);
+  [C,S]=wavedec2(x,3,'db2');
+  A2=wrcoef2('a',c,S,'db2',2);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="wavedec2">wavedec2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="waverec2">waverec2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="upcoef2">upcoef2</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

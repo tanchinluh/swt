@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="cplxdual2D"><info><pubdate>May 2008  </pubdate></info><refnamediv><refname>cplxdual2D</refname><refpurpose>Complex 2D dualtree wavelet transform  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>[c1,c2,s]=cplxdual2D(x,J,Faf,af)</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>x  </term>
+  
+            <listitem>
+    : input matrix
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>J  </term>
+  
+            <listitem>
+    : decomposition level
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Faf  </term>
+  
+            <listitem>
+    : first stage analysis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>af  </term>
+  
+            <listitem>
+    : further stage analysis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>c1  </term>
+  
+            <listitem>
+    : complex decomposition coefficient, real part for one tree and imainery part for another tree
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>c2  </term>
+  
+            <listitem>
+    : complex decomposition coefficient, real part for one tree and imainery part for another tree
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>s  </term>
+  
+            <listitem>
+    : coefficient size matrix
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  cplxdual2D is an utility function of complex 2D dualtree wavelet transform. Refer to Professor Ivan Selesnick's webpage at Brooklyn Polytech, NY. 
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  [Faf,Fsf]=FSfarras('f');
+  [af,sf]=dualfilt1('f');
+  x=rand(256,256);
+  [c1,c2,s]=cplxdual2D(x,3,Faf,af);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="FSfarras">FSfarras</link> 
+      </member>
+    
+      <member> 
+         <link linkend="dualfilt1">dualfilt1</link> 
+      </member>
+    
+      <member> 
+         <link linkend="dualtree">dualtree</link> 
+      </member>
+    
+      <member> 
+         <link linkend="idualtree">idualtree</link> 
+      </member>
+    
+      <member> 
+         <link linkend="idualtree2D">idualtree2D</link> 
+      </member>
+    
+      <member> 
+         <link linkend="icplxdual2D">icplxdual2D</link> 
+      </member>
+    
+      <member> 
+         <link linkend="wavedec2">wavedec2</link> 
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="wavedecplot"><info><pubdate>Aug 2010  </pubdate></info><refnamediv><refname>wavedecplot</refname><refpurpose>Plots wavedec coeffs</refpurpose></refnamediv>
+  
+
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>wavedecplot(C,L)
+   wavedecplot(C,L,cbar,f)
+</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+       <varlistentry>
+  
+            <term>C </term>
+  
+            <listitem>
+   :  wavedec C coeffs
+  </listitem> 
+  
+         </varlistentry>
+  
+  
+         <varlistentry>
+  
+            <term>L </term>
+  
+            <listitem>
+   :  wavedec L coeffs
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>cbar </term>
+    <listitem> 
+ : defines plotting of a color bar (%t or %f)
+  </listitem> 
+   </varlistentry>
+
+  
+
+    <varlistentry>
+  
+            <term>f  </term>
+  
+            <listitem>
+     : if used, the coeff are plotted in the figure f
+  </listitem> 
+  
+         </varlistentry>
+  
+       
+      </variablelist>
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+Plots the absolute coefficients of a discrete Wavelet-Transform (wavedec)
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+   wname = 'db2';
+ x=[zeros(1,200),20*ones(1,200)];
+
+[C,L]=wavedec(x,5,wname);
+wavedecplot(C,L);
+
+]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Holger Nahrstaedt  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="wavedec">wavedec</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="iconv"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>iconv</refname><refpurpose>periodic convolution  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>Y=iconv(a,b)</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>a  </term>
+  
+            <listitem>
+    : vector
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>b  </term>
+  
+            <listitem>
+    : vector
+  </listitem> 
+  
+         </varlistentry>
+   
+         <varlistentry>
+  
+            <term>Y  </term>
+  
+            <listitem>
+    : convolution result, same length with max(length(a),length(b)).
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+    iconv is a periodic convolution utility function on time domain. 
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+a=rand(1,3);
+b=rand(1,2);
+Y=conv(a,b);
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="conv">conv</link> 
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

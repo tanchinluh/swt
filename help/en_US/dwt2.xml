@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="dwt2"><info><pubdate>July 2007  </pubdate></info><refnamediv><refname>dwt2</refname><refpurpose>Two Dimensional Discrete Fast Wavelet Transform  </refpurpose></refnamediv>
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   
+  
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>[CA,CH,CV,CD]=dwt2(x,wname,['mode',extMethod])
+[CA,CH,CV,CD]=dwt2(x,Lo_D,Hi_D,['mode',extMethod])</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+         <varlistentry>
+  
+            <term>wname  </term>
+  
+            <listitem>
+    : wavelet name
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>x  </term>
+  
+            <listitem>
+    : double matrix
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Lo_D  </term>
+  
+            <listitem>
+    : lowpass analysis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>Hi_D  </term>
+  
+            <listitem>
+    : highpass analysis filter
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>extMethod  </term>
+  
+            <listitem>
+    : extension mode, 'zpd' for example
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>CA  </term>
+  
+            <listitem>
+    : approximation coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>CH  </term>
+  
+            <listitem>
+    : horizontal detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>CV  </term>
+  
+            <listitem>
+    : vertical detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>CD  </term>
+  
+            <listitem>
+    : diagonal detail coefficent
+  </listitem> 
+  
+         </varlistentry>
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+  dwt2 is for two dimension discrete fast wavelet transform with the signal extension method optional argument.
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  x=rand(100,100);
+  [CA,CH,CV,CD]=dwt2(x,'db2','mode','asymh');
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="dwt">dwt</link>  
+      </member>
+    
+      <member> 
+         <link linkend="dwt3">dwt3</link>  
+      </member>
+    
+      <member> 
+         <link linkend="idwt">idwt</link>  
+      </member>
+    
+      <member> 
+         <link linkend="idwt2">idwt2</link>  
+      </member>
+    
+      <member> 
+         <link linkend="idwt3">idwt3</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>
