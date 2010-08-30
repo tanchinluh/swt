@@ -1,6 +1,8 @@
 SWT - Scilab Wavelet Toolbox
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
+0.1.11
+  + Add unit_tests, some macros are removed, some bug fixes
 0.1.10
   + Add scal2frq, centfrq, cwtplot, wavedecplot
 0.1.9

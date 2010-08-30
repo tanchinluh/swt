@@ -1,7 +1,8 @@
 mode(7)
 //    Please ensure SIVP is installed and load SIVP first
 //    load an image
-im=imread(SWTDIR+'/image/woman.bmp');
+demopath = get_absolute_file_path("image.sce");
+im=imread(demopath+'/image/woman.bmp');
 //    Display the image
 imshow(im);
 //    Convert the color to gray
