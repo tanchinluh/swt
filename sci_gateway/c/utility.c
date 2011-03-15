@@ -1209,24 +1209,24 @@ conv (double *sigIn, int sigInLength,
  *-----------------------------------------*/
 
 void
-iconv(double *sigIn, int sigInLength,
+i_conv(double *sigIn, int sigInLength,
 	  double *sigOut, int sigOutLength,
 	  double *filter, int filterLength)
 {
-  int count;
-  int bufferLength;
-  int outLength;
+  int count = 0;
+  int bufferLength = 0;
+  int outLength = 0;
   double *pBuf;
   double *pOutBuf;
-
+  
   bufferLength = 2 * sigInLength;
-  pBuf = malloc(bufferLength*sizeof(double));
+  pBuf = malloc(bufferLength*sizeof(double));	
   for(count=0;count<sigInLength;count++)
   {
 	  pBuf[count] = sigIn[count];
 	  pBuf[count+sigInLength] = sigIn[count];
   }
-		 
+	     
   outLength = filterLength + 2 * sigInLength - 1;
   pOutBuf = malloc(outLength*sizeof(double));
   conv(pBuf,bufferLength,pOutBuf,outLength,filter,filterLength);

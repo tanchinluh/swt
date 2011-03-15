@@ -71,7 +71,7 @@ detcoef is for extraction of detail coeffient at different level after a multipl
    <refsection><title>Examples</title><programlisting role="example"><![CDATA[
   x=rand(1,100);
   [C,L]=wavedec(x,3,'db2');
-  D2=detcoef(c,l,2);
+  D2=detcoef(C,L,2);
  ]]></programlisting></refsection>
   
    <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>

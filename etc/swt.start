@@ -1,4 +1,4 @@
-mprintf("Start swt toolbox - (0.1.11)\n");
+mprintf("Start swt toolbox - (0.1.12)\n");
 
 if isdef("swtlib") then
 	warning("Toolbox swt library is already loaded");

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="wtresh"><info><pubdate>July 2010  </pubdate></info><refnamediv><refname>wtresh</refname><refpurpose>  Soft or hard thresholding </refpurpose></refnamediv>
+  
+
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>
+         Y = wthresh(X,SORH,T)
+</synopsis></refsynopsisdiv>
+  
+   <refsection><title>Parameters</title>
+ 
+      <variablelist>
+  
+      <varlistentry>
+  
+            <term>X  </term>
+  
+            <listitem>
+    : input vector
+  </listitem> 
+  
+         </varlistentry>
+         
+        
+  
+  
+         <varlistentry>
+  
+            <term>SORH  </term>
+  
+            <listitem>
+    : ('s' or 'h') soft or hard thresholding
+  </listitem> 
+  
+         </varlistentry>
+  
+         <varlistentry>
+  
+            <term>T  </term>
+  
+            <listitem>
+              <para>
+    : Treshhold
+         </para>        
+  </listitem> 
+  
+         </varlistentry>
+         
+       
+                  <varlistentry>
+  
+            <term>Y  </term>
+  
+            <listitem>
+    : output vector
+  </listitem> 
+  
+         </varlistentry>
+  
+        
+ 
+      </variablelist>
+  
+   </refsection>
+  
+   <refsection><title>Description</title>
+  
+      <para>
+      wtresh performs either soft- or hard tresholding on X.
+  
+  </para>
+  
+   </refsection>
+  
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+   
+y = linspace(-1,1,100); 
+thr = 0.4;
+
+// Perform hard thresholding. 
+ythard = wthresh(y,'h',thr);
+
+// Perform soft thresholding. 
+ytsoft = wthresh(y,'s',thr);
+
+subplot(311); plot(y,y);title("original signal");
+subplot(312); plot(y,ythard);title("Hardtresholded signal");
+subplot(313); plot(y,ytsoft);title("Softtresholded signal");
+
+ ]]></programlisting></refsection>
+  
+   <refsection><title>Authors</title><para>Holger Nahrstaedt</para></refsection>
+  
+   <refsection><title>See Also</title><simplelist type="inline">
+    
+      <member> 
+         <link linkend="thselect">thselect</link>  
+          <link linkend="wden">wtresh</link>  
+      </member>
+  
+   </simplelist></refsection>
+
+</refentry>

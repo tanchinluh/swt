@@ -115,7 +115,7 @@ X=wrcoef(type,c,l,Lo_R,Hi_R,[N])</synopsis></refsynopsisdiv>
    <refsection><title>Examples</title><programlisting role="example"><![CDATA[
   x=rand(1,100);
   [C,L]=wavedec(x,3,'db2');
-  x0=wrcoef('a',c,l,'db2',2);
+  x0=wrcoef('a',C,L,'db2',2);
  ]]></programlisting></refsection>
   
    <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>

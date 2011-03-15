@@ -71,7 +71,7 @@
    <refsection><title>Examples</title><programlisting role="example"><![CDATA[
   x=rand(1,100);
   [C,L]=wavedec(x,3,'db2');
-  [Ea,Ed]=wenergy(c,l);
+  [Ea,Ed]=wenergy(C,L);
  ]]></programlisting></refsection>
   
    <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>

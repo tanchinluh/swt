@@ -1753,6 +1753,9 @@ int_upcoef2 (char *fname)
   Func syn_fun;
   swt_wavelet pWaveStruct;
   
+  CheckRhs(minrhs,maxrhs);
+  CheckLhs(minlhs,maxlhs);
+  
   upcoef2_form_validate (&errCode, &flow);
   if (errCode != SUCCESS)
     {

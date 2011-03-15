@@ -74,6 +74,7 @@ int_iconv (char *fname)
   GetRhsVar (1, "d", &m1, &n1, &l1);
   GetRhsVar (2, "d", &m2, &n2, &l2);
   conv_validate (&errCode);
+
   if (errCode != SUCCESS)
     {
       validate_print (errCode);	
@@ -88,9 +89,9 @@ int_iconv (char *fname)
   CreateVar (3, "d", &m3, &n3, &l3);
   /* Actual Processing */
   if (m1*n1>m2*n2)
-	  iconv (stk (l1), n1 * m1, stk (l3), n3, stk (l2), n2 * m2);
+     i_conv (stk (l1), n1 * m1, stk (l3), n3, stk (l2), n2 * m2);
   else
-      iconv (stk (l2), n2 * m2, stk (l3), n3, stk (l1), n1 * m1);
+      i_conv (stk (l2), n2 * m2, stk (l3), n3, stk (l1), n1 * m1);
   /* Return Value */
   LhsVar (1) = 3;
   return 0;

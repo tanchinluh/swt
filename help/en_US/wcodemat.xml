@@ -79,7 +79,7 @@
    </refsection>
   
    <refsection><title>Examples</title><programlisting role="example"><![CDATA[
-  x=rand(1,100);
+  x=rand(100,100);
   m=wcodemat(x,64);
   cmap=jetcolormap(64);
   y=ind2rgb(m,cmap); // function provided by SIP toolbox

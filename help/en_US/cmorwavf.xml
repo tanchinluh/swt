@@ -10,7 +10,7 @@
   
    
   
-   <refsynopsisdiv><title>Calling Sequence</title><synopsis>[PSI,X]= cmorwavf(LB,UB,N)</synopsis></refsynopsisdiv>
+   <refsynopsisdiv><title>Calling Sequence</title><synopsis>[PSI,X]= cmorwavf(LB,UB,N,FB,FC)</synopsis></refsynopsisdiv>
   
    <refsection><title>Parameters</title>
  
@@ -42,6 +42,26 @@
   
             <listitem>
     : number of	data points
+  </listitem> 
+  
+         </varlistentry>
+	 
+	          <varlistentry>
+  
+            <term>FB  </term>
+  
+            <listitem>
+    : positive bandwidth parameter
+  </listitem> 
+  
+         </varlistentry>
+	 
+	          <varlistentry>
+  
+            <term>FC  </term>
+  
+            <listitem>
+    : wavelet center frequency 
   </listitem> 
   
          </varlistentry>
@@ -79,7 +99,15 @@
    </refsection>
   
    <refsection><title>Examples</title><programlisting role="example"><![CDATA[
-  [PSI,X]=cmorwavf(-8,8,1001);
+  [PSI,X]=cmorwavf(-8,8,1000,1.5,1);
+ // Plot complex Morlet wavelet.
+subplot(211)
+plot(X,real(PSI)),
+title('Complex Morlet wavelet cmor1.5-1')
+xlabel('Real part'), xgrid()
+subplot(212)
+plot(X,imag(PSI))
+xlabel('Imaginary part'),  xgrid()
  ]]></programlisting></refsection>
   
    <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>

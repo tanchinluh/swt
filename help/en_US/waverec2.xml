@@ -22,7 +22,7 @@ x0=waverec2(c,s,Lo_R,Hi_R)</synopsis></refsynopsisdiv>
             <term>wname  </term>
   
             <listitem>
-    : wavelet name
+    : wavelet name, haar( "haar"), daubechies ("db1" to "db20"), coiflets ("coif1" to "coif5"), symlets ("sym2" to "sym20"), legendre ("leg1" to "leg9"), bathlets("bath4.0" to "bath4.15" and "bath6.0" to "bath6.15"), dmey ("dmey"), beyklin ("beylkin"), vaidyanathan ("vaidyanathan"), biorthogonal B-spline wavelets ("bior1.1" to  "bior6.8"), "rbior1.1" to "rbior6.8"
   </listitem> 
   
          </varlistentry>
@@ -91,8 +91,8 @@ x0=waverec2(c,s,Lo_R,Hi_R)</synopsis></refsynopsisdiv>
   
    <refsection><title>Examples</title><programlisting role="example"><![CDATA[
   x=rand(100,100);
-  [C,S]=wavedec(x,3,'db2');
-  x0=waverec(C,S,'db2');
+  [C,S]=wavedec2(x,3,'db2');
+  x0=waverec2(C,S,'db2');
  ]]></programlisting></refsection>
   
    <refsection><title>Authors</title><para>Roger Liu and Isaac Zhi  </para></refsection>

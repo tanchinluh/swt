@@ -28,8 +28,8 @@
 			   double *filterLow, double *filterHi,
 			   int filterLength)
  {
-	 iconv(sigIn,sigInLength,approx,sigInLength,filterLow,filterLength);
-     iconv(sigIn,sigInLength,detail,sigInLength,filterHi,filterLength);
+	 i_conv(sigIn,sigInLength,approx,sigInLength,filterLow,filterLength);
+     i_conv(sigIn,sigInLength,detail,sigInLength,filterHi,filterLength);
 	 return;
  }
 
@@ -373,15 +373,15 @@
 	 sigOdd = malloc(length2*sizeof(double));
 	 sigEven = malloc(length2*sizeof(double));
 
-	 iconv(approxOutOdd,length2,approxT,length2,filterLow,filterLength);
-     iconv(detailOutOdd,length2,detailT,length2,filterHi,filterLength);
+	 i_conv(approxOutOdd,length2,approxT,length2,filterLow,filterLength);
+     i_conv(detailOutOdd,length2,detailT,length2,filterHi,filterLength);
      for(count=0;count<length2;count++)
 		 sigOdd[count] = approxT[count] + detailT[count];
 	 free(approxOutOdd);
 	 free(detailOutOdd);
 
-	 iconv(approxOutEven,length2,approxT,length2,filterLow,filterLength);
-     iconv(detailOutEven,length2,detailT,length2,filterHi,filterLength);
+	 i_conv(approxOutEven,length2,approxT,length2,filterLow,filterLength);
+     i_conv(detailOutEven,length2,detailT,length2,filterHi,filterLength);
      for(count=0;count<length2;count++)
 		 sigEven[count] = approxT[count] + detailT[count];
 	 free(approxOutEven);
@@ -478,15 +478,15 @@
 	 sigOdd = malloc(length2*sizeof(double));
 	 sigEven = malloc(length2*sizeof(double));
 
-	 iconv(approxOutOdd,length2,approxT,length2,filterLowTemp,mu*filterLength);
-     iconv(detailOutOdd,length2,detailT,length2,filterHiTemp,mu*filterLength);
+	 i_conv(approxOutOdd,length2,approxT,length2,filterLowTemp,mu*filterLength);
+     i_conv(detailOutOdd,length2,detailT,length2,filterHiTemp,mu*filterLength);
      for(count=0;count<length2;count++)
 		 sigOdd[count] = approxT[count] + detailT[count];
 	 free(approxOutOdd);
 	 free(detailOutOdd);
 
-	 iconv(approxOutEven,length2,approxT,length2,filterLowTemp,mu*filterLength);
-     iconv(detailOutEven,length2,detailT,length2,filterHiTemp,mu*filterLength);
+	 i_conv(approxOutEven,length2,approxT,length2,filterLowTemp,mu*filterLength);
+     i_conv(detailOutEven,length2,detailT,length2,filterHiTemp,mu*filterLength);
      for(count=0;count<length2;count++)
 		 sigEven[count] = approxT[count] + detailT[count];
 	 free(approxOutEven);

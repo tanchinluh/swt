@@ -236,7 +236,7 @@ extern void wkeep_2D_index (double *matrixIn, int matrixInRow,
 extern void conv (double *sigIn, int sigInLength,
 		  double *sigOut, int sigOutLength,
 		  double *fiter, int filterLength);
-extern void iconv (double *sigIn, int sigInLength,
+extern void i_conv (double *sigIn, int sigInLength,
 		  double *sigOut, int sigOutLength,
 		  double *fiter, int filterLength);
  extern void swt_exp2(int lev, int *outputV);

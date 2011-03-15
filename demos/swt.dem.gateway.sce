@@ -11,7 +11,7 @@ subdemolist=['one dimensional wavelet transform', 'swt1d.sce';..
 'one dimensional dualtree complex wavelet transform','cowt1d.sce';..
 'two dimensional dualtree complex wavelet transform','cowt2d.sce';..
 'continous wavelet transform', 'cwt.sce';..
-//'stationary wavelet transform', 'swtswt.sce';..
+'stationary wavelet transform', 'swtswt.sce';..
 'image processing', 'image.sce';];
 
 
