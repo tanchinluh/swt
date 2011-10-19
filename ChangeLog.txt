@@ -1,6 +1,11 @@
 SWT - Scilab Wavelet Toolbox
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
+0.1.13
+ + some minor bug fixes
+0.1.12
+ +   some bug fixes, help files are improved.
+ +  change of dir name in the tar.gz file
 0.1.11
   + Add unit_tests, some macros are removed, some bug fixes
 0.1.10

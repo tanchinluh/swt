@@ -1,6 +1,7 @@
 #include <mex.h> 
 #include <sci_gateway.h>
 #include <api_scilab.h>
+#include <MALLOC.h>
 static int direct_gateway(char *fname,void F(void)) { F();return 0;};
 extern Gatefunc int_wrev;
 extern Gatefunc int_wrev2;
@@ -134,7 +135,7 @@ static GenericTable Tab[]={
   {(Myinterfun)sci_gateway,int_fbspwavf,"fbspwavf"},
   {(Myinterfun)sci_gateway,int_cauchy,"cauwavf"},
   {(Myinterfun)sci_gateway,int_Gauswavf,"gauswavf"},
-  {(Myinterfun)sci_gateway,int_cgauss,"cgauswavf"},
+  {(Myinterfun)sci_gateway,int_cgauss,"cgauwavf"},
   {(Myinterfun)sci_gateway,int_wavefun,"wavefun"},
   {(Myinterfun)sci_gateway,int_wavefun2,"wavefun2"},
   {(Myinterfun)sci_gateway,int_cwt,"cwt"},
@@ -156,6 +157,10 @@ int C2F(libswt_c)()
   Rhs = Max(0, Rhs);
   if (*(Tab[Fin-1].f) != NULL) 
   {
+     if(pvApiCtx == NULL)
+     {
+       pvApiCtx = (StrCtx*)MALLOC(sizeof(StrCtx));
+     }
      pvApiCtx->pstName = (char*)Tab[Fin-1].name;
     (*(Tab[Fin-1].f))(Tab[Fin-1].name,Tab[Fin-1].F);
   }

@@ -22,7 +22,8 @@ function THR = thselect(X,TPTR)
 
   select convstr(TPTR),
     case 'rigrsure'
-      THR  = ValSUREThresh(X);
+       THR  = ValSUREThresh(X);
+
     case 'heursure'
 	[n,j] = dyadlength(X);
 	magic = sqrt(2*log(n));
@@ -40,6 +41,12 @@ function THR = thselect(X,TPTR)
 	lamlist = [0  0 0 0 0 1.27 1.474 1.669 1.860 2.048 2.232 2.414 2.594 2.773 2.952 3.131 3.310 3.49 3.67 3.85 4.03 4.21];
 	[n,j] = dyadlength(X);
 	THR = lamlist(j);
+//         n=max(size(X);
+//         if n <= 32
+//             thr = 0;
+//         else
+//             thr = 0.3936 + 0.1829*(log(n)/log(2));
+//         end
    else
       error("wrong parameter for threshhold selection!");
   end
@@ -59,14 +66,19 @@ function THR = ValSUREThresh(X)
 //  Description
 //    SURE referes to Stein's Unbiased Risk Estimate.
 //
+// Holger Nahrstaedt
+
 	X=X(:);
+        n = max(size(X));
+
 	//a = mtlb_sort(abs(X)).^2 ;
 	a = gsort(abs(X),'g','i').^2;
-	b = cumsum(a,'m');
-	n = length(X);
-	c = linspace(n-1,0,n);
-	s = b+c(:).*a;
-	risk = (n - ( 2 .* (1:n ))  + s')'/n;
+	
+	
+	//c = linspace(n-1,0,n);
+	//s = cumsum(a,'m')+c(:).*a;
+	//risk = (n - ( 2 .* (1:n ))  + s')'/n;
+        risk = (n-(2*(1:n))+(cumsum(a,'m')+(n-1:-1:0).*a))/n;
 	[guess,ibest] = min(risk);
 	THR = sqrt(a(ibest));
 

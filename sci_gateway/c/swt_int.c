@@ -51,7 +51,7 @@
    l3 = 0;
    l4 = 0;
    
-   sciprint("flow=%d\n",flow);
+   //sciprint("flow=%d\n",flow);
 
    switch (flow){
    case 1:
