@@ -998,7 +998,7 @@ upcoef2 (double *matrixIn, int matrixInRow, int matrixInCol,
 	 double *lowRe, double *hiRe, int filterLen,
 	 double *matrixOut, int matrixOutRow, int matrixOutCol,
 	 int matrixOutDefaultRow, int matrixOutDefaultCol,
-	 int step, char *type, extend_method extMethod)
+	 int step, char *type)//, extend_method extMethod)
 {
   double *vo, *matrixOutTemp, *matrixOutPre;
   int matrixOutTempRow, matrixOutTempCol, rowLeng, colLeng,count, count1;
@@ -1082,6 +1082,7 @@ upcoef2 (double *matrixIn, int matrixInRow, int matrixInCol,
 	  colLeng = colLeng*2 - filterLen + 2;
 	  verbatim_copy (matrixOutPre, rowLeng*colLeng, 
 			 matrixOutTemp, rowLeng*colLeng);
+	  free(vo);
 	}
       matrixOutTempRow = rowLeng;
       matrixOutTempCol = colLeng;
@@ -1091,9 +1092,11 @@ upcoef2 (double *matrixIn, int matrixInRow, int matrixInCol,
   wkeep_2D_center (matrixOutTemp, matrixOutDefaultRow, 
 		   matrixOutDefaultCol, matrixOut,
 		   matrixOutRow, matrixOutCol);
+  
 
-  free(vo);
+  //free(vo);
   free(matrixOutTemp);
+
   return;
 }
 

@@ -1,7 +1,7 @@
 mode(-1);lines(0);
 // 2d test
 disp("dwt 2d test!");
-testpath = get_absolute_file_path("dwt2d_test.tst");
+testpath = get_absolute_file_path("dwt2d_test.sce");
 // dwt2 test
 loadmatfile("-mat",testpath+"/Data.mat");
 clear row_low;

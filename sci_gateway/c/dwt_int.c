@@ -655,9 +655,10 @@ int_dwtmode (char *fname)
   //int row1, row2;
   // int col;
   //char *Str[] = {"symhh"};
-  char sss[6] = "symhh";
+  //char sss[6] = "symhh";
   char **Str;
-
+  int i;
+  
   CheckRhs (minrhs, maxrhs);
   CheckLhs (minlhs, maxlhs);
 
@@ -706,11 +707,20 @@ int_dwtmode (char *fname)
 	    {
 	      m3 = 1;
 	      n3 = 1;
-	      *Str = sss;
+	      //*Str = sss;
+	      
+	      Str=NULL;
+	      Str = (char **)malloc(1*sizeof(char *));
+
+	      for(i=0; i<(int)1; i++)
+		{
+		  Str[i] = (char *)malloc(6*sizeof(char));
+		  
+		}
 	      //printf("before dwt_parse\n");
 	      dwt_parse(Str);
 	      //printf("after dwt_parse\n");
-	      //printf("%s\n",str[0]);
+	      //printf("%s\n",Str[0]);
 	      CreateVarFromPtr(3,"S", &m3, &n3, Str);
 	      //printf("after Create\n");
 	      LhsVar(1) = 3;

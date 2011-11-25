@@ -1003,8 +1003,10 @@ upcoef_len_cal (int sigInLength, int filterLen, int stride,
   *sigOutLengthDefault = sigInLength;
   for(count=0;count<stride;count++)
     {
-      *sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
-      *sigOutLength = 2*(*sigOutLength) + filterLen - 2;
+      //*sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
+      *sigOutLengthDefault = 2*(*sigOutLengthDefault) - filterLen + 1;
+      //*sigOutLength = 2*(*sigOutLength) + filterLen - 2;
+      *sigOutLength = 2*(*sigOutLength) - filterLen + 2;
     }
   return;
 }
@@ -1017,7 +1019,8 @@ upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe,
   int count, sigInLengthTemp, leng;
   double *sigInTemp, *sigOutTemp;
 
-  sigInLengthTemp = 2 * sigInLength + filterLen - 2;
+  //sigInLengthTemp = 2 * sigInLength + filterLen - 2;
+  sigInLengthTemp = 2 * sigInLength - filterLen + 2; 
   //sigInLengthTemp = 2 * sigInLength + filterLen - 1;
   sigInTemp = malloc(defaultLength*sizeof(double));
   
@@ -1039,9 +1042,12 @@ upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe,
       leng = sigInLengthTemp;
       for(count=0;count<(step-1);count++)
 	{
+// 	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
+// 		       sigOutTemp, leng*2+filterLen-2);
 	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
-		       sigOutTemp, leng*2+filterLen-2);
-	  leng = leng*2+filterLen-2;
+		       sigOutTemp, leng*2-filterLen+2);
+	  //leng = leng*2+filterLen-2;
+	  leng = leng*2-filterLen+2;
 	  verbatim_copy (sigOutTemp, leng, sigInTemp, leng);
 	}
       sigInLengthTemp = leng;

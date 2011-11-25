@@ -7,23 +7,23 @@ chdir(get_absolute_file_path("run_tests.sce"));
 seed = rand("seed");
 
 printf("testing filter... ");
-exec("filter_test.tst");
+exec("filter_test.sce");
 printf("ok!\n");
 
 printf("testing utility functions... ");
-exec("utility_test.tst");
+exec("utility_test.sce");
 printf("ok!\n");
 
 printf("testing dwt1d ... ");
-exec("dwt1d_test.tst");
+exec("dwt1d_test.sce");
 printf("ok!\n");
 
 printf("testing dwt2d ... ");
-exec("dwt2d_test.tst");
+exec("dwt2d_test.sce");
 printf("ok!\n");
 
 printf("testing dwt2d 2.test... ");
-exec("dwt2d_test2.tst");
+exec("dwt2d_test2.sce");
 printf("ok!\n");
 
 

@@ -1,4 +1,9 @@
-mprintf("Start swt toolbox - (0.1.13)\n");
+// Copyright (C) 2008 - INRIA
+// Copyright (C) 2009 - DIGITEO
+
+// This file is released into the public domain
+
+mprintf("Start swt toolbox - (0.1.14)\n");
 
 if isdef("swtlib") then
 	warning("Toolbox swt library is already loaded");
@@ -22,16 +27,6 @@ mprintf("\tLoad gateways\n");
 ilib_verbose(0);
 exec(pathconvert(root_tlbx+"/sci_gateway/loader_gateway.sce",%f));
 
-
-// Load demos
-// =============================================================================
-if or(getscilabmode() == ["NW";"STD"]) then
-	mprintf("\tLoad demos\n");
-	pathdemos = pathconvert(root_tlbx+"/demos/swt.dem.gateway.sce",%F,%T);
-	add_demo("Toolbox swt",pathdemos);
-	clear pathdemos add_demo;
-end
-
 // Load and add help chapter
 // =============================================================================
 if or(getscilabmode() == ["NW";"STD"]) then
@@ -44,6 +39,14 @@ if or(getscilabmode() == ["NW";"STD"]) then
         clear path_addchapter;
 end
 
+// Load demos
+// =============================================================================
+if or(getscilabmode() == ["NW";"STD"]) then
+	mprintf("\tLoad demos\n");
+	pathdemos = pathconvert(root_tlbx+"/demos/swt.dem.gateway.sce",%F,%T);
+	add_demo("Toolbox swt",pathdemos);
+	clear pathdemos add_demo;
+end
 
 clear root_tlbx;
 clear etc_tlbx;

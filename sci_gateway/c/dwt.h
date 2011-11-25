@@ -334,7 +334,7 @@ extern void upcoef2 (double *matrixIn, int matrixInRow,
 		     int matrixOutRow, int matrixOutCol,
 		     int matrixOutDefaultRow, 
 		     int matrixOutDefaultCol,
-		     int step, char *type, extend_method extMethod);
+		     int step, char *type);//, extend_method extMethod);
 
 extern void dwt3d_tran(double *mat3DIn, int row1, int col1, int sli1,
 		       double *mat3DOut, int row2, int col2, int sli2);

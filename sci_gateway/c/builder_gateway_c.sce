@@ -1,12 +1,8 @@
 
 CURRENT_PATH = strsubst(get_absolute_file_path("builder_gateway_c.sce"), "\", "/");
 
-if getos() <> "Windows" then
-  INCLUDES_PATHS = "-I" + CURRENT_PATH;
-else
-  INCLUDES_PATHS = "";
-end
 
+CFLAGS = "-I" + CURRENT_PATH;
 
 // PutLhsVar managed by user in sci_sum and in sci_sub
 // if you do not this variable, PutLhsVar is added
@@ -93,12 +89,12 @@ FILES_GATEWAY = ["utility.c","dwt1d.c","dwt2d.c","haar.c","daubechies.c","coifle
 "cwt_int.c","dwt3d_int.c","cowt_int.c"];    // objects files
   
 
-tbx_build_gateway("swt_c", FUNCTIONS_GATEWAY, FILES_GATEWAY, CURRENT_PATH, [],"",INCLUDES_PATHS);
+tbx_build_gateway("swt_c", FUNCTIONS_GATEWAY, FILES_GATEWAY, CURRENT_PATH, "","",CFLAGS);
 
 clear WITHOUT_AUTO_PUTLHSVAR;
 
 clear tbx_build_gateway;
-clear INCLUDES_PATHS;
+clear CFLAGS;
 clear CURRENT_PATH;
 clear FILES_GATEWAY;
 clear FUNCTIONS_GATEWAY;

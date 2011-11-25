@@ -1813,8 +1813,8 @@ int_upcoef2 (char *fname)
       CreateVar(6, "d", &m6, &n6, &l6);
       upcoef2 (stk(l2), m2, n2,	pWaveStruct.pLowPass, 
 	       pWaveStruct.pHiPass, pWaveStruct.length,
-	       stk(l6), m6, n6, s1, s3, istk(l4)[0], cstk(l1), 
-	       dwtMode);
+	       stk(l6), m6, n6, s1, s3, istk(l4)[0], cstk(l1));//, 
+	       //dwtMode);
       LhsVar(1) = 6;
       filter_clear();
       break;
@@ -1852,8 +1852,8 @@ int_upcoef2 (char *fname)
       n7 = istk(l6)[1];
       CreateVar(7, "d", &m7, &n7, &l7);
       upcoef2 (stk(l2), m2, n2,	stk(l3), stk(l4), m3*n3,
-	       stk(l7), m7, n7, s1, s3, istk(l5)[0], cstk(l1), 
-	       dwtMode);
+	       stk(l7), m7, n7, s1, s3, istk(l5)[0], cstk(l1));//, 
+	       //dwtMode);
       LhsVar(1) = 7;
       break;
     }
@@ -1892,8 +1892,8 @@ int_upcoef2 (char *fname)
       CreateVar(5, "d", &m5, &n5, &l5);
       upcoef2 (stk(l2), m2, n2,	pWaveStruct.pLowPass, 
 	       pWaveStruct.pHiPass, pWaveStruct.length,
-	       stk(l5), m5, n5, s1, s3, istk(l4)[0], cstk(l1), 
-	       dwtMode);
+	       stk(l5), m5, n5, s1, s3, istk(l4)[0], cstk(l1));//, 
+	       //dwtMode);
       LhsVar(1) = 5;
       filter_clear();
       break;
@@ -1925,8 +1925,8 @@ int_upcoef2 (char *fname)
       n6 = s3;
       CreateVar(6, "d", &m6, &n6, &l6);
       upcoef2 (stk(l2), m2, n2,	stk(l3), stk(l4), m3*n3, 
-	       stk(l6), m6, n6, s1, s3, istk(l5)[0], cstk(l1), 
-	       dwtMode);
+	       stk(l6), m6, n6, s1, s3, istk(l5)[0], cstk(l1));//, 
+	       //dwtMode);
       LhsVar(1) = 6;
       break;
     }
@@ -1948,15 +1948,18 @@ int_upcoef2 (char *fname)
 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
 	  return 0;
 	}
-      upcoef_len_cal (m2, pWaveStruct.length, 1, &s1, &s2);
+
+       upcoef_len_cal (m2, pWaveStruct.length, 1, &s1, &s2);
       upcoef_len_cal (n2, pWaveStruct.length, 1, &s3, &s4);
+      	//printf("m2 %d, pwave %d, s1 %d s2 %d\n",m2,pWaveStruct.length,s1,s2);
+	//printf("n2 %d, pwave %d, s3 %d s4 %d\n",n2,pWaveStruct.length,s3,s4);
       m4 = s1;
       n4 = s3;
       CreateVar(4, "d", &m4, &n4, &l4);
       upcoef2 (stk(l2), m2, n2,	pWaveStruct.pLowPass, 
 	       pWaveStruct.pHiPass, pWaveStruct.length, 
-	       stk(l4), m4, n4, s1, s3, 1, cstk(l1), 
-	       dwtMode);
+	       stk(l4), m4, n4, s1, s3, 1, cstk(l1));//, 
+	       //dwtMode);
       LhsVar(1) = 4;
       filter_clear();
       break;
@@ -1982,8 +1985,8 @@ int_upcoef2 (char *fname)
       n5 = s3;
       CreateVar(5, "d", &m5, &n5, &l5);
       upcoef2 (stk(l2), m2, n2,	stk(l3), stk(l4), m3*n3, 
-	       stk(l5), m5, n5, s1, s3, 1, cstk(l1), 
-	       dwtMode);
+	       stk(l5), m5, n5, s1, s3, 1, cstk(l1));//, 
+	       //dwtMode);
       LhsVar(1) = 5;
       break;
     }
