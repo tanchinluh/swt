@@ -26,5 +26,5 @@ end;
 ylabel('Scale');
 xlabel('time (or space)');
 //xtitle('Continuous Transform, absolute coefficients');
-
+a=gca();a.tight_limits="on";
 endfunction

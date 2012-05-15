@@ -3,7 +3,7 @@
 
 Wavelet Toolbox containing FWT, CWT and SWT utility functions.
 
-SWT (version 0.1.9 For Scilab 5)
+SWT (version 0.1.12 For Scilab 5)
 ======================
 
 Information about SWT can be found at 

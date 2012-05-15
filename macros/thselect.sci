@@ -75,10 +75,10 @@ function THR = ValSUREThresh(X)
 	a = gsort(abs(X),'g','i').^2;
 	
 	
-	//c = linspace(n-1,0,n);
-	//s = cumsum(a,'m')+c(:).*a;
-	//risk = (n - ( 2 .* (1:n ))  + s')'/n;
-        risk = (n-(2*(1:n))+(cumsum(a,'m')+(n-1:-1:0).*a))/n;
+	c = linspace(n-1,0,n);
+	s = cumsum(a,'m')+c(:).*a;
+	risk = (n - ( 2 .* (1:n ))  + s')'/n;
+        //risk = (n-(2*(1:n))+(cumsum(a,'m')+c(:).*a))/n;
 	[guess,ibest] = min(risk);
 	THR = sqrt(a(ibest));
 

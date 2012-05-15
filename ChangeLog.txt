@@ -1,6 +1,12 @@
 SWT - Scilab Wavelet Toolbox
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
+0.1.15
+ + bug fix in thselect, wentropy
+ + help file for wentropy
+0.1.14
+ + some bug fixes in upcoef and upcoef2
+ + add 32 unit_tests
 0.1.13
  + some minor bug fixes
 0.1.12

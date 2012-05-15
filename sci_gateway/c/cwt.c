@@ -926,7 +926,8 @@ void cwt_iconv_real (double *sigIn, int sigInLength, double *f, int filterLen, d
     fTemp = malloc(filterLen*sizeof(double));
 
 	wrev(f, filterLen, fTemp, filterLen);
-	iconv(sigIn,sigInLength,buf,len,fTemp,filterLen);
+	//iconv(sigIn,sigInLength,buf,len,fTemp,filterLen);
+	i_conv(sigIn,sigInLength,buf,len,fTemp,filterLen);
 	free(fTemp);
 	wkeep_1D_center(buf,len,sigOut,sigOutLength);
 	free(buf);
