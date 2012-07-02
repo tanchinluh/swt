@@ -1,23 +1,37 @@
 function [X,XN] = wnoise(FUN,N,SQRT_SNR,INIT)
-// Noisy wavelet test data
-//  Usage
+//Noisy wavelet test data
+//Calling Sequence
 //X = wnoise(FUN,N)
 //[X,XN] = wnoise(FUN,N,SQRT_SNR)
 //[X,XN] = wnoise(FUN,N,SQRT_SNR,INIT)
+//Parameters
+//N: vector length of X = 2^N
+//FUN :
+//: FUN = 1 or 'blocks'
+//: FUN = 2 or 'bumps'
+//: FUN = 3 or 'heavy sine'
+//: FUN = 4 or 'doppler'
+//: FUN = 5 or 'quadchirp'
+//: FUN = 6 or 'mishmash'
+//INIT: generator seed is set to INIT value.
+//SQRT_SNR: sets std(X) = SQRT_SNR
+//X: test data
+//XN: noisy test data (rand(1,N,'normal') is added!)
+//Description
+//Noisy wavelet test data
+//Examples
+//[x,noisyx] = wnoise(4,10,7);
+//ind = linspace(0,1,2^10); 
+//for i = 1:6 
+//x = wnoise(i,10); 
+//subplot(6,1,i), plot(ind,x) 
+//end
+// See also
+// wden
+//Authors
+//Holger Nahrstaedt - 2010-2012
 
-//  Inputs
-//   FUN = 1     or 	'blocks'
-//FUN = 2     or	'bumps'
-//FUN = 3     or	'heavy sine'
-//FUN = 4     or/	'doppler'
-//FUN = 5     or	'quadchirp'
-//FUN = 6     or	'mishmash'
-//    C,L   output of the wavedec function   
-//  Outputs
-//    STDC  estimation of sigma
-//
-//  Description
-//    The estimator used is Median Absolute Deviation / 0.6745, well suited for zero mean Gaussian white noise in the de-noising one-dimensional model 
+
 //
 
 [nargout,nargin]=argn(0);

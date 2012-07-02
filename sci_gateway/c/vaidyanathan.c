@@ -3,6 +3,7 @@
  * vaidyanathan.c -- Vaidyanathan wavelets coefficents.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,15 +45,15 @@ static const double vaidyanathan[24] = {
 void
 vaidyanathan_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
-  pFilterCoef = vaidyanathan;
+//   pFilterCoef = vaidyanathan;
 
   pWaveStruct->length = 24;
 
-  wrev(pFilterCoef, pWaveStruct->length,
+  wrev(vaidyanathan, pWaveStruct->length,
        LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length,
+  qmf_wrev(vaidyanathan, pWaveStruct->length,
 	   HiDecomFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowDecomFilCoef;
   pWaveStruct->pHiPass = HiDecomFilCoef;
@@ -63,14 +64,14 @@ vaidyanathan_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 vaidyanathan_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
-  pFilterCoef = vaidyanathan;
+//   pFilterCoef = vaidyanathan;
   pWaveStruct->length = 24;
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
+  verbatim_copy(vaidyanathan, pWaveStruct->length,
 		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
+  qmf_even(vaidyanathan, pWaveStruct->length,
       HiReconFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowReconFilCoef;
   pWaveStruct->pHiPass = HiReconFilCoef;

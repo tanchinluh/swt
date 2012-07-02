@@ -1,69 +1,59 @@
-<?xml version="1.0" encoding="ISO-8859-1"?><refentry xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab" xml:lang="en" xml:id="cwtplot"><info><pubdate>Aug 2010  </pubdate></info><refnamediv><refname>cwtplot</refname><refpurpose>Plots cwt coeffs</refpurpose></refnamediv>
-  
+<?xml version="1.0" encoding="UTF-8"?>
 
-   <refsynopsisdiv><title>Calling Sequence</title><synopsis>cwtplot(coeff,scale)
+<!--
+ *
+ * This help file was generated from cwtplot.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="cwtplot" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+
+  <refnamediv>
+    <refname>cwtplot</refname><refpurpose>Plots cwt coeffs</refpurpose>
+  </refnamediv>
+
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   cwtplot(coeff,scale)
    cwtplot(coeff,scale,cbar,f)
-</synopsis></refsynopsisdiv>
-  
-   <refsection><title>Parameters</title>
- 
-      <variablelist>
-  
-       <varlistentry>
-  
-            <term>coeff </term>
-  
-            <listitem>
-   :  cwt coefficients
-  </listitem> 
-  
-         </varlistentry>
-  
-  
-         <varlistentry>
-  
-            <term>scale </term>
-  
-            <listitem>
-   :  vector with scales from cwt
-  </listitem> 
-  
-         </varlistentry>
-  
-         <varlistentry>
-  
-            <term>cbar </term>
-    <listitem> 
- : defines plotting of a color bar (%t or %f)
-  </listitem> 
-   </varlistentry>
+   </synopsis>
+</refsynopsisdiv>
 
-  
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>coeff:</term>
+      <listitem><para> cwt coefficients</para></listitem></varlistentry>
+   <varlistentry><term>scale:</term>
+      <listitem><para> vector with scales from cwt</para></listitem></varlistentry>
+   <varlistentry><term>cbar:</term>
+      <listitem><para> defines plotting of a color bar (%t or %f)</para></listitem></varlistentry>
+   <varlistentry><term>f:</term>
+      <listitem><para> if used, the coeff are plotted in the figure f</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
 
-    <varlistentry>
-  
-            <term>f  </term>
-  
-            <listitem>
-     : if used, the coeff are plotted in the figure f
-  </listitem> 
-  
-         </varlistentry>
-  
-       
-      </variablelist>
-   </refsection>
-  
-   <refsection><title>Description</title>
-  
-      <para>
+<refsection>
+   <title>Description</title>
+   <para>
 Plots the absolute coefficients of a continuous Wavelet-Transform (cwt)
-  </para>
-  
-   </refsection>
-  
-   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
-   wname = 'morl';
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+wname = 'morl';
 A = 0; B = 64; P = 500;
 // Compute the sampling period and the sampled function,
 // and the true frequencies.
@@ -80,17 +70,20 @@ end
 scales = [1:1:60];
 coef=cwt(x,scales,wname);
 cwtplot(coef,scales);
+   ]]></programlisting>
+</refsection>
 
-]]></programlisting></refsection>
-  
-   <refsection><title>Authors</title><para>Holger Nahrstaedt  </para></refsection>
-  
-   <refsection><title>See Also</title><simplelist type="inline">
-    
-      <member> 
-         <link linkend="cwt">cwt</link>  
-      </member>
-  
-   </simplelist></refsection>
+<refsection>
+   <title>See also</title>
+   <simplelist type="inline">
+   <member><link linkend="cwt">cwt</link></member>
+   </simplelist>
+</refsection>
 
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Holger Nahrstaedt - 2010-2012</member>
+   </simplelist>
+</refsection>
 </refentry>

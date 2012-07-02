@@ -3,6 +3,7 @@
  * cowt_validate.c -- Complex Wavelet Transform Validation
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,24 +38,24 @@ dualtree_form_validate (int *errCode, int *flow)
   return;
 }
 
-void
-dualtree_content_validate (int *errCode, int flow, int l1, int l2,
-			   int l3, int l4, int l5, int l6)
-{
-  int type;
-  *errCode = SUCCESS;
-  if (istk(l2)[0]<=0)
-	*errCode = POSITIVE_INTEGER_ONLY;
-  switch (flow) {
-  case 1:
-    {
-      break;
-    }
-  default:
-    break;
-  }
-  return;
-}
+// void
+// dualtree_content_validate (int *errCode, int flow, int l1, int l2,
+// 			   int l3, int l4, int l5, int l6)
+// {
+//   int type;
+//   *errCode = SUCCESS;
+//   if (istk(l2)[0]<=0)
+// 	*errCode = POSITIVE_INTEGER_ONLY;
+//   switch (flow) {
+//   case 1:
+//     {
+//       break;
+//     }
+//   default:
+//     break;
+//   }
+//   return;
+// }
 
 void
 idualtree_form_validate (int *errCode, int *flow)

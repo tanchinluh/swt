@@ -1,6 +1,13 @@
 SWT - Scilab Wavelet Toolbox
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
+0.1.16
+ + bug fix in cwt, wavefun
+ + bug fix in centfrq
+ + new demo for Differentiation of noisy Data
+ + new function waveletfamilies
+ + unit tests for wavefun and wavefun2
+ + works only for scilab5.4-beta-1 and higher
 0.1.15
  + bug fix in thselect, wentropy
  + help file for wentropy

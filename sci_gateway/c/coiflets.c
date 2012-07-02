@@ -3,6 +3,7 @@
  * coiflet.c -- Coiflet wavelets coefficients.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -94,36 +95,56 @@ void
 coiflets_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
 
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 6 * member;
 
   switch (member)
     {
     case 1:
-      pFilterCoef = coif1;
+//       pFilterCoef = coif1;
+        wrev(coif1, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(coif1, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = coif2;
+//       pFilterCoef = coif2;
+        wrev(coif2, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(coif2, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 3:
-      pFilterCoef = coif3;
+//       pFilterCoef = coif3;
+        wrev(coif3, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(coif3, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 4:
-      pFilterCoef = coif4;
+//       pFilterCoef = coif4;
+        wrev(coif4, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(coif4, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 5:
-      pFilterCoef = coif5;
+//       pFilterCoef = coif5;
+        wrev(coif5, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(coif5, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     default:
       printf("db%d is not available!\n",member);
       exit(0);
     }
 
-  wrev(pFilterCoef, pWaveStruct->length, 
-       LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length,
-	   HiDecomFilCoef, pWaveStruct->length);
+//   wrev(pFilterCoef, pWaveStruct->length, 
+//        LowDecomFilCoef, pWaveStruct->length);
+//   qmf_wrev(pFilterCoef, pWaveStruct->length,
+// 	   HiDecomFilCoef, pWaveStruct->length);
   //for (count = 0; count < pWaveStruct->length; count++)
     //LowDecomFilCoef[count] *= sqrt(2.0);
   //for (count = 0; count < pWaveStruct->length; count++)
@@ -139,36 +160,56 @@ void
 coiflets_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
 
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 6 * member;
 
   switch (member)
     {
     case 1:
-      pFilterCoef = coif1;
+//       pFilterCoef = coif1;
+        verbatim_copy(coif1, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(coif1, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 2:
-      pFilterCoef = coif2;
+//       pFilterCoef = coif2;
+        verbatim_copy(coif2, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(coif2, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 3:
-      pFilterCoef = coif3;
+//       pFilterCoef = coif3;
+        verbatim_copy(coif3, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(coif3, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 4:
-      pFilterCoef = coif4;
+//       pFilterCoef = coif4;
+        verbatim_copy(coif4, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(coif4, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 5:
-      pFilterCoef = coif5;
+//       pFilterCoef = coif5;
+        verbatim_copy(coif5, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(coif5, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     default:
       printf("db%d is not available!\n",member);
       exit(0);
     }
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
-		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
-      HiReconFilCoef, pWaveStruct->length );
+//   verbatim_copy(pFilterCoef, pWaveStruct->length,
+// 		LowReconFilCoef, pWaveStruct->length);
+//   qmf_even(pFilterCoef, pWaveStruct->length,
+//       HiReconFilCoef, pWaveStruct->length );
   //for (count = 0; count < pWaveStruct->length; count++)
     //LowReconFilCoef[count] *= sqrt(2.0);
   //for (count = 0; count < pWaveStruct->length; count++)

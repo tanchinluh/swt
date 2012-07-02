@@ -5,7 +5,7 @@
 loadmatfile("-mat",get_swt_path()+"tests/unit_tests/Data.mat");
 
 // dwt
-
+s1=s1(:)';
 // type 1 input
 // haar
 [cA,cD]=dwt(x1,'haar');

@@ -1,19 +1,42 @@
 function [XD,CXD,LXD] = wden(C,L,TPTR,SORH,SCAL,N,wname)
-// Noisy wavelet test data
-//  Usage
-//X = wnoise(FUN,N)
-//[X,XN] = wnoise(FUN,N,SQRT_SNR)
-//[X,XN] = wnoise(FUN,N,SQRT_SNR,INIT)
+//Automatic 1-D de-noising
+//Calling Sequence
+//[XD,CXD,LXD] = wden(X,TPTR,SORH,SCAL,N,wname)
+//[XD,CXD,LXD] = wden(C,L,TPTR,SORH,SCAL,N,wname)
+//Parameters
+//X: input vector
+//C: coefficent array
+//L: length array
+//wname: wavelet name
+//N: decompostion level
+//SCAL: threshold rescaling
+//: 'one' for no rescaling
+//: 'sln' for rescaling using a single estimation of level noise based on first-level coefficients
+//: 'mln' for rescaling done using level-dependent estimation of level noise
+//SORH: ('s' or 'h') soft or hard thresholding
+//TPTR: threshold selection rule
+//:'rigrsure' uses the principle of Stein's Unbiased Risk.
+//: 'heursure' is an heuristic variant of the first option.
+//: 'sqtwolog' for universal threshold
+//: 'minimaxi' for minimax thresholding
+//CXD: de-noised coefficent array
+//LXD: de-noised length array
+//XD: de-noised signal
+//Description
+//wden performs an automatic de-noising process of a one-dimensional signal using wavelets.
+//Examples
+//snr = 3; init = 2055615866; 
+//[xref,x] = wnoise(3,11,snr,init);
+//lev = 5;
+//xd = wden(x,'heursure','s','one',lev,'sym8');
+// 
+// See also
+//thselect
+//wtresh
+//wavedec 
+//Authors
+//Holger Nahrstaedt
 
-//  Inputs
-//   FUN = 1     or 	'blocks'
-//    C,L   output of the wavedec function   
-//  Outputs
-//    STDC  estimation of sigma
-//
-//  Description
-//    The estimator used is Median Absolute Deviation / 0.6745, well suited for zero mean Gaussian white noise in the de-noising one-dimensional model 
-//
 
 [nargout,nargin]=argn(0);
   if (nargin < 6 | nargin>7),

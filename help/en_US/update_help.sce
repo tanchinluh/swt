@@ -227,8 +227,35 @@ funmat = [
   "wdencmp"
   "wbmpen"
   "wentropy"
+  "scale2freq"
+  "centfrq"
+  "cwtplot"
+  "ddencmp"
+  "thselect"
+  "wavedecplot"
+  "wden"
+  "wnoise"
+  "wnoisest"
+  "wthresh"
   ];
 macrosdir = cwd +"../../macros";
+//demosdir = cwd +"../../demos";
+demosdir = [];
+modulename = "swt";
+helpupdate ( funmat , helpdir , macrosdir , demosdir , modulename , %t )
+//
+
+//
+cwd = get_absolute_file_path("update_help.sce");
+mprintf("Working dir = %s\n",cwd);
+//
+// Generate the swt help
+mprintf("Updating swt\n");
+helpdir = fullfile(cwd,"./");
+funmat = [
+  "waveletfamilies"
+  ];
+macrosdir = cwd +"../../macros/help_from_sci";
 //demosdir = cwd +"../../demos";
 demosdir = [];
 modulename = "swt";

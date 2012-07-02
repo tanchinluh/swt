@@ -1,8 +1,9 @@
 /*
  * -------------------------------------------------------------------------
- * dwt3d_int.c -- 2-D signal decomposition and reconstruction interface
+ * dwt3d_int.c -- 3-D signal decomposition and reconstruction interface
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,8 @@
 
 #include "swt_common.h"
 #include "dwt.h"
-#include "stack-c.h"
+// #define __USE_DEPRECATED_STACK_FUNCTIONS__
+// #include <stack-c.h>
 
 int
 int_dwt3 (char *fname)

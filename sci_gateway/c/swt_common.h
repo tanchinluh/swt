@@ -3,6 +3,7 @@
  * swt_common.h -- Declarations for wavelet functions.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2007  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +28,12 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#define __USE_DEPRECATED_STACK_FUNCTIONS__
 #include <stack-c.h>
+#include <api_scilab.h>
+#include <sciprint.h>
+#include <MALLOC.h>
+#include <Scierror.h>
 
 /*********************************************
  * Macro
@@ -52,6 +58,29 @@
 
 #define PI      3.1415926535
 
+/*********************************************
+ * Macros CWT
+ ********************************************/
+
+#define REAL    0
+#define COMPLEX 1
+
+#define PHI_ONLY     0
+#define PSI_ONLY     1
+#define PHI_PSI_BOTH 2
+
+#define SINUS           0
+#define POISSON         1
+#define MEXICAN_HAT     2
+#define MORLET          3
+#define DOGAUSS         4
+#define CMORLET         5
+#define SHANNON         6
+#define FBSP            7
+#define CAUCHY          8
+#define GAUSS           9
+#define CGAUSS          10
+
 
 /*********************************************
  * Extension Type
@@ -64,6 +93,14 @@ typedef enum {
 /*********************************************
  * Structure Declarations
  ********************************************/
+#ifndef __USE_DEPRECATED_STACK_FUNCTIONS__
+typedef struct sciintmat {
+         int m,n;
+         int it ; 
+         int l;   
+         void *D;     
+} SciIntMat ;
+#endif
 
 typedef struct {
   int     sigInLength;
@@ -94,6 +131,42 @@ typedef struct hypermat {
   double *I;
 } HyperMat;
 
+
+/*********************************************
+ * Structures CWT
+ ********************************************/
+
+typedef void(*WScaleFunc)(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
+
+
+typedef struct {
+	char wname[20];
+	int     realOrComplex;
+	int     family;
+	int     phipsi;
+	double  lb;
+	double  ub;
+	double cpsi;
+	WScaleFunc scalef;
+} cwt_identity;
+
+typedef struct {
+	char wname[20];
+	char     realOrComplex[20];
+	char     family[20];
+} cwt_family;
+
+
+/*********************************************
+ * Global Variables CWT
+ ********************************************/
+
+extern cwt_identity ci[];
+extern cwt_family cif[];
+extern int cwtFamilyNum;
+extern int cwtIdentityNum;
+
+
 /*********************************************
  * Function Prototype
  ********************************************/
@@ -104,15 +177,15 @@ typedef struct hypermat {
 extern void matrix_tran (double *matrixIn, int matrixInRow, 
 			 int matrixInCol, double *matrixOut, 
 			 int matrixOutRow, int matrixOutCol);
-extern void wrev (double *sigIn, int sigInLength, 
+extern void wrev (const double *sigIn, int sigInLength, 
 		  double *sigOut, int sigOutLength);
-extern void qmf_even (double *sigIn, int sigInLength, 
+extern void qmf_even (const double *sigIn, int sigInLength, 
 		      double *sigOut, int sigOutLength);
 extern void qmf_odd (double *sigIn, int sigInLength, 
 		     double *sigOut, int sigOutLength);
-extern void qmf_wrev (double *sigIn, int sigInLength, 
+extern void qmf_wrev (const double *sigIn, int sigInLength, 
 		      double *sigOut, int sigOutLength);
-extern void verbatim_copy (double *sigIn, int sigInLength, 
+extern void verbatim_copy (const double *sigIn, int sigInLength, 
 			   double *sigOut, int sigOutLength);
 extern void dyaddown_1D_keep_odd (double *sigIn, int sigInLength, 
 			       double *sigOut, int sigOutLength);
@@ -243,6 +316,7 @@ extern void i_conv (double *sigIn, int sigInLength,
  extern void linspace(double lb, double ub, int n, double *sigOut, int sigOutLength);
 //extern void ocumsum (double *sigIn, int sigInLength);
 
+ //extern int GetRhsVarDouble(int pos,  int *m1, int *n1, double *input);
 /*------------------------------------------*/
 /* Validation Function                      */
 /* -----------------------------------------*/

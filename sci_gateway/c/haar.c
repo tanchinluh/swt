@@ -3,6 +3,7 @@
  * haar.c -- Haar wavelets coefficients.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,15 +37,15 @@ static const double haar[2] = { 0.70710678, 0.70710678 };
 void
 haar_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
-  pFilterCoef = haar;
+//   pFilterCoef = haar;
 
   pWaveStruct->length = 2;
 
-  wrev(pFilterCoef, pWaveStruct->length,
+  wrev(haar, pWaveStruct->length,
        LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length,
+  qmf_wrev(haar, pWaveStruct->length,
 	   HiDecomFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowDecomFilCoef;
   pWaveStruct->pHiPass = HiDecomFilCoef;
@@ -55,14 +56,14 @@ haar_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 haar_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
-  pFilterCoef = haar;
+//   pFilterCoef = haar;
   pWaveStruct->length = 2;
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
+  verbatim_copy(haar, pWaveStruct->length,
 		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
+  qmf_even(haar, pWaveStruct->length,
       HiReconFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowReconFilCoef;
   pWaveStruct->pHiPass = HiReconFilCoef;

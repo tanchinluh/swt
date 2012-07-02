@@ -3,6 +3,7 @@
  * daubechies.c -- Daubechies wavelets coefficents.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -354,81 +355,161 @@ static const double db20[40] = {
 void
 daubechies_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 2 * member;
 
   switch (member)
     {
     case 1:
-      pFilterCoef = db1;
+//       pFilterCoef = db1;
+        wrev(db1, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db1, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = db2;
+//       pFilterCoef = db2;
+        wrev(db2, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db2, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 3:
-      pFilterCoef = db3;
+//       pFilterCoef = db3;
+        wrev(db3, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db3, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 4:
-      pFilterCoef = db4;
+//       pFilterCoef = db4;
+        wrev(db4, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db4, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 5:
-      pFilterCoef = db5;
+//       pFilterCoef = db5;
+        wrev(db5, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db5, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 6:
-      pFilterCoef = db6;
+//       pFilterCoef = db6;
+        wrev(db6, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db6, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 7:
-      pFilterCoef = db7;
+//       pFilterCoef = db7;
+        wrev(db7, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db7, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 8:
-      pFilterCoef = db8;
+//       pFilterCoef = db8;
+        wrev(db8, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db8, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 9:
-      pFilterCoef = db9;
+//       pFilterCoef = db9;
+        wrev(db9, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db9, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 10:
-      pFilterCoef = db10;
+//       pFilterCoef = db10;
+        wrev(db10, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db10, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 11:
-      pFilterCoef = db11;
+//       pFilterCoef = db11;
+        wrev(db11, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db11, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 12:
-      pFilterCoef = db12;
+//       pFilterCoef = db12;
+        wrev(db12, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db12, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 13:
-      pFilterCoef = db13;
+//       pFilterCoef = db13;
+        wrev(db13, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db13, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 14:
-      pFilterCoef = db14;
+//       pFilterCoef = db14;
+        wrev(db14, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db14, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 15:
-      pFilterCoef = db15;
+//       pFilterCoef = db15;
+        wrev(db15, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db15, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 16:
-      pFilterCoef = db16;
+//       pFilterCoef = db16;
+        wrev(db16, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db16, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 17:
-      pFilterCoef = db17;
+//       pFilterCoef = db17;
+        wrev(db17, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db17, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 18:
-      pFilterCoef = db18;
+//       pFilterCoef = db18;
+        wrev(db18, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db18, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 19:
-      pFilterCoef = db19;
+//       pFilterCoef = db19;
+        wrev(db19, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db19, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 20:
-      pFilterCoef = db20;
+//       pFilterCoef = db20;  
+      wrev(db20, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(db20, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     default:
       printf("db%d is not available!\n",member);
       exit(0);
     }
 
-  wrev(pFilterCoef, pWaveStruct->length, 
-       LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length, 
-	   HiDecomFilCoef, pWaveStruct->length);
+//   wrev(pFilterCoef, pWaveStruct->length, 
+//        LowDecomFilCoef, pWaveStruct->length);
+//   qmf_wrev(pFilterCoef, pWaveStruct->length, 
+// 	   HiDecomFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowDecomFilCoef;
   pWaveStruct->pHiPass = HiDecomFilCoef;
   
@@ -439,81 +520,161 @@ daubechies_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 daubechies_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 2 * member;
 
   switch (member)
     {
     case 1:
-      pFilterCoef = db1;
+//       pFilterCoef = db1;
+        verbatim_copy(db1, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db1, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = db2;
+//       pFilterCoef = db2;
+        verbatim_copy(db2, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db2, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 3:
-      pFilterCoef = db3;
+//       pFilterCoef = db3;  
+      verbatim_copy(db3, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db3, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 4:
-      pFilterCoef = db4;
+//       pFilterCoef = db4;
+        verbatim_copy(db4, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db4, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 5:
-      pFilterCoef = db5;
+//       pFilterCoef = db5;
+        verbatim_copy(db5, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db5, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 6:
-      pFilterCoef = db6;
+//       pFilterCoef = db6;
+        verbatim_copy(db6, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db6, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 7:
-      pFilterCoef = db7;
+//       pFilterCoef = db7;
+        verbatim_copy(db7, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db7, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 8:
-      pFilterCoef = db8;
+//       pFilterCoef = db8;
+        verbatim_copy(db8, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db8, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 9:
-      pFilterCoef = db9;
+//       pFilterCoef = db9;
+        verbatim_copy(db9, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db9, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 10:
-      pFilterCoef = db10;
+//       pFilterCoef = db10;
+        verbatim_copy(db10, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db10, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 11:
-      pFilterCoef = db11;
+//       pFilterCoef = db11;
+        verbatim_copy(db11, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db11, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 12:
-      pFilterCoef = db12;
+//       pFilterCoef = db12;
+        verbatim_copy(db12, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db12, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 13:
-      pFilterCoef = db13;
+//       pFilterCoef = db13;
+        verbatim_copy(db13, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db13, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 14:
-      pFilterCoef = db14;
+//       pFilterCoef = db14;
+        verbatim_copy(db14, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db14, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 15:
-      pFilterCoef = db15;
+//       pFilterCoef = db15;
+        verbatim_copy(db15, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db15, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 16:
-      pFilterCoef = db16;
+//       pFilterCoef = db16;
+        verbatim_copy(db16, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db16, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 17:
-      pFilterCoef = db17;
+//       pFilterCoef = db17;
+        verbatim_copy(db17, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db17, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 18:
-      pFilterCoef = db18;
+//       pFilterCoef = db18;
+        verbatim_copy(db18, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db18, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 19:
-      pFilterCoef = db19;
+//       pFilterCoef = db19;
+        verbatim_copy(db19, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db19, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 20:
-      pFilterCoef = db20;
+//       pFilterCoef = db20;
+        verbatim_copy(db20, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(db20, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     default:
       printf("db%d is not available!\n",member);
       exit(0);
     }
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
-		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
-      HiReconFilCoef, pWaveStruct->length);
+//   verbatim_copy(pFilterCoef, pWaveStruct->length,
+// 		LowReconFilCoef, pWaveStruct->length);
+//   qmf_even(pFilterCoef, pWaveStruct->length,
+//       HiReconFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowReconFilCoef;
   pWaveStruct->pHiPass = HiReconFilCoef;
   

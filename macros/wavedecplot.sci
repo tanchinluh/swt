@@ -1,4 +1,26 @@
 function wavedecplot(C,L,cbar,f)
+//Plots wavedec coeffs
+//Calling Sequence
+//wavedecplot(C,L)
+//wavedecplot(C,L,cbar,f)
+//Parameters
+//C: wavedec C coeffs
+//L: wavedec L coeffs
+//cbar: defines plotting of a color bar (%t or %f)
+//f: if used, the coeff are plotted in the figure f
+//Description
+//Plots the absolute coefficients of a discrete Wavelet-Transform (wavedec)
+//Examples
+//wname = 'db2';
+//x=[zeros(1,200),20*ones(1,200)];
+//
+//[C,L]=wavedec(x,5,wname);
+//wavedecplot(C,L);
+//
+// See also 
+// wavedec
+//Authors
+//Holger Nahrstaedt - 2010-2012
 
 
 

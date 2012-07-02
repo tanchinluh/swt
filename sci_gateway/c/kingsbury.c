@@ -3,6 +3,7 @@
  * kingsbury.c -- Kingsbury Q-filter coefficents.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2008  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,27 +60,35 @@ void
 kingsburyq_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
   int i;
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 10;
 
   switch (member)
     {
     case 1:
-      pFilterCoef = ksq1;
+//       pFilterCoef = ksq1;
+        wrev(ksq1, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(ksq1, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = ksq2;
+//       pFilterCoef = ksq2;
+        wrev(ksq2, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(ksq2, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     default:
       printf("ksq%d is not available!\n",member);
       exit(0);
     }
 
-  wrev(pFilterCoef, pWaveStruct->length, 
-       LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length, 
-	   HiDecomFilCoef, pWaveStruct->length);
+//   wrev(pFilterCoef, pWaveStruct->length, 
+//        LowDecomFilCoef, pWaveStruct->length);
+//   qmf_wrev(pFilterCoef, pWaveStruct->length, 
+// 	   HiDecomFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowDecomFilCoef;
   if (member==1)
     {
@@ -96,27 +105,35 @@ void
 kingsburyq_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
   int i;
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 10;
 
   switch (member)
     {
     case 1:
-      pFilterCoef = ksq1;
+//       pFilterCoef = ksq1; 
+      verbatim_copy(ksq1, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(ksq1, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = ksq2;
+//       pFilterCoef = ksq2;
+            verbatim_copy(ksq2, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(ksq2, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     default:
       printf("ksq%d is not available!\n",member);
       exit(0);
     }
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
-		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
-      HiReconFilCoef, pWaveStruct->length);
+//   verbatim_copy(pFilterCoef, pWaveStruct->length,
+// 		LowReconFilCoef, pWaveStruct->length);
+//   qmf_even(pFilterCoef, pWaveStruct->length,
+//       HiReconFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowReconFilCoef;
   if (member==1)
     {

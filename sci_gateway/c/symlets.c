@@ -3,6 +3,7 @@
  * symlet.c -- Symlet wavelets coefficients.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -283,78 +284,154 @@ void
 symlets_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
   
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 2 * member;
 
   switch (member)
     {
     case 2:
-      pFilterCoef = sym2;
+//       pFilterCoef = sym2;
+        wrev(sym2, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym2, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
 	  break;
 	case 3:
-      pFilterCoef = sym3;
+//       pFilterCoef = sym3;
+        wrev(sym3, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym3, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
 	  break;
     case 4:
-      pFilterCoef = sym4;
+//       pFilterCoef = sym4;
+        wrev(sym4, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym4, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 5:
-      pFilterCoef = sym5;
+//       pFilterCoef = sym5;
+        wrev(sym5, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym5, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 6:
-      pFilterCoef = sym6;
+//       pFilterCoef = sym6;
+        wrev(sym6, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym6, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 7:
-      pFilterCoef = sym7;
+//       pFilterCoef = sym7;
+        wrev(sym7, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym7, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 8:
-      pFilterCoef = sym8;
+//       pFilterCoef = sym8;
+        wrev(sym8, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym8, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 9:
-      pFilterCoef = sym9;
+//       pFilterCoef = sym9;
+        wrev(sym9, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym9, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 10:
-      pFilterCoef = sym10;
+//       pFilterCoef = sym10;
+        wrev(sym10, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym10, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 11:
-      pFilterCoef = sym11;
+//       pFilterCoef = sym11;
+        wrev(sym11, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym11, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 12:
-      pFilterCoef = sym12;
+//       pFilterCoef = sym12;
+        wrev(sym12, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym12, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 13:
-      pFilterCoef = sym13;
+//       pFilterCoef = sym13;
+        wrev(sym13, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym13, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 14:
-      pFilterCoef = sym14;
+//       pFilterCoef = sym14;
+        wrev(sym14, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym14, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 15:
-      pFilterCoef = sym15;
+//       pFilterCoef = sym15;
+        wrev(sym15, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym15, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 16:
-      pFilterCoef = sym16;
+//       pFilterCoef = sym16;
+        wrev(sym16, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym16, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 17:
-      pFilterCoef = sym17;
+//       pFilterCoef = sym17;
+        wrev(sym17, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym17, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 18:
-      pFilterCoef = sym18;
+//       pFilterCoef = sym18;
+        wrev(sym18, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym18, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 19:
-      pFilterCoef = sym19;
+//       pFilterCoef = sym19;
+        wrev(sym19, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym19, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 20:
-      pFilterCoef = sym20;
+//       pFilterCoef = sym20;
+        wrev(sym20, pWaveStruct->length,
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(sym20, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     default:
       printf("sym%d is not available!\n",member);
       exit(0);
     }
 
-  wrev(pFilterCoef, pWaveStruct->length,
-       LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length,
-	   HiDecomFilCoef, pWaveStruct->length);
+//   wrev(pFilterCoef, pWaveStruct->length,
+//        LowDecomFilCoef, pWaveStruct->length);
+//   qmf_wrev(pFilterCoef, pWaveStruct->length,
+// 	   HiDecomFilCoef, pWaveStruct->length);
   //for (count = 0; count < pWaveStruct->length; count++)
     //LowDecomFilCoef[count] /= sqrt(2.0);
   //for (count = 0; count < pWaveStruct->length; count++)
@@ -369,78 +446,154 @@ void
 symlets_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
   
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 2 * member;
 
   switch (member)
     {
 	case 2:
-      pFilterCoef = sym2;
+//       pFilterCoef = sym2;
+        verbatim_copy(sym2, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym2, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
 	  break;
 	case 3:
-      pFilterCoef = sym3;
+//       pFilterCoef = sym3;
+        verbatim_copy(sym3, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym3, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
 	  break;
     case 4:
-      pFilterCoef = sym4;
+//       pFilterCoef = sym4;
+        verbatim_copy(sym4, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym4, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 5:
-      pFilterCoef = sym5;
+//       pFilterCoef = sym5;
+        verbatim_copy(sym5, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym5, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 6:
-      pFilterCoef = sym6;
+//       pFilterCoef = sym6;
+        verbatim_copy(sym6, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym6, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 7:
-      pFilterCoef = sym7;
+//       pFilterCoef = sym7;
+        verbatim_copy(sym7, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym7, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 8:
-      pFilterCoef = sym8;
+//       pFilterCoef = sym8;
+        verbatim_copy(sym8, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym8, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 9:
-      pFilterCoef = sym9;
+//       pFilterCoef = sym9;
+        verbatim_copy(sym9, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym9, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 10:
-      pFilterCoef = sym10;
+//       pFilterCoef = sym10;
+        verbatim_copy(sym10, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym10, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 11:
-      pFilterCoef = sym11;
+//       pFilterCoef = sym11;
+        verbatim_copy(sym11, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym11, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 12:
-      pFilterCoef = sym12;
+//       pFilterCoef = sym12;
+        verbatim_copy(sym12, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym12, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 13:
-      pFilterCoef = sym13;
+//       pFilterCoef = sym13;
+        verbatim_copy(sym13, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym13, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 14:
-      pFilterCoef = sym14;
+//       pFilterCoef = sym14;
+        verbatim_copy(sym14, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym14, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 15:
-      pFilterCoef = sym15;
+//       pFilterCoef = sym15;
+        verbatim_copy(sym15, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym15, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 16:
-      pFilterCoef = sym16;
+//       pFilterCoef = sym16;
+        verbatim_copy(sym16, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym16, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 17:
-      pFilterCoef = sym17;
+//       pFilterCoef = sym17;
+        verbatim_copy(sym17, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym17, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 18:
-      pFilterCoef = sym18;
+//       pFilterCoef = sym18;
+        verbatim_copy(sym18, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym18, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 19:
-      pFilterCoef = sym19;
+//       pFilterCoef = sym19;
+        verbatim_copy(sym19, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym19, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 20:
-      pFilterCoef = sym20;
+//       pFilterCoef = sym20;
+        verbatim_copy(sym20, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(sym20, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     default:
       printf("sym%d is not available!\n",member);
       exit(0);
     }
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
-		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
-      HiReconFilCoef, pWaveStruct->length);
+//   verbatim_copy(pFilterCoef, pWaveStruct->length,
+// 		LowReconFilCoef, pWaveStruct->length);
+//   qmf_even(pFilterCoef, pWaveStruct->length,
+//       HiReconFilCoef, pWaveStruct->length);
   //for (count = 0; count < pWaveStruct->length; count++)
     //LowReconFilCoef[count] /= sqrt(2.0);
   //for (count = 0; count < pWaveStruct->length; count++)

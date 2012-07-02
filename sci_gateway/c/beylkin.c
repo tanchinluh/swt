@@ -3,6 +3,7 @@
  * beylkin.c -- Beylkin wavelets coefficents.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2007  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,15 +43,15 @@ static const double beylkin[18] = {
 void
 beylkin_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
-  pFilterCoef = beylkin;
+//   pFilterCoef = beylkin;
 
   pWaveStruct->length = 18;
 
-  wrev(pFilterCoef, pWaveStruct->length,
+  wrev(beylkin, pWaveStruct->length,
        LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length,
+  qmf_wrev(beylkin, pWaveStruct->length,
 	   HiDecomFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowDecomFilCoef;
   pWaveStruct->pHiPass = HiDecomFilCoef;
@@ -61,14 +62,14 @@ beylkin_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 beylkin_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
-  pFilterCoef = beylkin;
+//   pFilterCoef = beylkin;
   pWaveStruct->length = 18;
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
+  verbatim_copy(beylkin, pWaveStruct->length,
 		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
+  qmf_even(beylkin, pWaveStruct->length,
       HiReconFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowReconFilCoef;
   pWaveStruct->pHiPass = HiReconFilCoef;

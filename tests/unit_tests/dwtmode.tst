@@ -15,7 +15,7 @@ x0=idwt(cA,cD,'db2',length(x));
 
 assert_checkalmostequal ( cA , caa , %eps );
 assert_checkalmostequal ( cD , cdd , %eps );
-assert_checkalmostequal ( x , x0 , %eps );
+assert_checkalmostequal ( x , x0 , %eps*1000 );
 
 assert_checktrue(b);
 
@@ -31,7 +31,7 @@ x0=idwt(cA,cD,'db2',length(x));
 
 assert_checkalmostequal ( cA , caa , %eps );
 assert_checkalmostequal ( cD , cdd , %eps );
-assert_checkalmostequal ( x , x0 , %eps );
+assert_checkalmostequal ( x , x0 , %eps*1000 );
 
 assert_checktrue(b);
 

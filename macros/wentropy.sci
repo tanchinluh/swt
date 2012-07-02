@@ -1,6 +1,5 @@
 function E = wentropy(X,T,P)
 //   Entropy
-//   
 //   Calling Sequence
 //   E = wentropy(X,T,P)
 //   E = wentropy(X,T)

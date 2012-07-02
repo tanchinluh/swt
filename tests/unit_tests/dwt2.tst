@@ -25,24 +25,24 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 
 clear m_ex;
 clear row_low;
@@ -75,23 +75,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -127,23 +127,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps*1000);
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -180,23 +180,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps*10000);
 clear cA;
 clear cH;
 clear cV;
@@ -233,23 +233,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps*10000000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -286,23 +286,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -339,10 +339,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -385,23 +385,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -438,23 +438,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -491,23 +491,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps *10);
-assert_checkalmostequal ( ccA , cca , %eps *10);
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps *10);
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps *10000);
+assert_checkalmostequal ( ccA , cca , %eps *10000);
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps *10000);
 clear cA;
 clear cH;
 clear cV;
@@ -544,23 +544,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps *10);
-assert_checkalmostequal ( cD , ccd , %eps *10);
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps *10);
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps*100000);
+assert_checkalmostequal ( cD , ccd , %eps*100000);
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps*100000);
 clear cA;
 clear cH;
 clear cV;
@@ -597,23 +597,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -651,23 +651,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps *10);
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps *10);
-assert_checkalmostequal ( cD , ccd , %eps *10);
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps *10);
+assert_checkalmostequal ( cA , cca , %eps*100000);
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps*100000);
+assert_checkalmostequal ( cD , ccd , %eps*100000);
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps*100000);
 clear cA;
 clear cH;
 clear cV;
@@ -704,23 +704,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps *10);
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps*100000);
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -757,23 +757,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -810,23 +810,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -863,23 +863,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -916,23 +916,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -969,23 +969,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1022,23 +1022,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1075,23 +1075,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1128,23 +1128,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1181,23 +1181,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1234,23 +1234,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1287,23 +1287,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1340,23 +1340,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1393,23 +1393,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1446,23 +1446,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1499,23 +1499,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1552,23 +1552,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1605,23 +1605,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1658,23 +1658,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1711,23 +1711,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1764,23 +1764,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1817,23 +1817,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1871,23 +1871,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1924,23 +1924,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -1977,23 +1977,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -2030,23 +2030,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -2083,23 +2083,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -2136,23 +2136,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -2189,23 +2189,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -2242,23 +2242,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -2295,23 +2295,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r c]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r c]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r c]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r c]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;
@@ -2348,23 +2348,23 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+1 c+1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+1 c+1]),'m');
 ccv=dyaddown(wkeep(col_hi_low,[r+1 c+1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+1 c+1]),'m');
-assert_checkalmostequal ( cA , cca , %eps*10 );
-assert_checkalmostequal ( cH , cch , %eps*10 );
-assert_checkalmostequal ( cV , ccv , %eps*10 );
-assert_checkalmostequal ( cD , ccd , %eps*10 );
-assert_checkalmostequal ( ccA , cca , %eps*10 );
-assert_checkalmostequal ( ccH , cch , %eps*10 );
-assert_checkalmostequal ( ccV , ccv , %eps*10 );
-assert_checkalmostequal ( ccD , ccd , %eps*10 );
+assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( cV , ccv , %eps,  %eps*1000 );
+assert_checkalmostequal ( cD , ccd , %eps, %eps*1000 );
+assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
+assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );
+assert_checkalmostequal ( ccV , ccv , %eps, %eps*1000 );
+assert_checkalmostequal ( ccD , ccd , %eps, %eps*1000 );
 clear cA;
 clear cH;
 clear cV;

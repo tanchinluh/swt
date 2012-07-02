@@ -1,15 +1,36 @@
 function THR = thselect(X,TPTR)
+// Threshold selection for de-noising
+// Calling Sequence
+// THR = thselect(X,TPTR)
+//Parameters
+//X: input vector with scaled white noise (N(0,1))
+//TPTR: defines selection rules for thresholding
+// TPTR = 'rigrsure': adaptive threshold selection using principle of Stein's Unbiased Risk Estimate.
+// TPTR = 'heursure': heuristic variant of the first option.
+// TPTR = 'sqtwolog': threshold is sqrt(2*log(length(X))).
+// TPTR = 'minimaxi': minimax thresholding.
+// THR : threshold X-adapted value using selection rule defined by string TPTR
+//Description
+//Threshold selection for de-noising. The algorithm works only if the signal X has a white noise of N(0,1). Dealing with unscaled or nonwhite noise can be handled using rescaling of the threshold.
+//Examples
+//init = 2055415866; rand('seed',init); 
+//x = rand(1,1000,'normal');
+// 
+//thr = thselect(x,'rigrsure') 
+//
+//thr = thselect(x,'sqtwolog') 
+//
+//thr = thselect(x,'heursure') 
+//
+//thr = thselect(x,'minimaxi')
+//
+// See also
+// wden 
+//
+//Authors
+// Holger Nahrstaedt - 2010-2012
 
-//thselect is a one-dimensional de-noising oriented function.
 
-//THR = thselect(X,TPTR) returns threshold X-adapted value using selection rule defined by string TPTR.
-
-//Available selection rules are
-
-//    * TPTR = 'rigrsure', adaptive threshold selection using principle of Stein's Unbiased Risk Estimate.
-//    * TPTR = 'heursure', heuristic variant of the first option.
-//    * TPTR = 'sqtwolog', threshold is sqrt(2*log(length(X))).
-//    * TPTR = 'minimaxi', minimax thresholding.
 
   [nargout,nargin]=argn(0);
   if (nargin < 2),

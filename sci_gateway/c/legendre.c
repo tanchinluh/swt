@@ -3,6 +3,7 @@
  * legendre.c -- Legendre wavelets coefficents.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2007  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -74,7 +75,7 @@ static const double legd9[20] = {
 void
 legendre_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
   //double sum;
   //int count;
   
@@ -82,50 +83,86 @@ legendre_analysis_initialize (int member, swt_wavelet *pWaveStruct)
   switch (member)
     {
     case 1:
-      pFilterCoef = legd1;
+//       pFilterCoef = legd1;
 	  pWaveStruct->length = 2;
+	    wrev(legd1, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd1, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = legd2;
+//       pFilterCoef = legd2;
 	  pWaveStruct->length = 4;
+	    wrev(legd2, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd2, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 3:
-      pFilterCoef = legd3;
+//       pFilterCoef = legd3;
 	  pWaveStruct->length = 6;
+	    wrev(legd3, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd3, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 4:
-      pFilterCoef = legd4;
+//       pFilterCoef = legd4;
 	  pWaveStruct->length = 8;
+	    wrev(legd4, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd4, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 5:
-      pFilterCoef = legd5;
+//       pFilterCoef = legd5;
 	  pWaveStruct->length = 10;
+	    wrev(legd5, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd5, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 6:
-      pFilterCoef = legd6;
+//       pFilterCoef = legd6;
 	  pWaveStruct->length = 14;
+	    wrev(legd6, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd6, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 7:
-      pFilterCoef = legd7;
+//       pFilterCoef = legd7;
 	  pWaveStruct->length = 16;
+	    wrev(legd7, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd7, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 8:
-      pFilterCoef = legd8;
+//       pFilterCoef = legd8;
 	  pWaveStruct->length = 18;
+	    wrev(legd8, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd8, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 9:
-      pFilterCoef = legd9;
+//       pFilterCoef = legd9;
 	  pWaveStruct->length = 20;
+	    wrev(legd9, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(legd9, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     default:
       printf("legd%d is not available!\n",member);
       exit(0);
     }
 
-  wrev(pFilterCoef, pWaveStruct->length, 
-       LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length, 
-	   HiDecomFilCoef, pWaveStruct->length);
+//   wrev(pFilterCoef, pWaveStruct->length, 
+//        LowDecomFilCoef, pWaveStruct->length);
+//   qmf_wrev(pFilterCoef, pWaveStruct->length, 
+// 	   HiDecomFilCoef, pWaveStruct->length);
   //sum = 0;
   /*for (count = 0; count < pWaveStruct->length; count++)
     LowDecomFilCoef[count] *= sqrt(2.0);
@@ -142,7 +179,7 @@ legendre_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 legendre_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef;
+//   double *pFilterCoef;
   //double sum;
   //int count;
   
@@ -150,50 +187,86 @@ legendre_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
   switch (member)
     {
     case 1:
-      pFilterCoef = legd1;
+//       pFilterCoef = legd1;
 	  pWaveStruct->length = 2;
+	    verbatim_copy(legd1, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd1, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = legd2;
+//       pFilterCoef = legd2;
 	  pWaveStruct->length = 4;
+	    verbatim_copy(legd2, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd2, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 3:
-      pFilterCoef = legd3;
+//       pFilterCoef = legd3;
 	  pWaveStruct->length = 6;
+	    verbatim_copy(legd3, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd3, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 4:
-      pFilterCoef = legd4;
+//       pFilterCoef = legd4;
 	  pWaveStruct->length = 8;
+	    verbatim_copy(legd4, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd4, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 5:
-      pFilterCoef = legd5;
+//       pFilterCoef = legd5;
 	  pWaveStruct->length = 10;
+	    verbatim_copy(legd5, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd5, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 6:
-      pFilterCoef = legd6;
+//       pFilterCoef = legd6;
 	  pWaveStruct->length = 14;
+	    verbatim_copy(legd6, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd6, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 7:
-      pFilterCoef = legd7;
+//       pFilterCoef = legd7;
 	  pWaveStruct->length = 16;
+	    verbatim_copy(legd7, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd7, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 8:
-      pFilterCoef = legd8;
+//       pFilterCoef = legd8;
 	  pWaveStruct->length = 18;
+	    verbatim_copy(legd8, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd8, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 9:
-      pFilterCoef = legd9;
+//       pFilterCoef = legd9;
 	  pWaveStruct->length = 20;
+	    verbatim_copy(legd9, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(legd9, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     default:
       printf("legd%d is not available!\n",member);
       exit(0);
     }
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
-		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
-      HiReconFilCoef, pWaveStruct->length);
+//   verbatim_copy(pFilterCoef, pWaveStruct->length,
+// 		LowReconFilCoef, pWaveStruct->length);
+//   qmf_even(pFilterCoef, pWaveStruct->length,
+//       HiReconFilCoef, pWaveStruct->length);
   /*for (count = 0; count < pWaveStruct->length; count++)
     LowDecomFilCoef[count] *= sqrt(2.0);
   

@@ -1,6 +1,5 @@
 function [xc,cxc,lxc,perf0,perfl2] = wdencmp(o,varargin)
 //   De-noising or compression using wavelets.
-//   
 //   Calling Sequence
 //   [XC,CXC,LXC,PERF0,PERFL2] = wdencmp('gbl',X,'wname',N,THR,SORH,KEEPAPP)
 //   [XC,CXC,LXC,PERF0,PERFL2] = wdencmp('gbl',C,L,W,N,THR,SORH,KEEPAPP)
@@ -27,12 +26,30 @@ function [xc,cxc,lxc,perf0,perfl2] = wdencmp(o,varargin)
 //   performs a de-noising or compression process
 //   of a signal or an image using wavelets.
 //
+//   Examples
+//   x=sin(2*%pi*(0:0.01:1));
+//   xn=x+rand(x);
+//   thr=35;
+//    //compression  using global thresholding
+//   [xcomp,cxd,lxd,perf0,perfl2] = wdencmp('gbl',xn,'db3',3,thr,'h',1);
+//    //denoising
+//   // Find default values 
+//   [thr,sorh,keepapp] = ddencmp('den','wv',x);
+//   // De-noise signal using global thresholding option. 
+//   xd = wdencmp('gbl',xn,'db3',4,thr,sorh,keepapp);
+//   scf();clf();
+//   plot(xn);
+//   plot(xcomp,'r');
+//   plot(xd,'g');
+//   legend(["noisy signal","compressed signal","de-noised signal"],1);
 //   See also 
 //   ddencmp
 //   wavedec
 //   wavedec2
 //   wden
 //   wthresh
+//   Authors
+//   H. Nahrstaedt - 2010-2012
 
 
 

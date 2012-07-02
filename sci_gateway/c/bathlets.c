@@ -3,6 +3,7 @@
  * bathlets.c -- Bathlets wavelets coefficents.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2007  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -179,149 +180,277 @@ void
 bathlets_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
 
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   
 
   switch (member)
     {
     case 40:
-      pFilterCoef = bath4_0;
+//       pFilterCoef = bath4_0;
 	  pWaveStruct->length = 4;
+        wrev(bath4_0, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_0, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 41:
-      pFilterCoef = bath4_1;
+//       pFilterCoef = bath4_1;
 	  pWaveStruct->length = 4;
+        wrev(bath4_1, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_1, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 42:
-      pFilterCoef = bath4_2;
+//       pFilterCoef = bath4_2;
 	  pWaveStruct->length = 4;
+        wrev(bath4_2, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_2, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 43:
-      pFilterCoef = bath4_3;
+//       pFilterCoef = bath4_3;
 	  pWaveStruct->length = 4;
+        wrev(bath4_3, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_3, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 44:
-      pFilterCoef = bath4_4;
+//       pFilterCoef = bath4_4;
 	  pWaveStruct->length = 4;
+        wrev(bath4_4, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_4, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 45:
-      pFilterCoef = bath4_5;
+//       pFilterCoef = bath4_5;
 	  pWaveStruct->length = 4;
+        wrev(bath4_5, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_5, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 46:
-      pFilterCoef = bath4_6;
+//       pFilterCoef = bath4_6;
 	  pWaveStruct->length = 4;
+        wrev(bath4_6, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_6, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 47:
-      pFilterCoef = bath4_7;
+//       pFilterCoef = bath4_7;
 	  pWaveStruct->length = 4;
+        wrev(bath4_7, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_7, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 48:
-      pFilterCoef = bath4_8;
+//       pFilterCoef = bath4_8;
 	  pWaveStruct->length = 4;
+        wrev(bath4_8, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_8, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 49:
-      pFilterCoef = bath4_9;
+//       pFilterCoef = bath4_9;
 	  pWaveStruct->length = 4;
+        wrev(bath4_9, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_9, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 410:
-      pFilterCoef = bath4_10;
+//       pFilterCoef = bath4_10;
 	  pWaveStruct->length = 4;
+        wrev(bath4_10, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_10, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 411:
-      pFilterCoef = bath4_11;
+//       pFilterCoef = bath4_11;
 	  pWaveStruct->length = 4;
+        wrev(bath4_11, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_11, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 412:
-      pFilterCoef = bath4_12;
+//       pFilterCoef = bath4_12;
 	  pWaveStruct->length = 4;
+        wrev(bath4_12, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_12, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 413:
-      pFilterCoef = bath4_13;
+//       pFilterCoef = bath4_13;
 	  pWaveStruct->length = 4;
+        wrev(bath4_13, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_13, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 414:
-      pFilterCoef = bath4_14;
+//       pFilterCoef = bath4_14;
 	  pWaveStruct->length = 4;
+        wrev(bath4_14, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_14, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 415:
-      pFilterCoef = bath4_15;
+//       pFilterCoef = bath4_15;
 	  pWaveStruct->length = 4;
+        wrev(bath4_15, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath4_15, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 60:
-      pFilterCoef = bath6_0;
+//       pFilterCoef = bath6_0;
 	  pWaveStruct->length = 6;
+        wrev(bath6_0, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_0, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 61:
-      pFilterCoef = bath6_1;
+//       pFilterCoef = bath6_1;
 	  pWaveStruct->length = 6;
+        wrev(bath6_1, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_1, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 62:
-      pFilterCoef = bath6_2;
+//       pFilterCoef = bath6_2;
 	  pWaveStruct->length = 6;
+        wrev(bath6_2, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_2, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 63:
-      pFilterCoef = bath6_3;
+//       pFilterCoef = bath6_3;
 	  pWaveStruct->length = 6;
+        wrev(bath6_3, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_3, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 64:
-      pFilterCoef = bath6_4;
+//       pFilterCoef = bath6_4;
 	  pWaveStruct->length = 6;
+        wrev(bath6_4, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_4, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 65:
-      pFilterCoef = bath6_5;
+//       pFilterCoef = bath6_5;  
 	  pWaveStruct->length = 6;
+      wrev(bath6_5, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_5, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 66:
-      pFilterCoef = bath6_6;
+//       pFilterCoef = bath6_6;
 	  pWaveStruct->length = 6;
+        wrev(bath6_6, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_6, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 67:
-      pFilterCoef = bath6_7;
+//       pFilterCoef = bath6_7;
 	  pWaveStruct->length = 6;
+        wrev(bath6_7, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_7, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 68:
-      pFilterCoef = bath6_8;
+//       pFilterCoef = bath6_8;
 	  pWaveStruct->length = 6;
+        wrev(bath6_8, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_8, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 69:
-      pFilterCoef = bath6_9;
+//       pFilterCoef = bath6_9;
 	  pWaveStruct->length = 6;
+        wrev(bath6_9, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_9, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 610:
-      pFilterCoef = bath6_10;
+//       pFilterCoef = bath6_10;
 	  pWaveStruct->length = 6;
+        wrev(bath6_10, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_10, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 611:
-      pFilterCoef = bath6_11;
+//       pFilterCoef = bath6_11;
 	  pWaveStruct->length = 6;
+        wrev(bath6_11, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_11, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 612:
-      pFilterCoef = bath6_12;
+//       pFilterCoef = bath6_12;
 	  pWaveStruct->length = 6;
+        wrev(bath6_12, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_12, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 613:
-      pFilterCoef = bath6_13;
+//       pFilterCoef = bath6_13;
 	  pWaveStruct->length = 6;
+        wrev(bath6_13, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_13, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 614:
-      pFilterCoef = bath6_14;
+//       pFilterCoef = bath6_13;
 	  pWaveStruct->length = 6;
+        wrev(bath6_13, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_13, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 615:
-      pFilterCoef = bath6_15;
+//       pFilterCoef = bath6_15;
 	  pWaveStruct->length = 6;
+        wrev(bath6_15, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(bath6_15, pWaveStruct->length,
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     default:
       printf("db%d is not available!\n",member);
       exit(0);
     }
 
-  wrev(pFilterCoef, pWaveStruct->length, 
-       LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length,
-	   HiDecomFilCoef, pWaveStruct->length);
+//   wrev(pFilterCoef, pWaveStruct->length, 
+//        LowDecomFilCoef, pWaveStruct->length);
+//   qmf_wrev(pFilterCoef, pWaveStruct->length,
+// 	   HiDecomFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowDecomFilCoef;
   pWaveStruct->pHiPass = HiDecomFilCoef;
 
@@ -338,142 +467,270 @@ bathlets_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
   switch (member)
     {
     case 40:
-      pFilterCoef = bath4_0;
+//       pFilterCoef = bath4_0;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_0, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_0, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 41:
-      pFilterCoef = bath4_1;
+//       pFilterCoef = bath4_1;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_1, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_1, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 42:
-      pFilterCoef = bath4_2;
+//       pFilterCoef = bath4_2;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_2, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_2, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 43:
-      pFilterCoef = bath4_3;
+//       pFilterCoef = bath4_3;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_3, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_3, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 44:
-      pFilterCoef = bath4_4;
+//       pFilterCoef = bath4_4;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_4, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_4, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 45:
-      pFilterCoef = bath4_5;
+//       pFilterCoef = bath4_5;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_5, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_5, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 46:
-      pFilterCoef = bath4_6;
+//       pFilterCoef = bath4_6;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_6, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_6, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 47:
-      pFilterCoef = bath4_7;
+//       pFilterCoef = bath4_6;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_6, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_6, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 48:
-      pFilterCoef = bath4_8;
+//       pFilterCoef = bath4_8;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_8, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_8, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 49:
-      pFilterCoef = bath4_9;
+//       pFilterCoef = bath4_9;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_9, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_9, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 410:
-      pFilterCoef = bath4_10;
+//       pFilterCoef = bath4_10;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_10, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_10, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 411:
-      pFilterCoef = bath4_11;
+//       pFilterCoef = bath4_11;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_11, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_11, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 412:
-      pFilterCoef = bath4_12;
+//       pFilterCoef = bath4_12;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_12, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_12, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 413:
-      pFilterCoef = bath4_13;
+//       pFilterCoef = bath4_13;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_13, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_13, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 414:
-      pFilterCoef = bath4_14;
+//       pFilterCoef = bath4_14;  
 	  pWaveStruct->length = 4;
+      verbatim_copy(bath4_14, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_14, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 415:
-      pFilterCoef = bath4_15;
+//       pFilterCoef = bath4_15;
 	  pWaveStruct->length = 4;
+        verbatim_copy(bath4_15, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath4_15, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 60:
-      pFilterCoef = bath6_0;
+//       pFilterCoef = bath6_0;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_0, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_0, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 61:
-      pFilterCoef = bath6_1;
+//       pFilterCoef = bath6_1;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_1, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_1, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 62:
-      pFilterCoef = bath6_2;
+//       pFilterCoef = bath6_2;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_2, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_2, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 63:
-      pFilterCoef = bath6_3;
+//       pFilterCoef = bath6_3;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_3, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_3, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 64:
-      pFilterCoef = bath6_4;
+//       pFilterCoef = bath6_4;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_4, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_4, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 65:
-      pFilterCoef = bath6_5;
+//       pFilterCoef = bath6_5;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_5, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_5, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 66:
-      pFilterCoef = bath6_6;
+//       pFilterCoef = bath6_6;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_6, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_6, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 67:
-      pFilterCoef = bath6_7;
+//       pFilterCoef = bath6_7;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_7, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_7, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 68:
-      pFilterCoef = bath6_8;
+//       pFilterCoef = bath6_8;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_8, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_8, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 69:
-      pFilterCoef = bath6_9;
+//       pFilterCoef = bath6_9;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_9, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_9, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 610:
-      pFilterCoef = bath6_10;
+//       pFilterCoef = bath6_10;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_10, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_10, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 611:
-      pFilterCoef = bath6_11;
+//       pFilterCoef = bath6_11;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_11, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_11, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 612:
-      pFilterCoef = bath6_12;
+//       pFilterCoef = bath6_12;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_12, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_12, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 613:
-      pFilterCoef = bath6_13;
+//       pFilterCoef = bath6_13;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_13, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_13, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 614:
-      pFilterCoef = bath6_14;
+//       pFilterCoef = bath6_14;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_14, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_14, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     case 615:
-      pFilterCoef = bath6_15;
+//       pFilterCoef = bath6_15;
 	  pWaveStruct->length = 6;
+        verbatim_copy(bath6_15, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(bath6_15, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length );
       break;
     default:
       printf("db%d is not available!\n",member);
       exit(0);
     }
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
-		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
-      HiReconFilCoef, pWaveStruct->length );
+//   verbatim_copy(pFilterCoef, pWaveStruct->length,
+// 		LowReconFilCoef, pWaveStruct->length);
+//   qmf_even(pFilterCoef, pWaveStruct->length,
+//       HiReconFilCoef, pWaveStruct->length );
   pWaveStruct->pLowPass = LowReconFilCoef;
   pWaveStruct->pHiPass = HiReconFilCoef;
 

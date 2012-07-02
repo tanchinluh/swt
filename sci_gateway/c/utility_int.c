@@ -3,6 +3,7 @@
  * utility_int.c -- utility function interface
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2007  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,10 @@
 
 #include "swt_common.h"
 #include "dwt.h"
-#include "stack-c.h"
+
+
+// #define __USE_DEPRECATED_STACK_FUNCTIONS__
+// #include <stack-c.h>
 
 /*-------------------------------------------
  * convolution
@@ -2231,4 +2235,139 @@ int_wnorm (char *fname)
       }
   
   return 0;
+}
+
+
+int
+int_waveletfamilies (char *fname)
+{
+    int l1, m1, n1;
+   int minlhs = 1, maxlhs = 1, minrhs = 0, maxrhs = 1;
+  int errCode, flow;
+     int * p_input_string = NULL;
+   char * input_string = NULL;
+   SciErr _SciErr;
+  int type;
+  int i,j,count;
+  /* Input Validation */
+  CheckRhs (minrhs, maxrhs);
+  CheckLhs (minlhs, maxlhs);
+  
+  if (Rhs==0) {
+    input_string = malloc(2 * sizeof(char));
+    input_string[0]='f';
+//     sciprint ("------------------------------------\n");
+//     sciprint (" HAAR\t\t haar\t ORTH\n");
+//  sciprint ("DAUBECHIES\t  db\t ORTH\n");
+//  sciprint ("COIFLETS\t coif\t ORTH\n");
+//  sciprint ("SYMLETS\t\t sym\t ORTH\n");
+//  sciprint ("SPLINE_BIORTH\t bior\t BIORTH\n");
+//   sciprint ("SPLINE_RBIORTH\t rbior\t BIORTH\n");
+//  sciprint ("BEYLKIN\t\t beylkin\t ORTH\n");
+//  sciprint ("VAIDYANATHAN\t vaidyanathan\t ORTH\n");
+//  sciprint ("DMEY\t\t dmey\t ORTH\n");
+//  sciprint ("BATHLETS\t bath\t ORTH\n");
+//  sciprint ("LEGENDRE\t legd\t ORTH\n");
+//  sciprint ("FARRAS\t\t fa\t ORTH\n");
+//  sciprint ("KINGSBURYQ\t ksq\t ORTH\n");
+//  sciprint ("------------------------------------\n");
+//  sciprint ("SINUS\t\t sinus\t REAL\n");
+//  sciprint ("POISSON\t\t poisson\t REAL\n");
+//  sciprint ("MEXICAN_HAT\t mexh\t REAL\n");
+//  sciprint ("MORLET\t\t morl\t REAL\n");
+//  sciprint ("DOGAUSS\t\t DOG\t REAL\n");
+//  sciprint ("GAUSS\t\t gaus\t REAL\n");
+//  sciprint ("CMORLET\t\t cmor\t COMPLEX\n");
+//  sciprint ("SHANNON\t\t shan\t COMPLEX\n");
+//  sciprint ("FBSP\t\t fbsp\t COMPLEX\n");
+//  sciprint ("CAUCHY\t\t cauchy\t COMPLEX\n");
+//  sciprint ("CGAUSS\t\t cgau\t COMPLEX\n");
+//  sciprint ("------------------------------------\n");
+    
+  //  return 0;
+    
+  } else {
+  //   GetRhsVar (1, "c", &m1, &n1, &l1);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_string);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+     getAllocatedSingleString(pvApiCtx, p_input_string, &input_string);	 
+   }
+     if (input_string[0]=='n') {
+       
+      for (j=0;j<waveletFamilyIdentityNum;j++){
+	count=0;
+	sciprint (wif[j].family);
+	sciprint ("\t\t\t");
+	sciprint (wif[j].wname);
+	
+	sciprint ("\n------------------------------------\n");
+       for (i=0;i<waveletIdentityNum;i++) {
+	 if (wi[i].family==j){
+	   sciprint (wi[i].wname);
+	   sciprint (" ");
+	   if (count%5==0 && count>4)
+	      sciprint ("\n");
+	   count=count+1;
+	 }
+       }
+        sciprint ("\n------------------------------------\n");
+      }
+      
+      
+       for (j=0;j<cwtFamilyNum;j++){
+	count=0;
+	sciprint (cif[j].family);
+	sciprint ("\t\t\t");
+	sciprint (cif[j].wname);
+	
+	sciprint ("\n------------------------------------\n");
+       for (i=0;i<cwtIdentityNum;i++) {
+	 if (ci[i].family==j){
+	   sciprint (ci[i].wname);
+	   sciprint (" ");
+	   if (count%5==0 && count>4)
+	      sciprint ("\n");
+	   count=count+1;
+	 }
+       }
+        sciprint ("\n------------------------------------\n");
+      }
+     } else if (input_string[0]=='f') {
+           sciprint ("------------------------------------\n");
+    sciprint (" HAAR\t\t haar\t ORTH\n");
+ sciprint ("DAUBECHIES\t  db\t ORTH\n");
+ sciprint ("COIFLETS\t coif\t ORTH\n");
+ sciprint ("SYMLETS\t\t sym\t ORTH\n");
+ sciprint ("SPLINE_BIORTH\t bior\t BIORTH\n");
+  sciprint ("SPLINE_RBIORTH\t rbior\t BIORTH\n");
+ sciprint ("BEYLKIN\t\t beylkin\t ORTH\n");
+ sciprint ("VAIDYANATHAN\t vaidyanathan\t ORTH\n");
+ sciprint ("DMEY\t\t dmey\t ORTH\n");
+ sciprint ("BATHLETS\t bath\t ORTH\n");
+ sciprint ("LEGENDRE\t legd\t ORTH\n");
+ sciprint ("FARRAS\t\t fa\t ORTH\n");
+ sciprint ("KINGSBURYQ\t ksq\t ORTH\n");
+ sciprint ("------------------------------------\n");
+ sciprint ("SINUS\t\t sinus\t REAL\n");
+ sciprint ("POISSON\t\t poisson\t REAL\n");
+ sciprint ("MEXICAN_HAT\t mexh\t REAL\n");
+ sciprint ("MORLET\t\t morl\t REAL\n");
+ sciprint ("DOGAUSS\t\t DOG\t REAL\n");
+ sciprint ("GAUSS\t\t gaus\t REAL\n");
+ sciprint ("CMORLET\t\t cmor\t COMPLEX\n");
+ sciprint ("SHANNON\t\t shan\t COMPLEX\n");
+ sciprint ("FBSP\t\t fbsp\t COMPLEX\n");
+ sciprint ("CAUCHY\t\t cauchy\t COMPLEX\n");
+ sciprint ("CGAUSS\t\t cgau\t COMPLEX\n");
+ sciprint ("------------------------------------\n");
+  }
+     
+     	  if (input_string != NULL)
+    freeAllocatedSingleString(input_string);
+  return 0;
+  
 }

@@ -3,6 +3,7 @@
  * utility.c -- utility function
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -130,7 +131,7 @@ matrix_tran (double *matrixIn, int matrixInRow, int matrixInCol,
  *-----------------------------------------*/
 
 void
-wrev (double *sigIn, int sigInLength, 
+wrev (const double *sigIn, int sigInLength, 
       double *sigOut, int sigOutLength)
 {
   int count = 0;
@@ -160,7 +161,7 @@ qmf_odd (double *sigIn, int sigInLength,
 }
 
 void
-qmf_even (double *sigIn, int sigInLength, 
+qmf_even (const double *sigIn, int sigInLength, 
      double *sigOut, int sigOutLength)
 {
   int count = 0;
@@ -179,7 +180,7 @@ qmf_even (double *sigIn, int sigInLength,
  * Flipping and QMF at the same time
  *-----------------------------------------*/
 void
-qmf_wrev (double *sigIn, int sigInLength, 
+qmf_wrev (const double *sigIn, int sigInLength, 
 	  double *sigOut, int sigOutLength)
 {
   int count = 0;
@@ -205,7 +206,7 @@ qmf_wrev (double *sigIn, int sigInLength,
  *-----------------------------------------*/
 
 void
-verbatim_copy (double *sigIn, int sigInLength, 
+verbatim_copy (const double *sigIn, int sigInLength, 
 	       double *sigOut, int sigOutLength)
 {
   int count = 0;
@@ -415,6 +416,7 @@ dyadup_1D_feed_even (double *sigIn, int sigInLength,
   int count = 0;
   for (count = 0; count < sigInLength; count++)
     {
+      //printf("count %d\n",count);
       sigOut[count * 2] = 0;
       sigOut[count * 2 + 1] = sigIn[count];
     }
@@ -1466,3 +1468,42 @@ i_conv(double *sigIn, int sigInLength,
 	}
 	return;
 }*/
+
+
+// int GetRhsVarDouble(int pos,  int *m, int *n, double *input)
+// {
+//    int * p_input_vector = NULL;
+//   SciErr _SciErr;
+//   int type;
+//    
+//   _SciErr = getVarAddressFromPosition(pvApiCtx, pos, &p_input_vector);
+// 		if(_SciErr.iErr)
+// 		{
+// 			printError(&_SciErr, 0);
+// 			return -1;
+// 		}
+//                 _SciErr = getVarType(pvApiCtx, p_input_vector, &type);
+// 		if(_SciErr.iErr)
+// 		{
+// 			printError(&_SciErr, 0);
+// 			return -1;
+// 		}
+// 		if (type!=sci_matrix)
+// 		{
+// 		  Scierror (999,"first input vector must be double\n");	
+// 		  return -1;
+// 		}
+// 		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector, &m, &n, &input);
+// 		if(_SciErr.iErr)
+// 		{
+// 			printError(&_SciErr, 0);
+// 			return -1;
+// 		}
+//   
+//   
+//   
+//   
+//   return 0;
+//   
+// 
+// }

@@ -3,6 +3,7 @@
  * cwt_int.c -- continuous wavelet transform interface
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +22,8 @@
  */
 #include "swt_common.h"
 #include "cwt.h"
-#include "stack-c.h"
+// #include "stack-c.h"
+// #define __USE_DEPRECATED_STACK_FUNCTIONS__
 
 /*-------------------------------------------
  * Haar Scale Filter Generation
@@ -79,10 +81,19 @@ int_haar (char *fname)
 int
 int_sinus (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5;
-  static int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5;
+   int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
+   int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2;
   int errCode;
 
   CheckRhs (minrhs, maxrhs);
@@ -95,11 +106,79 @@ int_sinus (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}	
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
-  sinus_content_validate(&errCode, l1, l2, l3);
+  sinus_content_validate(&errCode, input1, input2, input3);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -107,17 +186,29 @@ int_sinus (char *fname)
     }
  
   m4 = 1;
-  n4 = istk(l3)[0];
+  n4 = input3[0];
   m5 = 1;
   n5 = n4;
+//   CreateVar (5, "d", &m5, &n5, &l5);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (4, "d", &m4, &n4, &l4);
+    _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (4, "d", &m4, &n4, &l4);
-  CreateVar (5, "d", &m5, &n5, &l5);
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l4), n4);
-  sinus(stk(l4), n4, stk(l5), n5, 1);
+  linspace(input1[0], input2[0], input3[0], output1, n4);
+  sinus(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = 5;
-  LhsVar(2) = 4;
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -129,10 +220,19 @@ int_sinus (char *fname)
 int
 int_poisson (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5;
-  static int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5;
+   int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
+     int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2;
   int errCode;
 
   CheckRhs (minrhs, maxrhs);
@@ -145,11 +245,79 @@ int_poisson (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}	
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
-  poisson_content_validate(&errCode, l1, l2, l3);
+  poisson_content_validate(&errCode, input1, input2, input3);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -157,17 +325,29 @@ int_poisson (char *fname)
     }
  
   m4 = 1;
-  n4 = istk(l3)[0];
+  n4 = input3[0];
   m5 = 1;
   n5 = n4;
+//   CreateVar (5, "d", &m5, &n5, &l5);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (4, "d", &m4, &n4, &l4);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (4, "d", &m4, &n4, &l4);
-  CreateVar (5, "d", &m5, &n5, &l5);
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l4), n4);
-  poisson(stk(l4), n4, stk(l5), n5, 1);
+  linspace(input1[0], input2[0], input3[0], output1, n4);
+  poisson(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = 5;
-  LhsVar(2) = 4;
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -178,10 +358,19 @@ int_poisson (char *fname)
 int
 int_mexihat (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5;
-  static int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5;
+   int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
+     int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2;
   int errCode;
 
   CheckRhs (minrhs, maxrhs);
@@ -194,11 +383,79 @@ int_mexihat (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}	
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
-  mexihat_content_validate(&errCode, l1, l2, l3);
+  mexihat_content_validate(&errCode, input1, input2, input3);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -206,17 +463,29 @@ int_mexihat (char *fname)
     }
  
   m4 = 1;
-  n4 = istk(l3)[0];
+  n4 = input3[0];
   m5 = 1;
   n5 = n4;
+//   CreateVar (5, "d", &m5, &n5, &l5);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (4, "d", &m4, &n4, &l4);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (4, "d", &m4, &n4, &l4);
-  CreateVar (5, "d", &m5, &n5, &l5);
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l4), n4);
-  mexihat(stk(l4), n4, stk(l5), n5, 1);
+  linspace(input1[0], input2[0], input3[0], output1, n4);
+  mexihat(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = 5;
-  LhsVar(2) = 4;
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -227,10 +496,19 @@ int_mexihat (char *fname)
 int
 int_morlet (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5;
-  static int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5;
+   int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
+       int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2;
   int errCode;
 
   CheckRhs (minrhs, maxrhs);
@@ -243,11 +521,79 @@ int_morlet (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
-  morlet_content_validate(&errCode, l1, l2, l3);
+  morlet_content_validate(&errCode, input1, input2, input3);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -255,17 +601,29 @@ int_morlet (char *fname)
     }
 
   m4 = 1;
-  n4 = istk(l3)[0];
+  n4 = input3[0];
   m5 = 1;
   n5 = n4;
+//   CreateVar (5, "d", &m5, &n5, &l5);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (4, "d", &m4, &n4, &l4);
+        _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (4, "d", &m4, &n4, &l4);
-  CreateVar (5, "d", &m5, &n5, &l5);
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l4), n4);
-  morlet(stk(l4), n4, stk(l5), n5, 1);
+  linspace(input1[0], input2[0], input3[0], output1, n4);
+  morlet(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = 5;
-  LhsVar(2) = 4;
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -276,10 +634,19 @@ int_morlet (char *fname)
 int
 int_DOGauss (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5;
-  static int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5;
+   int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
+       int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2;
   int errCode;
 
   CheckRhs (minrhs, maxrhs);
@@ -292,11 +659,79 @@ int_DOGauss (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+	_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
- DOGauss_content_validate(&errCode, l1, l2, l3);
+ DOGauss_content_validate(&errCode, input1, input2, input3);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -304,17 +739,29 @@ int_DOGauss (char *fname)
     }
 
   m4 = 1;
-  n4 = istk(l3)[0];
+  n4 = input3[0];
   m5 = 1;
   n5 = n4;
+//   CreateVar (5, "d", &m5, &n5, &l5);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (4, "d", &m4, &n4, &l4);
+        _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (4, "d", &m4, &n4, &l4);
-  CreateVar (5, "d", &m5, &n5, &l5);
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l4), n4);
-  DOGauss(stk(l4), n4, stk(l5), n5, 1);
+  linspace(input1[0], input2[0], input3[0], output1, n4);
+  DOGauss(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = 5;
-  LhsVar(2) = 4;
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -325,10 +772,21 @@ int_DOGauss (char *fname)
 int
 int_Gauswavf (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5, l6, m6, n6;
-  static int minlhs = 2, maxlhs = 2, minrhs = 4, maxrhs = 4;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5, l6, m6, n6;
+   int minlhs = 2, maxlhs = 2, minrhs = 4, maxrhs = 4;
+    int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    int * p_input_vector4 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+   double *input4; 
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2;
   int errCode;
 
   CheckRhs (minrhs, maxrhs);
@@ -341,12 +799,103 @@ int_Gauswavf (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
-  GetRhsVar (4, "i", &m4, &n4, &l4);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+					_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (4, "i", &m4, &n4, &l4);
+_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector4 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 4. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
- Gauss_content_validate(&errCode, l1, l2, l3, l4);
+ Gauss_content_validate(&errCode, input1, input2, input3, input4);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -354,18 +903,30 @@ int_Gauswavf (char *fname)
     }
 
   m5 = 1;
-  n5 = istk(l3)[0];
+  n5 = input3[0];
   m6 = 1;
   n6 = n5;
 
-  
-  CreateVar (5, "d", &m5, &n5, &l5);
-  CreateVar (6, "d", &m6, &n6, &l6);
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l5), n5);
-  Gauss(stk(l5), n5, stk(l6), n6, istk(l4)[0], 1);
+  //   CreateVar (6, "d", &m6, &n6, &l6);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m6, n6, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (5, "d", &m5, &n5, &l5);
+        _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m5, n5, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  LhsVar(1) = 6;
-  LhsVar(2) = 5;
+  linspace(input1[0], input2[0], input3[0], output1, n5);
+  Gauss(output1, n5, output2, n6, input4[0], 1);
+
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -377,11 +938,24 @@ int_Gauswavf (char *fname)
 int
 int_shanwavf (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5, l6, m6, n6;
-  static int l7r, l7c, m7, n7;
-  static int minlhs = 2, maxlhs = 2, minrhs = 5, maxrhs = 5;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5, l6, m6, n6;
+   int l7r, l7c, m7, n7;
+   int minlhs = 2, maxlhs = 2, minrhs = 5, maxrhs = 5;
+      int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    int * p_input_vector4 = NULL;
+    int * p_input_vector5 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+   double *input4; 
+   double *input5; 
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2_r, *output2_i;
   int errCode;
   int it;
 
@@ -395,13 +969,127 @@ int_shanwavf (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
-  GetRhsVar (4, "d", &m4, &n4, &l4);
-  GetRhsVar (5, "d", &m5, &n5, &l5);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+					_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (4, "d", &m4, &n4, &l4);
+_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector4 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 4. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (5, "d", &m5, &n5, &l5);
+_SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector5 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 5. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector5, &m5, &n5, &input5);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
-  shanwavf_content_validate(&errCode, l1, l2, l3, l4, l5);
+  shanwavf_content_validate(&errCode, input1, input2, input3, input4, input5);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -409,19 +1097,31 @@ int_shanwavf (char *fname)
     }
 
   m6 = 1;
-  n6 = istk(l3)[0];
+  n6 = input3[0];
   m7 = 1;
   n7 = n6;
   it = 1;
+//   CreateCVar (7, "d",&it, &m7, &n7, &l7r, &l7c);
+  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m7, n7, &output2_r, &output2_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (6, "d", &m6, &n6, &l6);
-  CreateCVar (7, "d",&it, &m7, &n7, &l7r, &l7c);
+//   CreateVar (6, "d", &m6, &n6, &l6);
+          _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m6, n6, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l6), n6);
-  shanwavf(stk(l6), n6, stk(l5)[0], stk(l4)[0], stk(l7r), stk(l7c), n7,1);
+  linspace(input1[0], input2[0], input3[0], output1, n6);
+  shanwavf(output1, n6, input5[0], input4[0], output2_r, output2_i, n7,1);
 
-  LhsVar(1) = 7;
-  LhsVar(2) = 6;
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
 
   return 0;
 }
@@ -433,11 +1133,24 @@ int_shanwavf (char *fname)
 int
 int_cmorlet (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5, l6, m6, n6;
-  static int l7r, l7c, m7, n7;
-  static int minlhs = 2, maxlhs = 2, minrhs = 5, maxrhs = 5;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5, l6, m6, n6;
+   int l7r, l7c, m7, n7;
+   int minlhs = 2, maxlhs = 2, minrhs = 5, maxrhs = 5;
+        int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    int * p_input_vector4 = NULL;
+    int * p_input_vector5 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+   double *input4; 
+   double *input5; 
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2_r, *output2_i;
   int errCode;
   int it;
 
@@ -451,13 +1164,127 @@ int_cmorlet (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
-  GetRhsVar (4, "d", &m4, &n4, &l4);
-  GetRhsVar (5, "d", &m5, &n5, &l5);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+					_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (4, "d", &m4, &n4, &l4);
+_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector4 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 4. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (5, "d", &m5, &n5, &l5);
+_SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector5 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 5. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector5, &m5, &n5, &input5);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
-  cmorlet_content_validate(&errCode, l1, l2, l3, l4, l5);
+  cmorlet_content_validate(&errCode, input1, input2, input3, input4, input5);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -466,19 +1293,32 @@ int_cmorlet (char *fname)
 
 
   m6 = 1;
-  n6 = istk(l3)[0];
+  n6 = input3[0];
   m7 = 1;
   n7 = n6;
   it = 1;
+//   CreateCVar (7, "d",&it, &m7, &n7, &l7r, &l7c);
+  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m7, n7, &output2_r, &output2_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (6, "d", &m6, &n6, &l6);
+            _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m6, n6, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (6, "d", &m6, &n6, &l6);
-  CreateCVar (7, "d",&it, &m7, &n7, &l7r, &l7c);
 
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l6), n6);
-  cmorlet(stk(l6), n6, stk(l5)[0], stk(l4)[0], stk(l7r), stk(l7c), n7, 1);
 
-  LhsVar(1) = 7;
-  LhsVar(2) = 6;
+  linspace(input1[0], input2[0], input3[0], output1, n6);
+  cmorlet(output1, n6, input5[0], input4[0], output2_r, output2_i, n7, 1);
+
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -489,11 +1329,26 @@ int_cmorlet (char *fname)
 int
 int_fbspwavf (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5, l6, m6, n6;
-  static int l7, m7, n7, l8r, l8c, m8, n8;
-  static int minlhs = 2, maxlhs = 2, minrhs = 6, maxrhs = 6;
-  
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5, l6, m6, n6;
+   int l7, m7, n7, l8r, l8c, m8, n8;
+   int minlhs = 2, maxlhs = 2, minrhs = 6, maxrhs = 6;
+       int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    int * p_input_vector4 = NULL;
+    int * p_input_vector5 = NULL;
+       int * p_input_vector6 = NULL; 
+    double *input1;
+  double *input2;
+  double *input3;
+   double *input4; 
+   double *input5; 
+     double *input6; 
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2_r, *output2_i;
   int errCode;
   int it;
 
@@ -507,14 +1362,151 @@ int_fbspwavf (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
-  GetRhsVar (4, "i", &m4, &n4, &l4);
-  GetRhsVar (5, "d", &m5, &n5, &l5);
-  GetRhsVar (6, "d", &m6, &n6, &l6);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+					_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (4, "i", &m4, &n4, &l4);
+_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector4 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 4. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (5, "d", &m5, &n5, &l5);
+_SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector5 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 5. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector5, &m5, &n5, &input5);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (6, "d", &m6, &n6, &l6);
+_SciErr = getVarAddressFromPosition(pvApiCtx,6, &p_input_vector6);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector6 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 6. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector6, &m6, &n6, &input6);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
 
-  fbspwavf_content_validate(&errCode, l1, l2, l3, l4, l5, l6);
+  fbspwavf_content_validate(&errCode,  input1, input2, input3, input4, input5, input6);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -523,19 +1515,32 @@ int_fbspwavf (char *fname)
 
 
   m7 = 1;
-  n7 = istk(l3)[0];
+  n7 = input3[0];
   m8 = 1;
   n8 = n7;
   it = 1;
+//   CreateCVar (8, "d",&it, &m8, &n8, &l8r, &l8c);
+  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m8, n8, &output2_r, &output2_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (7, "d", &m7, &n7, &l7);
+              _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m7, n7, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (7, "d", &m7, &n7, &l7);
-  CreateCVar (8, "d",&it, &m8, &n8, &l8r, &l8c);
 
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l7), n7);
-  fbspwavf(stk(l7), n7, istk(l4)[0], stk(l6)[0], stk(l5)[0], stk(l8r), stk(l8c), n8, 1);
 
-  LhsVar(1) = 8;
-  LhsVar(2) = 7;
+  linspace(input1[0], input2[0], input3[0], output1, n7);
+  fbspwavf(output1, n7, input4[0], input6[0], input5[0], output2_r, output2_i, n8, 1);
+
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -547,11 +1552,20 @@ int_fbspwavf (char *fname)
 int
 int_cauchy (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5r, m5, n5, l5i;
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5r, m5, n5, l5i;
   //static int l7r, l7c, m7, n7;
-  static int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
-  
+   int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
+   int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2_r, *output2_i;
   int errCode;
   int it;
 
@@ -565,13 +1579,81 @@ int_cauchy (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
   //GetRhsVar (4, "d", &m4, &n4, &l4);
   //GetRhsVar (5, "d", &m5, &n5, &l5);
 
-  cauchy_content_validate(&errCode, l1, l2, l3);
+  cauchy_content_validate(&errCode, input1, input2, input3);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -580,19 +1662,33 @@ int_cauchy (char *fname)
 
 
   m4 = 1;
-  n4 = istk(l3)[0];
+  n4 = input3[0];
   m5 = 1;
   n5 = n4;
   it = 1;
+//   CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5i);
+    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2_r, &output2_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+  
+//   CreateVar (4, "d", &m4, &n4, &l4);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (4, "d", &m4, &n4, &l4);
-  CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5i);
 
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l4), n4);
-  cauchy_neo(stk(l4), n4, stk(l5r), stk(l5i), n5, 1);
 
-  LhsVar(1) = 5;
-  LhsVar(2) = 4;
+  linspace(input1[0], input2[0], input3[0], output1, n4);
+  cauchy_neo(output1, n4, output2_r, output2_i, n5, 1);
+
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -603,11 +1699,22 @@ int_cauchy (char *fname)
 int
 int_cgauss (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l5, m5, n5, l6r, l6i, m6, n6;
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5, m5, n5, l6r, l6i, m6, n6;
   
-  static int minlhs = 2, maxlhs = 2, minrhs = 4, maxrhs = 4;
-  
+   int minlhs = 2, maxlhs = 2, minrhs = 4, maxrhs = 4;
+      int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    int * p_input_vector4 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+   double *input4; 
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2_r, *output2_i;
   int errCode;
   int it;
 
@@ -621,13 +1728,104 @@ int_cgauss (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "i", &m3, &n3, &l3);
-  GetRhsVar (4, "i", &m4, &n4, &l4);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+					_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (4, "i", &m4, &n4, &l4);
+_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector4 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 4. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
   
 
-  Gauss_content_validate(&errCode, l1, l2, l3, l4);
+  Gauss_content_validate(&errCode, input1, input2, input3, input4);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -636,19 +1834,31 @@ int_cgauss (char *fname)
 
 
   m5 = 1;
-  n5 = istk(l3)[0];
+  n5 = input3[0];
   m6 = 1;
   n6 = n5;
   it = 1;
+//   CreateCVar (6, "d",&it, &m6, &n6, &l6r, &l6i);
+    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m6, n6, &output2_r, &output2_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+//   CreateVar (5, "d", &m5, &n5, &l5);
+          _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m5, n5, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  CreateVar (5, "d", &m5, &n5, &l5);
-  CreateCVar (6, "d",&it, &m6, &n6, &l6r, &l6i);
 
-  linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l5), n5);
-  cgauss(stk(l5), n5, istk(l4)[0], stk(l6r), stk(l6i), n6, 1);
+  linspace(input1[0], input2[0], input3[0], output1, n5);
+  cgauss(output1, n5, input4[0], output2_r, output2_i, n6, 1);
 
-  LhsVar(1) = 6;
-  LhsVar(2) = 5;
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
   return 0;
 }
 
@@ -659,16 +1869,48 @@ int_cgauss (char *fname)
 int
 int_meyeraux (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2;
-  static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
-  
-  GetRhsVar (1, "d", &m1, &n1, &l1);
+   int l1, m1, n1, l2, m2, n2;
+   int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
+  int * p_input_vector1 = NULL;
+  double *input1;
+  SciErr _SciErr;
+  int type;
+  double *output1;
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+      _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
   m2 = 1;
   n2 = 1;
-  CreateVar (2, "d", &m2, &n2, &l2);
+//   CreateVar (2, "d", &m2, &n2, &l2);
+          _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-  meyeraux(stk(l1)[0],stk(l2));
-  LhsVar(1) = 2;
+  meyeraux(input1[0],output1);
+  LhsVar(1) = Rhs + 1;
   return 0;
 }
 
@@ -679,15 +1921,29 @@ int_meyeraux (char *fname)
 int
 int_wavefun (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
-  static int l5, m5, n5, l6, m6, n6, l7, m7, n7, l3r, l3i;
-  static int minlhs = 2, maxlhs = 5, minrhs = 2, maxrhs = 2;
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
+   int l5, m5, n5, l6, m6, n6, l7, m7, n7, l3r, l3i;
+   int minlhs = 2, maxlhs = 5, minrhs = 2, maxrhs = 2;
   int ind, family, member, s1, s2, leng, count, level, it, l, errCode;
-  double one, *lowfltr, *hifltr, *buff;
+  double *lowfltr, *hifltr, *buff;
+  double one, *phi, *psi;
   char a[2]="a",d[2]="d";
   Func syn_fun, ana_fun;
   swt_wavelet pWaveStruct;
-
+  int * p_input_string = NULL;
+   char * input_string = NULL;
+  int * p_input_vector2 = NULL;
+  double *input1;
+  double *input2;
+  SciErr _SciErr;
+  int type;
+  double *output1;
+  double *output1_r, *output1_i;
+  double *output2;
+  double *output3;
+  double *output4;
+  double *output5;
+  
   CheckRhs (minrhs, maxrhs);
   CheckLhs (minlhs, maxlhs);
 
@@ -698,33 +1954,63 @@ int_wavefun (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "c", &m1, &n1, &l1);
-  GetRhsVar (2, "i", &m2, &n2, &l2);
+//   GetRhsVar (1, "c", &m1, &n1, &l1);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_string);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+     getAllocatedSingleString(pvApiCtx, p_input_string, &input_string);	 
+//   GetRhsVar (2, "i", &m2, &n2, &l2);
+_SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: second input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
   
-  wavefun_content_validate(&errCode, l1, l2);
+  wavefun_content_validate(&errCode, input_string, input2);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
       return 0;			
     }
 
-  level = istk(l2)[0];
+  level = (int)input2[0];
   if (level==0)
 	  level = 8;
-  wavelet_fun_parser (cstk(l1), &ind);
+  wavelet_fun_parser (input_string, &ind);
   one = 1.0;
   
   if ((ind!=-1) && (wi[ind].rOrB==ORTH))
   {
 	  if (Lhs!=3)
 	  {
-          sciprint("Output arguments number should be 3!\n");
+          Scierror(999,"Output arguments number should be 3!\n");
 		  return 0;
 	  }
-      wavelet_parser(cstk(l1),&family,&member);
+      wavelet_parser(input_string,&family,&member);
 	  syn_fun = wi[ind].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-	  upcoef_len_cal (1, pWaveStruct.length, level, 
+	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
 	  swt_exp2(level, &leng);
       m3 = 1;
@@ -733,38 +2019,63 @@ int_wavefun (char *fname)
 	  n4 = n3;
 	  m5 = 1;
 	  n5 = n3;
-	  CreateVar(3, "d", &m3, &n3, &l3);
-	  CreateVar(4, "d", &m4, &n4, &l4);
-	  CreateVar(5, "d", &m5, &n5, &l5);
+// 	  CreateVar(3, "d", &m3, &n3, &l3);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(4, "d", &m4, &n4, &l4);
+_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(5, "d", &m5, &n5, &l5);
+_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+      phi=(double *) malloc(n3*sizeof(double));
+      psi=(double *) malloc(n3*sizeof(double));
+
 	  for(count=0;count<n3;count++)
 	  {
-		  stk(l3)[count] = 0;
-		  stk(l4)[count] = 0;
+		  phi[count] = 0;
+		  psi[count] = 0;
 	  }
 	  l=1;
-      upcoef (&one, 1, pWaveStruct.pLowPass,
-		  pWaveStruct.pHiPass, pWaveStruct.length, &(stk(l3)[l]), 
+      cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+		  pWaveStruct.pHiPass, pWaveStruct.length, phi+l, 
 	      s1, s1, a, level);
-	  upcoef (&one, 1, pWaveStruct.pLowPass,
-	      pWaveStruct.pHiPass, pWaveStruct.length, &(stk(l4)[l]), 
+	  cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+	      pWaveStruct.pHiPass, pWaveStruct.length, psi+l, 
 	      s1, s1, d, level);
 	  if ((family==COIFLETS) || (family==SYMLETS) || (family==DMEY))
 	  {
 
 		  for(count=0;count<n3;count++)
-	     {
-	         stk(l4)[count] = -1*stk(l4)[count];
+		  {
+		      psi[count] = -1*psi[count];
 		 }
 	  }
 	  for(count=0;count<n3;count++)
 	  {
-		  stk(l3)[count] = stk(l3)[count]*pow(sqrt(2),level);
-		  stk(l4)[count] = stk(l4)[count]*pow(sqrt(2),level);
+		  output1[count] = phi[count]*pow(sqrt(2),level);
+		  output2[count] = psi[count]*pow(sqrt(2),level);
 	  }
-	  linspace(0.0, (double)(pWaveStruct.length-1), n3, stk(l5), n3);
-      LhsVar(1) = 3;
-	  LhsVar(2) = 4;
-	  LhsVar(3) = 5;
+	  linspace(0.0, (double)(pWaveStruct.length-1), n3, output3, n3);
+	  free(phi);
+	  free(psi);
+          LhsVar(1) = Rhs + 1;
+	  LhsVar(2) = Rhs + 2;
+	  LhsVar(3) = Rhs + 3;
+	    if (input_string != NULL)
+    freeAllocatedSingleString(input_string);
 	  filter_clear();
       return 0;
   }
@@ -773,13 +2084,13 @@ int_wavefun (char *fname)
   {
 	  if (Lhs!=5)
 	  {
-          sciprint("Output arguments number should be 5!\n");
+          Scierror(999,"Output arguments number should be 5!\n");
 		  return 0;
 	  }
-      wavelet_parser(cstk(l1),&family,&member);
+      wavelet_parser(input_string,&family,&member);
 	  ana_fun = wi[ind].analysis;
       (*ana_fun)(member, &pWaveStruct);
-	  upcoef_len_cal (1, pWaveStruct.length, level, 
+	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
       swt_exp2(level, &leng);
       m3 = 1;
@@ -792,61 +2103,93 @@ int_wavefun (char *fname)
 	  n6 = n3;
 	  m7 = 1;
 	  n7 = n3;
-	  CreateVar(3, "d", &m3, &n3, &l3);
-	  CreateVar(4, "d", &m4, &n4, &l4);
-	  CreateVar(5, "d", &m5, &n5, &l5);
-      CreateVar(6, "d", &m6, &n6, &l6);
-	  CreateVar(7, "d", &m7, &n7, &l7);
+// 	  CreateVar(3, "d", &m3, &n3, &l3);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(4, "d", &m4, &n4, &l4);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(5, "d", &m5, &n5, &l5);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(6, "d", &m6, &n6, &l6);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 4, m6, n6, &output4);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(7, "d", &m7, &n7, &l7);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 5, m7, n7, &output5);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 	  for(count=0;count<n3;count++)
 	  {
-		  stk(l3)[count] = 0;
-		  stk(l4)[count] = 0;
-		  stk(l5)[count] = 0;
-		  stk(l6)[count] = 0;
+		  output1[count] = 0;
+		  output2[count] = 0;
+		  output3[count] = 0;
+		  output4[count] = 0;
 	  }
-	  lowfltr = malloc(pWaveStruct.length*sizeof(double));
-	  hifltr = malloc(pWaveStruct.length*sizeof(double));
+	  lowfltr = (double *)  malloc(pWaveStruct.length*sizeof(double));
+	  hifltr =(double *)  malloc(pWaveStruct.length*sizeof(double));
       wrev(pWaveStruct.pLowPass, pWaveStruct.length, lowfltr, pWaveStruct.length);
 	  qmf_wrev(lowfltr,pWaveStruct.length,hifltr,pWaveStruct.length);
 	  l=1;
-      upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, &(stk(l3)[l]), 
+      cwt_upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, output1+l, 
 	      s1, s1, a, level);
-      upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, &(stk(l4)[l]), 
+       cwt_upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, output2+l, 
 	      s1, s1, d, level);
 	  free(lowfltr);
 	  free(hifltr);
 	  filter_clear();
       syn_fun = wi[ind].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      upcoef (&one, 1, pWaveStruct.pLowPass,
-		  pWaveStruct.pHiPass, pWaveStruct.length, &(stk(l5)[l]), 
+       cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+		  pWaveStruct.pHiPass, pWaveStruct.length, output3+l, 
 	      s1, s1, a, level);
-	  upcoef (&one, 1, pWaveStruct.pLowPass,
-	      pWaveStruct.pHiPass, pWaveStruct.length, &(stk(l6)[l]), 
+	   cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+	      pWaveStruct.pHiPass, pWaveStruct.length, output4+l, 
 	      s1, s1, d, level);
 	   for(count=0;count<n3;count++)
 	     {
-			  stk(l3)[count] = stk(l3)[count]*pow(sqrt(2),level);
-		      stk(l4)[count] = -1*stk(l4)[count]*pow(sqrt(2),level);
-			  stk(l5)[count] = stk(l5)[count]*pow(sqrt(2),level);
-		      stk(l6)[count] = -1*stk(l6)[count]*pow(sqrt(2),level);
+			  output1[count] = output1[count]*pow(sqrt(2),level);
+		      output2[count] = -1*output2[count]*pow(sqrt(2),level);
+			  output3[count] = output3[count]*pow(sqrt(2),level);
+		     output4[count] = -1*output4[count]*pow(sqrt(2),level);
 		 }
-	  linspace(0.0, (double)(pWaveStruct.length-1), n3, stk(l7), n3);
-	  LhsVar(1) = 3;
-	  LhsVar(2) = 4;
-	  LhsVar(3) = 5;
-	  LhsVar(4) = 6;
-	  LhsVar(5) = 7;
+	  linspace(0.0, (double)(pWaveStruct.length-1), n3, output5, n3);
+	  LhsVar(1) = Rhs + 1;
+	  LhsVar(2) = Rhs + 2;
+	  LhsVar(3) = Rhs + 3;
+	  LhsVar(4) = Rhs + 4;
+	  LhsVar(5) = Rhs + 5;
+	    if (input_string != NULL)
+    freeAllocatedSingleString(input_string);
 	  filter_clear();
 	  return 0;
   }
 
-  cwt_fun_parser(cstk(l1), &ind);
+  cwt_fun_parser(input_string, &ind);
   if ((ind!=-1) && (ci[ind].phipsi==PSI_ONLY) && (ci[ind].realOrComplex==REAL) )
   {
 	  if (Lhs!=2)
 	  {
-          sciprint("Output arguments number should be 2!\n");
+          Scierror(999,"Output arguments number should be 2!\n");
 		  return 0;
 	  }
 	  swt_exp2(level, &leng);
@@ -854,12 +2197,26 @@ int_wavefun (char *fname)
       n3 = leng;
 	  m4 = 1;
 	  n4 = n3;
-      CreateVar(3, "d", &m3, &n3, &l3);
-	  CreateVar(4, "d", &m4, &n4, &l4);
-	  linspace(ci[ind].lb, ci[ind].ub, n3, stk(l4), n3);
-	  (*(ci[ind].scalef))(stk(l4),n3,stk(l3),n3,ci[ind].cpsi);
-	  LhsVar(1) = 3;
-	  LhsVar(2) = 4;
+// 	  CreateVar(3, "d", &m3, &n3, &l3);
+	  	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(4, "d", &m4, &n4, &l4);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+	  linspace(ci[ind].lb, ci[ind].ub, n3, output2, n3);
+	  (*(ci[ind].scalef))(output2,n3,output1,n3,ci[ind].cpsi);
+	  LhsVar(1) = Rhs + 1;
+	  LhsVar(2) = Rhs + 2;
+	    if (input_string != NULL)
+    freeAllocatedSingleString(input_string);
 	  return 0;
   }
 
@@ -867,7 +2224,7 @@ int_wavefun (char *fname)
   {
 	  if (Lhs!=2)
 	  {
-          sciprint("Output arguments number should be 2!\n");
+          Scierror(999,"Output arguments number should be 2!\n");
 		  return 0;
 	  }
 	  swt_exp2(level, &leng);
@@ -876,19 +2233,33 @@ int_wavefun (char *fname)
 	  m4 = 1;
 	  n4 = n3;
 	  it = 1;
-      CreateCVar(3, "d", &it, &m3, &n3, &l3r, &l3i);
-	  CreateVar(4, "d", &m4, &n4, &l4);
-	  buff = malloc(n3*2*sizeof(double));
-	  linspace(ci[ind].lb, ci[ind].ub, n3, stk(l4), n3);
-	  (*(ci[ind].scalef))(stk(l4),n3,buff,n3,ci[ind].cpsi);
+//       CreateCVar(3, "d", &it, &m3, &n3, &l3r, &l3i);
+	 _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1_r,&output1_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(4, "d", &m4, &n4, &l4);
+	  	  	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+	  buff = (double *) malloc(n3*2*sizeof(double));
+	  linspace(ci[ind].lb, ci[ind].ub, n3, output2, n3);
+	  (*(ci[ind].scalef))(output2,n3,buff,n3,ci[ind].cpsi);
 	  for(count=0;count<n3;count++)
 	  {
-        stk(l3r)[count]=buff[count];
-		stk(l3i)[count]=buff[count+n3];
+        output1_r[count]=buff[count];
+		output1_i[count]=buff[count+n3];
 	  }
 	  free(buff);
-	  LhsVar(1) = 3;
-	  LhsVar(2) = 4;
+	  LhsVar(1) = Rhs + 1;
+	  LhsVar(2) = Rhs + 2;
+	    if (input_string != NULL)
+    freeAllocatedSingleString(input_string);
 	  return 0;
   }
      return 0;
@@ -901,9 +2272,21 @@ int_wavefun (char *fname)
 int
 int_wavefun2 (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
-  static int l5, m5, n5, l6, m6, n6, l7, m7, n7;
-  static int minlhs = 5, maxlhs = 5, minrhs = 2, maxrhs = 2;
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
+   int l5, m5, n5, l6, m6, n6, l7, m7, n7;
+   int minlhs = 5, maxlhs = 5, minrhs = 2, maxrhs = 2;
+     int * p_input_string = NULL;
+   char * input_string = NULL;
+   int * p_input_vector2 = NULL;
+   double *input2;
+   SciErr _SciErr;
+  int type;
+  double *output1;
+  double *output2;
+  double *output3;
+  double *output4;
+  double *output5;
+  
   int ind, family, member, s1, s2, leng, count, level, row, col, l, errCode;
   double one, *phi, *psi, *xval;
   char a[2]="a",d[2]="d";
@@ -920,29 +2303,59 @@ int_wavefun2 (char *fname)
       return 0;			
     }
 
-  GetRhsVar (1, "c", &m1, &n1, &l1);
-  GetRhsVar (2, "i", &m2, &n2, &l2);
+//   GetRhsVar (1, "c", &m1, &n1, &l1);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_string);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+     getAllocatedSingleString(pvApiCtx, p_input_string, &input_string);	 
+//   GetRhsVar (2, "i", &m2, &n2, &l2);
+     _SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: second input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
   
-  wavefun2_content_validate(&errCode, l1, l2);
+  wavefun2_content_validate(&errCode, input_string, input2);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
       return 0;			
     }
 
-  level = istk(l2)[0];
+  level = input2[0];
   if (level==0)
 	  level = 4;
 
-  wavelet_fun_parser (cstk(l1), &ind);
+  wavelet_fun_parser (input_string, &ind);
   one = 1.0;
 
  if ((ind!=-1) && (wi[ind].rOrB==ORTH))
   {
-      wavelet_parser(cstk(l1),&family,&member);
+      wavelet_parser(input_string,&family,&member);
 	  syn_fun = wi[ind].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-	  upcoef_len_cal (1, pWaveStruct.length, level, 
+	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
 	  
 	  swt_exp2(level, &leng);
@@ -956,15 +2369,45 @@ int_wavefun2 (char *fname)
 	  n6 = n3;
 	  m7 = m3;
 	  n7 = n3;
-	  CreateVar(3, "d", &m3, &n3, &l3);
-	  CreateVar(4, "d", &m4, &n4, &l4);
-	  CreateVar(5, "d", &m5, &n5, &l5);
-	  CreateVar(6, "d", &m6, &n6, &l6);
-	  CreateVar(7, "d", &m7, &n7, &l7);
+// 	  CreateVar(3, "d", &m3, &n3, &l3);
+	 _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(4, "d", &m4, &n4, &l4);
+_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(5, "d", &m5, &n5, &l5);
+_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(6, "d", &m6, &n6, &l6);
+_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 4, m6, n6, &output4);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+// 	  CreateVar(7, "d", &m7, &n7, &l7);
+_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 5, m7, n7, &output5);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
 
-	  phi=malloc(n3*sizeof(double));
-	  psi=malloc(n3*sizeof(double));
-      xval=malloc(n3*sizeof(double));
+	  phi=(double *) malloc(n3*sizeof(double));
+	  psi=(double *) malloc(n3*sizeof(double));
+      xval=(double *) malloc(n3*sizeof(double));
 	  for(count=0;count<n3;count++)
 	  {
 		  phi[count] = 0;
@@ -972,10 +2415,10 @@ int_wavefun2 (char *fname)
 		
 	  }
 	  l=(int)(floor((n3-s1)/2));
-      upcoef (&one, 1, pWaveStruct.pLowPass,
+      cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
 		  pWaveStruct.pHiPass, pWaveStruct.length, phi+l, 
 	      s1, s1, a, level);
-	  upcoef (&one, 1, pWaveStruct.pLowPass,
+	  cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
 	      pWaveStruct.pHiPass, pWaveStruct.length, psi+l, 
 	      s1, s1, d, level);
 	  linspace(0.0, (double)(pWaveStruct.length), n3, xval, n3);
@@ -991,23 +2434,43 @@ int_wavefun2 (char *fname)
 	  {
 		  for(row=0;row<n3;row++)
 		  {
-			  stk(l3)[row+col*n3]=phi[col]*phi[row]*pow(sqrt(2),level*2);
-			  stk(l4)[row+col*n3]=psi[col]*phi[row]*pow(sqrt(2),level*2);
-              stk(l5)[row+col*n3]=phi[col]*psi[row]*pow(sqrt(2),level*2);
-			  stk(l6)[row+col*n3]=psi[col]*psi[row]*pow(sqrt(2),level*2);
-			  stk(l7)[row+col*n3]=xval[col]*xval[row];
+			  output1[row+col*n3]=phi[col]*phi[row]*pow(sqrt(2),level*2);
+			  output2[row+col*n3]=psi[col]*phi[row]*pow(sqrt(2),level*2);
+              output3[row+col*n3]=phi[col]*psi[row]*pow(sqrt(2),level*2);
+			  output4[row+col*n3]=psi[col]*psi[row]*pow(sqrt(2),level*2);
+			  output5[row+col*n3]=xval[col]*xval[row];
 		  }
 	  }
 	  free(phi);
 	  free(psi);
 	  free(xval);
-      LhsVar(1) = 3;
-	  LhsVar(2) = 4;
-	  LhsVar(3) = 5;
-	  LhsVar(4) = 6;
-	  LhsVar(5) = 7;
+	  LhsVar(1) = Rhs + 1;
+	  LhsVar(2) = Rhs + 2;
+	  LhsVar(3) = Rhs + 3;
+	  LhsVar(4) = Rhs + 4;
+	  LhsVar(5) = Rhs + 5;
+	  if (input_string != NULL)
+    freeAllocatedSingleString(input_string);
 	  filter_clear();
       return 0;
+  }
+  if ((ind!=-1) && (wi[ind].rOrB==BIORTH))
+  {
+
+          Scierror(999,"wavefun2 does not work with BIORTH splines!\n");
+		  return 0;
+  }
+  cwt_fun_parser(input_string, &ind);
+  if ((ind!=-1) && (ci[ind].phipsi==PSI_ONLY) && (ci[ind].realOrComplex==REAL) )
+  {
+    Scierror(999,"wavefun2 does not work with REAL splines!\n");
+		  return 0;
+  }
+  
+  if ((ind!=-1) && (ci[ind].phipsi==PSI_ONLY) && (ci[ind].realOrComplex==COMPLEX) )
+  {
+    Scierror(999,"wavefun2 does not work with COMPLEX splines!\n");
+		  return 0;
   }
    return 0;
 }
@@ -1128,9 +2591,18 @@ int_cwtconv (char *fname)
 int
 int_cwt (char *fname)
 {
-  static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
-  static int l4, m4, n4, l4r, l4i, l1r, l1i;
-  static int minlhs = 1, maxlhs = 1, minrhs = 3, maxrhs = 3;
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l4r, l4i, l1r, l1i;
+   int minlhs = 1, maxlhs = 1, minrhs = 3, maxrhs = 3;
+     int * p_input_vector1 = NULL;
+    int * p_input_vector2 = NULL;
+    int * p_input_string = NULL;
+   char * input_string = NULL;
+    double *input1,*input1_r,*input1_i;
+  double *input2;
+    SciErr _SciErr;
+  int type;
+   double *output1, *output1_r, *output1_i;
   int ind1, ind2, count, len, plen, family, member, i, it, scale, errCode, flow;
   double delta;
   double *psi, *f, *temp, *tempi;
@@ -1148,11 +2620,63 @@ int_cwt (char *fname)
     }
  if (flow==1)
  {
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
-  GetRhsVar (3, "c", &m3, &n3, &l3);
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+					_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "c", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+     getAllocatedSingleString(pvApiCtx, p_input_string, &input_string);	
 
-  cwt_content_validate(&errCode, l1, l2, l3);
+  cwt_content_validate(&errCode, input_string);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -1163,40 +2687,47 @@ int_cwt (char *fname)
   n4 = m1*n1;
   it = 1;
   
-  wavelet_fun_parser (cstk(l3), &ind1);
-  cwt_fun_parser(cstk(l3), &ind2);
+  wavelet_fun_parser (input_string, &ind1);
+  cwt_fun_parser(input_string, &ind2);
 
   if (ind1!=-1) 
   {
 	  
-	  wavelet_parser(cstk(l3),&family,&member);
+	  wavelet_parser(input_string,&family,&member);
 	  syn_fun = wi[ind1].synthesis;
       (*syn_fun)(member, &pWaveStruct);
 	  plen=1024*(pWaveStruct.length-1)+1;
 	  filter_clear();
-	  psi=malloc(plen*sizeof(double));
-	  full_range_scalef (cstk(l3), psi, plen);
+	  psi=(double *) malloc(plen*sizeof(double));
+	  full_range_scalef (input_string, psi, plen);
 	  //ocumsum(psi,plen);
-	  CreateVar(4, "d", &m4, &n4, &l4);
-	  temp = malloc(m4*n4*sizeof(double));
+// 	  CreateVar(4, "d", &m4, &n4, &l4);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+	  temp = (double *) malloc(m4*n4*sizeof(double));
 	  //tim = (int)(floor(len/n4));
 	  //scale = (int)(floor(stk(l2)[0]));
 	  for (count=0;count<m4;count++)
 	  {
-		  scale = (int)(floor(stk(l2)[count]));
+		  scale = (int)(floor(input2[count]));
 		  if (scale<1)
 			  scale = 1;
 		  cwt_len_cal (plen, (scale*pWaveStruct.length+1), &len, &delta);
-		  f = malloc(len*sizeof(double));
+		  f = (double *) malloc(len*sizeof(double));
 		  scale_real (psi, plen, delta, f, len);
 		  
 		  for(i=0;i<len;i++)
 			f[i]=f[i]/sqrt(scale);
-		  cwt_conv_real (stk(l1), n4, f, len, temp+count*n4, n4);
+		  cwt_conv_real (input1, n4, f, len, temp+count*n4, n4);
+		  free(f);
 	  }
-	  free(f);
+	  
 	  free(psi);
-	  matrix_tran(temp,m4,n4,stk(l4),n4,m4);
+	  matrix_tran(temp,m4,n4,output1,n4,m4);
 	  free(temp);
   }
 
@@ -1204,22 +2735,28 @@ int_cwt (char *fname)
   {
 	 
 	  
-	  CreateVar(4, "d", &m4, &n4, &l4);
-	  temp = malloc(m4*n4*sizeof(double));
+// 	  CreateVar(4, "d", &m4, &n4, &l4);
+	_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+	  temp = (double *) malloc(m4*n4*sizeof(double));
 	  for (count=0;count<m4;count++)
 	  {
 		  //scale = (int)(floor(stk(l2)[count]));
-		  plen=(int)((ci[ind2].ub-ci[ind2].lb)*(stk(l2)[count]))+1;
+		  plen=(int)((ci[ind2].ub-ci[ind2].lb)*(input2[count]))+1;
 		  if (plen<3)
 			  plen = 3;
-	      psi=malloc(plen*sizeof(double));
-	      full_range_scalef (cstk(l3), psi, plen);
+	      psi=(double *) malloc(plen*sizeof(double));
+	      full_range_scalef (input_string, psi, plen);
           for(i=0;i<plen;i++)
-			psi[i]=psi[i]/sqrt(stk(l2)[count]);
-		  cwt_conv_real (stk(l1), n4, psi, plen, temp+count*n4, n4);
+			psi[i]=psi[i]/sqrt(input2[count]);
+		  cwt_conv_real (input1, n4, psi, plen, temp+count*n4, n4);
 		  free(psi);
 	  }
-	  matrix_tran(temp,m4,n4,stk(l4),n4,m4);
+	  matrix_tran(temp,m4,n4,output1,n4,m4);
 	  free(temp);
   }
 
@@ -1227,38 +2764,97 @@ int_cwt (char *fname)
   {
 	 
 	  
-	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
-	  temp = malloc(m4*n4*sizeof(double));
-	  tempi = malloc(m4*n4*sizeof(double));
+// 	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
+	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1_r,&output1_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+	  temp = (double *) malloc(m4*n4*sizeof(double));
+	  tempi = (double *) malloc(m4*n4*sizeof(double));
 	  for (count=0;count<m4;count++)
 	  {
-		  plen=((int)((ci[ind2].ub-ci[ind2].lb)*(stk(l2)[count])+1))*2;//(int)((ci[ind2].ub-ci[ind2].lb)*(stk(l2)[count]+1))*2;
+		  plen=((int)((ci[ind2].ub-ci[ind2].lb)*(input2[count])+1))*2;//(int)((ci[ind2].ub-ci[ind2].lb)*(stk(l2)[count]+1))*2;
 		  if (plen<3)
 			  plen = 3;
-	      psi=malloc(plen*sizeof(double));
-	      full_range_scalef (cstk(l3), psi, plen);
+	      psi=(double *) malloc(plen*sizeof(double));
+	      full_range_scalef (input_string, psi, plen);
           for(i=0;i<plen;i++)
-			psi[i]=psi[i]/sqrt(stk(l2)[count]);
-		  cwt_conv_complex (stk(l1), n4, psi, psi+plen/2, plen/2, temp+count*n4, tempi+count*n4, n4); 
+			psi[i]=psi[i]/sqrt(input2[count]);
+		  cwt_conv_complex (input1, n4, psi, psi+plen/2, plen/2, temp+count*n4, tempi+count*n4, n4); 
 		  free(psi);
 	  }
-	  matrix_tran(temp,m4,n4,stk(l4r),n4,m4);
-	  matrix_tran(tempi,m4,n4,stk(l4i),n4,m4);
+	  matrix_tran(temp,m4,n4,output1_r,n4,m4);
+	  matrix_tran(tempi,m4,n4,output1_i,n4,m4);
 	  free(temp);
 	  free(tempi);
   }
-  LhsVar(1) = 4;
-
+  LhsVar(1) = Rhs + 1;
+  if (input_string != NULL)
+    freeAllocatedSingleString(input_string);
   return 0;
  }
  
  if (flow==2)
  {
-	  GetRhsCVar (1, "d", &it, &m1, &n1, &l1r, &l1i);
-      GetRhsVar (2, "d", &m2, &n2, &l2);
-      GetRhsVar (3, "c", &m3, &n3, &l3);
-
-	   cwt_content_validate(&errCode, l1, l2, l3);
+// 	  GetRhsCVar (1, "d", &it, &m1, &n1, &l1r, &l1i);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getComplexMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1_r, &input1_i);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//       GetRhsVar (2, "d", &m2, &n2, &l2);
+					_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//       GetRhsVar (3, "c", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+ getAllocatedSingleString(pvApiCtx, p_input_string, &input_string);
+ 
+	   cwt_content_validate(&errCode, input_string);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -1269,41 +2865,47 @@ int_cwt (char *fname)
   n4 = m1*n1;
   it = 1;
   
-  wavelet_fun_parser (cstk(l3), &ind1);
-  cwt_fun_parser(cstk(l3), &ind2);
+  wavelet_fun_parser (input_string, &ind1);
+  cwt_fun_parser(input_string, &ind2);
 
   if (ind1!=-1) 
   {
 	  
-	  wavelet_parser(cstk(l3),&family,&member);
+	  wavelet_parser(input_string,&family,&member);
 	  syn_fun = wi[ind1].synthesis;
       (*syn_fun)(member, &pWaveStruct);
 	  plen=1024*(pWaveStruct.length-1)+1;
 	  filter_clear();
-	  psi=malloc(plen*sizeof(double));
-	  full_range_scalef (cstk(l3), psi, plen);
+	  psi=(double *) malloc(plen*sizeof(double));
+	  full_range_scalef (input_string, psi, plen);
 
-	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
-	  temp = malloc(m4*n4*sizeof(double));
-	  tempi = malloc(m4*n4*sizeof(double));
+// 	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
+	 _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1_r,&output1_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+	  temp = (double *) malloc(m4*n4*sizeof(double));
+	  tempi = (double *) malloc(m4*n4*sizeof(double));
 	  for (count=0;count<m4;count++)
 	  {
-		  scale = (int)(floor(stk(l2)[count]));
+		  scale = (int)(floor(input2[count]));
 		  if (scale<1)
 			  scale = 1;
 		  cwt_len_cal (plen, (scale*pWaveStruct.length+1), &len, &delta);
-		  f = malloc(len*sizeof(double));
+		  f = (double *) malloc(len*sizeof(double));
 		  scale_real (psi, plen, delta, f, len);
 		  
 		  for(i=0;i<len;i++)
 			f[i]=f[i]/sqrt(scale);
-		  cwt_conv_real (stk(l1r), n4, f, len, temp+count*n4, n4);
-		  cwt_conv_real (stk(l1i), n4, f, len, tempi+count*n4, n4);
+		  cwt_conv_real (input1_r, n4, f, len, temp+count*n4, n4);
+		  cwt_conv_real (input1_i, n4, f, len, tempi+count*n4, n4);
 	  }
 	  free(f);
 	  free(psi);
-	  matrix_tran(temp,m4,n4,stk(l4r),n4,m4);
-      matrix_tran(tempi,m4,n4,stk(l4i),n4,m4);
+	  matrix_tran(temp,m4,n4,output1_r,n4,m4);
+      matrix_tran(tempi,m4,n4,output1_i,n4,m4);
 	  free(temp);
 	  free(tempi);
   }
@@ -1312,25 +2914,31 @@ int_cwt (char *fname)
   {
 	 
 	  
-	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
-	  temp = malloc(m4*n4*sizeof(double));
-	  tempi = malloc(m4*n4*sizeof(double));
+// 	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
+	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1_r,&output1_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+	  temp = (double *) malloc(m4*n4*sizeof(double));
+	  tempi = (double *) malloc(m4*n4*sizeof(double));
 	  for (count=0;count<m4;count++)
 	  {
 		  //scale = (int)(floor(stk(l2)[count]));
-		  plen=(int)((ci[ind2].ub-ci[ind2].lb)*(stk(l2)[count]))+1;
+		  plen=(int)((ci[ind2].ub-ci[ind2].lb)*(input2[count]))+1;
 		  if (plen<3)
 			  plen = 3;
-	      psi=malloc(plen*sizeof(double));
-	      full_range_scalef (cstk(l3), psi, plen);
+	      psi=(double *) malloc(plen*sizeof(double));
+	      full_range_scalef (input_string, psi, plen);
           for(i=0;i<plen;i++)
-			psi[i]=psi[i]/sqrt(stk(l2)[count]);
-		  cwt_conv_real (stk(l1r), n4, psi, plen, temp+count*n4, n4);
-		  cwt_conv_real (stk(l1i), n4, psi, plen, tempi+count*n4, n4);
+		  psi[i]=psi[i]/sqrt(input2[count]);
+		  cwt_conv_real (input1_r, n4, psi, plen, temp+count*n4, n4);
+		  cwt_conv_real (input1_i, n4, psi, plen, tempi+count*n4, n4);
 		  free(psi);
 	  }
-	  matrix_tran(temp,m4,n4,stk(l4r),n4,m4);
-	  matrix_tran(tempi,m4,n4,stk(l4i),n4,m4);
+	  matrix_tran(temp,m4,n4,output1_r,n4,m4);
+	  matrix_tran(tempi,m4,n4,output1_i,n4,m4);
 	  free(temp);
 	  free(tempi);
   }
@@ -1339,29 +2947,36 @@ int_cwt (char *fname)
   {
 	 
 	  
-	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
-	  temp = malloc(m4*n4*sizeof(double));
-	  tempi = malloc(m4*n4*sizeof(double));
+// 	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
+	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1_r,&output1_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+	  temp = (double *) malloc(m4*n4*sizeof(double));
+	  tempi = (double *) malloc(m4*n4*sizeof(double));
 	  for (count=0;count<m4;count++)
 	  {
-		  plen=((int)((ci[ind2].ub-ci[ind2].lb)*(stk(l2)[count])+1))*2;//(int)((ci[ind2].ub-ci[ind2].lb)*(stk(l2)[count]+1))*2;
+		  plen=((int)((ci[ind2].ub-ci[ind2].lb)*(input2[count])+1))*2;//(int)((ci[ind2].ub-ci[ind2].lb)*(stk(l2)[count]+1))*2;
 		  if (plen<3)
 			  plen = 3;
-	      psi=malloc(plen*sizeof(double));
-	      full_range_scalef (cstk(l3), psi, plen);
+	      psi=(double *) malloc(plen*sizeof(double));
+	      full_range_scalef (input_string, psi, plen);
           for(i=0;i<plen;i++)
-			psi[i]=psi[i]/sqrt(stk(l2)[count]);
-		  cwt_conv_complex_complex (stk(l1r), stk(l1i), n4, psi, psi+plen/2, plen/2, temp+count*n4, tempi+count*n4, n4); 
+			psi[i]=psi[i]/sqrt(input2[count]);
+		  cwt_conv_complex_complex (input1_r, input1_i, n4, psi, psi+plen/2, plen/2, temp+count*n4, tempi+count*n4, n4); 
 		  free(psi);
 	  }
-	  matrix_tran(temp,m4,n4,stk(l4r),n4,m4);
-	  matrix_tran(tempi,m4,n4,stk(l4i),n4,m4);
+	  matrix_tran(temp,m4,n4,output1_r,n4,m4);
+	  matrix_tran(tempi,m4,n4,output1_i,n4,m4);
 	  free(temp);
 	  free(tempi);
   }
 
-      LhsVar(1) = 4;
-
+      LhsVar(1) = Rhs + 1;
+      if (input_string != NULL)
+	freeAllocatedSingleString(input_string);
       return 0;
  }
 }

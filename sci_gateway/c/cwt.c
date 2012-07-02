@@ -3,6 +3,7 @@
  * cwt.c -- continuous wavelet transform
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +30,7 @@ cwt_identity ci[] = {
 	{"mexh", REAL, MEXICAN_HAT,PSI_ONLY, -5, 5, 1.0, mexihat},
 	{"morl",REAL,  MORLET, PSI_ONLY, -4, 4, 1.0, morlet},
 	{"DOG", REAL, DOGAUSS, PSI_ONLY, -5, 5, 0.6455109, DOGauss},
-    {"gaus1", REAL, GAUSS, PSI_ONLY, -5, 5, 1, Gaus1},
+	{"gaus1", REAL, GAUSS, PSI_ONLY, -5, 5, 1, Gaus1},
 	{"gaus2", REAL, GAUSS, PSI_ONLY, -5, 5, 1, Gaus2},
 	{"gaus3", REAL, GAUSS, PSI_ONLY, -5, 5, 1, Gaus3},
 	{"gaus4", REAL, GAUSS, PSI_ONLY, -5, 5, 1, Gaus4},
@@ -41,7 +42,7 @@ cwt_identity ci[] = {
 	{"shan",  COMPLEX, SHANNON, PSI_ONLY, -20, 20, 1, shanwavf_packet},
 	{"fbsp", COMPLEX, FBSP, PSI_ONLY, -20, 20, 1, fbspwavf_packet},
 	{"cauchy", COMPLEX, CAUCHY, PSI_ONLY, -5, 5, 1, cauchy_packet},
-    {"cgau1", COMPLEX, CGAUSS, PSI_ONLY, -5, 5, 1, cgau1_packet},
+	{"cgau1", COMPLEX, CGAUSS, PSI_ONLY, -5, 5, 1, cgau1_packet},
 	{"cgau2", COMPLEX, CGAUSS, PSI_ONLY, -5, 5, 1, cgau2_packet},
 	{"cgau3", COMPLEX, CGAUSS, PSI_ONLY, -5, 5, 1, cgau3_packet},
 	{"cgau4", COMPLEX, CGAUSS, PSI_ONLY, -5, 5, 1, cgau4_packet},
@@ -51,6 +52,21 @@ cwt_identity ci[] = {
 	{"cgau8", COMPLEX, CGAUSS, PSI_ONLY, -5, 5, 1, cgau8_packet}
 };
 int cwtIdentityNum = sizeof(ci)/sizeof(cwt_identity);
+
+cwt_family cif[] = {
+    {"sinus", "REAL", "SINUS"},
+    {"poisson", "REAL", "POISSON"},
+    {"mexh", "REAL", "MEXICAN_HAT"},
+    {"morl","REAL",  "MORLET"},
+    {"DOG", "REAL", "DOGAUSS"},
+    {"cmor","COMPLEX", "CMORLET"},
+    {"shan",  "COMPLEX", "SHANNON"},
+    {"fbsp", "COMPLEX", "FBSP"},
+    {"cauchy", "COMPLEX", "CAUCHY"},
+    {"gaus", "REAL", "GAUSS"},    
+    {"cgau", "COMPLEX", "CGAUSS"}
+};
+int cwtFamilyNum = sizeof(cif)/sizeof(cwt_family);
 
 /*void haar(double *x, int sigInLength, double *psi, int sigOutLength, double ys)
 {
@@ -806,13 +822,13 @@ void full_range_scalef (char *wname, double *f, int sigOutLength)
       wavelet_parser(wname,&family,&member);
 	  syn_fun = wi[ind].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-	  upcoef_len_cal (1, pWaveStruct.length, level, 
+	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
 	  l=1;
 	  //l=(int)(floor((sigOutLength-s1)/2));
 	  for(count=0;count<sigOutLength;count++)
 		  f[count] = 0;
-	  upcoef (&one, 1, pWaveStruct.pLowPass,
+	  cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
 		  pWaveStruct.pHiPass, pWaveStruct.length, &(f[l]), 
 	      s1, s1, d, level);
 	  if ((family==COIFLETS) || (family==SYMLETS) || (family==DMEY))
@@ -831,7 +847,7 @@ void full_range_scalef (char *wname, double *f, int sigOutLength)
       wavelet_parser(wname,&family,&member);
 	  ana_fun = wi[ind].analysis;
       (*ana_fun)(member, &pWaveStruct);
-	  upcoef_len_cal (1, pWaveStruct.length, level, 
+	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
 	  //l=(int)(floor((sigOutLength-s1)/2));
 	  l=1;
@@ -841,7 +857,7 @@ void full_range_scalef (char *wname, double *f, int sigOutLength)
 	  hifltr = malloc(pWaveStruct.length*sizeof(double));
       wrev(pWaveStruct.pLowPass, pWaveStruct.length, lowfltr, pWaveStruct.length);
 	  qmf_wrev(lowfltr,pWaveStruct.length,hifltr,pWaveStruct.length);
-      upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, &(f[l]), 
+      cwt_upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, &(f[l]), 
 	      s1, s1, d, level);
 	  free(lowfltr);
 	  free(hifltr);
@@ -968,6 +984,78 @@ void cwt_conv_complex_complex (double *a, double *b, int sigInLength,double *c, 
 	free(ad);
 
 	return;
+}
+
+
+void
+cwt_upcoef_len_cal (int sigInLength, int filterLen, int stride, 
+		int *sigOutLength, int *sigOutLengthDefault)
+{
+  int count;
+  *sigOutLength = sigInLength;
+  *sigOutLengthDefault = sigInLength;
+      for(count=0;count<stride;count++)
+      {
+	// original version
+	*sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
+	*sigOutLength = 2*(*sigOutLength) + filterLen - 2;
+	
+      }
+  return;
+}
+
+void
+cwt_upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe, 
+	int filterLen, double *sigOut, int sigOutLength, 
+	int defaultLength, char *coefType, int step)
+{
+  int count, sigInLengthTemp, leng;
+  double *sigInTemp, *sigOutTemp;
+
+  // works with wavefun, cwt
+  sigInLengthTemp = 2 * sigInLength + filterLen - 2;
+   
+
+  
+  //sigInLengthTemp = 2 * sigInLength + filterLen - 1;
+  sigInTemp = (double *) malloc(defaultLength*sizeof(double));
+  
+  if (strcmp(coefType,"a")==0)
+  {
+	  //sciprint("recognized\n");
+// 	  printf("sigInLength %d, filterLen%d, sigInLengthTemp %d\n",sigInLength,filterLen,sigInLengthTemp);
+	  idwt_approx_neo (sigIn, sigInLength, lowRe, filterLen, 
+		 sigInTemp, sigInLengthTemp);
+// 	  sciprint("recognized\n");
+  }
+  else
+    idwt_detail_neo (sigIn, sigInLength, hiRe, filterLen, 
+		 sigInTemp, sigInLengthTemp); 
+
+  if (step > 1)
+    {
+      sigOutTemp = (double *) malloc(defaultLength*sizeof(double));
+      for(count=0;count<defaultLength;count++)
+	sigOutTemp[count] = 0;
+      leng = sigInLengthTemp;
+      for(count=0;count<(step-1);count++) //for cwt
+	{
+	  //printf("leng %d, filterLen%d, leng*2-filterLen+2 %d\n",leng,filterLen,leng*2-filterLen+2);
+	  // original version
+	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
+	               sigOutTemp, leng*2+filterLen-2);
+	  leng = leng*2+filterLen-2;
+	  
+	  verbatim_copy (sigOutTemp, leng, sigInTemp, leng);
+	}
+      sigInLengthTemp = leng;
+      free(sigOutTemp);
+    }
+
+ 
+  wkeep_1D_center (sigInTemp, sigInLengthTemp, sigOut, sigOutLength);
+  free(sigInTemp);
+  return;
 }
 
 /*void real_scale (double lb, double ub, double scale, int length, double *f, double ys, RWScaleFunc w)

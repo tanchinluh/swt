@@ -18,7 +18,8 @@ subdemolist=['one dimensional wavelet transform', 'swt1d.sce';..
 'two dimensional dualtree complex wavelet transform','cowt2d.sce';..
 'continous wavelet transform', 'cwt.sce';..
 'stationary wavelet transform', 'swtswt.sce';..
-'image processing', 'image.sce';];
+'image processing', 'image.sce';
+'Differentiation of noisy Data', 'diff_cwt.dem.sce'];
 
 
 subdemolist(:,2) = demopath + subdemolist(:,2);

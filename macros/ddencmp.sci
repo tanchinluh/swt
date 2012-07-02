@@ -1,18 +1,30 @@
 function [THR,SORH,KEEPAPP,CRIT] = ddencmp(IN1,IN2,X)
 // Default values for de-noising or compression
-//  Usage
-//   [THR,SORH,KEEPAPP,CRIT] = ddencmp(IN1,IN2,X)
-//   [THR,SORH,KEEPAPP] = ddencmp(IN1,'wv',X)
-//   [THR,SORH,KEEPAPP,CRIT] = ddencmp(IN1,'wp',X)
-//  Inputs
-//    IN1 is 'den' for de-noising or 'cmp' for compression.
-//    IN2 is 'wv' for wavelet or 'wp' for wavelet packet.
-//  Outputs
-//    
+//Calling Sequence
+//[THR,SORH,KEEPAPP,CRIT] = ddencmp(IN1,IN2,X)
+//[THR,SORH,KEEPAPP] = ddencmp(IN1,'wv',X)
+//[THR,SORH,KEEPAPP,CRIT] = ddencmp(IN1,'wp',X)
+//Parameters
+//X: double vector
+//IN1: IN1 is 'den' for de-noising or 'cmp' for compression.
+//IN2: IN2 is 'wv' for wavelet or 'wp' for wavelet packet.
+//CRIT: entropy name
+//KEEPAPP: keep aproximation coefficients
+//SORH: hard / soft thresholding
+//THR: threshold
+//Description
+//ddencmp gives default values for all the general procedures related to de-noising and compression of one- or two-dimensional signals, using wavelets or wavelet packets.
+//Examples
+//init = 2055415866; rand('seed',init); 
+//x = rand(1,1000,'normal');
+//[thr,sorh,keepapp] = ddencmp('den','wv',x)
 //
-//  Description
-//     
-//
+//See also
+// waverec
+//Authors
+// Roger Liu and Isaac Zhi
+// H. Nahrstaedt - 2010-2012
+
 
   [nargout,nargin]=argn(0);
   if (nargin < 3),

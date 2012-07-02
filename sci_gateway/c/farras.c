@@ -3,6 +3,7 @@
  * farras.c -- Farras filter coefficents.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2008  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,27 +59,35 @@ void
 farras_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
   int i;
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 10;
 
   switch (member)
     {
     case 1:
-      pFilterCoef = fa1;
+//       pFilterCoef = fa1;
+        wrev(fa1, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(fa1, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = fa2;
+//       pFilterCoef = fa2;
+        wrev(fa2, pWaveStruct->length, 
+       LowDecomFilCoef, pWaveStruct->length);
+  qmf_wrev(fa2, pWaveStruct->length, 
+	   HiDecomFilCoef, pWaveStruct->length);
       break;
     default:
       printf("fa%d is not available!\n",member);
       exit(0);
     }
 
-  wrev(pFilterCoef, pWaveStruct->length, 
-       LowDecomFilCoef, pWaveStruct->length);
-  qmf_wrev(pFilterCoef, pWaveStruct->length, 
-	   HiDecomFilCoef, pWaveStruct->length);
+//   wrev(pFilterCoef, pWaveStruct->length, 
+//        LowDecomFilCoef, pWaveStruct->length);
+//   qmf_wrev(pFilterCoef, pWaveStruct->length, 
+// 	   HiDecomFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowDecomFilCoef;
   for(i=0;i<10;i++)
     HiDecomFilCoef[i] *= -1; 
@@ -92,27 +101,35 @@ void
 farras_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
   int i;
-  double *pFilterCoef;
+//   double *pFilterCoef;
 
   pWaveStruct->length = 10;
 
   switch (member)
     {
     case 1:
-      pFilterCoef = fa1;
+//       pFilterCoef = fa1;
+        verbatim_copy(fa1, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(fa1, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     case 2:
-      pFilterCoef = fa2;
+//       pFilterCoef = fa2;
+        verbatim_copy(fa2, pWaveStruct->length,
+		LowReconFilCoef, pWaveStruct->length);
+  qmf_even(fa2, pWaveStruct->length,
+      HiReconFilCoef, pWaveStruct->length);
       break;
     default:
       printf("fa%d is not available!\n",member);
       exit(0);
     }
 
-  verbatim_copy(pFilterCoef, pWaveStruct->length,
-		LowReconFilCoef, pWaveStruct->length);
-  qmf_even(pFilterCoef, pWaveStruct->length,
-      HiReconFilCoef, pWaveStruct->length);
+//   verbatim_copy(pFilterCoef, pWaveStruct->length,
+// 		LowReconFilCoef, pWaveStruct->length);
+//   qmf_even(pFilterCoef, pWaveStruct->length,
+//       HiReconFilCoef, pWaveStruct->length);
   pWaveStruct->pLowPass = LowReconFilCoef;
   for(i=0;i<10;i++)
     HiReconFilCoef[i] *= -1;

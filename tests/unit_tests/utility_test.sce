@@ -11,9 +11,9 @@ c2=conv(a,b');
 c3=conv(a',b');
 d=convol(a,b);
 e1=sum(abs(c-d));
-e2=sum(abs(c1-d));
+e2=sum(abs(c1'-d));
 e3=sum(abs(c2-d));
-e4=sum(abs(c3-d));
+e4=sum(abs(c3'-d));
 if ((e1<1E-8) & (e2<1E-8) & (e3<1E-8) & (e4<1E-8))
    disp("***conv test passes!***");
 else

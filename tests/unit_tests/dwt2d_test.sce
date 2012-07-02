@@ -23,10 +23,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -90,10 +90,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -157,10 +157,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -224,10 +224,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -291,10 +291,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -358,10 +358,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -425,10 +425,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -492,10 +492,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -559,10 +559,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -626,10 +626,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -693,10 +693,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -760,10 +760,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -828,10 +828,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -895,10 +895,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -962,10 +962,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1029,10 +1029,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1096,10 +1096,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1163,10 +1163,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1230,10 +1230,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1297,10 +1297,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1364,10 +1364,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1431,10 +1431,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1498,10 +1498,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1565,10 +1565,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1632,10 +1632,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1699,10 +1699,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1766,10 +1766,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1833,10 +1833,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1900,10 +1900,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -1967,10 +1967,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2034,10 +2034,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2101,10 +2101,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2168,10 +2168,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2235,10 +2235,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2302,10 +2302,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2370,10 +2370,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2437,10 +2437,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2504,10 +2504,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2571,10 +2571,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2638,10 +2638,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2705,10 +2705,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2772,10 +2772,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2839,10 +2839,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
@@ -2906,10 +2906,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r c]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r c]),'m');
@@ -2973,10 +2973,10 @@ for i=1:rex,
 end
 [rrex,ccex]=size(row_low);
 for i=1:ccex,
-  col_low_low(:,i)=conv(Lo_D,row_low(:,i))';
-  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)))';
-  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)))';
-  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)))';
+  col_low_low(:,i)=conv(Lo_D,row_low(:,i));
+  col_low_hi(:,i)=(conv(Hi_D,row_low(:,i)));
+  col_hi_low(:,i)=(conv(Lo_D,row_hi(:,i)));
+  col_hi_hi(:,i)=(conv(Hi_D,row_hi(:,i)));
 end
 cca=dyaddown(wkeep(col_low_low,[r+1 c+1]),'m');
 cch=dyaddown(wkeep(col_low_hi,[r+1 c+1]),'m');
@@ -3046,10 +3046,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3107,10 +3107,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3169,10 +3169,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3230,10 +3230,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3291,10 +3291,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3352,10 +3352,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3413,10 +3413,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3474,10 +3474,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3535,10 +3535,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3597,10 +3597,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3660,10 +3660,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3722,10 +3722,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3784,10 +3784,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3846,10 +3846,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3909,10 +3909,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -3972,10 +3972,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4035,10 +4035,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4098,10 +4098,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4161,10 +4161,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4224,10 +4224,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4286,10 +4286,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4348,10 +4348,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4410,10 +4410,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4472,10 +4472,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4533,10 +4533,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4595,10 +4595,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4657,10 +4657,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4719,10 +4719,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4781,10 +4781,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4843,10 +4843,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4905,10 +4905,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -4967,10 +4967,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -5029,10 +5029,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -5091,10 +5091,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -5153,10 +5153,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R);
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1));
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;
@@ -5245,10 +5245,10 @@ dd2=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,'mode','per');
 dd3=idwt2(cA,cH,cV,cD,Lo_R,Hi_R,size(d1),'mode','per');
 [r,c]=size(cA);
 for i=1:c,
-   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R))';
-   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R))';
-   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R))';
-   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R))';
+   col_low_low(:,i)=(conv(dyadup(cA(:,i)),Lo_R));
+   col_low_hi(:,i)=(conv(dyadup(cH(:,i)),Hi_R));
+   col_hi_low(:,i)=(conv(dyadup(cV(:,i)),Lo_R));
+   col_hi_hi(:,i)=(conv(dyadup(cD(:,i)),Hi_R));
 end
 row_low=col_low_low+col_low_hi;
 row_hi=col_hi_low+col_hi_hi;

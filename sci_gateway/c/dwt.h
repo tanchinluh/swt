@@ -3,6 +3,7 @@
  * dwt.h -- Declarations for wavelet functions.
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@
 #include "swt_common.h"
 
 /*********************************************
- * Macros
+ * Macros DWT
  ********************************************/
 
 #define HAAR           0
@@ -66,6 +67,11 @@ typedef struct {
   Func  synthesis;
 } wavelet_identity;
 
+typedef struct {
+  char  wname[20];
+  char   rOrB[20];
+  char   family[20];
+} wavelet_family;
 
 
 /*********************************************
@@ -78,6 +84,8 @@ extern double HiDecomFilCoef[80];
 extern double HiReconFilCoef[80];
 extern wavelet_identity wi[];
 extern int waveletIdentityNum;
+extern wavelet_family wif[];
+extern int waveletFamilyIdentityNum;
 extern extend_method dwtMode;
 extern extension_identity ei[];
 extern int extensionIdentityNum;

@@ -3,6 +3,7 @@
  * dwt1d.c -- 1-D signal decomposition and reconstruction
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -149,6 +150,23 @@ wavelet_identity wi[] = {
 };
 
 int waveletIdentityNum = sizeof(wi)/sizeof(wavelet_identity);
+
+wavelet_family wif[] = {
+  {"haar","ORTH", "HAAR"},
+  {"db", "ORTH", "DAUBECHIES"},
+  {"coif", "ORTH", "COIFLETS"},
+  {"sym", "ORTH", "SYMLETS"},
+  {"bior", "BIORTH", "SPLINE_BIORTH"},
+  {"beylkin", "ORTH", "BEYLKIN"},
+  {"vaidyanathan", "ORTH", "VAIDYANATHAN"},
+  {"dmey", "ORTH", "DMEY"},
+  {"bath", "ORTH", "BATHLETS"},
+  {"legd", "ORTH", "LEGENDRE"},
+  {"rbior", "BIORTH","SPLINE_RBIORTH"}, 
+  {"fa", "ORTH", "FARRAS"},
+  {"ksq", "ORTH", "KINGSBURYQ"}
+};
+int waveletFamilyIdentityNum = sizeof(wif)/sizeof(wavelet_family);
 
 extend_method dwtMode = SYMH;
 
@@ -855,12 +873,12 @@ idwt_approx_neo (double *approx, int sigInLength,
   double *approxTemp, *approxPre;
 
   sigInLengthTemp = 2 * sigInLength + 1;
-  approxTemp = malloc(sigInLengthTemp * sizeof(double));
+  approxTemp = (double*)malloc(sigInLengthTemp * sizeof(double));
   dyadup_1D_feed_even (approx, sigInLength, 
 		       approxTemp, sigInLengthTemp);
   
   sigOutLengthTemp = sigInLengthTemp + filterLen - 1;
-  approxPre = malloc (sigOutLengthTemp * sizeof(double));
+  approxPre = (double*)malloc (sigOutLengthTemp * sizeof(double));
   conv (approxTemp, sigInLengthTemp, approxPre, 
 	sigOutLengthTemp, lowRe, filterLen);
   free(approxTemp);
@@ -1001,13 +1019,24 @@ upcoef_len_cal (int sigInLength, int filterLen, int stride,
   int count;
   *sigOutLength = sigInLength;
   *sigOutLengthDefault = sigInLength;
-  for(count=0;count<stride;count++)
-    {
-      //*sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
-      *sigOutLengthDefault = 2*(*sigOutLengthDefault) - filterLen + 1;
-      //*sigOutLength = 2*(*sigOutLength) + filterLen - 2;
-      *sigOutLength = 2*(*sigOutLength) - filterLen + 2;
-    }
+//   if ((2*(*sigOutLength) - filterLen + 2)<0){ //this was implemented for cwt
+//       for(count=0;count<stride;count++)
+//       {
+// 	// original version
+// 	*sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
+// 	*sigOutLength = 2*(*sigOutLength) + filterLen - 2;
+// 	
+//       }
+//     } else { //works with dwt 
+      for(count=0;count<stride;count++)
+	{
+	  
+    //version 1.14 - but does not work with cwt
+	  *sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
+	  *sigOutLength = 2*(*sigOutLength) - filterLen + 2;
+	  
+	}
+//      }
   return;
 }
 
@@ -1018,17 +1047,24 @@ upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe,
 {
   int count, sigInLengthTemp, leng;
   double *sigInTemp, *sigOutTemp;
+  //version 1.14 fow dwt - but does not work with cwt
+   sigInLengthTemp = 2 * sigInLength - filterLen + 2; 
+//    if (sigInLengthTemp<0) { 
+//   // works with wavefun, cwt
+//       sigInLengthTemp = 2 * sigInLength + filterLen - 2;
+//    }
 
-  //sigInLengthTemp = 2 * sigInLength + filterLen - 2;
-  sigInLengthTemp = 2 * sigInLength - filterLen + 2; 
+  
   //sigInLengthTemp = 2 * sigInLength + filterLen - 1;
-  sigInTemp = malloc(defaultLength*sizeof(double));
+  sigInTemp = (double *) malloc(defaultLength*sizeof(double));
   
   if (strcmp(coefType,"a")==0)
   {
 	  //sciprint("recognized\n");
+// 	  printf("sigInLength %d, filterLen%d, sigInLengthTemp %d\n",sigInLength,filterLen,sigInLengthTemp);
 	  idwt_approx_neo (sigIn, sigInLength, lowRe, filterLen, 
 		 sigInTemp, sigInLengthTemp);
+// 	  sciprint("recognized\n");
   }
   else
     idwt_detail_neo (sigIn, sigInLength, hiRe, filterLen, 
@@ -1036,18 +1072,25 @@ upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe,
 
   if (step > 1)
     {
-      sigOutTemp = malloc(defaultLength*sizeof(double));
+      sigOutTemp = (double *) malloc(defaultLength*sizeof(double));
       for(count=0;count<defaultLength;count++)
 	sigOutTemp[count] = 0;
       leng = sigInLengthTemp;
-      for(count=0;count<(step-1);count++)
+      for(count=0;count<(step-1);count++) 
 	{
+	  //printf("leng %d, filterLen%d, leng*2-filterLen+2 %d\n",leng,filterLen,leng*2-filterLen+2);
+// 	  if ((leng*2-filterLen+2)<0) {//for cwt
+// 	  // original version
 // 	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
-// 		       sigOutTemp, leng*2+filterLen-2);
+// 	               sigOutTemp, leng*2+filterLen-2);
+// 	  leng = leng*2+filterLen-2;
+// 	  } else { //works for dwt
+	  //version 1.14 - but does not work with cwt
 	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
 		       sigOutTemp, leng*2-filterLen+2);
-	  //leng = leng*2+filterLen-2;
+	  //sciprint("ok\n");
 	  leng = leng*2-filterLen+2;
+//  	  }
 	  verbatim_copy (sigOutTemp, leng, sigInTemp, leng);
 	}
       sigInLengthTemp = leng;

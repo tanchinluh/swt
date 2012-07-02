@@ -3,6 +3,7 @@
  * cwt_validate.c -- CWT validation
  * SWT - Scilab wavelet toolbox
  * Copyright (C) 2005-2006  Roger Liu
+ * Copyright (C) 20010-2012  Holger Nahrstaedt
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,10 +59,10 @@ void sinus_form_validate(int *errCode)
 	return;
 }
 
-void sinus_content_validate(int *errCode, int l1, int l2, int l3)
+void sinus_content_validate(int *errCode, double* input1, double* input2, double* input3)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
+	if ((input1[0]>=input2[0]) || (input3[0]<2))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -79,10 +80,10 @@ void poisson_form_validate(int *errCode)
 	return;
 }
 
-void poisson_content_validate(int *errCode, int l1, int l2, int l3)
+void poisson_content_validate(int *errCode, double* input1, double* input2, double* input3)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
+	if ((input1[0]>=input2[0]) || (input3[0]<2))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -100,10 +101,10 @@ void mexihat_form_validate(int *errCode)
 	return;
 }
 
-void mexihat_content_validate(int *errCode, int l1, int l2, int l3)
+void mexihat_content_validate(int *errCode, double* input1, double* input2, double* input3)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
+	if ((input1[0]>=input2[0]) || (input3[0]<2))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -121,10 +122,10 @@ void morlet_form_validate(int *errCode)
 	return;
 }
 
-void morlet_content_validate(int *errCode, int l1, int l2, int l3)
+void morlet_content_validate(int *errCode, double* input1, double* input2, double* input3)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
+	if ((input1[0]>=input2[0]) || (input3[0]<2))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -142,10 +143,10 @@ void DOGauss_form_validate(int *errCode)
 	return;
 }
 
-void DOGauss_content_validate(int *errCode, int l1, int l2, int l3)
+void DOGauss_content_validate(int *errCode, double* input1, double* input2, double* input3)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
+	if ((input1[0]>=input2[0]) || (input3[0]<2))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -163,10 +164,10 @@ void Gauss_form_validate(int *errCode)
 	return;
 }
 
-void Gauss_content_validate(int *errCode, int l1, int l2, int l3, int l4)
+void Gauss_content_validate(int *errCode, double* input1, double* input2, double* input3, double* input4)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2) || (istk(l4)[0]>8))
+	if ((input1[0]>=input2[0]) || (input3[0]<2) || (input4[0]>8))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -187,10 +188,10 @@ void cmorlet_form_validate(int *errCode)
 	return;
 }
 
-void cmorlet_content_validate(int *errCode, int l1, int l2, int l3, int l4, int l5)
+void cmorlet_content_validate(int *errCode, double* input1, double* input2, double* input3, double* input4 , double* input5)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
+	if ((input1[0]>=input2[0]) || (input3[0]<2))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -209,10 +210,10 @@ void shanwavf_form_validate(int *errCode)
 	return;
 }
 
-void shanwavf_content_validate(int *errCode, int l1, int l2, int l3, int l4, int l5)
+void shanwavf_content_validate(int *errCode, double* input1, double* input2, double* input3, double* input4 , double* input5)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
+	if ((input1[0]>=input2[0]) || (input3[0]<2))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -231,10 +232,10 @@ void fbspwavf_form_validate(int *errCode)
 	return;
 }
 
-void fbspwavf_content_validate(int *errCode, int l1, int l2, int l3, int l4, int l5, int l6)
+void fbspwavf_content_validate(int *errCode, double* input1, double* input2, double* input3, double* input4, double* input5, double* input6)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2) || (istk(l4)[0]<1))
+	if ((input1[0]>=input2[0]) || (input3[0]<2) || (input4[0]<1))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -253,10 +254,10 @@ void cauchy_form_validate(int *errCode)
 	return;
 }
 
-void cauchy_content_validate(int *errCode, int l1, int l2, int l3)
+void cauchy_content_validate(int *errCode, double* input1, double* input2, double* input3)
 {
     *errCode = SUCCESS;
-	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
+	if ((input1[0]>=input2[0]) || (input3[0]<2))
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
@@ -273,17 +274,17 @@ void wavefun_form_validate(int *errCode)
 	return;
 }
 
-void wavefun_content_validate(int *errCode, int l1, int l2)
+void wavefun_content_validate(int *errCode, char *input_string, double* input2)
 {
 	int ind1, ind2;
     *errCode = SUCCESS;
-	if (istk(l2)[0] < 0)
+	if (input2[0] < 0)
 	{
 		*errCode = UNKNOWN_INPUT_ERR;
 		return;
 	}
-    wavelet_fun_parser (cstk(l1), &ind1);
-	cwt_fun_parser(cstk(l1), &ind2);
+    wavelet_fun_parser (input_string, &ind1);
+	cwt_fun_parser(input_string, &ind2);
 	if ((ind1==-1) && (ind2==-1))
 	{
 		*errCode = UNKNOWN_INPUT_ERR;
@@ -304,17 +305,17 @@ void wavefun2_form_validate(int *errCode)
 	return;
 }
 
-void wavefun2_content_validate(int *errCode, int l1, int l2)
+void wavefun2_content_validate(int *errCode, char *input_string, double* input2)
 {
 	int ind1;
     *errCode = SUCCESS;
-	if (istk(l2)[0] < 0)
+	if (input2[0] < 0)
 	{
 		*errCode = UNKNOWN_INPUT_ERR;
 		return;
 	}
-    wavelet_fun_parser (cstk(l1), &ind1);
-	//cwt_fun_parser(cstk(l1), &ind2);
+    wavelet_fun_parser (input_string, &ind1);
+	//cwt_fun_parser(input_string, &ind2);
 	if (ind1==-1)
 	{
 		*errCode = UNKNOWN_INPUT_ERR;
@@ -328,7 +329,7 @@ void wavefun2_content_validate(int *errCode, int l1, int l2)
  *-----------------------------------------*/
 void cwt_form_validate(int *errCode, int *flow)
 {
-    if (sci_matrix_vector_real(1) && sci_matrix_vector_real(2) && sci_strings_scalar(3) )
+    if (sci_matrix_vector_real(1) && (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3) )
 	{
 		*errCode = SUCCESS;
 		*flow = 1;
@@ -343,13 +344,13 @@ void cwt_form_validate(int *errCode, int *flow)
 	return;
 }
 
-void cwt_content_validate(int *errCode, int l1, int l2, int l3)
+void cwt_content_validate(int *errCode, char *input_string)
 {
 	int ind1, ind2;
     *errCode = SUCCESS;
 	
-    wavelet_fun_parser (cstk(l3), &ind1);
-	cwt_fun_parser(cstk(l3), &ind2);
+    wavelet_fun_parser (input_string, &ind1);
+	cwt_fun_parser(input_string, &ind2);
 	if ((ind1==-1) && (ind2==-1))
 	{
 		*errCode = UNKNOWN_INPUT_ERR;
