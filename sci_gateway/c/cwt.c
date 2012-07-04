@@ -22,7 +22,7 @@
  */
 #include "swt_common.h"
 #include "cwt.h"
-
+  #include "kiss_fft.h"
 
 cwt_identity ci[] = {
     {"sinus", REAL, SINUS, PSI_ONLY, -0.5, 0.5, 1, sinus},
@@ -68,6 +68,8 @@ cwt_family cif[] = {
 };
 int cwtFamilyNum = sizeof(cif)/sizeof(cwt_family);
 
+#define ISODD(x)        ((x/2.0)== ((int)(x/2)) ? 0 : 1)
+
 /*void haar(double *x, int sigInLength, double *psi, int sigOutLength, double ys)
 {
 	int count;
@@ -81,6 +83,42 @@ int cwtFamilyNum = sizeof(cif)/sizeof(cwt_family);
 	}
 	return;
 }*/
+
+double
+powof (double x, double alpha)
+{
+  double         resu;
+
+
+  if (x >= 0) /* in this case, no problem */
+    {
+      if (x == 0)
+	resu = 0.0;
+      else
+	resu = exp (alpha * log (x));
+    }
+  else /* there may be problems */
+    {
+      if (alpha == (int)(alpha)) /* if alpha is an integer */
+	{
+	  /* then x^alpha is real-valued */ 
+	  resu = powof ( -x, alpha);
+	  /* and the sign of the results depends on
+	     wether alpha is ODD or EVEN */
+	  if (ISODD(alpha) == 1)
+	    {
+	      /* alpha is ODD */
+	      resu = -resu;
+	    }
+	}
+      else
+	{
+	  Scierror (999,"Attempt to compute x^alpha with x<0 : complex valued result\n");
+	  return 0;
+	}
+    }
+  return resu;
+}
 
 /*-------------------------------------------
  * Sinus Scale Filter Generation
@@ -121,7 +159,8 @@ void mexihat(double *x, int sigInLength, double *psi, int sigOutLength, double y
 	int count;
 	double x2, con;
 
-    con = 2*sqrt(sqrt(PI))/sqrt(3);
+    //con = 2*sqrt(sqrt(PI))/sqrt(3);
+    con = 2/(sqrt(3)*sqrt(sqrt(PI)));
 	for(count=0;count<sigInLength;count++)
 	{
 		x2 = x[count] * x[count];
@@ -453,8 +492,8 @@ void cgau4(double *x, int sigInLength,
 	   x4 = x2 * x2;
 	   cosx = cos(x[count]);
 	   sinx = sin(x[count]);
-	   psir[count]=(16*x4*cosx+32*x3*sinx-72*x2*cosx-56*x[count]*sinx+25*cosx)*exp(-x2)/sqrt(774*sqrt(PI/2));
-	   psii[count]=(-16*x4*sinx+32*x3*cosx+72*x2*sinx-56*x[count]*cosx-25*sinx)*exp(-x2)/sqrt(774*sqrt(PI/2));
+ 	   psir[count]=(16*x4*cosx+32*x3*sinx-72*x2*cosx-56*x[count]*sinx+25*cosx)*exp(-x2)/sqrt(764*sqrt(PI/2));
+ 	   psii[count]=(-16*x4*sinx+32*x3*cosx+72*x2*sinx-56*x[count]*cosx-25*sinx)*exp(-x2)/sqrt(764*sqrt(PI/2));
 	}
 	return;
 }
@@ -481,8 +520,8 @@ void cgau5(double *x, int sigInLength,
 	   x5 = x2 * x3;
 	   cosx = cos(x[count]);
 	   sinx = sin(x[count]);
-	   psir[count]=(-32*x5*cosx-80*x4*sinx+240*x3*cosx+280*x2*sinx-250*x[count]*cosx-81*sinx)*exp(-x2)/sqrt(29746*sqrt(PI/2));
-	   psii[count]=(32*x5*sinx-80*x4*cosx-240*x3*sinx+280*x2*cosx+250*x[count]*sinx-81*cosx)*exp(-x2)/sqrt(29746*sqrt(PI/2));
+ 	   psir[count]=(-32*x5*cosx-80*x4*sinx+240*x3*cosx+280*x2*sinx-250*x[count]*cosx-81*sinx)*exp(-x2)/sqrt(9496*sqrt(PI/2));
+ 	   psii[count]=(32*x5*sinx-80*x4*cosx-240*x3*sinx+280*x2*cosx+250*x[count]*sinx-81*cosx)*exp(-x2)/sqrt(9496*sqrt(PI/2));
 	}
 	return;
 }
@@ -510,8 +549,8 @@ void cgau6(double *x, int sigInLength,
 	   x6 = x3 * x3;
 	   cosx = cos(x[count]);
 	   sinx = sin(x[count]);
-	   psir[count]=(64*x6*cosx+192*x5*sinx-720*x4*cosx-1120*x3*sinx+1500*x2*cosx+972*x[count]*sinx-331*cosx)*exp(-x2)/sqrt(147322*sqrt(PI/2));
-	   psii[count]=(-64*x6*sinx+192*x5*cosx+720*x4*sinx-1120*x3*cosx-1500*x2*sinx+972*x[count]*cosx+331*sinx)*exp(-x2)/sqrt(147322*sqrt(PI/2));
+	   psir[count]=(64*x6*cosx+192*x5*sinx-720*x4*cosx-1120*x3*sinx+1500*x2*cosx+972*x[count]*sinx-331*cosx)*exp(-x2)/sqrt(140152*sqrt(PI/2));
+	   psii[count]=(-64*x6*sinx+192*x5*cosx+720*x4*sinx-1120*x3*cosx-1500*x2*sinx+972*x[count]*cosx+331*sinx)*exp(-x2)/sqrt(140152*sqrt(PI/2));
 	}
 	return;
 }
@@ -540,8 +579,8 @@ void cgau7(double *x, int sigInLength,
 	   x7 = x4 * x3;
 	   cosx = cos(x[count]);
 	   sinx = sin(x[count]);
-	   psir[count]=(-128*x7*cosx-448*x6*sinx+2016*x5*cosx+3920*x4*sinx-7000*x3*cosx-6804*x2*sinx+4364*x[count]*cosx+1303*sinx)*exp(-x2)/sqrt(2099965*sqrt(PI/2));
-	   psii[count]=(128*x7*sinx-448*x6*cosx-2016*x5*sinx+3920*x4*cosx+7000*x3*sinx-6804*x2*cosx-4364*x[count]*sinx+1303*cosx)*exp(-x2)/sqrt(2099965*sqrt(PI/2));
+	   psir[count]=(-128*x7*cosx-448*x6*sinx+2016*x5*cosx+3920*x4*sinx-7000*x3*cosx-6804*x2*sinx+4634*x[count]*cosx+1303*sinx)*exp(-x2)/sqrt(2390480*sqrt(PI/2));
+	   psii[count]=(128*x7*sinx-448*x6*cosx-2016*x5*sinx+3920*x4*cosx+7000*x3*sinx-6804*x2*cosx-4634*x[count]*sinx+1303*cosx)*exp(-x2)/sqrt(2390480*sqrt(PI/2));
 	}
 	return;
 }
@@ -571,8 +610,8 @@ void cgau8(double *x, int sigInLength,
 	   x8 = x4 * x4;
 	   cosx = cos(x[count]);
 	   sinx = sin(x[count]);
-	   psir[count]=(256*x8*cosx+1024*x7*sinx-5376*x6*cosx-12544*x5*sinx+28000*x4*cosx+36288*x3*sinx-36532*x2*cosx-20578*x[count]*sinx+5667*cosx)*exp(-x2)/sqrt(42102009.0*sqrt(PI/2));
-	   psii[count]=(-256*x8*sinx+1024*x7*cosx+5736*x6*sinx-12544*x5*cosx-28000*x4*sinx+36288*x3*cosx+36532*x2*sinx-20578*x[count]*cosx-5667*sinx)*exp(-x2)/sqrt(42102009.0*sqrt(PI/2));
+	   psir[count]=(256*x8*cosx+1024*x7*sinx-5376*x6*cosx-12544*x5*sinx+28000*x4*cosx+36288*x3*sinx-37072*x2*cosx-20848*x[count]*sinx+5937*cosx)*exp(-x2)/sqrt(46206736*sqrt(PI/2));
+	   psii[count]=(-256*x8*sinx+1024*x7*cosx+5376*x6*sinx-12544*x5*cosx-28000*x4*sinx+36288*x3*cosx+37072*x2*sinx-20848*x[count]*cosx-5937*sinx)*exp(-x2)/sqrt(46206736*sqrt(PI/2));
 	}
 	return;
 }
@@ -681,14 +720,14 @@ void fbspwavf(double *x, int sigInLength,int m,
 	for(count=0;count<sigInLength;count++)
 	{
 		if (x[count] != 0)
-			econ = sin(x[count]*fb*PI/m)/(x[count]*fb*PI/m); 
+			econ = sin(x[count]*fb*PI/(double)m)/(x[count]*fb*PI/(double)m); 
 		else
 			econ = 1;
-        for(i=0;i<m;i++)
-			econ*=econ;
+//         for(i=0;i<m;i++)
+// 			econ*=econ;
 
-		psir[count] = cos(2*PI*fc*x[count])*econ*con/ys;
-		psii[count] = sin(2*PI*fc*x[count])*econ*con/ys;
+		psir[count] = cos(2*PI*fc*x[count])*powof(econ,m)*con/ys;
+		psii[count] = sin(2*PI*fc*x[count])*powof(econ,m)*con/ys;
 	}
 	return;
 }
@@ -768,9 +807,56 @@ void cauchy_packet(double *x, int sigInLength,
 	return;
 }
 
+
 /*-------------------------------------------
  * Meyer Filter Generation
  *-----------------------------------------*/
+
+
+void meyer_phi(double *x, int sigInLength, 
+			double lb, double ub, double *phir, double *phii, 
+			int sigOutLength, double ys)
+{
+	int count;
+	double con,delta,omega,xhat;
+	double *xhat_r,*xhat_i;
+	 xhat_r = (double *)malloc(sigInLength*sizeof(double));
+	 xhat_i = (double *)malloc(sigInLength*sizeof(double));
+	delta = (ub-lb)/sigInLength;
+	
+	for(count=0;count<sigInLength;count++)
+	{
+		xhat_r[count]=0;
+		xhat_i[count]=0;
+		xhat=0;
+	        if (abs(x[count]) <(2*PI/3))
+		  xhat=1;
+		if (abs(x[count]) >=(2*PI/3) && abs(x[count]) <(4*PI/3)){
+		  meyeraux(3/2/PI*abs(x[count])-1,&con);
+		  xhat=cos(PI/2*con);
+		}
+		
+		//tmp omega
+		omega=(-sigInLength+2*count)/(2*sigInLength*delta);
+		//xhat ohne fftshift
+		xhat_r[count]=xhat*cos(2*PI*omega*lb)/delta;
+		xhat_i[count]=xhat*sin(2*PI*omega*lb)/delta;
+
+	}
+ 	fftshift(xhat_r,phir,sigInLength);
+ 	fftshift(xhat_i,phii,sigInLength);
+ 	
+ 	ifft (sigInLength, sigInLength, phir, phii);
+	for(count=0;count<sigInLength;count++)
+	{
+	  phir[count]=phir[count]*ys;
+	  phii[count]=phii[count]*ys;
+	}
+	clear(xhat_r);
+	clear(xhat_i);
+	return;
+}
+
 void meyeraux(double x, double *y)
 {
     double x4, x5, x6, x7;
@@ -822,13 +908,13 @@ void full_range_scalef (char *wname, double *f, int sigOutLength)
       wavelet_parser(wname,&family,&member);
 	  syn_fun = wi[ind].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
+	  upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
 	  l=1;
 	  //l=(int)(floor((sigOutLength-s1)/2));
 	  for(count=0;count<sigOutLength;count++)
 		  f[count] = 0;
-	  cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+	  upcoef (&one, 1, pWaveStruct.pLowPass,
 		  pWaveStruct.pHiPass, pWaveStruct.length, &(f[l]), 
 	      s1, s1, d, level);
 	  if ((family==COIFLETS) || (family==SYMLETS) || (family==DMEY))
@@ -847,7 +933,7 @@ void full_range_scalef (char *wname, double *f, int sigOutLength)
       wavelet_parser(wname,&family,&member);
 	  ana_fun = wi[ind].analysis;
       (*ana_fun)(member, &pWaveStruct);
-	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
+	  upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
 	  //l=(int)(floor((sigOutLength-s1)/2));
 	  l=1;
@@ -857,7 +943,7 @@ void full_range_scalef (char *wname, double *f, int sigOutLength)
 	  hifltr = malloc(pWaveStruct.length*sizeof(double));
       wrev(pWaveStruct.pLowPass, pWaveStruct.length, lowfltr, pWaveStruct.length);
 	  qmf_wrev(lowfltr,pWaveStruct.length,hifltr,pWaveStruct.length);
-      cwt_upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, &(f[l]), 
+      upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, &(f[l]), 
 	      s1, s1, d, level);
 	  free(lowfltr);
 	  free(hifltr);
@@ -987,76 +1073,303 @@ void cwt_conv_complex_complex (double *a, double *b, int sigInLength,double *c, 
 }
 
 
-void
-cwt_upcoef_len_cal (int sigInLength, int filterLen, int stride, 
-		int *sigOutLength, int *sigOutLengthDefault)
+// void
+// cwt_upcoef_len_cal (int sigInLength, int filterLen, int stride, 
+// 		int *sigOutLength, int *sigOutLengthDefault)
+// {
+//   int count;
+//   *sigOutLength = sigInLength;
+//   *sigOutLengthDefault = sigInLength;
+//       for(count=0;count<stride;count++)
+//       {
+// 	// original version
+// 	*sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
+// 	*sigOutLength = 2*(*sigOutLength) + filterLen - 2;
+// 	
+//       }
+//   return;
+// }
+
+// void
+// cwt_upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe, 
+// 	int filterLen, double *sigOut, int sigOutLength, 
+// 	int defaultLength, char *coefType, int step)
+// {
+//   int count, sigInLengthTemp, leng;
+//   double *sigInTemp, *sigOutTemp;
+// 
+//   // works with wavefun, cwt
+//   sigInLengthTemp = 2 * sigInLength + filterLen - 2;
+//    
+// 
+//   
+//   //sigInLengthTemp = 2 * sigInLength + filterLen - 1;
+//   sigInTemp = (double *) malloc(defaultLength*sizeof(double));
+//   
+//   if (strcmp(coefType,"a")==0)
+//   {
+// 	  //sciprint("recognized\n");
+// // 	  printf("sigInLength %d, filterLen%d, sigInLengthTemp %d\n",sigInLength,filterLen,sigInLengthTemp);
+// 	  idwt_approx_neo (sigIn, sigInLength, lowRe, filterLen, 
+// 		 sigInTemp, sigInLengthTemp);
+// // 	  sciprint("recognized\n");
+//   }
+//   else
+//     idwt_detail_neo (sigIn, sigInLength, hiRe, filterLen, 
+// 		 sigInTemp, sigInLengthTemp); 
+// 
+//   if (step > 1)
+//     {
+//       sigOutTemp = (double *) malloc(defaultLength*sizeof(double));
+//       for(count=0;count<defaultLength;count++)
+// 	sigOutTemp[count] = 0;
+//       leng = sigInLengthTemp;
+//       for(count=0;count<(step-1);count++) //for cwt
+// 	{
+// 	  //printf("leng %d, filterLen%d, leng*2-filterLen+2 %d\n",leng,filterLen,leng*2-filterLen+2);
+// 	  // original version
+// 	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
+// 	               sigOutTemp, leng*2+filterLen-2);
+// 	  leng = leng*2+filterLen-2;
+// 	  
+// 	  verbatim_copy (sigOutTemp, leng, sigInTemp, leng);
+// 	}
+//       sigInLengthTemp = leng;
+//       free(sigOutTemp);
+//     }
+// 
+//  
+//   wkeep_1D_center (sigInTemp, sigInLengthTemp, sigOut, sigOutLength);
+//   free(sigInTemp);
+//   return;
+// }
+
+
+/*====================================================================*
+ * Name of the function : fftshift                                    *
+ * Date of creation     : 02 - 06 - 1999                              *
+ *--------------------------------------------------------------------*
+ * Action of the function                                             *
+ * swaps the first and second halves of a vector. Example             *
+ * [1 2 3 4 5 6 7 8 9 10 ] becomes [6 7 8 9 10 1 2 3 4 5]             *
+ * The parameters to pass are :                          	      *
+ *   - the input vector		                            	      *
+ *   - the output vector	                            	      *
+ *   - its length                                                     *
+ * if the length is odd, example [1 2 3 4 5] becomes [4 5 1 2 3]      *
+ *====================================================================*/
+int
+fftshift (double *vector_in, double *vector_out, int vector_length)
+
 {
-  int count;
-  *sigOutLength = sigInLength;
-  *sigOutLengthDefault = sigInLength;
-      for(count=0;count<stride;count++)
-      {
-	// original version
-	*sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
-	*sigOutLength = 2*(*sigOutLength) + filterLen - 2;
-	
-      }
-  return;
-}
+  double inter1, inter2;
+  int i, half_length;
 
-void
-cwt_upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe, 
-	int filterLen, double *sigOut, int sigOutLength, 
-	int defaultLength, char *coefType, int step)
-{
-  int count, sigInLengthTemp, leng;
-  double *sigInTemp, *sigOutTemp;
 
-  // works with wavefun, cwt
-  sigInLengthTemp = 2 * sigInLength + filterLen - 2;
-   
+  /* computation of the half length in case of odd or even length */
+  half_length = (int) (vector_length/2.0);
 
-  
-  //sigInLengthTemp = 2 * sigInLength + filterLen - 1;
-  sigInTemp = (double *) malloc(defaultLength*sizeof(double));
-  
-  if (strcmp(coefType,"a")==0)
-  {
-	  //sciprint("recognized\n");
-// 	  printf("sigInLength %d, filterLen%d, sigInLengthTemp %d\n",sigInLength,filterLen,sigInLengthTemp);
-	  idwt_approx_neo (sigIn, sigInLength, lowRe, filterLen, 
-		 sigInTemp, sigInLengthTemp);
-// 	  sciprint("recognized\n");
-  }
-  else
-    idwt_detail_neo (sigIn, sigInLength, hiRe, filterLen, 
-		 sigInTemp, sigInLengthTemp); 
 
-  if (step > 1)
+  /* case where the length is odd */
+  if (ISODD(vector_length)==1)
     {
-      sigOutTemp = (double *) malloc(defaultLength*sizeof(double));
-      for(count=0;count<defaultLength;count++)
-	sigOutTemp[count] = 0;
-      leng = sigInLengthTemp;
-      for(count=0;count<(step-1);count++) //for cwt
+      inter2=vector_in[half_length];
+      for (i=0; i<half_length; i++)
 	{
-	  //printf("leng %d, filterLen%d, leng*2-filterLen+2 %d\n",leng,filterLen,leng*2-filterLen+2);
-	  // original version
-	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
-	               sigOutTemp, leng*2+filterLen-2);
-	  leng = leng*2+filterLen-2;
-	  
-	  verbatim_copy (sigOutTemp, leng, sigInTemp, leng);
-	}
-      sigInLengthTemp = leng;
-      free(sigOutTemp);
+	  inter1 = vector_in[i];
+	  vector_out[i] = vector_in[half_length+i+1];
+	  vector_out[half_length + i ] = inter1;
+	}      
+      vector_out[vector_length-1]=inter2;
     }
-
+  /* case where the length is even */
+  else
+    {
+      for (i=0; i<half_length; i++)
+	{
+	  inter1 = vector_in[half_length + i ];
+	  vector_out[half_length + i] = vector_in[i];
+	  vector_out[i] = inter1;
+	}
+    }
+  /* fftshifting of the vector */
  
-  wkeep_1D_center (sigInTemp, sigInLengthTemp, sigOut, sigOutLength);
-  free(sigInTemp);
-  return;
+
+return 0;
 }
+
+
+
+
+
+int
+ifft (int Signal_Length, int Nfft, double *sig_real, double *sig_imag)
+{
+      kiss_fft_cpx * buf;
+    kiss_fft_cpx * bufout;
+  kiss_fft_cfg cfg = kiss_fft_alloc(Signal_Length , 1, 0, 0);
+//      fftw_complex * in=NULL;
+//     fftw_complex * out=NULL;
+//     fftw_plan p;
+
+        int            i, j, k, n, n2;
+      double         c, s, e, a, t1, t2;
+  /*------------------------------------------------------------------*/
+  /*          when the signal length is a power of two                */
+  /*------------------------------------------------------------------*/
+  if (Signal_Length == (int) powof (2, Nfft) + 1)
+    {
+     
+
+      j = 0;			/* bit-reverse  */
+      n2 = Signal_Length / 2;
+      for (i = 1; i < Signal_Length - 1; i++)
+	{
+	  n = n2;
+	  while (j >= n)
+	    {
+	      j = j - n;
+	      n = n / 2;
+	    }
+	  j = j + n;
+
+	  if (i < j)
+	    {
+	      t1 = sig_real[i];
+	      sig_real[i] = sig_real[j];
+	      sig_real[j] = t1;
+	      t1 = sig_imag[i];
+	      sig_imag[i] = sig_imag[j];
+	      sig_imag[j] = t1;
+	    }
+	}
+
+
+      n = 0;			/*IFFT  */
+      n2 = 1;
+
+      for (i = 0; i < Nfft; i++)
+	{
+	  n = n2;
+	  n2 = n2 + n2;
+	  e = 6.283185307179586 / n2;
+	  a = 0.0;
+
+	  for (j = 0; j < n; j++)
+	    {
+	      c = cos (a);
+	      s = sin (a);
+	      a = a + e;
+
+	      for (k = j; k < Signal_Length; k = k + n2)
+		{
+		  t1 = c * sig_real[k + n] - s * sig_imag[k + n];
+		  t2 = s * sig_real[k + n] + c * sig_imag[k + n];
+		  sig_real[k + n] = sig_real[k] - t1;
+		  sig_imag[k + n] = sig_imag[k] - t2;
+		  sig_real[k] = sig_real[k] + t1;
+		  sig_imag[k] = sig_imag[k] + t2;
+		}
+	    }
+	}
+      /* divide by Signal_Length */
+      for (k = 0; k < Signal_Length; k++)
+	{
+	  sig_real[k] = sig_real[k] / Signal_Length;
+	  sig_imag[k] = sig_imag[k] / Signal_Length;
+	}
+  	  free(cfg);
+    }
+  /*------------------------------------------------------------------*/
+  /*        when the signal length is NOT a power of two              */
+  /*            Calls the matlab subroutine ifft                      */
+  /*------------------------------------------------------------------*/
+  else
+    {
+//       cfg = kiss_fft_alloc(Signal_Length , 1, 0, 0);
+//       mxArray       *outputArray[1];
+//       mxArray       *inputArray[1];
+//       mxArray       *array_ptr;
+
+
+//       num_out = 1;
+//       num_in = 1;
+
+      /* recopy the real and imag parts of the signal in matrices */
+//       array_ptr = mxCreateDoubleMatrix (1, Signal_Length, mxCOMPLEX);
+//       memcpy (mxGetPr (array_ptr), sig_real, Signal_Length * sizeof (double));
+//       memcpy (mxGetPi (array_ptr), sig_imag, Signal_Length * sizeof (double));
+//       inputArray[0] = array_ptr;
+       buf	= (kiss_fft_cpx*)KISS_FFT_MALLOC(Signal_Length * sizeof(kiss_fft_cpx));
+       bufout	= (kiss_fft_cpx*)KISS_FFT_MALLOC(Signal_Length * sizeof(kiss_fft_cpx));
+      for (i=0;i<Signal_Length;i++){
+	buf[i].r=sig_real[i];
+	buf[i].i=sig_imag[i];
+      }
+//       printf("sig in %f\n",buf[0].r);
+  /*in=fftw_malloc(sizeof(fftw_complex) * Signal_Length);
+    out=fftw_malloc(sizeof(fftw_complex) * Signal_Length);
+    for (i=0;i<Signal_Length;++i ) {
+        in[i][0] = sig_real[i];
+        in[i][1] = sig_imag[i];
+    }
+      p = fftw_plan_dft_1d(Signal_Length, in, out, FFTW_BACKWARD, FFTW_ESTIMATE);*/
+//        for (i=0;i<Nfft;i++)
+//          fftw_execute(p);
+//    
+/*  sig_copy_real= (double*)malloc(sizeof(double) * 1*Signal_Length);
+  sig_copy_imag= (double*)malloc(sizeof(double) * 1*Signal_Length);
+  
+       memcpy (sig_copy_real, sig_real, Signal_Length * sizeof (double));
+      memcpy ( sig_copy_imag, sig_imag, Signal_Length * sizeof (double));*/
+    
+//        for (i=0;i<Signal_Length;i++){
+// 	sig_real[i]=(double)out[i][0];
+// 	sig_imag[i]=(double)out[i][1];
+//       }
+      /* calls the MATLAB function */
+      //mexCallMATLAB (num_out, outputArray, num_in, inputArray, "ifft");
+//        for (j = 0; j < Nfft; j++)
+       kiss_fft(cfg, buf, bufout);
+//        
+      for (i=0;i<Signal_Length;i++){
+	sig_real[i]=(double)bufout[i].r;
+	sig_imag[i]=(double)bufout[i].i;
+      }
+//        printf("sig out %f\n",bufout[0].r);
+      /* recovers the output */
+
+//       if (mxIsComplex (outputArray[0]))
+// 	{
+// 	   for (i=0;i<Signal_Length;i++){
+// 	sig_copy_real[i]=(double)buf[i].r;
+// 	sig_copy_imag[i]=(double)buf[i].i;
+//       }
+//  	  memcpy (sig_imag, sig_copy_real, Signal_Length * sizeof (double));
+//       memcpy (sig_real, mxGetPr (outputArray[0]), Signal_Length * sizeof (double));
+//       if (mxIsComplex (outputArray[0]))
+// 	{
+//    memcpy (sig_imag, sig_copy_imag, Signal_Length * sizeof (double));
+// 	  memcpy (sig_imag, mxGetPi (outputArray[0]), Signal_Length * sizeof (double));
+// 	}
+//       else
+// 	{
+// 	  for (i = 0; i < Signal_Length; i++)
+// 	    sig_imag[i] = 0;
+// 	}
+
+      /* free memory */
+       free(cfg);free(buf);free(bufout);
+//         free(sig_copy_real);free(sig_copy_imag);
+//          fftw_destroy_plan(p);
+//           fftw_free(in); fftw_free(out);
+
+      //mxDestroyArray (outputArray[0]);
+      //mxDestroyArray (inputArray[0]);
+    }
+  return 0;
+}
+
 
 /*void real_scale (double lb, double ub, double scale, int length, double *f, double ys, RWScaleFunc w)
 {

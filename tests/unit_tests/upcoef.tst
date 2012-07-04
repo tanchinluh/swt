@@ -23,14 +23,14 @@ y8=upcoef('a',a,Lo_R,Hi_R,3);
 y9=upcoef('a',a,'sym10',3,25);
 y10=upcoef('a',a,Lo_R,Hi_R,3,25);
 
-assert_checkalmostequal ( x1 , y1 , %eps );
-assert_checkalmostequal ( x1 , y2 , %eps );
+assert_checkalmostequal ( x1 , y1(19:$-18) , %eps );
+assert_checkalmostequal ( x1 , y2(19:$-18) , %eps );
 assert_checkalmostequal ( x2 , y3 , %eps );
 assert_checkalmostequal ( x2 , y4 , %eps );
-assert_checkalmostequal ( x1 , y5 , %eps );
-assert_checkalmostequal ( x1 , y6 , %eps );
-assert_checkalmostequal ( x3 , y7 , %eps );
-assert_checkalmostequal ( x3 , y8 , %eps );
+assert_checkalmostequal ( x1 , y5(19:$-18) , %eps );
+assert_checkalmostequal ( x1 , y6(19:$-18) , %eps );
+assert_checkalmostequal ( x3 , y7(127:$-126) , %eps );
+assert_checkalmostequal ( x3 , y8(127:$-126) , %eps );
 assert_checkalmostequal ( x33 , y9 , %eps );
 assert_checkalmostequal ( x33 , y10 , %eps );
 
@@ -52,16 +52,23 @@ y7=upcoef('d',d,'sym10',3);
 y8=upcoef('d',d,Lo_R,Hi_R,3);
 y9=upcoef('d',d,'sym10',3,25);
 y10=upcoef('d',d,Lo_R,Hi_R,3,25);
-assert_checkalmostequal ( x1 , y1 , %eps );
-assert_checkalmostequal ( x1 , y2 , %eps );
+assert_checkalmostequal ( x1 , y1(19:$-18) , %eps );
+assert_checkalmostequal ( x1 , y2(19:$-18) , %eps );
 assert_checkalmostequal ( x2 , y3 , %eps );
 assert_checkalmostequal ( x2 , y4 , %eps );
-assert_checkalmostequal ( x1 , y5 , %eps );
-assert_checkalmostequal ( x1 , y6 , %eps );
-assert_checkalmostequal ( x3 , y7 , %eps );
-assert_checkalmostequal ( x3 , y8 , %eps );
+assert_checkalmostequal ( x1 , y5(19:$-18) , %eps );
+assert_checkalmostequal ( x1 , y6(19:$-18) , %eps );
+assert_checkalmostequal ( x3 , y7(127:$-126) , %eps );
+assert_checkalmostequal ( x3 , y8(127:$-126) , %eps );
 assert_checkalmostequal ( x33 , y9 , %eps );
 assert_checkalmostequal ( x33 , y10 , %eps );
+
+
+//size of upcoef
+
+y1=upcoef('a',1,'sym8',1);
+
+assert_checkalmostequal ( size(y1) , [1,16] , %eps );
 
 
 clear a;

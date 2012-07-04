@@ -1004,8 +1004,10 @@ upcoef2 (double *matrixIn, int matrixInRow, int matrixInCol,
   double *vo, *matrixOutTemp, *matrixOutPre;
   int matrixOutTempRow, matrixOutTempCol, rowLeng, colLeng,count, count1;
 
-  matrixOutTempRow = 2*matrixInRow - filterLen + 2;
-  matrixOutTempCol = 2*matrixInCol - filterLen + 2;
+//   matrixOutTempRow = 2*matrixInRow - filterLen + 2;
+//   matrixOutTempCol = 2*matrixInCol - filterLen + 2;
+  matrixOutTempRow = 2*matrixInRow + filterLen - 2;
+  matrixOutTempCol = 2*matrixInCol + filterLen - 2;
 
   vo = malloc(matrixInRow*matrixInCol*sizeof(double));
   for(count = 0;count<matrixInRow*matrixInCol;count++)
@@ -1075,12 +1077,16 @@ upcoef2 (double *matrixIn, int matrixInRow, int matrixInCol,
       vo = malloc(rowLeng*colLeng*sizeof(double));
       for(count1 = 0;count1<rowLeng*colLeng;count1++)
          vo[count1] = 0;
-
 	  idwt2D_neo (matrixOutTemp, vo, vo, vo, rowLeng, colLeng, 
 		  lowRe, hiRe, filterLen, matrixOutPre,
-		  rowLeng*2-filterLen+2, colLeng*2-filterLen+2);
-	  rowLeng = rowLeng*2 - filterLen + 2;
-	  colLeng = colLeng*2 - filterLen + 2;
+		  rowLeng*2+filterLen-2, colLeng*2+filterLen-2);
+	  rowLeng = rowLeng*2 + filterLen - 2;
+	  colLeng = colLeng*2 + filterLen - 2;
+// 	  idwt2D_neo (matrixOutTemp, vo, vo, vo, rowLeng, colLeng, 
+// 		  lowRe, hiRe, filterLen, matrixOutPre,
+// 		  rowLeng*2-filterLen+2, colLeng*2-filterLen+2);
+// 	  rowLeng = rowLeng*2 - filterLen + 2;
+// 	  colLeng = colLeng*2 - filterLen + 2;
 	  verbatim_copy (matrixOutPre, rowLeng*colLeng, 
 			 matrixOutTemp, rowLeng*colLeng);
 	  free(vo);

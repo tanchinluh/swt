@@ -941,7 +941,7 @@ int_shanwavf (char *fname)
    int l1, m1, n1, l2, m2, n2, l3, m3, n3;
    int l4, m4, n4, l5, m5, n5, l6, m6, n6;
    int l7r, l7c, m7, n7;
-   int minlhs = 2, maxlhs = 2, minrhs = 5, maxrhs = 5;
+   int minlhs = 1, maxlhs = 2, minrhs = 5, maxrhs = 5;
       int * p_input_vector1 = NULL;
   int * p_input_vector2 = NULL;
   int * p_input_vector3 = NULL;
@@ -1121,7 +1121,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   shanwavf(output1, n6, input5[0], input4[0], output2_r, output2_i, n7,1);
 
   LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  if (Lhs>1)
+    LhsVar(2) = Rhs + 2;
 
   return 0;
 }
@@ -1866,6 +1867,155 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
  * Meyer Filter Generation
  *-----------------------------------------*/
 
+
+int
+int_meyer (char *fname)
+{
+   int l1, m1, n1, l2, m2, n2, l3, m3, n3;
+   int l4, m4, n4, l5r, m5, n5, l5i;
+  //static int l7r, l7c, m7, n7;
+   int minlhs = 2, maxlhs = 2, minrhs = 3, maxrhs = 3;
+   int * p_input_vector1 = NULL;
+  int * p_input_vector2 = NULL;
+  int * p_input_vector3 = NULL;
+    double *input1;
+  double *input2;
+  double *input3;
+    SciErr _SciErr;
+  int type;
+   double *output1;
+   double *output2_r, *output2_i;
+  int errCode;
+  int i,it;
+
+  CheckRhs (minrhs, maxrhs);
+  CheckLhs (minlhs, maxlhs);
+
+  cauchy_form_validate(&errCode);
+  if (errCode != SUCCESS)
+    {
+      validate_print (errCode);
+      return 0;			
+    }
+
+//   GetRhsVar (1, "d", &m1, &n1, &l1);
+    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return 0;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: first input vector must be double\n",fname);	
+		  return -1;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+		}
+//   GetRhsVar (2, "d", &m2, &n2, &l2);
+_SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 2. input vector must be double\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+//   GetRhsVar (3, "i", &m3, &n3, &l3);
+_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+                _SciErr = getVarType(pvApiCtx, p_input_vector3 ,&type);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+		if (type!=sci_matrix)
+		{
+		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
+		  return 0;
+		}
+		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
+		if(_SciErr.iErr)
+		{
+			printError(&_SciErr, 0);
+			return -1;
+		}
+  //GetRhsVar (4, "d", &m4, &n4, &l4);
+  //GetRhsVar (5, "d", &m5, &n5, &l5);
+
+//   cauchy_content_validate(&errCode, input1, input2, input3);
+//   if (errCode != SUCCESS)
+//     {
+//       validate_print (errCode);
+//       return 0;			
+//     }
+
+
+  m4 = 1;
+  n4 = input3[0];
+  m5 = 1;
+  n5 = n4;
+  it = 1;
+//   CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5i);
+    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2_r, &output2_i);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+  
+//   CreateVar (4, "d", &m4, &n4, &l4);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+	if(_SciErr.iErr)
+	 {
+		printError(&_SciErr, 0);
+		return -1;
+	}
+
+  for (i=0;i<input3[0];i++)
+    output1[i]=(-(double)input3[0]+2.*(double)i)/(2*((input2[0]-input1[0])/2/PI));
+  
+
+  //linspace(input1[0], input2[0], input3[0], output1, n4);
+  meyer_phi(output1, n4, input1[0],input2[0], output2_r, output2_i, n5, 1);
+
+  for (i=0;i<input3[0];i++)
+    output1[i]=input1[0] + (double)i*((input2[0]-input1[0])/input3[0]);
+  
+  LhsVar(1) = Rhs + 1;
+  LhsVar(2) = Rhs + 2;
+  return 0;
+}
+
 int
 int_meyeraux (char *fname)
 {
@@ -1876,6 +2026,7 @@ int_meyeraux (char *fname)
   SciErr _SciErr;
   int type;
   double *output1;
+  int i;
 //   GetRhsVar (1, "d", &m1, &n1, &l1);
       _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
 		if(_SciErr.iErr)
@@ -1901,6 +2052,8 @@ int_meyeraux (char *fname)
 		}
   m2 = 1;
   n2 = 1;
+  m2 = m1;
+  n2 = n1;
 //   CreateVar (2, "d", &m2, &n2, &l2);
           _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &output1);
 	if(_SciErr.iErr)
@@ -1908,8 +2061,8 @@ int_meyeraux (char *fname)
 		printError(&_SciErr, 0);
 		return -1;
 	}
-
-  meyeraux(input1[0],output1);
+  for (i=0;i<m1*n1;i++)
+    meyeraux(input1[i],&output1[i]);
   LhsVar(1) = Rhs + 1;
   return 0;
 }
@@ -2010,7 +2163,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
       wavelet_parser(input_string,&family,&member);
 	  syn_fun = wi[ind].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
+	  upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
 	  swt_exp2(level, &leng);
       m3 = 1;
@@ -2049,10 +2202,10 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
 		  psi[count] = 0;
 	  }
 	  l=1;
-      cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+      upcoef (&one, 1, pWaveStruct.pLowPass,
 		  pWaveStruct.pHiPass, pWaveStruct.length, phi+l, 
 	      s1, s1, a, level);
-	  cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+	  upcoef (&one, 1, pWaveStruct.pLowPass,
 	      pWaveStruct.pHiPass, pWaveStruct.length, psi+l, 
 	      s1, s1, d, level);
 	  if ((family==COIFLETS) || (family==SYMLETS) || (family==DMEY))
@@ -2090,7 +2243,7 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
       wavelet_parser(input_string,&family,&member);
 	  ana_fun = wi[ind].analysis;
       (*ana_fun)(member, &pWaveStruct);
-	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
+	  upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
       swt_exp2(level, &leng);
       m3 = 1;
@@ -2150,19 +2303,19 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
       wrev(pWaveStruct.pLowPass, pWaveStruct.length, lowfltr, pWaveStruct.length);
 	  qmf_wrev(lowfltr,pWaveStruct.length,hifltr,pWaveStruct.length);
 	  l=1;
-      cwt_upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, output1+l, 
+        upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, output1+l, 
 	      s1, s1, a, level);
-       cwt_upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, output2+l, 
+        upcoef (&one, 1, lowfltr, hifltr, pWaveStruct.length, output2+l, 
 	      s1, s1, d, level);
 	  free(lowfltr);
 	  free(hifltr);
 	  filter_clear();
       syn_fun = wi[ind].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-       cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+       upcoef (&one, 1, pWaveStruct.pLowPass,
 		  pWaveStruct.pHiPass, pWaveStruct.length, output3+l, 
 	      s1, s1, a, level);
-	   cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+	   upcoef (&one, 1, pWaveStruct.pLowPass,
 	      pWaveStruct.pHiPass, pWaveStruct.length, output4+l, 
 	      s1, s1, d, level);
 	   for(count=0;count<n3;count++)
@@ -2355,7 +2508,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_string);
       wavelet_parser(input_string,&family,&member);
 	  syn_fun = wi[ind].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-	  cwt_upcoef_len_cal (1, pWaveStruct.length, level, 
+	  upcoef_len_cal (1, pWaveStruct.length, level, 
 	       &s1, &s2);
 	  
 	  swt_exp2(level, &leng);
@@ -2415,10 +2568,10 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 5, m7, n7, &output5);
 		
 	  }
 	  l=(int)(floor((n3-s1)/2));
-      cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+      upcoef (&one, 1, pWaveStruct.pLowPass,
 		  pWaveStruct.pHiPass, pWaveStruct.length, phi+l, 
 	      s1, s1, a, level);
-	  cwt_upcoef (&one, 1, pWaveStruct.pLowPass,
+	  upcoef (&one, 1, pWaveStruct.pLowPass,
 	      pWaveStruct.pHiPass, pWaveStruct.length, psi+l, 
 	      s1, s1, d, level);
 	  linspace(0.0, (double)(pWaveStruct.length), n3, xval, n3);

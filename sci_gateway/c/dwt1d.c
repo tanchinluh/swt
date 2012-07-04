@@ -1020,22 +1020,22 @@ upcoef_len_cal (int sigInLength, int filterLen, int stride,
   *sigOutLength = sigInLength;
   *sigOutLengthDefault = sigInLength;
 //   if ((2*(*sigOutLength) - filterLen + 2)<0){ //this was implemented for cwt
-//       for(count=0;count<stride;count++)
-//       {
-// 	// original version
-// 	*sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
-// 	*sigOutLength = 2*(*sigOutLength) + filterLen - 2;
-// 	
-//       }
-//     } else { //works with dwt 
       for(count=0;count<stride;count++)
-	{
-	  
-    //version 1.14 - but does not work with cwt
-	  *sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
-	  *sigOutLength = 2*(*sigOutLength) - filterLen + 2;
-	  
-	}
+      {
+	// original version
+	*sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
+	*sigOutLength = 2*(*sigOutLength) + filterLen - 2;
+	
+      }
+//     } else { //works with dwt 
+//       for(count=0;count<stride;count++)
+// 	{
+// 	  
+//     //version 1.14 - but does not work with cwt
+// 	  *sigOutLengthDefault = 2*(*sigOutLengthDefault) + filterLen - 1;
+// 	  *sigOutLength = 2*(*sigOutLength) - filterLen + 2;
+// 	  
+// 	}
 //      }
   return;
 }
@@ -1048,11 +1048,11 @@ upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe,
   int count, sigInLengthTemp, leng;
   double *sigInTemp, *sigOutTemp;
   //version 1.14 fow dwt - but does not work with cwt
-   sigInLengthTemp = 2 * sigInLength - filterLen + 2; 
-//    if (sigInLengthTemp<0) { 
+//    sigInLengthTemp = 2 * sigInLength - filterLen + 2; 
+
 //   // works with wavefun, cwt
-//       sigInLengthTemp = 2 * sigInLength + filterLen - 2;
-//    }
+      sigInLengthTemp = 2 * sigInLength + filterLen - 2;
+
 
   
   //sigInLengthTemp = 2 * sigInLength + filterLen - 1;
@@ -1079,18 +1079,18 @@ upcoef (double *sigIn, int sigInLength, double *lowRe,double *hiRe,
       for(count=0;count<(step-1);count++) 
 	{
 	  //printf("leng %d, filterLen%d, leng*2-filterLen+2 %d\n",leng,filterLen,leng*2-filterLen+2);
-// 	  if ((leng*2-filterLen+2)<0) {//for cwt
-// 	  // original version
-// 	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
-// 	               sigOutTemp, leng*2+filterLen-2);
-// 	  leng = leng*2+filterLen-2;
-// 	  } else { //works for dwt
-	  //version 1.14 - but does not work with cwt
+
+	  // original version
 	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
-		       sigOutTemp, leng*2-filterLen+2);
-	  //sciprint("ok\n");
-	  leng = leng*2-filterLen+2;
-//  	  }
+	               sigOutTemp, leng*2+filterLen-2);
+	  leng = leng*2+filterLen-2;
+
+// 	  //version 1.14 - but does not work with cwt
+// 	  idwt_approx_neo (sigInTemp, leng, lowRe, filterLen,
+// 		       sigOutTemp, leng*2-filterLen+2);
+// 	  //sciprint("ok\n");
+// 	  leng = leng*2-filterLen+2;
+
 	  verbatim_copy (sigOutTemp, leng, sigInTemp, leng);
 	}
       sigInLengthTemp = leng;

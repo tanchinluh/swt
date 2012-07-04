@@ -1552,28 +1552,28 @@ upcoef2_form_validate (int *errCode, int *flow)
 {
   *errCode = SUCCESS;
   if ((Rhs==3) && sci_strings_scalar(1) && 
-      sci_matrix_matrix_real(2) && sci_strings_scalar(3))
+      (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2) || sci_matrix_vector_real(2)) && sci_strings_scalar(3))
     *flow = 5;
   else if ((Rhs==4) && sci_strings_scalar(1) &&
-	   sci_matrix_matrix_real(2) && sci_strings_scalar(3) &&
+	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3) &&
 	   sci_matrix_scalar_real(4))
     *flow = 3;
   else if ((Rhs==4) && sci_strings_scalar(1) &&
-	   sci_matrix_matrix_real(2) && sci_matrix_vector_real(3) &&
+	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
 	   sci_matrix_vector_real(4) && vector_length_check(3,4))
     *flow = 6;
   else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   sci_matrix_matrix_real(2) && sci_strings_scalar(3) &&
+	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3) &&
 	   sci_matrix_scalar_real(4) && sci_matrix_vector_real(5) &&
 	   length_check(5,2))
     *flow = 1;
   else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   sci_matrix_matrix_real(2) && sci_matrix_vector_real(3) &&
+	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
 	   sci_matrix_vector_real(4) && vector_length_check(3,4) &&
 	   sci_matrix_scalar_real(5))
     *flow = 4;
   else if ((Rhs==6) && sci_strings_scalar(1) &&
-	   sci_matrix_matrix_real(2) && sci_matrix_vector_real(3) &&
+	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
 	   sci_matrix_vector_real(4) && vector_length_check(3,4) &&
 	   sci_matrix_scalar_real(5) && sci_matrix_vector_real(6) &&
 	   length_check(6,2))

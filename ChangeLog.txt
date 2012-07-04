@@ -1,6 +1,12 @@
 SWT - Scilab Wavelet Toolbox
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
+0.1.17
+ + unit tests for dbwavf, gauswavf, biorwavf, rbiorwavf, shanwavf, coifwavf, cgauwavf, fbspwavf, mexihat, morlet
+ + bug fix in upcoef and upcoef2
+ + bug fix in fbspwavf, cgauwavf
+ + bug fix in upcoef and upcoef2 unit test
+ + some new demos
 0.1.16
  + bug fix in cwt, wavefun
  + bug fix in centfrq

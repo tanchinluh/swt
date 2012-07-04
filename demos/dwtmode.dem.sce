@@ -20,11 +20,15 @@ w = 'db2';
 
 subplot(311), plot(1:length(x),x), title('Original signal')
 
+disp("plotting wavelet coeffients using Zero Padding mode (subplot 2)");
+
 dwtmode('zpd');
 [C,L]=wavedec(x,5,w);
 subplot(312)
 wavedecplot(C,L,%f,my_handle);
 xtitle('dwtmode: Zero Padding mode');
+
+disp("plotting wavelet coeffients using order 1 smooth padding (subplot 3)");
 
 dwtmode('spd');
 [C,L]=wavedec(x,5,w);

@@ -125,10 +125,10 @@ extern void cwt_conv_complex_complex (double *a, double *b, int sigInLength,doub
 
 extern void cwt_form_validate(int *errCode, int *flow);
 extern void cwt_content_validate(int *errCode, char *input_string);
-extern void cwt_upcoef (double *sigIn, int sigInLength, double *lowRe,
-		    double *hiRe, int filterLen, double *sigOut, 
-		    int sigOutLength, int defaultLength, 
-		    char *coefType, int step);
-extern void cwt_upcoef_len_cal (int sigInLength, int filterLen, 
-			    int stride, int *sigOutLength,
-			    int *sigOutLengthDefault);
+// extern void cwt_upcoef (double *sigIn, int sigInLength, double *lowRe,
+// 		    double *hiRe, int filterLen, double *sigOut, 
+// 		    int sigOutLength, int defaultLength, 
+// 		    char *coefType, int step);
+// extern void cwt_upcoef_len_cal (int sigInLength, int filterLen, 
+// 			    int stride, int *sigOutLength,
+// 			    int *sigOutLengthDefault);

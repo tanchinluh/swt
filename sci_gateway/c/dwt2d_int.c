@@ -1796,11 +1796,11 @@ int_upcoef2 (char *fname)
 	  sciprint("Level Parameter is not valid for input matrix!\n");
 	  return 0;
 	}
-      if ((m2<pWaveStruct.length) || (n2<pWaveStruct.length))
-	{
-	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
-	  return 0;
-	}
+//       if ((m2<pWaveStruct.length) || (n2<pWaveStruct.length))
+// 	{
+// 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
+// 	  return 0;
+// 	}
       upcoef_len_cal (m2, pWaveStruct.length, istk(l4)[0], 
 		      &s1, &s2);
       upcoef_len_cal (n2, pWaveStruct.length, istk(l4)[0], 
@@ -1838,11 +1838,11 @@ int_upcoef2 (char *fname)
 	  sciprint("Level Parameter is not valid for input matrix!\n");
 	  return 0;
 	}
-      if ((m2<m3*n3) || (n2<m3*n3))
-	{
-	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
-	  return 0;
-	}
+//       if ((m2<m3*n3) || (n2<m3*n3))
+// 	{
+// 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
+// 	  return 0;
+// 	}
       upcoef_len_cal (m2, m3*n3, istk(l5)[0], &s1, &s2);
       upcoef_len_cal (n2, m3*n3, istk(l5)[0], &s3, &s4);
       if ((istk(l6)[0]>s1) || (istk(l6)[1]>s3))
@@ -1878,11 +1878,11 @@ int_upcoef2 (char *fname)
 	  sciprint("Level Parameter is not valid for input matrix!\n");
 	  return 0;
 	}
-      if ((m2<pWaveStruct.length) || (n2<pWaveStruct.length))
-	{
-	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
-	  return 0;
-	}
+//       if ((m2<pWaveStruct.length) || (n2<pWaveStruct.length))
+// 	{
+// 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
+// 	  return 0;
+// 	}
 	  //sciprint("before upcoef_len_cal!\n");
       upcoef_len_cal (m2, pWaveStruct.length, istk(l4)[0], 
 		      &s1, &s2);
@@ -1916,11 +1916,11 @@ int_upcoef2 (char *fname)
 	  sciprint("Level Parameter is not valid for input matrix!\n");
 	  return 0;
 	}
-      if ((m2<m3*n3) || (n2<m3*n3))
-	{
-	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
-	  return 0;
-	}
+//       if ((m2<m3*n3) || (n2<m3*n3))
+// 	{
+// 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
+// 	  return 0;
+// 	}
       upcoef_len_cal (m2, m3*n3, istk(l5)[0], &s1, &s2);
       upcoef_len_cal (n2, m3*n3, istk(l5)[0], &s3, &s4);
       m6 = s1;
@@ -1945,11 +1945,11 @@ int_upcoef2 (char *fname)
       wavelet_fun_parser (cstk(l3), &ii);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      if ((m2<pWaveStruct.length) || (n2<pWaveStruct.length))
-	{
-	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
-	  return 0;
-	}
+//       if ((m2<pWaveStruct.length) || (n2<pWaveStruct.length))
+// 	{
+// 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
+// 	  return 0;
+// 	}
 
        upcoef_len_cal (m2, pWaveStruct.length, 1, &s1, &s2);
       upcoef_len_cal (n2, pWaveStruct.length, 1, &s3, &s4);
@@ -1976,11 +1976,11 @@ int_upcoef2 (char *fname)
 	  validate_print (errCode);
 	  return 0;			
 	}
-      if ((m2<m3*n3) || (n2<m3*n3))
-	{
-	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
-	  return 0;
-	}
+//       if ((m2<m3*n3) || (n2<m3*n3))
+// 	{
+// 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
+// 	  return 0;
+// 	}
       upcoef_len_cal (m2, m3*n3, 1, &s1, &s2);
       upcoef_len_cal (n2, m3*n3, 1, &s3, &s4);
       m5 = s1;

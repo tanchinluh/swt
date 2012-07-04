@@ -46,9 +46,9 @@ function E = wentropy(X,T,P)
  
       select(convstr(T))
 	case "shannon" 
-	 E= - sum(sum(X.^2 .* log(%eps+X.^2)));
+	 E= - sum(X.^2 .* log(%eps+X.^2));
 	case "log energy"
-	 E=  sum(sum( log(%eps+X.^2)));
+	 E=  sum( log(%eps+X.^2));
         case "threshold"
 	 if (P<0)
 	  error("P must be >=0!");
