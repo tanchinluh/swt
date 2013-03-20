@@ -46,22 +46,22 @@ N=2^N;
 X=zeros(1,N);
 
 if (typeof(FUN)=="string")
-select FUN
-case 'blocks'
- FUN=1;
-case 'bumps'
- FUN=2;
-case 'heavy sine'
- FUN=3;
-case 'doppler'
- FUN=4;
-case 'quadchirp'
- FUN=5;
-case 'mishmash'
- FUN=6;
-else
-  error("Wrong input for the FUN parameter!");
-end
+  select FUN
+  case 'blocks'
+  FUN=1;
+  case 'bumps'
+  FUN=2;
+  case 'heavy sine'
+  FUN=3;
+  case 'doppler'
+  FUN=4;
+  case 'quadchirp'
+  FUN=5;
+  case 'mishmash'
+  FUN=6;
+  else
+    error("Wrong input for the FUN parameter!");
+  end
 else
   if (FUN<1 | FUN>6)
       error("FUN must be between 1 and 6!");

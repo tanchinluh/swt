@@ -1,6 +1,16 @@
 SWT - Scilab Wavelet Toolbox
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
+0.1.19
+ + accuracy of Daubechies wavelets coefficents and Coiflet wavelets coefficients increaced
+ + db21 to db36 added
+ + coif6 to coif17 added
+ + all unit tests are working under windows
+ + help files improved
+ + ndwt,indwt,ndwt2,indwt2 added
+0.1.18
+ + update some help files
+ + bug fix in cwt.c
 0.1.17
  + unit tests for dbwavf, gauswavf, biorwavf, rbiorwavf, shanwavf, coifwavf, cgauwavf, fbspwavf, mexihat, morlet
  + bug fix in upcoef and upcoef2

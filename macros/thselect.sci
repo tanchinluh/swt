@@ -61,13 +61,12 @@ function THR = thselect(X,TPTR)
     case 'minimaxi'
 	lamlist = [0  0 0 0 0 1.27 1.474 1.669 1.860 2.048 2.232 2.414 2.594 2.773 2.952 3.131 3.310 3.49 3.67 3.85 4.03 4.21];
 	[n,j] = dyadlength(X);
-	THR = lamlist(j);
-//         n=max(size(X);
-//         if n <= 32
-//             thr = 0;
-//         else
-//             thr = 0.3936 + 0.1829*(log(n)/log(2));
-//         end
+	if j<=length(lamlist) then
+		THR = lamlist(j);
+	else
+		THR = 4.21 + (j-length(lamlist))*0.18;
+	end;
+
    else
       error("wrong parameter for threshhold selection!");
   end

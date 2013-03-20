@@ -32,7 +32,7 @@ function [XD,CXD,LXD] = wden(C,L,TPTR,SORH,SCAL,N,wname)
 // 
 // See also
 //thselect
-//wtresh
+//wthresh
 //wavedec 
 //Authors
 //Holger Nahrstaedt
