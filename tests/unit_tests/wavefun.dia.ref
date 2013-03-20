@@ -6,41 +6,41 @@ ITER=12;
 // type 1 input
 // haar
 [phi,psi,xval]=wavefun('haar',ITER);
-assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-7 );
-assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-7  );
+assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-10 );
+assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-10  );
 assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-10 );
 // tmp=fft(psi);
 // assert_checkalmostequal ( real(tmp(1)) , 0 , %eps);
 //db family
-db_fam={"db1","db2", "db3", "db4", "db5", "db6","db7", "db8", "db9", "db10", "db11",... 
-"db12", "db13", "db14", "db15", "db16","db17", "db18", "db19", "db20"}; 
-// db1
-for i=1:max(size(db_fam))
-  [phi,psi,xval]=wavefun(db_fam(i),ITER);
-  assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-7 );
-  assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-7  );
+//db1 - db36
+for N=1:36
+  wname="db"+sprintf("%d",N);
+  [phi,psi,xval]=wavefun(wname,ITER);
+  assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-10 );
+  assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-10  );
   assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-10 );
-//   tmp=fft(psi);
-//   assert_checkalmostequal ( real(tmp(1)) , 0 , %eps,1e-10);
+  tmp=fft(psi);
+  assert_checkalmostequal ( real(tmp(1)) , 0 , %eps,1e-10);
 end;
 //coif family
-coif_fam={"coif1","coif2","coif3","coif4","coif5"};
-for i=1:max(size(coif_fam))
-  [phi,psi,xval]=wavefun(coif_fam(i),ITER);
-  assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-7 );
-  assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-7  );
-  assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-5 );
-//   tmp=fft(psi);
-//   assert_checkalmostequal ( real(tmp(1)) , 0 , %eps,1e-3);
+// coif1 - coif17
+for N=1:17
+  wname="coif"+sprintf("%d",N);
+  [phi,psi,xval]=wavefun(wname,ITER);
+  assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-10 );
+  assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-10  );
+  assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-10 );
+  tmp=fft(psi);
+  assert_checkalmostequal ( real(tmp(1)) , 0 , %eps,1e-10);
 end;
 //symlets family
-sym_fam={"sym2", "sym3", "sym4", "sym5", "sym6","sym7", "sym8", "sym9", "sym10", "sym11",... 
-"sym12", "sym13", "sym14", "sym15", "sym16","sym17", "sym18", "sym19", "sym20"}; 
-for i=1:max(size(sym_fam))
-  [phi,psi,xval]=wavefun(sym_fam(i),ITER);
-  assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-7 );
-  assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-7  );
-  assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-8 );
+// sym2 - sym20
+for N=2:20
+  wname="sym"+sprintf("%d",N);
+  [phi,psi,xval]=wavefun(wname,ITER);
+  assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-8 );
+  assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-8  );
+  assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-8	 );
 end;
 //bior family
 bior_fam={"bior1.1","bior1.3", "bior1.5", "bior2.2", "bior2.4", "bior2.6",...

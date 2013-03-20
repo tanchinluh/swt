@@ -21,5 +21,5 @@ ed3=ed3*100/energy;
 [Ea,Ed]=wenergy(c,l);
 e=sum(abs(ea-Ea))+sum(abs(Ed-[ed3 ed2 ed1]));
 
-assert_checkalmostequal ( ea , Ea , %eps );
-assert_checkalmostequal ( Ed , [ed3 ed2 ed1] , %eps );
+assert_checkalmostequal ( ea , Ea , %eps , 1e-10);
+assert_checkalmostequal ( Ed , [ed3 ed2 ed1] , %eps, 1e-10 );

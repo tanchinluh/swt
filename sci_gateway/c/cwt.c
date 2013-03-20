@@ -852,8 +852,8 @@ void meyer_phi(double *x, int sigInLength,
 	  phir[count]=phir[count]*ys;
 	  phii[count]=phii[count]*ys;
 	}
-	clear(xhat_r);
-	clear(xhat_i);
+	free(xhat_r);
+	free(xhat_i);
 	return;
 }
 

@@ -56,7 +56,7 @@
 #define WRONG_LHS                                           9
 #define UNKNOWN_INPUT_ERR                                   20
 
-#define PI      3.1415926535
+#define PI   3.1415926535897931159980
 
 /*********************************************
  * Macros CWT

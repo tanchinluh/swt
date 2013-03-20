@@ -26,12 +26,12 @@ eed1=eh1+ev1+ed1;
 eed2=eh2+ev2+ed2;
 eed3=eh3+ev3+ed3;
 
-assert_checkalmostequal ( Ea , ea , %eps );
-assert_checkalmostequal ( Eh , [eh3 eh2 eh1] , %eps );
-assert_checkalmostequal ( Ev , [ev3 ev2 ev1] , %eps );
-assert_checkalmostequal ( Ed , [ed3 ed2 ed1] , %eps );
-assert_checkalmostequal ( Eaa , ea , %eps );
-assert_checkalmostequal ( Edetail , [eed3 eed2 eed1] , %eps*100 );
+assert_checkalmostequal ( Ea , ea , %eps,1e-10 );
+assert_checkalmostequal ( Eh , [eh3 eh2 eh1] , %eps,1e-10 );
+assert_checkalmostequal ( Ev , [ev3 ev2 ev1] , %eps, 1e-10 );
+assert_checkalmostequal ( Ed , [ed3 ed2 ed1] , %eps, 1e-10);
+assert_checkalmostequal ( Eaa , ea , %eps, 1e-10 );
+assert_checkalmostequal ( Edetail , [eed3 eed2 eed1] , %eps, 1e-10);
 
 
 
