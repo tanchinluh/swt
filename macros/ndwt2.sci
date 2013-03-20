@@ -124,57 +124,35 @@ if length(sX)<3 , sX(3) = 1; end
 lf = length(Lo);
 lx = sX(2);
 lc = lx+lf-1;
+x = wextend('ac',dwtEXTM,X,lf,'b')
 select dwtEXTM
-    case 'zpd'             // Zero extension.
+    case 'zpd'            
         
-    case 'sym'    // Symmetric extension (half-point).
-        X = [X(:,lf-1:-1:1,:) , X , X(:,$:-1:$-lf+1,:)];
-    case 'symh'   // Symmetric extension (half-point).
-        X = [X(:,lf-1:-1:1,:) , X , X(:,$:-1:$-lf+1,:)];
-        
-    case 'sp0'             // Smooth extension of order 0.
-        X = [X(:,ones(1,lf-1),:) , X , X(:,lx*ones(1,lf-1),:)];
-        
-    case 'sp1'     // Smooth extension of order 1.
-        Z = zeros(sX(1),sX(2)+ 2*lf-2,sX(3));
-        Z(:,lf:lf+lx-1,:) = X;
-        last = sX(2)+lf-1;
-        for k = 1:lf-1
-            Z(:,last+k,:) = 2*Z(:,last+k-1,:)- Z(:,last+k-2,:);
-            Z(:,lf-k,:)   = 2*Z(:,lf-k+1,:)- Z(:,lf-k+2,:);
-        end
-        X = Z; clear Z;
-    case 'spd'     // Smooth extension of order 1.
-        Z = zeros(sX(1),sX(2)+ 2*lf-2,sX(3));
-        Z(:,lf:lf+lx-1,:) = X;
-        last = sX(2)+lf-1;
-        for k = 1:lf-1
-            Z(:,last+k,:) = 2*Z(:,last+k-1,:)- Z(:,last+k-2,:);
-            Z(:,lf-k,:)   = 2*Z(:,lf-k+1,:)- Z(:,lf-k+2,:);
-        end
-        X = Z; clear Z;
-        
-    case 'symw'            // Symmetric extension (whole-point).
-        X = [X(:,lf:-1:2,:) , X , X(:,$-1:-1:$-lf,:)];
-        
-    case {'asym','asymh'}  // Antisymmetric extension (half-point).
-        X = [-X(:,lf-1:-1:1,:) , X , -X(:,$:-1:$-lf+1,:)];        
-        
-    case 'asymw'           // Antisymmetric extension (whole-point).
-        X = [-X(:,lf:-1:2,:) , X , -X(:,$-1:-1:$-lf,:)];
-
+    case 'sym'  
+        X = x(:,2:$);
+    case 'symh' 
+        X = x(:,2:$);
+    case 'sp0'           
+        X = x(:,2:$-1);
+    case 'sp1'     
+        X = x(:,2:$-1);
+    case 'spd'     
+        X = x(:,2:$-1);
+    case 'symw'         
+        X = x(:,2:$);
+    case 'asym'  
+         X = x(:,2:$);
+    case 'asymw'         
+         X = x(:,2:$);
     case 'rndu'            // Uniformly randomized extension.
         X = [rand(sX(1),lf-1,sX(3),'norm') , X , rand(sX(1),lf-1,sX(3),'norm')];        
                         
     case 'rndn'            // Normally randomized extension.
-        X = [rand(sX(1),lf-1,sX(3),'norm') , X , rand(sX(1),lf-1,sX(3),'norm')];        
-                
-    case 'ppd'             // Periodized extension (1).
-        X = [X(:,$-lf+2:$,:) , X , X(:,1:lf-1,:)];
-        
-    case 'per'             // Periodized extension (2).
-        if modulo(lx,2) , X = [X , X(:,$,:)]; end
-        X = [X(:,$-lf+2:$,:) , X , X(:,1:lf-1,:)];        
+        X = [rand(sX(1),lf-1,sX(3),'norm') , X , rand(sX(1),lf-1,sX(3),'norm')];           
+    case 'ppd'             
+        X = x(:,2:$-1);
+    case 'per'    
+        X = x(:,2:$-1);   
 end
 L = conv2(X,Lo);
 H = conv2(X,Hi);

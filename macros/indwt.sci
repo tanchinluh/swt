@@ -50,14 +50,12 @@ while nargin>=nextArg
     end
 end
 
-fistIDX  = 1;
 lastSTEP = level;
 select nam_Rec
     case 's'
         
     case 'cd'
-        num2keep = level+1-(lev_Rec-1);
-        x = ndList(num2keep);
+        x = ndList(level+1-(lev_Rec-1));
         return;
         
     case 'ca'
@@ -71,9 +69,7 @@ select nam_Rec
         lastSTEP = level-lev_Rec;
         
     case 'd'
-        set2zero = (1:level+1);
-        num2keep = level+2-lev_Rec;
-        set2zero = setdiff(set2zero,num2keep);
+        set2zero = setdiff((1:level+1),level+2-lev_Rec);
         for k = set2zero
             ndList(k) = zeros(ndList(k));
         end        
@@ -84,18 +80,18 @@ select nam_Rec
         end
 end
 
-idx = fistIDX;
+index = 1;
 for k=1:lastSTEP
-    a = conv(ndList(idx),LoR);
-    d = conv(ndList(idx+1),HiR);
-    ndList(idx+1) = (a+d)/2;
-    if idx<level
-        ndList(idx+1) = wkeep(ndList(idx+1),length(ndList(idx+2)),'c');
+    a = conv(ndList(index),LoR);
+    d = conv(ndList(index+1),HiR);
+    ndList(index+1) = (a+d)/2;
+    if index<level
+        ndList(index+1) = wkeep(ndList(index+1),length(ndList(index+2)),'c');
     end
-    idx = idx+1;
+    index = index+1;
 end
 if (nam_Rec=='ca') & ~(lev_Rec==0)
-    x = ndList(idx); return; 
+    x = ndList(index); return; 
 end
 x = wkeep(ndList($),LX,'c');
 

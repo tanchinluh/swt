@@ -31,7 +31,7 @@ if nbIN>0
     nbCELL = length(W.dec);
     w_type = varargin(1);
     if ~type(w_type)==10
-        error('must be char')
+        error('W must be a char!')
     end
     w_type = convstr(w_type,'u');
     cfsFLAG = (convstr(w_type(1),'u')=='C');
@@ -70,14 +70,12 @@ if nbIN>0
             X = W.dec(1); 
             return; 
         end
-        idxMinToKill = 1 + 3*(W.level-levREC)+1;
-        for j=idxMinToKill:nbCELL
+        for j=(1 + 3*(W.level-levREC)+1):nbCELL
             W.dec(j) = zeros(W.dec(j));
         end
                 
     elseif idxCFS==0
-        idxMaxToKill = 1 + 3*(W.level-levREC);
-        for j=1:idxMaxToKill
+        for j=1:(1 + 3*(W.level-levREC))
             W.dec(j) = zeros(W.dec(j));
         end
         
