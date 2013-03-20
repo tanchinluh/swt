@@ -1,4 +1,5 @@
 SWT - Scilab Wavelet Toolbox
+Copyright (C) 2011 - 2013 Holger Nahrstaedt
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
 0.1.19

@@ -3,12 +3,12 @@
 
 Wavelet Toolbox containing FWT, CWT and SWT utility functions.
 
-SWT (version 0.1.12 For Scilab 5)
+SWT (version 0.1.19 For Scilab 5)
 ======================
 
-Information about SWT can be found at 
-http://scwt.sourceforge.net
+This toolbox is aimed to mimic matlab wavelet toolbox. Most of the functions are similiar to their counterparts in Matlab equivalents.
 
+This toolbox is a fork from http://scwt.sf.net.
 
 
 AUTHORS

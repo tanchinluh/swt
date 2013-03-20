@@ -13,5 +13,6 @@ Authors of SWT - Scilab Wavelet Toolbox
 
 
  Holger Nahrstaedt
+     - is corrently the only remaining author, who is activly working on SWT
      - porting the toolbox to scilab 5
      - adding denoising funtions
