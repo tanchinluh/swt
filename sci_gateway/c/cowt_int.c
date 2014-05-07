@@ -42,8 +42,8 @@ int_FSfarras(char *fname)
   char * input_string = NULL;
   SciErr _SciErr;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
 //   GetRhsVar(1, "c", &m1, &n1, &l1);
 
@@ -97,13 +97,13 @@ int_FSfarras(char *fname)
       n3 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
 //       CreateVar(3, "d", &m3, &n3, &l3);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &ptr);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
 			if(_SciErr.iErr)
 		        {
 			    printError(&_SciErr, 0);
 			    return 0;
 		         }
-       _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m3, n3, &ptr2);
+       _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m3, n3, &ptr2);
 			if(_SciErr.iErr)
 		        {
 			    printError(&_SciErr, 0);
@@ -112,8 +112,8 @@ int_FSfarras(char *fname)
       
       matrix_tran(var1,m2,n2,ptr,n2,m2);
       matrix_tran(var2,m3,n3,ptr2,n3,m3);
-      LhsVar(1) = Rhs+1;
-      LhsVar(2) = Rhs+2;
+      AssignOutputVariable(pvApiCtx,1) = Rhs+1;
+      AssignOutputVariable(pvApiCtx,2) = Rhs+2;
     }
 //   else if ((cstk(l1)[0] == 'a') || (cstk(l1)[0] == 'A'))
   else if ((input_string[0] == 'a') || (input_string[0] == 'A'))
@@ -122,7 +122,7 @@ int_FSfarras(char *fname)
       m2 = 4;
       n2 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
-       _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &ptr);
+       _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
 			if(_SciErr.iErr)
 		        {
 			    printError(&_SciErr, 0);
@@ -130,7 +130,7 @@ int_FSfarras(char *fname)
 		         }
 //     matrix_tran(var1,m2,n2,stk(l2),n2,m2);
       matrix_tran(var1,m2,n2,ptr,n2,m2);
-      LhsVar(1) = Rhs + 1;
+      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
     }
 //   else if ((cstk(l1)[0] == 's') || (cstk(l1)[0] == 'S'))
   else if ((input_string[0] == 's') || (input_string[0] == 'S')) 
@@ -139,7 +139,7 @@ int_FSfarras(char *fname)
       m2 = 4;
       n2 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &ptr);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
 			if(_SciErr.iErr)
 		        {
 			    printError(&_SciErr, 0);
@@ -147,7 +147,7 @@ int_FSfarras(char *fname)
 		         }
 //       matrix_tran(var2,m2,n2,stk(l2),n2,m2);
       matrix_tran(var2,m2,n2,ptr,n2,m2);
-      LhsVar(1) = Rhs + 1;
+      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
     }
   else
     {
@@ -178,8 +178,8 @@ int_dualfilt1(char *fname)
   char * input_string = NULL;
   SciErr _SciErr;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
 //   GetRhsVar(1, "c", &m1, &n1, &l1);
    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_string);
@@ -233,13 +233,13 @@ int_dualfilt1(char *fname)
       n3 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
 //       CreateVar(3, "d", &m3, &n3, &l3);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &ptr);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
 			if(_SciErr.iErr)
 		        {
 			    printError(&_SciErr, 0);
 			    return 0;
 		         }
-       _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m3, n3, &ptr2);
+       _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m3, n3, &ptr2);
 			if(_SciErr.iErr)
 		        {
 			    printError(&_SciErr, 0);
@@ -248,8 +248,8 @@ int_dualfilt1(char *fname)
       
       matrix_tran(var1,m2,n2,ptr,n2,m2);
       matrix_tran(var2,m3,n3,ptr2,n3,m3);
-      LhsVar(1) = Rhs +1;
-      LhsVar(2) = Rhs +2;
+      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) +1;
+      AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) +2;
     }
 //   else if (cstk(l1)[0] == 'a')
   else if (input_string[0] == 'a')
@@ -258,14 +258,14 @@ int_dualfilt1(char *fname)
       m2 = 4;
       n2 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
-            _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &ptr);
+            _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
 			if(_SciErr.iErr)
 		        {
 			    printError(&_SciErr, 0);
 			    return 0;
 		         }
       matrix_tran(var1,m2,n2,ptr,n2,m2);
-      LhsVar(1) = Rhs + 1;
+      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
     }
 //   else if (cstk(l1)[0] == 's')
   else if (input_string[0] == 's')
@@ -274,14 +274,14 @@ int_dualfilt1(char *fname)
       m2 = 4;
       n2 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
-            _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &ptr);
+            _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
 			if(_SciErr.iErr)
 		        {
 			    printError(&_SciErr, 0);
 			    return 0;
 		         }
       matrix_tran(var2,m2,n2,ptr,n2,m2);
-      LhsVar(1) = Rhs + 1;
+      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
     }
   else
     {
@@ -316,8 +316,8 @@ int_dualtree(char *fname)
   SciErr _SciErr;
   int type;
    
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   dualtree_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -476,15 +476,15 @@ int_dualtree(char *fname)
       it = 1;
 //       CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5c);
 
-	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &ptr_r,&ptr_i);
+	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &ptr_r,&ptr_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //       CreateVar(6, "i", &m6, &n6, &l6);
-      	_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m6, n6, &ptr2);
-	//_SciErr = allocMatrixOfInteger32(pvApiCtx, Rhs + 2, m6, n6, &ptr2);
+      	_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &ptr2);
+	//_SciErr = allocMatrixOfInteger32(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &ptr2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -503,8 +503,8 @@ int_dualtree(char *fname)
         
     
     free(ptr2_int);
-      LhsVar(1) = Rhs + 1;
-      LhsVar(2) = Rhs + 2;
+      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+      AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
       break;
     }
   default:
@@ -541,8 +541,8 @@ int_idualtree(char *fname)
    double *output1;
    int i,j;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   idualtree_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -680,7 +680,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   m5 = 1;
   n5 = input2[m2*n2-1];
 //   CreateVar(5, "d", &m5, &n5, &l5);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output1);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -703,7 +703,7 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output1);
   free(input2_int);
   free(f1);
   free(f2);
-  LhsVar(1) = Rhs + 1;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
 
   return 0;
 }
@@ -732,8 +732,8 @@ int_dualtree2D(char *fname)
       double *output1_r,*output1_i,*output2;
 
       
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   dualtree2D_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -869,15 +869,15 @@ int_dualtree2D(char *fname)
   m6 = input2[0] + 2;
   n6 = 2;
 //   CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5c);
-  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output1_r,&output1_i);
+  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output1_r,&output1_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar(6, "i", &m6, &n6, &l6);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m6, n6, &output2);
-	//_SciErr = allocMatrixOfInteger32(pvApiCtx, Rhs + 2, m6, n6, &ptr2);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &output2);
+	//_SciErr = allocMatrixOfInteger32(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &ptr2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -908,8 +908,8 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m6, n6, &output2);
   free(mr);
   free(mi);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
 
   return 0;
 }
@@ -935,8 +935,8 @@ int_idualtree2D(char *fname)
   int type;
    double *output1;
    
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   idualtree2D_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -1087,7 +1087,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   n5 = pLen[(m2 - 1) * n2 + 1];
 
 //   CreateVar(5, "d", &m5, &n5, &l5);
-  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output1);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1120,7 +1120,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   free(maxI);
   free(f1);
   free(f2);
-  LhsVar(1) = Rhs + 1;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
 
   return 0;
 }
@@ -1150,8 +1150,8 @@ int_cplxdual2D(char *fname)
       int *output2_int;
       double *output3_r,*output3_i;
       int i,j;
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   dualtree2D_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -1288,21 +1288,21 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   m7 = m5;
   n7 = n5;
 //   CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5c);
-    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output1_r,&output1_i);
+    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output1_r,&output1_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
-	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 2, m7, n7, &output3_r,&output3_i);
+	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m7, n7, &output3_r,&output3_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar(6, "i", &m6, &n6, &l6);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m6, n6, &output2);
-	//_SciErr = allocMatrixOfInteger32(pvApiCtx, Rhs + 2, m6, n6, &ptr2);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 3, m6, n6, &output2);
+	//_SciErr = allocMatrixOfInteger32(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &ptr2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1351,9 +1351,9 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m6, n6, &output2);
   free(mrr);
   free(mii);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
-  LhsVar(3) = Rhs + 3;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
+  AssignOutputVariable(pvApiCtx,3) = nbInputArgument(pvApiCtx) + 3;
 
   return 0;
 }
@@ -1379,8 +1379,8 @@ int_icplxdual2D(char *fname)
   SciErr _SciErr;
   int type;
    double *output1;
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   icplxdual2D_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -1555,7 +1555,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   n6 = pLen[(m3 - 1) * n3 + 1];
 
 //   CreateVar(6, "d", &m6, &n6, &l6);
-    _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m6, n6, &output1);
+    _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m6, n6, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1610,7 +1610,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   free(maxII);
   free(f1);
   free(f2);
-  LhsVar(1) = Rhs + 1;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
 
   return 0;
 }

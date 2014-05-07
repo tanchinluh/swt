@@ -2,6 +2,10 @@ SWT - Scilab Wavelet Toolbox
 Copyright (C) 2011 - 2013 Holger Nahrstaedt
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
+0.1.20
+ + help files and demos improved
+ + Issue 1428 fixed
+ + first steps in porting the c-code to the new scilab-api
 0.1.19
  + accuracy of Daubechies wavelets coefficents and Coiflet wavelets coefficients increaced
  + db21 to db36 added

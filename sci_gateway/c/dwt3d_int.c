@@ -50,8 +50,8 @@ int_dwt3 (char *fname)
   int fLen1, fLen2, fLen3;
  
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   dwt3_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -182,7 +182,7 @@ int_dwt3 (char *fname)
       CreateListVarFromPtr(3,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(3,3,"d",&m3, &n3, &var3);
       free(var3);
-      LhsVar(1) = 3;
+      AssignOutputVariable(pvApiCtx,1) = 3;
       break;
     }
   case 2:
@@ -229,7 +229,7 @@ int_dwt3 (char *fname)
       CreateListVarFromPtr(4,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(4,3,"d",&m4, &n4, &var4);
       free(var4);
-      LhsVar(1) = 4;
+      AssignOutputVariable(pvApiCtx,1) = 4;
       break;
     }
   case 3:
@@ -287,7 +287,7 @@ int_dwt3 (char *fname)
       CreateListVarFromPtr(5,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(5,3,"d",&m5, &n5, &var3);
       free(var3);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
 
       break;
     }
@@ -338,7 +338,7 @@ int_dwt3 (char *fname)
       CreateListVarFromPtr(6,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(6,3,"d",&m6, &n6, &var4);
       free(var4);
-      LhsVar(1) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 6;
 
       break;
     }
@@ -436,7 +436,7 @@ int_dwt3 (char *fname)
       CreateListVarFromPtr(5,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(5,3,"d",&m5, &n5, &var3);
       free(var3);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
 
       
       break;
@@ -487,7 +487,7 @@ int_dwt3 (char *fname)
       CreateListVarFromPtr(8,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(8,3,"d",&m8, &n8, &var3);
       free(var3);
-      LhsVar(1) = 8;
+      AssignOutputVariable(pvApiCtx,1) = 8;
       break;
     }
   case 7:
@@ -590,7 +590,7 @@ int_dwt3 (char *fname)
       CreateListVarFromPtr(7,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(7,3,"d",&m7, &n7, &var3);
       free(var3);
-      LhsVar(1) = 7;
+      AssignOutputVariable(pvApiCtx,1) = 7;
 
       break;
     }
@@ -646,7 +646,7 @@ int_dwt3 (char *fname)
       CreateListVarFromPtr(10,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(10,3,"d",&m10, &n10, &var3);
       free(var3);
-      LhsVar(1) = 10;
+      AssignOutputVariable(pvApiCtx,1) = 10;
 
       break;
     }
@@ -681,8 +681,8 @@ int_idwt3 (char *fname)
   double *Lo1, *Hi1, *Lo2, *Hi2, *Lo3, *Hi3;
   int fLen1, fLen2, fLen3;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   idwt3_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -795,7 +795,7 @@ int_idwt3 (char *fname)
       CreateListVarFromPtr(3,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(3,3,"d",&m3, &n3, &var3);
       free(var3);
-      LhsVar(1) = 3;
+      AssignOutputVariable(pvApiCtx,1) = 3;
       break;
     }
   case 2:
@@ -862,7 +862,7 @@ int_idwt3 (char *fname)
       CreateListVarFromPtr(4,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(4,3,"d",&m4, &n4, &var3);
       free(var3);
-      LhsVar(1) = 4;
+      AssignOutputVariable(pvApiCtx,1) = 4;
       break;
     }
   case 3:
@@ -909,7 +909,7 @@ int_idwt3 (char *fname)
       CreateListVarFromPtr(4,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(4,3,"d",&m4, &n4, &var3);
       free(var3);
-      LhsVar(1) = 4;
+      AssignOutputVariable(pvApiCtx,1) = 4;
       break;
     }
   case 4:
@@ -965,7 +965,7 @@ int_idwt3 (char *fname)
       CreateListVarFromPtr(5,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(5,3,"d",&m5, &n5, &var3);
       free(var3);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
       break;
     }
   case 5:
@@ -1062,7 +1062,7 @@ int_idwt3 (char *fname)
       CreateListVarFromPtr(5,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(5,3,"d",&m5, &n5, &var3);
       free(var3);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
 
       break;
     }
@@ -1178,7 +1178,7 @@ int_idwt3 (char *fname)
       CreateListVarFromPtr(6,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(6,3,"d",&m6, &n6, &var3);
       free(var3);
-      LhsVar(1) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 6;
       break;
     }
   case 7:
@@ -1229,7 +1229,7 @@ int_idwt3 (char *fname)
       CreateListVarFromPtr(8,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(8,3,"d",&m8, &n8, &var3);
       free(var3);
-      LhsVar(1) = 8;
+      AssignOutputVariable(pvApiCtx,1) = 8;
       break;
     }
   case 8:
@@ -1292,7 +1292,7 @@ int_idwt3 (char *fname)
       CreateListVarFromPtr(9,2,"I",&mi,&ni,&ssi);
       CreateListVarFromPtr(9,3,"d",&m9, &n9, &var3);
       free(var3);
-      LhsVar(1) = 9;
+      AssignOutputVariable(pvApiCtx,1) = 9;
       break;
     }
   default:

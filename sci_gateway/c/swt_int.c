@@ -37,8 +37,8 @@
    Func ana_fun;
    swt_wavelet pWaveStruct; 
 
-   CheckRhs (minrhs,maxrhs);
-   CheckLhs (minlhs,maxlhs);
+   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
    //sprint("after check\n");
    swt_form_validate(&errCode,&flow);
@@ -95,7 +95,7 @@
 				pWaveStruct.length, istk(l2)[0]);
             //sciprint("after out!\n");
 			filter_clear();
-            LhsVar(1) = 4;
+            AssignOutputVariable(pvApiCtx,1) = 4;
 		    break;
 	   }
    case 2:
@@ -128,7 +128,7 @@
 			 swt_out1 (stk(l1), m1*n1, stk(l5), m5, n5,
 				stk(l3), stk(l4), m3*n3, istk(l2)[0]);
 			 //filter_clear();
-             LhsVar(1) = 5;
+             AssignOutputVariable(pvApiCtx,1) = 5;
 		     break;
 	   }
    case 3:
@@ -174,8 +174,8 @@
 				       pWaveStruct.length, istk(l2)[0]);
             //sciprint("after out!\n");
 			 filter_clear();
-             LhsVar(1) = 4;
-             LhsVar(2) = 5;
+             AssignOutputVariable(pvApiCtx,1) = 4;
+             AssignOutputVariable(pvApiCtx,2) = 5;
 		     break;
 	   }
    case 4:
@@ -210,8 +210,8 @@
 			  CreateVar(6, "d", &m6, &n6, &l6);
 			  swt_out2 (stk(l1), m1*n1, stk(l5), stk(l6), m5, n5, 
 				        stk(l3), stk(l4), m3*n3, istk(l2)[0]);
-              LhsVar(1) = 5;
-              LhsVar(2) = 6;
+              AssignOutputVariable(pvApiCtx,1) = 5;
+              AssignOutputVariable(pvApiCtx,2) = 6;
 		   break;
 	   }
    default:
@@ -231,8 +231,8 @@
    Func syn_fun;
    swt_wavelet pWaveStruct;;
 
-   CheckRhs (minrhs,maxrhs);
-   CheckLhs (minlhs,maxlhs);
+   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
    iswt_form_validate(&errCode,&flow);
    if (errCode != SUCCESS)
@@ -277,7 +277,7 @@
            CreateVar(3, "d", &m3, &n3, &l3);
            iswt_input1 (stk(l1), m1, n1, stk(l3), n3, pWaveStruct.pLowPass, 
 			            pWaveStruct.pHiPass, pWaveStruct.length);
-		   LhsVar(1) = 3;
+		   AssignOutputVariable(pvApiCtx,1) = 3;
 		   filter_clear();
 		   break;
 	   }
@@ -312,7 +312,7 @@
            CreateVar(4, "d", &m4, &n4, &l4);
 		   iswt_input2 (stk(l1), stk(l2), m1, n1, stk(l4), n4, pWaveStruct.pLowPass, 
 			            pWaveStruct.pHiPass, pWaveStruct.length);
-		   LhsVar(1) = 4;
+		   AssignOutputVariable(pvApiCtx,1) = 4;
 		   filter_clear();
 		   break;
 	   }
@@ -343,7 +343,7 @@
            CreateVar(4, "d", &m4, &n4, &l4);
 		   iswt_input1 (stk(l1), m1, n1, stk(l4), n4, stk(l2), 
 			            stk(l3), m3*n3);
-		   LhsVar(1) = 4;
+		   AssignOutputVariable(pvApiCtx,1) = 4;
 		   break;
 	   }
    case 4:
@@ -374,7 +374,7 @@
            CreateVar(5, "d", &m5, &n5, &l5);
 		   iswt_input2 (stk(l1), stk(l2), m1, n1, stk(l5), n5, stk(l3), 
 			            stk(l4), m3*n3);
-		   LhsVar(1) = 5;
+		   AssignOutputVariable(pvApiCtx,1) = 5;
 		   break;
 	   }
    default:
@@ -401,8 +401,8 @@
    double *var4, *var5, *var6, *var7, *var8;
    SciIntMat ssi;
 
-   CheckRhs (minrhs,maxrhs);
-   CheckLhs (minlhs,maxlhs);
+   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
    swt2_form_validate(&errCode,&flow);
    if (errCode != SUCCESS)
@@ -500,7 +500,7 @@
 				   free(var4);
 			   }
 			   filter_clear();
-			   LhsVar(1) = 4;
+			   AssignOutputVariable(pvApiCtx,1) = 4;
 			   break;
 		   }
 	   case 2:
@@ -578,7 +578,7 @@
 				   CreateListVarFromPtr(5,3,"d",&m5, &n5, &var5);
 				   free(var5);
 			   }
-			   LhsVar(1) = 5;
+			   AssignOutputVariable(pvApiCtx,1) = 5;
 			   
 			   break;
 		   }
@@ -686,10 +686,10 @@
 				   free(var7);
 			   }
 			   filter_clear();
-			   LhsVar(1) = 4;
-			   LhsVar(2) = 5;
-			   LhsVar(3) = 6;
-			   LhsVar(4) = 7;
+			   AssignOutputVariable(pvApiCtx,1) = 4;
+			   AssignOutputVariable(pvApiCtx,2) = 5;
+			   AssignOutputVariable(pvApiCtx,3) = 6;
+			   AssignOutputVariable(pvApiCtx,4) = 7;
 			   break;
 		   }
 	   case 4:
@@ -792,10 +792,10 @@
 				   free(var8);
 
 			   }
-			   LhsVar(1) = 5;
-			   LhsVar(2) = 6;
-			   LhsVar(3) = 7;
-			   LhsVar(4) = 8;
+			   AssignOutputVariable(pvApiCtx,1) = 5;
+			   AssignOutputVariable(pvApiCtx,2) = 6;
+			   AssignOutputVariable(pvApiCtx,3) = 7;
+			   AssignOutputVariable(pvApiCtx,4) = 8;
 			   break;
 		   }
 	   default:
@@ -823,8 +823,8 @@
    int m2A, m2H, m2V, m2D, n2A, n2H, n2V, n2D, stepA, stepH, stepV, stepD;
    //HyperMat *H;
 
-   CheckRhs (minrhs,maxrhs);
-   CheckLhs (minlhs,maxlhs);
+   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
    iswt2_form_validate(&errCode,&flow);
    if (errCode != SUCCESS)
@@ -905,7 +905,7 @@
 		   iswt2_input1_step(stk(lL3),  m3, n3, stk(l3), m3, n3,
 		               pWaveStruct.pLowPass, pWaveStruct.pHiPass, pWaveStruct.length, step);
 
-		   LhsVar(1) = 3;
+		   AssignOutputVariable(pvApiCtx,1) = 3;
 		   filter_clear();
            break;
 	   }
@@ -966,7 +966,7 @@
 		   iswt2_input1_step(stk(lL3),  m4, n4, stk(l4), m4, n4,
 		               stk(l2), stk(l3), m2*n2, step);
 
-		   LhsVar(1) = 4;
+		   AssignOutputVariable(pvApiCtx,1) = 4;
 
 		   break;
 	   }
@@ -1180,7 +1180,7 @@
 
 		   }
 
-		   LhsVar(1) = 6;
+		   AssignOutputVariable(pvApiCtx,1) = 6;
 		   filter_clear();
 		   break;
 	   }
@@ -1377,7 +1377,7 @@
 
 		   }
 		   
-		   LhsVar(1) = 7;
+		   AssignOutputVariable(pvApiCtx,1) = 7;
 		   break;
 	   }
    default:

@@ -116,7 +116,7 @@ case 6 //'mishmash'
 end
 
 if (nargin>=3)
-   X=X/mtlb_std(X)*SQRT_SNR;
+   X=X/stdev(X)*SQRT_SNR;
 end;
    XN=X+rand(1,N,'normal');
 

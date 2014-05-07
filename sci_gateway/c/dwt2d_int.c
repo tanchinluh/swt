@@ -39,8 +39,8 @@ int_dwt2 (char *fname)
   swt_wavelet pWaveStruct;
   extend_method extMethod;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   dwt2_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -98,10 +98,10 @@ int_dwt2 (char *fname)
       dwt2D_neo (stk(l1), m1, n1, stk(l3), stk(l4), stk(l5), stk(l6),
 	     m3, n3, pWaveStruct.pLowPass, pWaveStruct.pHiPass, 
 	     pWaveStruct.length, dwtMode);
-      LhsVar(1) = 3;
-      LhsVar(2) = 4;
-      LhsVar(3) = 5;
-      LhsVar(4) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 3;
+      AssignOutputVariable(pvApiCtx,2) = 4;
+      AssignOutputVariable(pvApiCtx,3) = 5;
+      AssignOutputVariable(pvApiCtx,4) = 6;
       filter_clear();
       break;
     }
@@ -140,10 +140,10 @@ int_dwt2 (char *fname)
       CreateVar(7, "d", &m7, &n7, &l7);
       dwt2D_neo (stk(l1), m1, n1, stk(l4), stk(l5), stk(l6), stk(l7),
 	     m4, n4, stk(l2), stk(l3), m2*n2, dwtMode);
-      LhsVar(1) = 4;
-      LhsVar(2) = 5;
-      LhsVar(3) = 6;
-      LhsVar(4) = 7;
+      AssignOutputVariable(pvApiCtx,1) = 4;
+      AssignOutputVariable(pvApiCtx,2) = 5;
+      AssignOutputVariable(pvApiCtx,3) = 6;
+      AssignOutputVariable(pvApiCtx,4) = 7;
       break;
     }
   case 3:
@@ -196,10 +196,10 @@ int_dwt2 (char *fname)
       dwt2D_neo (stk(l1), m1, n1, stk(l5), stk(l6), stk(l7), stk(l8),
 	     m5, n5, pWaveStruct.pLowPass, pWaveStruct.pHiPass, 
 	     pWaveStruct.length, extMethod);
-      LhsVar(1) = 5;
-      LhsVar(2) = 6;
-      LhsVar(3) = 7;
-      LhsVar(4) = 8;
+      AssignOutputVariable(pvApiCtx,1) = 5;
+      AssignOutputVariable(pvApiCtx,2) = 6;
+      AssignOutputVariable(pvApiCtx,3) = 7;
+      AssignOutputVariable(pvApiCtx,4) = 8;
       filter_clear();
       break;
     }
@@ -247,10 +247,10 @@ int_dwt2 (char *fname)
       CreateVar(9, "d", &m9, &n9, &l9);
       dwt2D_neo (stk(l1), m1, n1, stk(l6), stk(l7), stk(l8), stk(l9),
 	     m6, n6, stk(l2), stk(l3), m2*n2, extMethod);
-      LhsVar(1) = 6;
-      LhsVar(2) = 7;
-      LhsVar(3) = 8;
-      LhsVar(4) = 9;
+      AssignOutputVariable(pvApiCtx,1) = 6;
+      AssignOutputVariable(pvApiCtx,2) = 7;
+      AssignOutputVariable(pvApiCtx,3) = 8;
+      AssignOutputVariable(pvApiCtx,4) = 9;
       break;
     }
   default:
@@ -273,8 +273,8 @@ int_idwt2 (char *fname)
   swt_wavelet pWaveStruct;
   extend_method extMethod;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   idwt2_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -359,7 +359,7 @@ int_idwt2 (char *fname)
 	  idwt2D_neo (ca, ch, cv, cd, m, n, pWaveStruct.pLowPass,
 	      pWaveStruct.pHiPass, pWaveStruct.length, 
 	      stk(l6), m6, n6);
-      LhsVar(1) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 6;
       filter_clear();
       break;
     }
@@ -390,7 +390,7 @@ int_idwt2 (char *fname)
 	    //  m5*n5, stk(l7), m7, n7, dwtMode);
 	  idwt2D_neo (ca, ch, cv, cd, m, n, stk(l5), stk(l6),
 	      m5*n5, stk(l7), m7, n7);
-      LhsVar(1) = 7;
+      AssignOutputVariable(pvApiCtx,1) = 7;
       break;
     }
   case 3:
@@ -437,7 +437,7 @@ int_idwt2 (char *fname)
 	  idwt2D_neo (ca, ch, cv, cd, m, n, pWaveStruct.pLowPass,
 	      pWaveStruct.pHiPass, pWaveStruct.length, 
 	      stk(l7), m7, n7);
-      LhsVar(1) = 7;
+      AssignOutputVariable(pvApiCtx,1) = 7;
       filter_clear();
       break;
     }
@@ -477,7 +477,7 @@ int_idwt2 (char *fname)
 	    //  m5*n5, stk(l8), m8, n8, dwtMode);
 	  idwt2D_neo (ca, ch, cv, cd, m, n, stk(l5), stk(l6),
 	      m5*n5, stk(l8), m8, n8);
-      LhsVar(1) = 8;
+      AssignOutputVariable(pvApiCtx,1) = 8;
       break;
     }
   case 5:
@@ -517,7 +517,7 @@ int_idwt2 (char *fname)
 	  idwt2D_neo (ca, ch, cv, cd, m, n, pWaveStruct.pLowPass,
 	      pWaveStruct.pHiPass, pWaveStruct.length, 
 	      stk(l8), m8, n8);
-      LhsVar(1) = 8;
+      AssignOutputVariable(pvApiCtx,1) = 8;
       filter_clear();
       break;
     }
@@ -551,7 +551,7 @@ int_idwt2 (char *fname)
 	    //  m5*n5, stk(l9), m9, n9, extMethod);
 	  idwt2D_neo (ca, ch, cv, cd, m, n, stk(l5), stk(l6),
 	      m5*n5, stk(l9), m9, n9);
-      LhsVar(1) = 9;
+      AssignOutputVariable(pvApiCtx,1) = 9;
       break;
     }
   case 7:
@@ -600,7 +600,7 @@ int_idwt2 (char *fname)
 	  idwt2D_neo (ca, ch, cv, cd, m, n, pWaveStruct.pLowPass,
 	      pWaveStruct.pHiPass, pWaveStruct.length, 
 	      stk(l9), m9, n9);//, extMethod);
-      LhsVar(1) = 9;
+      AssignOutputVariable(pvApiCtx,1) = 9;
       filter_clear();
       break;
     }
@@ -643,7 +643,7 @@ int_idwt2 (char *fname)
 	    //  m5*n5, stk(l10), m10, n10, extMethod);
 	  idwt2D_neo (ca, ch, cv, cd, m, n, stk(l5), stk(l6),
 	      m5*n5, stk(l10), m10, n10);
-      LhsVar(1) = 10;
+      AssignOutputVariable(pvApiCtx,1) = 10;
       break;
     }
   default:
@@ -665,8 +665,8 @@ int_wavedec2 (char *fname)
   Func ana_fun;
   swt_wavelet pWaveStruct;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   //if (dwtMode==PER)
   //{
@@ -738,8 +738,8 @@ int_wavedec2 (char *fname)
       wavedec2 (stk(l1), m1, n1, pWaveStruct.pLowPass, 
 		pWaveStruct.pHiPass, pWaveStruct.length,
 		pLen, stk(l4), m4*n4, istk(l2)[0], dwtMode);
-      LhsVar(1) = 4;
-      LhsVar(2) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 4;
+      AssignOutputVariable(pvApiCtx,2) = 5;
       filter_clear();
       free(pLen);
       break;
@@ -806,8 +806,8 @@ int_waverec2 (char *fname)
   Func syn_fun;
   swt_wavelet pWaveStruct;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   waverec2_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -882,7 +882,7 @@ int_waverec2 (char *fname)
       waverec2 (stk(l1), m1*n1, pWaveStruct.pLowPass,
 		pWaveStruct.pHiPass, pWaveStruct.length, 
 		stk(l4), m4, n4, pLen, m2-2, dwtMode);
-      LhsVar(1) = 4;
+      AssignOutputVariable(pvApiCtx,1) = 4;
       filter_clear();
       free(pLen);
       break;
@@ -943,7 +943,7 @@ int_waverec2 (char *fname)
       CreateVar (5, "d", &m5, &n5, &l5);
       waverec2 (stk(l1), m1*n1, stk(l3), stk(l4),
 		m3*n3, stk(l5), m5, n5, pLen, m2-2, dwtMode);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
       free(pLen);
       break;
     }
@@ -962,8 +962,8 @@ int_wenergy2 (char *fname)
   static int minrhs=2, maxrhs=2, minlhs=2, maxlhs=4;
   int errCode, flow, size, val, row, col, *pLen;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   wenergy2_form_validate(&errCode,&flow);
   if (errCode != SUCCESS)
@@ -1025,10 +1025,10 @@ int_wenergy2 (char *fname)
       CreateVar(6, "d", &m6, &n6, &l6);
       wenergy_4output (stk(l1), m1*n1, pLen, stk(l3), stk(l4), 
 		       stk(l5), stk(l6), n4, m2 - 2);
-      LhsVar(1) = 3;
-      LhsVar(2) = 4;
-      LhsVar(3) = 5;
-      LhsVar(4) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 3;
+      AssignOutputVariable(pvApiCtx,2) = 4;
+      AssignOutputVariable(pvApiCtx,3) = 5;
+      AssignOutputVariable(pvApiCtx,4) = 6;
       break;
     }
   case 2:
@@ -1041,8 +1041,8 @@ int_wenergy2 (char *fname)
       CreateVar(4, "d", &m4, &n4, &l4);
       wenergy_2output (stk(l1), m1*n1, pLen, stk(l3), stk(l4), 
 		      n4, m2-2);
-      LhsVar(1) = 3;
-      LhsVar(2) = 4;
+      AssignOutputVariable(pvApiCtx,1) = 3;
+      AssignOutputVariable(pvApiCtx,2) = 4;
       break;
     }
   default:
@@ -1063,8 +1063,8 @@ int_detcoef2 (char *fname)
   static char v[] = { "v" };
   static char d[] = { "d" };
   
-  CheckRhs(minrhs,maxrhs);
-  CheckLhs(minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
   
   detcoef2_form_validate(&errCode, &flow);
   if (errCode != SUCCESS)
@@ -1133,7 +1133,7 @@ int_detcoef2 (char *fname)
       CreateVar(5, "d", &m5, &n5, &l5);
       detcoef2 (stk(l2), m2*n2 , stk(l5), m5*n5, pLen, m3-2, 
 		istk(l4)[0], cstk(l1));
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
     }
   else if ((Lhs==1) && (!strcmp(cstk(l1),"v")))
     {
@@ -1142,7 +1142,7 @@ int_detcoef2 (char *fname)
       CreateVar(5, "d", &m5, &n5, &l5);
       detcoef2 (stk(l2), m2*n2 , stk(l5), m5*n5, pLen, m3-2, 
 		istk(l4)[0], cstk(l1));
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
     }
   else if ((Lhs==1) && (!strcmp(cstk(l1),"d")))
     {
@@ -1151,7 +1151,7 @@ int_detcoef2 (char *fname)
       CreateVar(5, "d", &m5, &n5, &l5);
       detcoef2 (stk(l2), m2*n2 , stk(l5), m5*n5, pLen, m3-2, 
 		istk(l4)[0], cstk(l1));
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
     }
   else if ((Lhs==1) && ((!strcmp(cstk(l1),"c")) ||
 			(!strcmp(cstk(l1),"compact"))))
@@ -1165,7 +1165,7 @@ int_detcoef2 (char *fname)
 		m3-2, istk(l4)[0], v);
       detcoef2 (stk(l2), m2*n2 , stk(l5)+m5*n5*2/3, m5*n5/3, pLen, m3-2, 
 		istk(l4)[0], d);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
     }
 
   else if ((Lhs==3) && ((!strcmp(cstk(l1),"a")) ||
@@ -1186,9 +1186,9 @@ int_detcoef2 (char *fname)
 		istk(l4)[0], v);
       detcoef2 (stk(l2), m2*n2 , stk(l7), m7*n7, pLen, m3-2, 
 		istk(l4)[0], d);
-      LhsVar(1) = 5;
-      LhsVar(2) = 6;
-      LhsVar(3) = 7;
+      AssignOutputVariable(pvApiCtx,1) = 5;
+      AssignOutputVariable(pvApiCtx,2) = 6;
+      AssignOutputVariable(pvApiCtx,3) = 7;
     }
   else 
     {
@@ -1210,11 +1210,11 @@ int_appcoef2 (char *fname)
   Func syn_fun;
   swt_wavelet pWaveStruct;
 
-  CheckRhs (minrhs,maxrhs);
-  CheckLhs (minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
-  CheckRhs(minrhs,maxrhs);
-  CheckLhs(minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   appcoef2_form_validate(&errCode, &flow);
   if (errCode != SUCCESS)
@@ -1300,7 +1300,7 @@ int_appcoef2 (char *fname)
       appcoef2 (stk(l1), m1*n1, pWaveStruct.pLowPass, 
 		pWaveStruct.pHiPass, pWaveStruct.length, 
 		stk(l5), m5, n5, pLen, m2-2, istk(l4)[0], dwtMode);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
       filter_clear();
       break;
     }
@@ -1329,7 +1329,7 @@ int_appcoef2 (char *fname)
       appcoef2 (stk(l1), m1*n1, pWaveStruct.pLowPass, 
 		pWaveStruct.pHiPass, pWaveStruct.length, 
 		stk(l4), m4, n4, pLen, m2-2, m2-2, dwtMode);
-      LhsVar(1) = 4;
+      AssignOutputVariable(pvApiCtx,1) = 4;
       filter_clear();
       break;
     }
@@ -1354,7 +1354,7 @@ int_appcoef2 (char *fname)
       CreateVar(5, "d", &m5, &n5, &l5);
       appcoef2 (stk(l1), m1*n1, stk(l3), stk(l4), m3*n3, 
 		stk(l5), m5, n5, pLen, m2-2, m2-2, dwtMode);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
       break;
     }
   case 4:
@@ -1384,7 +1384,7 @@ int_appcoef2 (char *fname)
       CreateVar (6, "d", &m6, &n6, &l6);
       appcoef2 (stk(l1), m1*n1, stk(l3), stk(l4), m3*n3, 
 		stk(l6), m6, n6, pLen, m2-2, istk(l5)[0], dwtMode);
-      LhsVar(1) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 6;
       break;
     }
   default:
@@ -1491,7 +1491,7 @@ int_wrcoef2 (char *fname)
 	       pWaveStruct.pHiPass, pWaveStruct.length, 
 	       stk(l6), m6, n6, pLen, m3-2, istk(l5)[0], 
 	       cstk(l1), dwtMode);
-      LhsVar(1) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 6;
       filter_clear();
       break;
     }
@@ -1523,7 +1523,7 @@ int_wrcoef2 (char *fname)
       wrcoef2 (stk(l2), m2*n2, stk(l4), stk(l5), 
 	       m4*n4, stk(l7), m7, n7, pLen, m3-2, istk(l6)[0], 
 	       cstk(l1), dwtMode);
-      LhsVar(1) = 7;
+      AssignOutputVariable(pvApiCtx,1) = 7;
       break;
     }
   case 3:
@@ -1552,7 +1552,7 @@ int_wrcoef2 (char *fname)
 	       pWaveStruct.pHiPass, pWaveStruct.length, 
 	       stk(l5), m5, n5, pLen, m3-2, m3-2, 
 	       cstk(l1), dwtMode);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
       filter_clear();
       break;
     }
@@ -1578,7 +1578,7 @@ int_wrcoef2 (char *fname)
       wrcoef2 (stk(l2), m2*n2, stk(l4), stk(l5), 
 	       m4*n4, stk(l6), m6, n6, pLen, m3-2, m3-2, 
 	       cstk(l1), dwtMode);
-      LhsVar(1) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 6;
       break;
     }
   default:
@@ -1599,8 +1599,8 @@ int_upwlev2 (char *fname)
   Func syn_fun;
   swt_wavelet pWaveStruct;
 
-  CheckRhs(minrhs,maxrhs);
-  CheckLhs(minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
   upwlev2_form_validate (&errCode, &flow);
   if (errCode != SUCCESS)
@@ -1698,9 +1698,9 @@ int_upwlev2 (char *fname)
 	       pWaveStruct.pHiPass,pWaveStruct.length,
 	       pLen, m2, n2, stk(l6), m6*n6, stk(l4), m4*n4,
 	       istk(l5), m5, n5, m2-2, dwtMode);
-      LhsVar(1) = 4;
-      LhsVar(2) = 5;
-      LhsVar(3) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 4;
+      AssignOutputVariable(pvApiCtx,2) = 5;
+      AssignOutputVariable(pvApiCtx,3) = 6;
       filter_clear();
       break;
     }
@@ -1732,9 +1732,9 @@ int_upwlev2 (char *fname)
       upwlev2 (stk(l1), m1*n1, stk(l3), stk(l4), m3*n3,
 	       pLen, m2, n2, stk(l7), m7*n7, stk(l5), m5*n5,
 	       istk(l6), m6, n6, m2-2, dwtMode);
-      LhsVar(1) = 5;
-      LhsVar(2) = 6;
-      LhsVar(3) = 7;
+      AssignOutputVariable(pvApiCtx,1) = 5;
+      AssignOutputVariable(pvApiCtx,2) = 6;
+      AssignOutputVariable(pvApiCtx,3) = 7;
       break;
     }
   default:
@@ -1755,8 +1755,8 @@ int_upcoef2 (char *fname)
   Func syn_fun;
   swt_wavelet pWaveStruct;
   
-  CheckRhs(minrhs,maxrhs);
-  CheckLhs(minlhs,maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs,maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
   
   upcoef2_form_validate (&errCode, &flow);
   if (errCode != SUCCESS)
@@ -1817,7 +1817,7 @@ int_upcoef2 (char *fname)
 	       pWaveStruct.pHiPass, pWaveStruct.length,
 	       stk(l6), m6, n6, s1, s3, istk(l4)[0], cstk(l1));//, 
 	       //dwtMode);
-      LhsVar(1) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 6;
       filter_clear();
       break;
     }
@@ -1856,7 +1856,7 @@ int_upcoef2 (char *fname)
       upcoef2 (stk(l2), m2, n2,	stk(l3), stk(l4), m3*n3,
 	       stk(l7), m7, n7, s1, s3, istk(l5)[0], cstk(l1));//, 
 	       //dwtMode);
-      LhsVar(1) = 7;
+      AssignOutputVariable(pvApiCtx,1) = 7;
       break;
     }
   case 3:
@@ -1896,7 +1896,7 @@ int_upcoef2 (char *fname)
 	       pWaveStruct.pHiPass, pWaveStruct.length,
 	       stk(l5), m5, n5, s1, s3, istk(l4)[0], cstk(l1));//, 
 	       //dwtMode);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
       filter_clear();
       break;
     }
@@ -1929,7 +1929,7 @@ int_upcoef2 (char *fname)
       upcoef2 (stk(l2), m2, n2,	stk(l3), stk(l4), m3*n3, 
 	       stk(l6), m6, n6, s1, s3, istk(l5)[0], cstk(l1));//, 
 	       //dwtMode);
-      LhsVar(1) = 6;
+      AssignOutputVariable(pvApiCtx,1) = 6;
       break;
     }
   case 5:
@@ -1962,7 +1962,7 @@ int_upcoef2 (char *fname)
 	       pWaveStruct.pHiPass, pWaveStruct.length, 
 	       stk(l4), m4, n4, s1, s3, 1, cstk(l1));//, 
 	       //dwtMode);
-      LhsVar(1) = 4;
+      AssignOutputVariable(pvApiCtx,1) = 4;
       filter_clear();
       break;
     }
@@ -1989,7 +1989,7 @@ int_upcoef2 (char *fname)
       upcoef2 (stk(l2), m2, n2,	stk(l3), stk(l4), m3*n3, 
 	       stk(l5), m5, n5, s1, s3, 1, cstk(l1));//, 
 	       //dwtMode);
-      LhsVar(1) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 5;
       break;
     }
   default:

@@ -39,8 +39,8 @@ int_conv (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 2, maxrhs = 2;
   int errCode;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   /* Get Input */
   GetRhsVar (1, "d", &m1, &n1, &l1);
   GetRhsVar (2, "d", &m2, &n2, &l2);
@@ -72,8 +72,8 @@ int_iconv (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 2, maxrhs = 2;
   int errCode;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   /* Get Input */
   GetRhsVar (1, "d", &m1, &n1, &l1);
   GetRhsVar (2, "d", &m2, &n2, &l2);
@@ -113,8 +113,8 @@ int_wrev (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   wrev_validate (&errCode);
   if (errCode != SUCCESS)
@@ -145,8 +145,8 @@ int_qmf (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 2;
   int errCode, flow;
   /* Input Validation  */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   
   qmf_validate (&flow, &errCode);
   if (errCode != SUCCESS)
@@ -198,8 +198,8 @@ int_dyaddown (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 3;
   int flow, errCode;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   flow = 0;
   dyaddown_form_validate (&flow, &errCode);
@@ -525,8 +525,8 @@ int_dyadup (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 3;
   int flow, errCode;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   flow = 0;
   dyadup_form_validate (&flow, &errCode);
@@ -821,8 +821,8 @@ int_wkeep (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 2, maxrhs = 3;
   int flow, errCode;//, row1, row2, col1, col2;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   flow = 0;
   wkeep_form_validate (&flow, &errCode);
@@ -976,8 +976,8 @@ int_wextend (char *fname)
   char **str;
   extend_method extMethod;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   if (GetType(1) == sci_matrix)
     GetRhsVar (1, "i", &m1, &n1, &l1);
@@ -1413,8 +1413,8 @@ int_wcodemat (char *fname)
   int errCode, flow, op, zero, typ, mn, inc;
   double *var;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   wcodemat_form_validate (&flow, &errCode);
   if (errCode != SUCCESS)
@@ -1449,7 +1449,7 @@ int_wcodemat (char *fname)
 		  mn = m2*n2;
 		  C2F(tpconv)(&zero,&typ,&mn,var, &inc,istk(l2), &inc);
 		  free(var);
-		  LhsVar(1) = 2;
+		  AssignOutputVariable(pvApiCtx,1) = 2;
 		  break;
 	  }
   case 2:
@@ -1471,7 +1471,7 @@ int_wcodemat (char *fname)
 		  mn = m3*n3;
 		  C2F(tpconv)(&zero,&typ,&mn,var, &inc,istk(l3), &inc);
 		  free(var);
-		  LhsVar(1) = 3;
+		  AssignOutputVariable(pvApiCtx,1) = 3;
 		  break;
 	  }
   case 3:
@@ -1504,7 +1504,7 @@ int_wcodemat (char *fname)
 			  mn = m4*n4;
               C2F(tpconv)(&zero,&typ,&mn,var, &inc,istk(l4), &inc);
 			  free(var);
-		      LhsVar(1) = 4;
+		      AssignOutputVariable(pvApiCtx,1) = 4;
 		  }
 		  else
 		  {
@@ -1547,7 +1547,7 @@ int_wcodemat (char *fname)
 			  mn = m5*n5;
 			  C2F(tpconv)(&zero,&typ,&mn,var, &inc,istk(l5), &inc);
 			  free(var);
-		      LhsVar(1) = 5;
+		      AssignOutputVariable(pvApiCtx,1) = 5;
 		  }
 		  else
 		  {
@@ -1574,8 +1574,8 @@ int_ind2rgb (char *fname)
   SciIntMat ssi, M;
 
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   if ((GetType(1)!=sci_ints)|| (GetType(2)!=sci_matrix))
   {
@@ -1655,7 +1655,7 @@ int_ind2rgb (char *fname)
   CreateListVarFromPtr(3,2,"I",&mi,&ni,&ssi);
   CreateListVarFromPtr(3,3,"d",&m3, &n3, &var);
   free(var);
-  LhsVar(1) = 3;
+  AssignOutputVariable(pvApiCtx,1) = 3;
  
   return 0;
 }
@@ -1676,8 +1676,8 @@ int_mat3Dtran (char *fname)
   double *temp, *var3, *var2;
   int errCode;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   /* Get Input */
   GetRhsVar(1,"m",&m1,&n1,&l1);
   CheckLength(1,m1,3);
@@ -1937,7 +1937,7 @@ int_mat3Dtran (char *fname)
   CreateListVarFromPtr(4,2,"I",&mi,&ni,&ssi);
   CreateListVarFromPtr(4,3,"d",&m4, &n4, &var3);
   free(var3);
-  LhsVar(1) = 4;
+  AssignOutputVariable(pvApiCtx,1) = 4;
 
   return 0;
 }
@@ -1957,8 +1957,8 @@ int_wrev3 (char *fname)
   double *temp, *var3, *var2;
   int errCode;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   /* Get Input */
   GetRhsVar(1,"m",&m1,&n1,&l1);
   CheckLength(1,m1,3);
@@ -2109,7 +2109,7 @@ int_wrev3 (char *fname)
   CreateListVarFromPtr(3,2,"I",&mi,&ni,&ssi);
   CreateListVarFromPtr(3,3,"d",&m3, &n3, &var3);
   free(var3);
-  LhsVar(1) = 3;
+  AssignOutputVariable(pvApiCtx,1) = 3;
 
   return 0;
 } 
@@ -2122,8 +2122,8 @@ int_wrev2(char *fname)
   int i, errCode;
   double *var;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   wrev2_form_validate (&errCode);
   if (errCode != SUCCESS)
@@ -2180,7 +2180,7 @@ int_wrev2(char *fname)
     default: break;
     }
 
-  LhsVar(1) = 3;
+  AssignOutputVariable(pvApiCtx,1) = 3;
 
   return 0;
 }
@@ -2192,8 +2192,8 @@ int_wnorm (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 3;
   int errCode, flow;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   
   /* Get Input */
   GetRhsVar (1, "d", &m1, &n1, &l1);
@@ -2212,7 +2212,7 @@ int_wnorm (char *fname)
       n2 = n1;
       CreateVar (2, "d", &m2, &n2, &l2);
       wcodematd(stk(l1), m1*n1, stk(l2), m2*n2, 0.0, 1.0);
-      LhsVar(1) = 2;
+      AssignOutputVariable(pvApiCtx,1) = 2;
       break;
     }
   case 2:
@@ -2228,7 +2228,7 @@ int_wnorm (char *fname)
 	  return 0;
 	}
       wcodematd(stk(l1), m1*n1, stk(l4), m4*n4, stk(l2)[0], stk(l3)[0]);
-      LhsVar(1) = 4;
+      AssignOutputVariable(pvApiCtx,1) = 4;
       break;
     }
   default:break;
@@ -2250,8 +2250,8 @@ int_waveletfamilies (char *fname)
   int type;
   int i,j,count;
   /* Input Validation */
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   
   if (Rhs==0) {
     input_string = malloc(2 * sizeof(char));

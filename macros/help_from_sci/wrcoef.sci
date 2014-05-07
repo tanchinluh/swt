@@ -29,7 +29,7 @@ function X=wrcoef(type,c,l,wname,N)
 //  X = wnoise(4,10,0.5); //doppler with N=2^10 and Noise
 //  [C,L] = wavedec(X,lvl,wname);
 // 
-// 
+// A=zeros(lvl,length(X));D=zeros(A);
 // for i = 1:lvl
 //     A(i,:) = wrcoef('a',C,L,wname,i);
 //     D(i,:) = wrcoef('d',C,L,wname,i);
@@ -46,5 +46,5 @@ function X=wrcoef(type,c,l,wname,N)
 // upcoef 
 // Authors
 // Roger Liu and Isaac Zhi
-// H. Nahrstaedt - 2010-2012
+// H. Nahrstaedt - 2010-2013
 

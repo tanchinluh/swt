@@ -101,7 +101,7 @@ end
 
     [c,l] = wavedec(s,lvl,wname);
 
-
+A=zeros(lvl,length(s));D=zeros(A);
 for i = 1:lvl
     A(i,:) = wrcoef('a',c,l,wname,i);
     D(i,:) = wrcoef('d',c,l,wname,i);

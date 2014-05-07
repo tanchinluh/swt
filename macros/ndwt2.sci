@@ -124,7 +124,7 @@ if length(sX)<3 , sX(3) = 1; end
 lf = length(Lo);
 lx = sX(2);
 lc = lx+lf-1;
-x = wextend('ac',dwtEXTM,X,lf,'b')
+x = wextend('ac',dwtEXTM,X,lf,'b');
 select dwtEXTM
     case 'zpd'            
         

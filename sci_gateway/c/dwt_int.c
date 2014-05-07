@@ -38,8 +38,8 @@ int_orthfilt (char *fname)
   static int minlhs = 4, maxlhs = 4, minrhs = 1, maxrhs = 1;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   GetRhsVar (1, "d", &m1, &n1, &l1);
 
@@ -81,8 +81,8 @@ int_biorfilt (char *fname)
   static int minlhs = 4, maxlhs = 4, minrhs = 2, maxrhs = 2;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   biorfilt_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -132,8 +132,8 @@ int_dbwavf (char *fname)
   swt_wavelet pWaveStruct;
   int errCode, family, member;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   dbwavf_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -171,8 +171,8 @@ int_coifwavf (char *fname)
   swt_wavelet pWaveStruct;
   int errCode, family, member;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   coifwavf_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -209,8 +209,8 @@ int_symwavf (char *fname)
   swt_wavelet pWaveStruct;
   int errCode, family, member;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   symwavf_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -246,8 +246,8 @@ int_legdwavf (char *fname)
   swt_wavelet pWaveStruct;
   int errCode, family, member;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   legdwavf_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -283,8 +283,8 @@ int_biorwavf (char *fname)
   swt_wavelet pWaveStruct;
   int errCode, family, member;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   biorwavf_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -330,8 +330,8 @@ int_rbiorwavf (char *fname)
   swt_wavelet pWaveStruct;
   int errCode, family, member;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   rbiorwavf_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -379,8 +379,8 @@ int_wfilters (char *fname)
   Func ana_fun, syn_fun;
   swt_wavelet pWaveStruct;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   errCode = SUCCESS;
   if (GetType(1)!=sci_strings)
@@ -446,10 +446,10 @@ int_wfilters (char *fname)
       verbatim_copy (pWaveStruct.pLowPass, m4*n4, stk(l4), m4*n4);
       verbatim_copy (pWaveStruct.pHiPass, m5*n5, stk(l5), m5*n5);
       filter_clear();
-      LhsVar(1) = 2;
-      LhsVar(2) = 3;
-      LhsVar(3) = 4;
-      LhsVar(4) = 5;
+      AssignOutputVariable(pvApiCtx,1) = 2;
+      AssignOutputVariable(pvApiCtx,2) = 3;
+      AssignOutputVariable(pvApiCtx,3) = 4;
+      AssignOutputVariable(pvApiCtx,4) = 5;
       break;
     }
   case 2:
@@ -552,8 +552,8 @@ int_wmaxlev (char *fname)
   int errCode, family, member;
   Func syn_fun;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   wmaxlev_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -661,8 +661,8 @@ int_dwtmode (char *fname)
   char **Str;
   int i;
   
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
 
   if (Rhs == 0)
@@ -725,7 +725,7 @@ int_dwtmode (char *fname)
 	      //printf("%s\n",Str[0]);
 	      CreateVarFromPtr(3,"S", &m3, &n3, Str);
 	      //printf("after Create\n");
-	      LhsVar(1) = 3;
+	      AssignOutputVariable(pvApiCtx,1) = 3;
 	      //FreeRhsSVar(Str);
 	    }
 	  else

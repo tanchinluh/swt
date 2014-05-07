@@ -1,5 +1,5 @@
 function waveletfamilies(c)
-//Wavelet center frequency
+//List of all available wavelets
 //Calling Sequence
 //waveletfamilies()
 //waveletfamilies('f')
@@ -14,4 +14,5 @@ function waveletfamilies(c)
 // waveletfamilies('n')
 //
 // Authors
-// Holger Nahrstaedt - 2010-2012
+// Holger Nahrstaedt - 2010-2014
+//

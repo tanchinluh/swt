@@ -38,8 +38,8 @@ int_haar (char *fname)
   
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   haar_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -69,8 +69,8 @@ int_haar (char *fname)
   linspace(stk(l1)[0], stk(l2)[0], istk(l3)[0], stk(l4), n4);
   haar(stk(l4), n4, stk(l5), n5, 1);
 
-  LhsVar(1) = 5;
-  LhsVar(2) = 4;
+  AssignOutputVariable(pvApiCtx,1) = 5;
+  AssignOutputVariable(pvApiCtx,2) = 4;
   return 0;
 }*/
 
@@ -96,8 +96,8 @@ int_sinus (char *fname)
    double *output2;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   sinus_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -190,14 +190,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   m5 = 1;
   n5 = n4;
 //   CreateVar (5, "d", &m5, &n5, &l5);
-  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (4, "d", &m4, &n4, &l4);
-    _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+    _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -207,8 +207,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   linspace(input1[0], input2[0], input3[0], output1, n4);
   sinus(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -235,8 +235,8 @@ int_poisson (char *fname)
    double *output2;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   poisson_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -329,14 +329,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   m5 = 1;
   n5 = n4;
 //   CreateVar (5, "d", &m5, &n5, &l5);
-  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (4, "d", &m4, &n4, &l4);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -346,8 +346,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   linspace(input1[0], input2[0], input3[0], output1, n4);
   poisson(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -373,8 +373,8 @@ int_mexihat (char *fname)
    double *output2;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   mexihat_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -467,14 +467,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   m5 = 1;
   n5 = n4;
 //   CreateVar (5, "d", &m5, &n5, &l5);
-  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (4, "d", &m4, &n4, &l4);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -484,8 +484,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   linspace(input1[0], input2[0], input3[0], output1, n4);
   mexihat(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -511,8 +511,8 @@ int_morlet (char *fname)
    double *output2;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   morlet_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -605,14 +605,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   m5 = 1;
   n5 = n4;
 //   CreateVar (5, "d", &m5, &n5, &l5);
-  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (4, "d", &m4, &n4, &l4);
-        _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+        _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -622,8 +622,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   linspace(input1[0], input2[0], input3[0], output1, n4);
   morlet(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -649,8 +649,8 @@ int_DOGauss (char *fname)
    double *output2;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   DOGauss_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -743,14 +743,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   m5 = 1;
   n5 = n4;
 //   CreateVar (5, "d", &m5, &n5, &l5);
-  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (4, "d", &m4, &n4, &l4);
-        _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+        _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -760,8 +760,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   linspace(input1[0], input2[0], input3[0], output1, n4);
   DOGauss(output1, n4, output2, n5, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -789,8 +789,8 @@ int_Gauswavf (char *fname)
    double *output2;
   int errCode;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   Gauss_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -908,14 +908,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   n6 = n5;
 
   //   CreateVar (6, "d", &m6, &n6, &l6);
-  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m6, n6, &output2);
+  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m6, n6, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (5, "d", &m5, &n5, &l5);
-        _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m5, n5, &output1);
+        _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m5, n5, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -925,8 +925,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   linspace(input1[0], input2[0], input3[0], output1, n5);
   Gauss(output1, n5, output2, n6, input4[0], 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -959,8 +959,8 @@ int_shanwavf (char *fname)
   int errCode;
   int it;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   shanwavf_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -1102,7 +1102,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   n7 = n6;
   it = 1;
 //   CreateCVar (7, "d",&it, &m7, &n7, &l7r, &l7c);
-  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m7, n7, &output2_r, &output2_i);
+  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m7, n7, &output2_r, &output2_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1110,7 +1110,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
 	}
 
 //   CreateVar (6, "d", &m6, &n6, &l6);
-          _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m6, n6, &output1);
+          _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1120,9 +1120,9 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   linspace(input1[0], input2[0], input3[0], output1, n6);
   shanwavf(output1, n6, input5[0], input4[0], output2_r, output2_i, n7,1);
 
-  LhsVar(1) = Rhs + 1;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
   if (Lhs>1)
-    LhsVar(2) = Rhs + 2;
+    AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
 
   return 0;
 }
@@ -1155,8 +1155,8 @@ int_cmorlet (char *fname)
   int errCode;
   int it;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   cmorlet_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -1299,14 +1299,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   n7 = n6;
   it = 1;
 //   CreateCVar (7, "d",&it, &m7, &n7, &l7r, &l7c);
-  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m7, n7, &output2_r, &output2_i);
+  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m7, n7, &output2_r, &output2_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (6, "d", &m6, &n6, &l6);
-            _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m6, n6, &output1);
+            _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1318,8 +1318,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   linspace(input1[0], input2[0], input3[0], output1, n6);
   cmorlet(output1, n6, input5[0], input4[0], output2_r, output2_i, n7, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -1353,8 +1353,8 @@ int_fbspwavf (char *fname)
   int errCode;
   int it;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   fbspwavf_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -1521,14 +1521,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,6, &p_input_vector6);
   n8 = n7;
   it = 1;
 //   CreateCVar (8, "d",&it, &m8, &n8, &l8r, &l8c);
-  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m8, n8, &output2_r, &output2_i);
+  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m8, n8, &output2_r, &output2_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (7, "d", &m7, &n7, &l7);
-              _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m7, n7, &output1);
+              _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m7, n7, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1540,8 +1540,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,6, &p_input_vector6);
   linspace(input1[0], input2[0], input3[0], output1, n7);
   fbspwavf(output1, n7, input4[0], input6[0], input5[0], output2_r, output2_i, n8, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -1570,8 +1570,8 @@ int_cauchy (char *fname)
   int errCode;
   int it;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   cauchy_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -1668,7 +1668,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   n5 = n4;
   it = 1;
 //   CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5i);
-    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2_r, &output2_i);
+    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output2_r, &output2_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1676,7 +1676,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
 	}
   
 //   CreateVar (4, "d", &m4, &n4, &l4);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1688,8 +1688,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   linspace(input1[0], input2[0], input3[0], output1, n4);
   cauchy_neo(output1, n4, output2_r, output2_i, n5, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -1719,8 +1719,8 @@ int_cgauss (char *fname)
   int errCode;
   int it;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   Gauss_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -1840,14 +1840,14 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   n6 = n5;
   it = 1;
 //   CreateCVar (6, "d",&it, &m6, &n6, &l6r, &l6i);
-    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m6, n6, &output2_r, &output2_i);
+    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m6, n6, &output2_r, &output2_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 //   CreateVar (5, "d", &m5, &n5, &l5);
-          _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m5, n5, &output1);
+          _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m5, n5, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1858,8 +1858,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   linspace(input1[0], input2[0], input3[0], output1, n5);
   cgauss(output1, n5, input4[0], output2_r, output2_i, n6, 1);
 
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -1888,8 +1888,8 @@ int_meyer (char *fname)
   int errCode;
   int i,it;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   cauchy_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -1986,7 +1986,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   n5 = n4;
   it = 1;
 //   CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5i);
-    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m5, n5, &output2_r, &output2_i);
+    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output2_r, &output2_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -1994,7 +1994,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
 	}
   
 //   CreateVar (4, "d", &m4, &n4, &l4);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output1);
+      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2011,8 +2011,8 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
   for (i=0;i<input3[0];i++)
     output1[i]=input1[0] + (double)i*((input2[0]-input1[0])/input3[0]);
   
-  LhsVar(1) = Rhs + 1;
-  LhsVar(2) = Rhs + 2;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
   return 0;
 }
 
@@ -2055,7 +2055,7 @@ int_meyeraux (char *fname)
   m2 = m1;
   n2 = n1;
 //   CreateVar (2, "d", &m2, &n2, &l2);
-          _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m2, n2, &output1);
+          _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2063,7 +2063,7 @@ int_meyeraux (char *fname)
 	}
   for (i=0;i<m1*n1;i++)
     meyeraux(input1[i],&output1[i]);
-  LhsVar(1) = Rhs + 1;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
   return 0;
 }
 
@@ -2097,8 +2097,8 @@ int_wavefun (char *fname)
   double *output4;
   double *output5;
   
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   wavefun_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -2173,21 +2173,21 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
 	  m5 = 1;
 	  n5 = n3;
 // 	  CreateVar(3, "d", &m3, &n3, &l3);
-	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m3, n3, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(4, "d", &m4, &n4, &l4);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(5, "d", &m5, &n5, &l5);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 3, m5, n5, &output3);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2224,9 +2224,9 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
 	  linspace(0.0, (double)(pWaveStruct.length-1), n3, output3, n3);
 	  free(phi);
 	  free(psi);
-          LhsVar(1) = Rhs + 1;
-	  LhsVar(2) = Rhs + 2;
-	  LhsVar(3) = Rhs + 3;
+          AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+	  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
+	  AssignOutputVariable(pvApiCtx,3) = nbInputArgument(pvApiCtx) + 3;
 	    if (input_string != NULL)
     freeAllocatedSingleString(input_string);
 	  filter_clear();
@@ -2257,35 +2257,35 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
 	  m7 = 1;
 	  n7 = n3;
 // 	  CreateVar(3, "d", &m3, &n3, &l3);
-	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m3, n3, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(4, "d", &m4, &n4, &l4);
-	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(5, "d", &m5, &n5, &l5);
-	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 3, m5, n5, &output3);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(6, "d", &m6, &n6, &l6);
-	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 4, m6, n6, &output4);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 4, m6, n6, &output4);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(7, "d", &m7, &n7, &l7);
-	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 5, m7, n7, &output5);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 5, m7, n7, &output5);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2326,11 +2326,11 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
 		     output4[count] = -1*output4[count]*pow(sqrt(2),level);
 		 }
 	  linspace(0.0, (double)(pWaveStruct.length-1), n3, output5, n3);
-	  LhsVar(1) = Rhs + 1;
-	  LhsVar(2) = Rhs + 2;
-	  LhsVar(3) = Rhs + 3;
-	  LhsVar(4) = Rhs + 4;
-	  LhsVar(5) = Rhs + 5;
+	  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+	  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
+	  AssignOutputVariable(pvApiCtx,3) = nbInputArgument(pvApiCtx) + 3;
+	  AssignOutputVariable(pvApiCtx,4) = nbInputArgument(pvApiCtx) + 4;
+	  AssignOutputVariable(pvApiCtx,5) = nbInputArgument(pvApiCtx) + 5;
 	    if (input_string != NULL)
     freeAllocatedSingleString(input_string);
 	  filter_clear();
@@ -2351,14 +2351,14 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
 	  m4 = 1;
 	  n4 = n3;
 // 	  CreateVar(3, "d", &m3, &n3, &l3);
-	  	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1);
+	  	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m3, n3, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(4, "d", &m4, &n4, &l4);
-	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2366,8 +2366,8 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
 	}
 	  linspace(ci[ind].lb, ci[ind].ub, n3, output2, n3);
 	  (*(ci[ind].scalef))(output2,n3,output1,n3,ci[ind].cpsi);
-	  LhsVar(1) = Rhs + 1;
-	  LhsVar(2) = Rhs + 2;
+	  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+	  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
 	    if (input_string != NULL)
     freeAllocatedSingleString(input_string);
 	  return 0;
@@ -2387,14 +2387,14 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
 	  n4 = n3;
 	  it = 1;
 //       CreateCVar(3, "d", &it, &m3, &n3, &l3r, &l3i);
-	 _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1_r,&output1_i);
+	 _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m3, n3, &output1_r,&output1_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(4, "d", &m4, &n4, &l4);
-	  	  	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+	  	  	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2409,8 +2409,8 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
 		output1_i[count]=buff[count+n3];
 	  }
 	  free(buff);
-	  LhsVar(1) = Rhs + 1;
-	  LhsVar(2) = Rhs + 2;
+	  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+	  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
 	    if (input_string != NULL)
     freeAllocatedSingleString(input_string);
 	  return 0;
@@ -2446,8 +2446,8 @@ int_wavefun2 (char *fname)
   Func syn_fun;
   swt_wavelet pWaveStruct;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   wavefun2_form_validate(&errCode);
   if (errCode != SUCCESS)
@@ -2523,35 +2523,35 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_string);
 	  m7 = m3;
 	  n7 = n3;
 // 	  CreateVar(3, "d", &m3, &n3, &l3);
-	 _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m3, n3, &output1);
+	 _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m3, n3, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(4, "d", &m4, &n4, &l4);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 2, m4, n4, &output2);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m4, n4, &output2);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(5, "d", &m5, &n5, &l5);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 3, m5, n5, &output3);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 3, m5, n5, &output3);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(6, "d", &m6, &n6, &l6);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 4, m6, n6, &output4);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 4, m6, n6, &output4);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
 		return -1;
 	}
 // 	  CreateVar(7, "d", &m7, &n7, &l7);
-_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 5, m7, n7, &output5);
+_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 5, m7, n7, &output5);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2597,11 +2597,11 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 5, m7, n7, &output5);
 	  free(phi);
 	  free(psi);
 	  free(xval);
-	  LhsVar(1) = Rhs + 1;
-	  LhsVar(2) = Rhs + 2;
-	  LhsVar(3) = Rhs + 3;
-	  LhsVar(4) = Rhs + 4;
-	  LhsVar(5) = Rhs + 5;
+	  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+	  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
+	  AssignOutputVariable(pvApiCtx,3) = nbInputArgument(pvApiCtx) + 3;
+	  AssignOutputVariable(pvApiCtx,4) = nbInputArgument(pvApiCtx) + 4;
+	  AssignOutputVariable(pvApiCtx,5) = nbInputArgument(pvApiCtx) + 5;
 	  if (input_string != NULL)
     freeAllocatedSingleString(input_string);
 	  filter_clear();
@@ -2641,8 +2641,8 @@ int_wpsi (char *fname)
 	Func syn_fun;
     swt_wavelet pWaveStruct;
 
-    CheckRhs (minrhs, maxrhs);
-    CheckLhs (minlhs, maxlhs);
+    CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+    CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
     GetRhsVar (1, "c", &m1, &n1, &l1);
     
@@ -2684,7 +2684,7 @@ int_wpsi (char *fname)
 	else
 		return 0;
 
-    LhsVar(1) = 2;
+    AssignOutputVariable(pvApiCtx,1) = 2;
 	return 0;
 }
 
@@ -2702,7 +2702,7 @@ int_cwtscale (char *fname)
 	cwt_len_cal (m1*n1, istk(l2)[0], &n3, &delta);
 	CreateVar(3, "d", &m3, &n3, &l3);
     scale_real (stk(l1), m1*n1, delta, stk(l3), n3);
-    LhsVar(1) = 3;
+    AssignOutputVariable(pvApiCtx,1) = 3;
 	return 0;
 }
 
@@ -2713,8 +2713,8 @@ int_cwtconv (char *fname)
 	static int minlhs=1, maxlhs=1, minrhs=2, maxrhs=2;
 	int it;
 
-    CheckRhs (minrhs, maxrhs);
-    CheckLhs (minlhs, maxlhs);
+    CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+    CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
     GetRhsVar (1, "d", &m1, &n1, &l1);
     GetRhsCVar (2, "d", &it, &m2, &n2, &l2r, &l2i);
@@ -2733,7 +2733,7 @@ int_cwtconv (char *fname)
 					   stk(l3r), stk(l3i), m3*n3);
 	}
 
-	LhsVar(1) = 3; 
+	AssignOutputVariable(pvApiCtx,1) = 3; 
 	return 0;
 }*/
 
@@ -2762,8 +2762,8 @@ int_cwt (char *fname)
   Func syn_fun;
   swt_wavelet pWaveStruct;
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   cwt_form_validate(&errCode, &flow);
   if (errCode != SUCCESS)
@@ -2855,7 +2855,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
 	  full_range_scalef (input_string, psi, plen);
 	  //ocumsum(psi,plen);
 // 	  CreateVar(4, "d", &m4, &n4, &l4);
-	  _SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1);
+	  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2889,7 +2889,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
 	 
 	  
 // 	  CreateVar(4, "d", &m4, &n4, &l4);
-	_SciErr = allocMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1);
+	_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m4, n4, &output1);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2918,7 +2918,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
 	 
 	  
 // 	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
-	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1_r,&output1_i);
+	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m4, n4, &output1_r,&output1_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -2943,7 +2943,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
 	  free(temp);
 	  free(tempi);
   }
-  LhsVar(1) = Rhs + 1;
+  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
   if (input_string != NULL)
     freeAllocatedSingleString(input_string);
   return 0;
@@ -3033,7 +3033,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
 	  full_range_scalef (input_string, psi, plen);
 
 // 	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
-	 _SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1_r,&output1_i);
+	 _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m4, n4, &output1_r,&output1_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -3068,7 +3068,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
 	 
 	  
 // 	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
-	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1_r,&output1_i);
+	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m4, n4, &output1_r,&output1_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -3101,7 +3101,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
 	 
 	  
 // 	  CreateCVar(4, "d", &it, &m4, &n4, &l4r, &l4i);
-	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, Rhs + 1, m4, n4, &output1_r,&output1_i);
+	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m4, n4, &output1_r,&output1_i);
 	if(_SciErr.iErr)
 	 {
 		printError(&_SciErr, 0);
@@ -3127,7 +3127,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_string);
 	  free(tempi);
   }
 
-      LhsVar(1) = Rhs + 1;
+      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
       if (input_string != NULL)
 	freeAllocatedSingleString(input_string);
       return 0;
@@ -3148,8 +3148,8 @@ int_cwtzwei (char *fname)
   double *psi, *temp;
 
 
-  CheckRhs (minrhs, maxrhs);
-  CheckLhs (minlhs, maxlhs);
+  CheckInputArgument(pvApiCtx,minrhs, maxrhs);
+  CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   GetRhsVar (1, "d", &m1, &n1, &l1);
   GetRhsVar (2, "i", &m2, &n2, &l2);
@@ -3182,7 +3182,7 @@ int_cwtzwei (char *fname)
 	  free(temp);
   }
 
-  LhsVar(1) = 4;
+  AssignOutputVariable(pvApiCtx,1) = 4;
 
   return 0;
 }*/

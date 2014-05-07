@@ -36,7 +36,7 @@ if trt_flag
     x=(1:max(size(u)))*dx;
     a=(u($)-u(1))/(x($)-x(1));
     b=u(1)-a*x(1);
-    u=u-a*x-b;
+    u=u'-a*x-b;
 else
     a=0;
 end
