@@ -5,7 +5,7 @@
 
 function swtlib = startModule()
 
-mprintf("Start swt toolbox - (0.1.20)\n");
+mprintf("Start swt toolbox - (0.2.0)\n");
 
 if isdef("swtlib") then
 	warning("Toolbox swt library is already loaded");
@@ -46,7 +46,7 @@ end
 if or(getscilabmode() == ["NW";"STD"]) then
 	mprintf("\tLoad demos\n");
 	pathdemos = pathconvert(root_tlbx+"/demos/swt.dem.gateway.sce",%F,%T);
-	add_demo("Toolbox swt",pathdemos);
+	add_demo("wavelet toolbox",pathdemos);
 end
 
 endfunction

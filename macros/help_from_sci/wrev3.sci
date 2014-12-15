@@ -10,7 +10,7 @@ function Y=wrev3(x,M)
 // wrev3 is a fliping utility function on time domain.
 // Examples
 // a=rand(3,3,3);
-// Y=wrev(a,2);
+// Y=wrev3(a,2);
 //  
 //  
 // 

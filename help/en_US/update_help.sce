@@ -6,7 +6,7 @@
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 
-// Updates the .xml files by deleting existing files and 
+// Updates the .xml files by deleting existing files and
 // creating them again from the .sci with help_from_sci.
 
 // Copyright (C) 2010 - DIGITEO - Michael Baudin
@@ -17,7 +17,7 @@
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 
-// Updates the .xml files by deleting existing files and 
+// Updates the .xml files by deleting existing files and
 // creating them again from the .sci with help_from_sci.
 
 
@@ -180,7 +180,7 @@ funmat = [
    "cplxdual2D"
    "dwt3"
    "idualtree2D"
-   "ind2rgb"
+//   "ind2rgb"
    "upcoef2"
    "wavedec"
    "waverec"

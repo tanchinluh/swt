@@ -27,8 +27,8 @@ function [XD,CXD,LXD] = wden(C,L,TPTR,SORH,SCAL,N,wname)
 //Examples
 //snr = 3; init = 2055615866; 
 //[xref,x] = wnoise(3,11,snr,init);
-//lev = 5;
-//xd = wden(x,'heursure','s','one',lev,'sym8');
+//level = 5;
+//xd = wden(x,'heursure','s','one',level,'sym8');
 // 
 // See also
 //thselect
@@ -44,48 +44,76 @@ function [XD,CXD,LXD] = wden(C,L,TPTR,SORH,SCAL,N,wname)
   end
  
   if (nargin==6)
-    X=C;
+
     wname=N;
     N=SCAL;
     SCAL=SORH;
     SORH=TPTR;
     TPTR=L;
-    clear C,L;
-    if (min(size(X))>1)
+    X=C;
+    C=[];
+    L=[];
+    if (N<1) then
+	error("The decompostion level must be greater than zero!");
+    end;
+    if (type(wname)~=10) then
+      error("wname must be a string");
+    end;
+    if (min(size(X))>1) | length(X)==1
       error("This is a 1-D denoising funtion. X must be a vector!");
     end
-    [C,L] = wavedec(X,N,wname);
+    try
+      [C,L] = wavedec(X,N,wname);
+    catch
+      error("wavedec(X,N,wname) could not be perfomed!");
+    end;
+  else
+    if (N<1) then
+	error("The decompostion level must be greater than zero!");
+    end;
+    if (type(wname)~=10) then
+      error("wname must be a string");
+    end;
   end
-D=list();
-for n=1:N
- D(n)=detcoef(C,L,n);
-end;
+  
+  if (type(SCAL)~=10) then
+      error("SCAL must be a string");
+  end;
+  if (type(SORH)~=10) then
+      error("SORH must be a string");
+  end;
+  if (type(TPTR)~=10) then
+      error("TPTR must be a string");
+  end;
+  
+  D=list();
+  for n=1:N
+    D(n)=detcoef(C,L,n);
+  end;
 
-  THR = thselect(X,TPTR);
 
-select convstr(SCAL),
-   case 'one'
-      sigma=ones(1,N);
-   case 'sln'
-       sigma=ones(1,N)*wnoisest(C,L,1);
-      // THR = thselect(D(1),TPTR);
-   case 'mln'
-       sigma=wnoisest(C,L,1:N);
-end
- // THR = thselect(X,TPTR);
+  select convstr(SCAL),
+    case 'one'
+	sigma=ones(1,N);
+    case 'sln'
+	sigma=ones(1,N)*wnoisest(C,L,1);
+    case 'mln'
+	sigma=wnoisest(C,L,1:N);
+    else
+	error("SCAL must be either ''one'',''sln'' or ''mln''");
+  end
 
   CXD=C;
   LXD=L;
- i=0;
-for n=N:-1:1
-  i=i+1;
+  i=0;
+  for n=N:-1:1
+    i=i+1;
 
-  CXD(sum(L(1:i))+(1:L(i+1)))=wthresh(D(n),SORH,thselect(D(n)/sigma(n),TPTR)*sigma(n));
-end
+    CXD(sum(L(1:i))+(1:L(i+1)))=wthresh(D(n),SORH,thselect(D(n)/sigma(n),TPTR)*sigma(n));
+  end
 
 
-
- XD=waverec(CXD,LXD,wname);
+  XD=waverec(CXD,LXD,wname);
 
  endfunction
  

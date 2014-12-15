@@ -10,10 +10,10 @@ function Y=wrev2(x,M)
 // wrev2 is a fliping utility function on time domain.
 // Examples
 // a=rand(3,3);
-// Y=wrev(a,1);
-//  
-//  
-// 
+// Y=wrev2(a,1);
+//
+//
+//
 // Authors
 // Roger Liu and Isaac Zhi
 // See Also

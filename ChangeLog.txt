@@ -1,7 +1,15 @@
 SWT - Scilab Wavelet Toolbox
-Copyright (C) 2011 - 2013 Holger Nahrstaedt
+Copyright (C) 2011 - 2014 Holger Nahrstaedt
 Copyright (C) 2005-2008 Scilab Wavelet Toolbox Team
 __________________________________________________________________
+0.2.0
+ + source code reorganized
+ + ind2rgb removed, as it is already defined in the sivp toolbox
+ + the complete c-code is ported to the new scilab-api
+0.1.21
+ + Issue 1478 fixed
+ + unit tests for windows fixed
+ + strange bug in detcoef,wavedec and waverec for windows fixed
 0.1.20
  + help files and demos improved
  + Issue 1428 fixed
@@ -90,6 +98,3 @@ __________________________________________________________________
    + help pages for all the functions.
    + home page
    + nice photographs
-
-
-

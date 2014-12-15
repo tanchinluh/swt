@@ -9,12 +9,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -22,9 +22,8 @@
  */
 
 #include "swt_common.h"
-#include "dwt.h"
-// #define __USE_DEPRECATED_STACK_FUNCTIONS__
-// #include <stack-c.h>
+//
+// converted to scilab-api
 
 /*-------------------------------------------
  * orthfilt
@@ -37,17 +36,29 @@ int_orthfilt (char *fname)
   static int l4, m4, n4, l5, m5, n5;
   static int minlhs = 4, maxlhs = 4, minrhs = 1, maxrhs = 1;
   int errCode;
+  int readFlag;
+  double *input1;
+  double *output1;
+  double *output2;
+  double *output3;
+  double *output4;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
+//  GetRhsVar (1, "d", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+
 
   orthfilt_form_validate(&errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
   m2 = 1;
@@ -59,17 +70,44 @@ int_orthfilt (char *fname)
   n4 = n1 * m1;
   n5 = n1 * m1;
 
-  CreateVar (2, "d", &m2, &n2, &l2);
-  CreateVar (3, "d", &m3, &n3, &l3);
-  CreateVar (4, "d", &m4, &n4, &l4);
-  CreateVar (5, "d", &m5, &n5, &l5);
+  //CreateVar (2, "d", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 
-  orth_filt_group (stk (l1), n1 * m1, stk (l4), stk (l2), stk (l5), stk (l3));
 
-  LhsVar (1) = 2;
-  LhsVar (2) = 3;
-  LhsVar (3) = 4;
-  LhsVar (4) = 5;
+  //CreateVar (3, "d", &m3, &n3, &l3);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &output2 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+
+
+  //CreateVar (4, "d", &m4, &n4, &l4);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 3,  m4 , n4 , &output3 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+
+
+  //CreateVar (5, "d", &m5, &n5, &l5);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 4,  m5 , n5 , &output4 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+
+
+  orth_filt_group (input1, n1 * m1, output3, output1, output4, output2);
+
+  //LhsVar (1) = 2;
+  //LhsVar (2) = 3;
+  //LhsVar (3) = 4;
+  //LhsVar (4) = 5;
   return 0;
 }
 
@@ -80,6 +118,13 @@ int_biorfilt (char *fname)
   static int l4, m4, n4, l5, m5, n5, l6, m6, n6;
   static int minlhs = 4, maxlhs = 4, minrhs = 2, maxrhs = 2;
   int errCode;
+  int readFlag;
+  double *input1;
+  double *input2;
+  double *output1;
+  double *output2;
+  double *output3;
+  double *output4;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
@@ -88,11 +133,21 @@ int_biorfilt (char *fname)
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  GetRhsVar (1, "d", &m1, &n1, &l1);
-  GetRhsVar (2, "d", &m2, &n2, &l2);
+  //GetRhsVar (1, "d", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  //GetRhsVar (2, "d", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 2,  &m2, &n2, &input2);
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 
   m3 = 1;
   m4 = 1;
@@ -103,18 +158,38 @@ int_biorfilt (char *fname)
   n5 = n1 * m1;
   n6 = n1 * m1;
 
-  CreateVar (3, "d", &m3, &n3, &l3);
-  CreateVar (4, "d", &m4, &n4, &l4);
-  CreateVar (5, "d", &m5, &n5, &l5);
-  CreateVar (6, "d", &m6, &n6, &l6);
+  //CreateVar (3, "d", &m3, &n3, &l3);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  //CreateVar (4, "d", &m4, &n4, &l4);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  //CreateVar (5, "d", &m5, &n5, &l5);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 3,  m5 , n5 , &output3 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  //CreateVar (6, "d", &m6, &n6, &l6);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 4,  m6 , n6 , &output4 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 
-  bior_filt_group (stk(l1), m1 * n1, stk(l2), m2 * n2, 
-		   stk(l3), m3 * n3, stk(l4), m4 * n4,
-		   stk(l5), m5 * n5, stk(l6), m6 * n6);
-  LhsVar (1) = 3;
-  LhsVar (2) = 4;
-  LhsVar (3) = 5;
-  LhsVar (4) = 6;
+  bior_filt_group (input1, m1 * n1, input2, m2 * n2,
+		   output1, m3 * n3, output2, m4 * n4,
+       output3, m5 * n5, output4, m6 * n6);
+  // LhsVar (1) = 3;
+  // LhsVar (2) = 4;
+  // LhsVar (3) = 5;
+  // LhsVar (4) = 6;
 
   return 0;
 }
@@ -131,6 +206,9 @@ int_dbwavf (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
   swt_wavelet pWaveStruct;
   int errCode, family, member;
+  int readFlag;
+  char * input_string1 = NULL;
+  double *output1;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
@@ -139,25 +217,36 @@ int_dbwavf (char *fname)
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
-  
-  GetRhsVar (1, "c", &m1, &n1, &l1);
-  dbwavf_content_validate(&errCode,cstk(l1));
+
+  //GetRhsVar (1, "c", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  m1=1;n1=1;
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  dbwavf_content_validate(&errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  wavelet_parser(cstk(l1),&family,&member);
+  wavelet_parser(input_string1,&family,&member);
   daubechies_synthesis_initialize (member, &pWaveStruct);
   m2 = 1;
   n2 = pWaveStruct.length;
-  CreateVar (2, "d", &m2, &n2, &l2);
-  verbatim_copy (pWaveStruct.pLowPass, m2*n2, stk(l2), m2*n2);
+  //CreateVar (2, "d", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  verbatim_copy (pWaveStruct.pLowPass, m2*n2, output1, m2*n2);
   filter_clear();
-  LhsVar (1) = 2;
+  //LhsVar (1) = 2;
   return 0;
 }
 
@@ -170,6 +259,9 @@ int_coifwavf (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
   swt_wavelet pWaveStruct;
   int errCode, family, member;
+  int readFlag;
+  char * input_string1 = NULL;
+  double *output1;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
@@ -178,25 +270,36 @@ int_coifwavf (char *fname)
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
-  
-  GetRhsVar (1, "c", &m1, &n1, &l1);
-  coifwavf_content_validate(&errCode,cstk(l1));
+
+  //GetRhsVar (1, "c", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  m1=1;n1=1;
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  coifwavf_content_validate(&errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  wavelet_parser(cstk(l1),&family,&member);
+  wavelet_parser(input_string1,&family,&member);
   coiflets_synthesis_initialize (member, &pWaveStruct);
   m2 = 1;
   n2 = pWaveStruct.length;
-  CreateVar (2, "d", &m2, &n2, &l2);
-  verbatim_copy (pWaveStruct.pLowPass, m2*n2, stk(l2), m2*n2);
+  //CreateVar (2, "d", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  verbatim_copy (pWaveStruct.pLowPass, m2*n2, output1, m2*n2);
   filter_clear();
-  LhsVar (1) = 2;
+  //LhsVar (1) = 2;
   return 0;
 }
 
@@ -208,6 +311,9 @@ int_symwavf (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
   swt_wavelet pWaveStruct;
   int errCode, family, member;
+  int readFlag;
+  char * input_string1 = NULL;
+  double *output1;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
@@ -216,25 +322,36 @@ int_symwavf (char *fname)
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
-  
-  GetRhsVar (1, "c", &m1, &n1, &l1);
-  symwavf_content_validate(&errCode,cstk(l1));
+
+  //GetRhsVar (1, "c", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  m1=1;n1=1;
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  symwavf_content_validate(&errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  wavelet_parser(cstk(l1),&family,&member);
+  wavelet_parser(input_string1,&family,&member);
   symlets_synthesis_initialize (member, &pWaveStruct);
   m2 = 1;
   n2 = pWaveStruct.length;
-  CreateVar (2, "d", &m2, &n2, &l2);
-  verbatim_copy (pWaveStruct.pLowPass, m2*n2, stk(l2), m2*n2);
+  //CreateVar (2, "d", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  verbatim_copy (pWaveStruct.pLowPass, m2*n2, output1, m2*n2);
   filter_clear();
-  LhsVar (1) = 2;
+  //LhsVar (1) = 2;
   return 0;
 }
 
@@ -245,6 +362,9 @@ int_legdwavf (char *fname)
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
   swt_wavelet pWaveStruct;
   int errCode, family, member;
+  int readFlag;
+  char * input_string1 = NULL;
+  double *output1;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
@@ -253,25 +373,36 @@ int_legdwavf (char *fname)
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
-  
-  GetRhsVar (1, "c", &m1, &n1, &l1);
-  legdwavf_content_validate(&errCode,cstk(l1));
+
+  //GetRhsVar (1, "c", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  m1=1;n1=1;
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  legdwavf_content_validate(&errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  wavelet_parser(cstk(l1),&family,&member);
+  wavelet_parser(input_string1,&family,&member);
   legendre_synthesis_initialize (member, &pWaveStruct);
   m2 = 1;
   n2 = pWaveStruct.length;
-  CreateVar (2, "d", &m2, &n2, &l2);
-  verbatim_copy (pWaveStruct.pLowPass, m2*n2, stk(l2), m2*n2);
+  //CreateVar (2, "d", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  verbatim_copy (pWaveStruct.pLowPass, m2*n2, output1, m2*n2);
   filter_clear();
-  LhsVar (1) = 2;
+  //LhsVar (1) = 2;
   return 0;
 }
 
@@ -282,6 +413,10 @@ int_biorwavf (char *fname)
   static int minlhs = 2, maxlhs = 2, minrhs = 1, maxrhs = 1;
   swt_wavelet pWaveStruct;
   int errCode, family, member;
+  int readFlag;
+  char * input_string1 = NULL;
+  double *output1;
+  double *output2;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
@@ -290,35 +425,51 @@ int_biorwavf (char *fname)
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
-  
-  GetRhsVar (1, "c", &m1, &n1, &l1);
-  biorwavf_content_validate(&errCode,cstk(l1));
+
+//  GetRhsVar (1, "c", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  m1=1;n1=1;
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  biorwavf_content_validate(&errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  wavelet_parser(cstk(l1),&family,&member);
+  wavelet_parser(input_string1,&family,&member);
   sp_bior_synthesis_initialize (member, &pWaveStruct);
   m2 = 1;
   n2 = pWaveStruct.length;
   m3 = 1;
   n3 = pWaveStruct.length;
-  CreateVar (2, "d", &m2, &n2, &l2);
-  CreateVar (3, "d", &m3, &n3, &l3);
+  //CreateVar (2, "d", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  //CreateVar (3, "d", &m3, &n3, &l3);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &output2 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 
-  verbatim_copy (pWaveStruct.pLowPass, m2*n2, stk(l2), m2*n2);
+  verbatim_copy (pWaveStruct.pLowPass, m2*n2, output1, m2*n2);
   filter_clear();
-  
+
   sp_bior_analysis_initialize (member, &pWaveStruct);
-  wrev(pWaveStruct.pLowPass, m3 * n3, stk(l3), m3 * n3);
+  wrev(pWaveStruct.pLowPass, m3 * n3, output2, m3 * n3);
   filter_clear();
 
-  LhsVar (1) = 2;
-  LhsVar (2) = 3;
+  //LhsVar (1) = 2;
+  //LhsVar (2) = 3;
   return 0;
 }
 
@@ -329,6 +480,10 @@ int_rbiorwavf (char *fname)
   static int minlhs = 2, maxlhs = 2, minrhs = 1, maxrhs = 1;
   swt_wavelet pWaveStruct;
   int errCode, family, member;
+  int readFlag;
+  char * input_string1 = NULL;
+  double *output1;
+  double *output2;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
@@ -337,35 +492,51 @@ int_rbiorwavf (char *fname)
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
-  
-  GetRhsVar (1, "c", &m1, &n1, &l1);
-  rbiorwavf_content_validate(&errCode,cstk(l1));
+
+  //GetRhsVar (1, "c", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  m1=1;n1=1;
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  rbiorwavf_content_validate(&errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  wavelet_parser(cstk(l1),&family,&member);
+  wavelet_parser(input_string1,&family,&member);
   sp_rbior_synthesis_initialize (member, &pWaveStruct);
   m2 = 1;
   n2 = pWaveStruct.length;
   m3 = 1;
   n3 = pWaveStruct.length;
-  CreateVar (2, "d", &m2, &n2, &l2);
-  CreateVar (3, "d", &m3, &n3, &l3);
+  //CreateVar (2, "d", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  //CreateVar (3, "d", &m3, &n3, &l3);
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &output2 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 
-  verbatim_copy (pWaveStruct.pLowPass, m2*n2, stk(l2), m2*n2);
+  verbatim_copy (pWaveStruct.pLowPass, m2*n2,output1, m2*n2);
   filter_clear();
-  
+
   sp_rbior_analysis_initialize (member, &pWaveStruct);
-  wrev(pWaveStruct.pLowPass, m3 * n3, stk(l3), m3 * n3);
+  wrev(pWaveStruct.pLowPass, m3 * n3, output2, m3 * n3);
   filter_clear();
 
-  LhsVar (1) = 2;
-  LhsVar (2) = 3;
+  //LhsVar (1) = 2;
+  //LhsVar (2) = 3;
   return 0;
 }
 
@@ -378,53 +549,72 @@ int_wfilters (char *fname)
   int errCode, flow, family, member, ii;
   Func ana_fun, syn_fun;
   swt_wavelet pWaveStruct;
+  int readFlag;
+  char * input_string1 = NULL;
+  char * input_string2 = NULL;
+  double *output1;
+  double *output2;
+  double *output3;
+  double *output4;
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   errCode = SUCCESS;
-  if (GetType(1)!=sci_strings)
+  if (swt_gwsupport_GetType(1)!=sci_strings)
     errCode = UNKNOWN_INPUT_ERR;
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  GetRhsVar (1, "c", &m1, &n1, &l1);
+  //GetRhsVar (1, "c", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  m1=1;n1=1;
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
   l2 = 0;
-  
+
   if (Rhs==2)
     {
-      if (GetType(2)!=sci_strings)
+      if (swt_gwsupport_GetType(2)!=sci_strings)
 	errCode = UNKNOWN_INPUT_ERR;
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
 	  return 0;
 	}
-      GetRhsVar (2, "c", &m2, &n2, &l2);
+      //GetRhsVar (2, "c", &m2, &n2, &l2);
+      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      m2=1;n2=1;
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
     }
 
-  wfilters_form_validate(&errCode, &flow, l2);
+  wfilters_form_validate(&errCode, &flow, input_string2);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
-  wfilters_content_validate(&errCode, cstk(l1));
+  wfilters_content_validate(&errCode, input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
   switch (flow) {
   case 1:
     {
       //sciprint("enter flow 1!\n");
-      wavelet_parser(cstk(l1),&family,&member);
-      wavelet_fun_parser (cstk(l1), &ii);
+      wavelet_parser(input_string1,&family,&member);
+      wavelet_fun_parser (input_string1, &ii);
       ana_fun = wi[ii].analysis;
       syn_fun = wi[ii].synthesis;
       (*ana_fun)(member, &pWaveStruct);
@@ -436,106 +626,166 @@ int_wfilters (char *fname)
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
       n5 = pWaveStruct.length;
-      CreateVar (2, "d", &m2, &n2, &l2);
-      CreateVar (3, "d", &m3, &n3, &l3);
-      CreateVar (4, "d", &m4, &n4, &l4);
-      CreateVar (5, "d", &m5, &n5, &l5);
-      verbatim_copy (pWaveStruct.pLowPass, m2*n2, stk(l2), m2*n2);
-      verbatim_copy (pWaveStruct.pHiPass, m3*n3, stk(l3), m3*n3);
+      //CreateVar (2, "d", &m2, &n2, &l2);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      //CreateVar (3, "d", &m3, &n3, &l3);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &output2 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      //CreateVar (4, "d", &m4, &n4, &l4);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 3,  m4 , n4 , &output3 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      //CreateVar (5, "d", &m5, &n5, &l5);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 4,  m5 , n5 , &output4 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      verbatim_copy (pWaveStruct.pLowPass, m2*n2, output1, m2*n2);
+      verbatim_copy (pWaveStruct.pHiPass, m3*n3, output2, m3*n3);
       (*syn_fun)(member, &pWaveStruct);
-      verbatim_copy (pWaveStruct.pLowPass, m4*n4, stk(l4), m4*n4);
-      verbatim_copy (pWaveStruct.pHiPass, m5*n5, stk(l5), m5*n5);
+      verbatim_copy (pWaveStruct.pLowPass, m4*n4, output3, m4*n4);
+      verbatim_copy (pWaveStruct.pHiPass, m5*n5, output4, m5*n5);
       filter_clear();
-      AssignOutputVariable(pvApiCtx,1) = 2;
-      AssignOutputVariable(pvApiCtx,2) = 3;
-      AssignOutputVariable(pvApiCtx,3) = 4;
-      AssignOutputVariable(pvApiCtx,4) = 5;
+      // AssignOutputVariable(pvApiCtx,1) = 2;
+      // AssignOutputVariable(pvApiCtx,2) = 3;
+      // AssignOutputVariable(pvApiCtx,3) = 4;
+      // AssignOutputVariable(pvApiCtx,4) = 5;
       break;
     }
   case 2:
     {
-      wavelet_parser(cstk(l1),&family,&member);
-      wavelet_fun_parser (cstk(l1), &ii);
+      wavelet_parser(input_string1,&family,&member);
+      wavelet_fun_parser (input_string1, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
       m3 = 1;
       m4 = 1;
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
-      CreateVar (3, "d", &m3, &n3, &l3);
-      CreateVar (4, "d", &m4, &n4, &l4);
-      verbatim_copy (pWaveStruct.pLowPass, m3*n3, stk(l3), m3*n3);
-      verbatim_copy (pWaveStruct.pHiPass, m4*n4, stk(l4), m4*n4);
+      //CreateVar (3, "d", &m3, &n3, &l3);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      //CreateVar (4, "d", &m4, &n4, &l4);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      verbatim_copy (pWaveStruct.pLowPass, m3*n3, output1, m3*n3);
+      verbatim_copy (pWaveStruct.pHiPass, m4*n4, output2, m4*n4);
       filter_clear();
-      LhsVar (1) = 3;
-      LhsVar (2) = 4;
+    //  LhsVar (1) = 3;
+    //  LhsVar (2) = 4;
       break;
     }
   case 3:
     {
-      wavelet_parser(cstk(l1),&family,&member);
-      wavelet_fun_parser (cstk(l1), &ii);
+      wavelet_parser(input_string1,&family,&member);
+      wavelet_fun_parser (input_string1, &ii);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
       m3 = 1;
       m4 = 1;
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
-      CreateVar (3, "d", &m3, &n3, &l3);
-      CreateVar (4, "d", &m4, &n4, &l4);
-      verbatim_copy (pWaveStruct.pLowPass, m3*n3, stk(l3), m3*n3);
-      verbatim_copy (pWaveStruct.pHiPass, m4*n4, stk(l4), m4*n4);
+      //CreateVar (3, "d", &m3, &n3, &l3);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      //CreateVar (4, "d", &m4, &n4, &l4);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      verbatim_copy (pWaveStruct.pLowPass, m3*n3, output1, m3*n3);
+      verbatim_copy (pWaveStruct.pHiPass, m4*n4, output2, m4*n4);
       filter_clear();
-      LhsVar (1) = 3;
-      LhsVar (2) = 4;
+      //LhsVar (1) = 3;
+      //LhsVar (2) = 4;
       break;
     }
     case 4:
     {
-      wavelet_parser(cstk(l1),&family,&member);
-      wavelet_fun_parser (cstk(l1), &ii);
+      wavelet_parser(input_string1,&family,&member);
+      wavelet_fun_parser (input_string1, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
       m3 = 1;
       m4 = 1;
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
-      CreateVar (3, "d", &m3, &n3, &l3);
-      CreateVar (4, "d", &m4, &n4, &l4);
-      verbatim_copy (pWaveStruct.pLowPass, m3*n3, stk(l3), m3*n3);
+      //CreateVar (3, "d", &m3, &n3, &l3);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      //CreateVar (4, "d", &m4, &n4, &l4);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      verbatim_copy (pWaveStruct.pLowPass, m3*n3, output1, m3*n3);
 	  //filter_clear();
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      verbatim_copy (pWaveStruct.pLowPass, m4*n4, stk(l4), m4*n4);
+      verbatim_copy (pWaveStruct.pLowPass, m4*n4, output2, m4*n4);
       filter_clear();
-      LhsVar (1) = 3;
-      LhsVar (2) = 4;
+      //LhsVar (1) = 3;
+      //LhsVar (2) = 4;
       break;
     }
   case 5:
     {
-      wavelet_parser(cstk(l1),&family,&member);
-      wavelet_fun_parser (cstk(l1), &ii);
+      wavelet_parser(input_string1,&family,&member);
+      wavelet_fun_parser (input_string1, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
       m3 = 1;
       m4 = 1;
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
-      CreateVar (3, "d", &m3, &n3, &l3);
-      CreateVar (4, "d", &m4, &n4, &l4);
-      verbatim_copy (pWaveStruct.pHiPass, m3*n3, stk(l3), m3*n3);
+      //CreateVar (3, "d", &m3, &n3, &l3);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      //CreateVar (4, "d", &m4, &n4, &l4);
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+      verbatim_copy (pWaveStruct.pHiPass, m3*n3, output1, m3*n3);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      verbatim_copy (pWaveStruct.pHiPass, m4*n4, stk(l4), m4*n4);
+      verbatim_copy (pWaveStruct.pHiPass, m4*n4, output2, m4*n4);
       filter_clear();
-      LhsVar (1) = 3;
-      LhsVar (2) = 4;
+      //LhsVar (1) = 3;
+      //LhsVar (2) = 4;
       break;
     }
   default:
     break;
-  }  
+  }
 
   return 0;
 }
@@ -551,6 +801,11 @@ int_wmaxlev (char *fname)
   swt_wavelet pWaveStruct;
   int errCode, family, member;
   Func syn_fun;
+  int readFlag;
+  char * input_string1 = NULL;
+  int *input1;
+  int *output1;
+
 
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
@@ -559,32 +814,43 @@ int_wmaxlev (char *fname)
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  GetRhsVar (1, "i", &m1, &n1, &l1);
-  GetRhsVar (2, "c", &m2, &n2, &l2);
+  //GetRhsVar (1, "i", &m1, &n1, &l1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 1,  &m1 , &n1 , &input1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+  //GetRhsVar (2, "c", &m2, &n2, &l2);
+  readFlag = swt_gwsupport_GetScalarString(fname,2 , &input_string1 );
+  m2=1;n2=1;
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 
-  wfilters_content_validate(&errCode, cstk(l2));
+  wfilters_content_validate(&errCode, input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
-      return 0;			
+      return 0;
     }
 
-  wavelet_parser(cstk(l2),&family,&member);
-  wavelet_fun_parser (cstk(l2), &ii);
+  wavelet_parser(input_string1,&family,&member);
+  wavelet_fun_parser (input_string1, &ii);
   syn_fun = wi[ii].synthesis;
   (*syn_fun)(member, &pWaveStruct);
   filter_clear();
   if (sci_matrix_scalar_real(1))
     {
-      if (istk(l1)[0] <= 0)
+      if (input1[0] <= 0)
 	{
 	  sciprint("Input integer must be positive!\n");
 	  return 0;
 	}
-      wave_len_validate(istk(l1)[0], pWaveStruct.length, 
+      wave_len_validate(input1[0], pWaveStruct.length,
 			&stride, &val);
       if (val == 0)
 	{
@@ -596,25 +862,30 @@ int_wmaxlev (char *fname)
 	{
 	  m3 = 1;
 	  n3 = 1;
-	  CreateVar (3, "i", &m3, &n3, &l3);
-	  istk (l3)[0] = stride;
-	  LhsVar (1) = 3;
+	  //CreateVar (3, "i", &m3, &n3, &l3);
+    readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (fname, 1,  m3 , n3 , &output1 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
+      output1[0] = stride;
+	 // LhsVar (1) = 3;
 	}
     }
   else
     {
 	  //sciprint("enter matrix\n");
-	  if (istk(l1)[0] <= 0)
+	  if (input1[0] <= 0)
 	    {
 		 sciprint("Input integer must be positive!\n");
 		 return 0;
 	    }
-      if (istk(l1)[0] <= 0)
+      if (input1[0] <= 0)
 	   {
 	    sciprint("Input integer must be positive!\n");
 	    return 0;
 	}
-    wave_len_validate(istk(l1)[0], pWaveStruct.length, 
+    wave_len_validate(input1[0], pWaveStruct.length,
 			&stride1, &val1);
     if (val1 == 0)
 	{
@@ -622,9 +893,9 @@ int_wmaxlev (char *fname)
 		("The wavelet you select is not appropriate for that row size of the matrix!\n");
 		return 0;
 	}
-    wave_len_validate (istk(l1)[1], pWaveStruct.length, 
+    wave_len_validate (input1[1], pWaveStruct.length,
 		&stride2, &val2);
-	
+
     if (val2 == 0)
 	{
 		sciprint
@@ -635,13 +906,18 @@ int_wmaxlev (char *fname)
 		return 0;
     m3 = 1;
     n3 = 1;
-    CreateVar (3, "i", &m3, &n3, &l3);
-    istk (l3)[0] = (stride1 > stride2) ? stride2 : stride1;
+    //CreateVar (3, "i", &m3, &n3, &l3);
+    readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (fname, 1,  m3 , n3 , &output1 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
+      output1[0] = (stride1 > stride2) ? stride2 : stride1;
 	//if (stride1>=stride2)
 	//	istk(l3)[0]=stride2;
 	//else
 	//	istk(l3)[0]=stride1;
-    LhsVar (1) = 3;
+  //  LhsVar (1) = 3;
     }
 
   return 0;
@@ -660,7 +936,10 @@ int_dwtmode (char *fname)
   //char sss[6] = "symhh";
   char **Str;
   int i;
-  
+  int readFlag;
+  char * input_string1 = NULL;
+  char * input_string2 = NULL;
+
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
@@ -673,16 +952,22 @@ int_dwtmode (char *fname)
       if (sci_strings_scalar(1))
 	{
 	//sciprint("before GetVAR\n");
-	  GetRhsVar(1, "c", &m1, &n1, &l1);
-	  if (!strcmp(cstk(l1),"status"))
+	  //GetRhsVar(1, "c", &m1, &n1, &l1);
+    readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+    m1=1;n1=1;
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
+	  if (!strcmp(input_string1,"status"))
 	    dwt_print();
-	  else 
+	  else
 	    {
-	      dwt_write(cstk(l1),&errCode);
+	      dwt_write(input_string1,&errCode);
 	      if (errCode != SUCCESS)
 		{
 		  validate_print (errCode);
-		  return 0;			
+		  return 0;
 		}
 	      sciprint("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 	      sciprint("!!     WARNING: Change DWT Extension Mode   !!\n");
@@ -700,32 +985,49 @@ int_dwtmode (char *fname)
     {
       //      GetMatrixdims(1, &row1, &col1);
       //GetMatrixdims(2, &row2, &col2);
-      /*      if ((GetType(1) == sci_strings) && (GetType(2) == sci_strings) && (is_scalar(row1,col1)) && (is_scalar(row2,col2)))*/
+      /*      if ((swt_gwsupport_GetType(1) == sci_strings) && (swt_gwsupport_GetType(2) == sci_strings) && (is_scalar(row1,col1)) && (is_scalar(row2,col2)))*/
       if (sci_strings_scalar(1) && sci_strings_scalar(2))
 	{
-	  GetRhsVar(1, "c", &m1, &n1, &l1);
-	  GetRhsVar(2, "c", &m2, &n2, &l2);
-	  if ((!strcmp(cstk(l1),"status")) && (!strcmp(cstk(l2),"nodisp")))
+	  //GetRhsVar(1, "c", &m1, &n1, &l1);
+    readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+    m1=1;n1=1;
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
+	  //GetRhsVar(2, "c", &m2, &n2, &l2);
+    readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+    m2=1;n2=1;
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
+	  if ((!strcmp(input_string1,"status")) && (!strcmp(input_string2,"nodisp")))
 	    {
 	      m3 = 1;
 	      n3 = 1;
 	      //*Str = sss;
-	      
+
 	      Str=NULL;
 	      Str = (char **)malloc(1*sizeof(char *));
 
 	      for(i=0; i<(int)1; i++)
 		{
 		  Str[i] = (char *)malloc(6*sizeof(char));
-		  
+
 		}
 	      //printf("before dwt_parse\n");
 	      dwt_parse(Str);
 	      //printf("after dwt_parse\n");
 	      //printf("%s\n",Str[0]);
-	      CreateVarFromPtr(3,"S", &m3, &n3, Str);
+	      //CreateVarFromPtr(3,"S", &m3, &n3, Str);
+        readFlag = swt_gwsupport_CreateMatrixOfString (fname, 1,  m3 , n3 , Str );
+        if(readFlag==SWT_GWSUPPORT_ERROR)
+          {
+            return 0;
+          }
 	      //printf("after Create\n");
-	      AssignOutputVariable(pvApiCtx,1) = 3;
+	      //AssignOutputVariable(pvApiCtx,1) = 3;
 	      //FreeRhsSVar(Str);
 	    }
 	  else
@@ -747,4 +1049,3 @@ int_dwtmode (char *fname)
     }
   return 0;
 }
-

@@ -9,12 +9,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -22,8 +22,6 @@
  */
 
 #include "swt_common.h"
-#include "dwt.h"
-// #define __USE_DEPRECATED_STACK_FUNCTIONS__
 // #include "stack-c.h"
 
 int
@@ -37,24 +35,20 @@ int_FSfarras(char *fname)
   char s1[]={"fa1"};
   char s2[]={"fa2"};
   double *var1,*var2;
-  int type1;
-  int * p_input_string = NULL;
-  char * input_string = NULL;
-  SciErr _SciErr;
+  int readFlag;
+  char * input_string1 = NULL;
+  //SciErr _SciErr;
 
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
 //   GetRhsVar(1, "c", &m1, &n1, &l1);
 
-  _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_string);
-   if(_SciErr.iErr)
-    {
-	   printError(&_SciErr, 0);
-	   return 0;
-    }
-
-    getAllocatedSingleString(pvApiCtx, p_input_string, &input_string);	    
+  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
 
   var1 = (double *)malloc(40*sizeof(double));
   var2 = (double *)malloc(40*sizeof(double));
@@ -88,74 +82,70 @@ int_FSfarras(char *fname)
   verbatim_copy(pWaveStruct.pHiPass, pWaveStruct.length, var2+30, pWaveStruct.length);
 
   //if ((cstk(l1)[0] == 'f') || (cstk(l1)[0] == 'F'))
-  if ((input_string[0] == 'f') || (input_string[0] == 'F'))  
+  if ((input_string1[0] == 'f') || (input_string1[0] == 'F'))
     {
-      double *ptr,*ptr2;
+      double *output1,*output2;
       m2 = 4;
       n2 = 10;
       m3 = 4;
       n3 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
 //       CreateVar(3, "d", &m3, &n3, &l3);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
-			if(_SciErr.iErr)
-		        {
-			    printError(&_SciErr, 0);
-			    return 0;
-		         }
-       _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m3, n3, &ptr2);
-			if(_SciErr.iErr)
-		        {
-			    printError(&_SciErr, 0);
-			    return 0;
-		         }	         
-      
-      matrix_tran(var1,m2,n2,ptr,n2,m2);
-      matrix_tran(var2,m3,n3,ptr2,n3,m3);
-      AssignOutputVariable(pvApiCtx,1) = Rhs+1;
-      AssignOutputVariable(pvApiCtx,2) = Rhs+2;
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+        readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output2 );
+        if(readFlag==SWT_GWSUPPORT_ERROR)
+          {
+            return 0;
+          }
+
+      matrix_tran(var1,m2,n2,output1,n2,m2);
+      matrix_tran(var2,m3,n3,output2,n3,m3);
+      //AssignOutputVariable(pvApiCtx,1) = Rhs+1;
+      //AssignOutputVariable(pvApiCtx,2) = Rhs+2;
     }
 //   else if ((cstk(l1)[0] == 'a') || (cstk(l1)[0] == 'A'))
-  else if ((input_string[0] == 'a') || (input_string[0] == 'A'))
+  else if ((input_string1[0] == 'a') || (input_string1[0] == 'A'))
     {
-      double *ptr;
+      double *output1;
       m2 = 4;
       n2 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
-       _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
-			if(_SciErr.iErr)
-		        {
-			    printError(&_SciErr, 0);
-			    return 0;
-		         }
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
 //     matrix_tran(var1,m2,n2,stk(l2),n2,m2);
-      matrix_tran(var1,m2,n2,ptr,n2,m2);
-      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+      matrix_tran(var1,m2,n2,output1,n2,m2);
+      //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
     }
 //   else if ((cstk(l1)[0] == 's') || (cstk(l1)[0] == 'S'))
-  else if ((input_string[0] == 's') || (input_string[0] == 'S')) 
+  else if ((input_string1[0] == 's') || (input_string1[0] == 'S'))
     {
-      double *ptr;
+      double *output1;
       m2 = 4;
       n2 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
-			if(_SciErr.iErr)
-		        {
-			    printError(&_SciErr, 0);
-			    return 0;
-		         }
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
 //       matrix_tran(var2,m2,n2,stk(l2),n2,m2);
-      matrix_tran(var2,m2,n2,ptr,n2,m2);
-      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+      matrix_tran(var2,m2,n2,output1,n2,m2);
+//      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
     }
   else
     {
       errCode = UNKNOWN_INPUT_ERR;
       validate_print (errCode);
     }
-  if (input_string != NULL)
-    freeAllocatedSingleString(input_string);
+  if (input_string1 != NULL)
+    freeAllocatedSingleString(input_string1);
   free(var1);
   free(var2);
   return 0;
@@ -173,24 +163,21 @@ int_dualfilt1(char *fname)
   char s1[]={"ksq1"};
   char s2[]={"ksq2"};
   double *var1,*var2;
-  int type1;
-  int * p_input_string = NULL;
   char * input_string = NULL;
-  SciErr _SciErr;
+  double *output1;
+  double *output2;
+  int readFlag;
 
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
 //   GetRhsVar(1, "c", &m1, &n1, &l1);
-   _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_string);
-   if(_SciErr.iErr)
-    {
-	   printError(&_SciErr, 0);
-	   return 0;
-    }
-
-    getAllocatedSingleString(pvApiCtx, p_input_string, &input_string);	    
-
+    readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string );
+    m1=1;n1=1;
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 
   var1 = (double *)malloc(40*sizeof(double));
   var2 = (double *)malloc(40*sizeof(double));
@@ -233,23 +220,22 @@ int_dualfilt1(char *fname)
       n3 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
 //       CreateVar(3, "d", &m3, &n3, &l3);
-      _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
-			if(_SciErr.iErr)
-		        {
-			    printError(&_SciErr, 0);
-			    return 0;
-		         }
-       _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m3, n3, &ptr2);
-			if(_SciErr.iErr)
-		        {
-			    printError(&_SciErr, 0);
-			    return 0;
-		         }	         
-      
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &ptr );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
+
+       readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &ptr2 );
+       if(readFlag==SWT_GWSUPPORT_ERROR)
+         {
+           return 0;
+         }
+
       matrix_tran(var1,m2,n2,ptr,n2,m2);
       matrix_tran(var2,m3,n3,ptr2,n3,m3);
-      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) +1;
-      AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) +2;
+      //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) +1;
+      //AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) +2;
     }
 //   else if (cstk(l1)[0] == 'a')
   else if (input_string[0] == 'a')
@@ -258,14 +244,13 @@ int_dualfilt1(char *fname)
       m2 = 4;
       n2 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
-            _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
-			if(_SciErr.iErr)
-		        {
-			    printError(&_SciErr, 0);
-			    return 0;
-		         }
+             readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &ptr );
+             if(readFlag==SWT_GWSUPPORT_ERROR)
+               {
+                 return 0;
+               }
       matrix_tran(var1,m2,n2,ptr,n2,m2);
-      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+      //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
     }
 //   else if (cstk(l1)[0] == 's')
   else if (input_string[0] == 's')
@@ -274,21 +259,20 @@ int_dualfilt1(char *fname)
       m2 = 4;
       n2 = 10;
 //       CreateVar(2, "d", &m2, &n2, &l2);
-            _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m2, n2, &ptr);
-			if(_SciErr.iErr)
-		        {
-			    printError(&_SciErr, 0);
-			    return 0;
-		         }
+    readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &ptr );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
       matrix_tran(var2,m2,n2,ptr,n2,m2);
-      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+      //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
     }
   else
     {
       errCode = UNKNOWN_INPUT_ERR;
       validate_print (errCode);
     }
-    
+
   if (input_string != NULL)
     freeAllocatedSingleString(input_string);
   free(var1);
@@ -305,17 +289,13 @@ int_dualtree(char *fname)
   static int minlhs=2, maxlhs=2, minrhs=4, maxrhs=6;
   int errCode, flow, calLen, temLen, count, ln, it, stride, val;
   double *f1, *f2;
-  int * p_input_vector1 = NULL;
-  int * p_input_vector2 = NULL;
-  int * p_input_vector3 = NULL;
-  int * p_input_vector4 = NULL;
+  int readFlag;
   double *input1;
-  double *input2;
+  int *input2;
   double *input3;
   double *input4;
-  SciErr _SciErr;
-  int type;
-   
+
+
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
@@ -323,106 +303,34 @@ int_dualtree(char *fname)
   if (errCode != SUCCESS)
   {
     validate_print (errCode);
-    return 0;			
+    return 0;
   }
 
 //   GetRhsVar(1, "d", &m1, &n1, &l1);
 // GetRhsVarDouble(1,  &m1, &n1, input1);
-  		_SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: first input vector must be double\n",fname);	
-		  return -1;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 1,  &m1, &n1 , &input1 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
 //   GetRhsVar(2, "i", &m2, &n2, &l2);
-    		_SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: second input vector must be double or int\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(3, "d", &m3, &n3, &l3);
-    		_SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_vector3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector3, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 3. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 3,  &m3, &n3 , &input3 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(4, "d", &m4, &n4, &l4);
-    		_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector4, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 4. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,4,  &m4, &n4 , &input4 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 
   wave_len_validate (m1*n1, n3, &stride, &val);
   if ((!val) || (stride<input2[0]))
@@ -431,7 +339,7 @@ int_dualtree(char *fname)
       return 0;
     }
 
-  if (dwtMode==PER)
+  if (getdwtMode()==PER)
     {
       ln = 0;
       calLen = n1 * m1;
@@ -461,7 +369,7 @@ int_dualtree(char *fname)
   f2 = (double *)malloc(m3*n3*sizeof(double));
   matrix_tran(input3,n3,m3,f1,m3,n3);
   matrix_tran(input4,n3,m3,f2,m3,n3);
-  
+
   switch (flow) {
   case 1:
     {
@@ -476,35 +384,33 @@ int_dualtree(char *fname)
       it = 1;
 //       CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5c);
 
-	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &ptr_r,&ptr_i);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
+  readFlag = swt_gwsupport_AllocComplexMatrixOfDoubles (fname, 1,  m5 , n5 , &ptr_r,&ptr_i);
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 //       CreateVar(6, "i", &m6, &n6, &l6);
-      	_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &ptr2);
-	//_SciErr = allocMatrixOfInteger32(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &ptr2);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
-	ptr2_int = (int*)malloc(sizeof(int) * m6 * n6);
-      wave_dec_len_cal (n3, m1*n1, (int)input2[0], ptr2_int);
-      cowavedec (input1, m1*n1, ptr_r, ptr_i, n5, 
+  readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (fname, 2,  m6 , n6 , &ptr2_int );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
+
+//	ptr2_int = (int*)malloc(sizeof(int) * m6 * n6);
+      wave_dec_len_cal (n3, m1*n1, input2[0], ptr2_int);
+      cowavedec (input1, m1*n1, ptr_r, ptr_i, n5,
 		 f1, f1+n3, f1+n3*2, f1+n3*3,
-		 f2, f2+n3, f2+n3*2, f2+n3*3, 
-		 n3, ptr2_int, n6, (int)input2[0], dwtMode);
-      
-      for(i = 0 ; i < m6 ; i++)
-        for(j = 0 ; j < n6 ; j++)
-                    ptr2[i + m6 * j] = (double)ptr2_int[i + m6 * j];
-        
-    
-    free(ptr2_int);
-      AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
-      AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
+		 f2, f2+n3, f2+n3*2, f2+n3*3,
+		 n3, ptr2_int, n6, input2[0], getdwtMode());
+
+    //  for(i = 0 ; i < m6 ; i++)
+    //    for(j = 0 ; j < n6 ; j++)
+    //                ptr2[i + m6 * j] = (double)ptr2_int[i + m6 * j];
+
+
+    //free(ptr2_int);
+      //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+      //AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
       break;
     }
   default:
@@ -526,18 +432,12 @@ int_idualtree(char *fname)
    int minlhs=1, maxlhs=1, minrhs=4, maxrhs=4;
   int errCode, flow, it, val, count, len;
   double *f1, *f2;
-  
-  int * p_input_vector1 = NULL;
-  int * p_input_vector2 = NULL;
-  int * p_input_vector3 = NULL;
-  int * p_input_vector4 = NULL;
+   int readFlag;
   double *input1_r,*input1_i;
-  double *input2;
-  int *input2_int;
+  int *input2;
   double *input3;
   double *input4;
-  SciErr _SciErr;
-  int type;
+  //SciErr _SciErr;
    double *output1;
    int i,j;
 
@@ -548,105 +448,33 @@ int_idualtree(char *fname)
   if (errCode != SUCCESS)
   {
     validate_print (errCode);
-    return 0;			
+    return 0;
   }
 
 //   GetRhsCVar(1, "d", &it, &m1, &n1, &l1r, &l1c);
-  _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: first input vector must be double\n",fname);	
-		  return -1;
-		}
-		_SciErr = getComplexMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1_r,&input1_i);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetComplexMatrixOfDoubles (fname, 1,  &m1, &n1, &input1_r,&input1_i );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(2, "i", &m2, &n2, &l2);
-_SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: second input vector must be double or int\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 2,  &m2, &n2 , &input2 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
 //   GetRhsVar(3, "d", &m3, &n3, &l3);
-_SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_vector3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector3, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 3. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 3,  &m3, &n3 , &input3 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(4, "d", &m4, &n4, &l4);
-_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector4, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 4. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,4,  &m4, &n4 , &input4 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 
   len = 0;
   for (count = 0; count < (m2 * n2 - 1); count++)
@@ -680,30 +508,30 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   m5 = 1;
   n5 = input2[m2*n2-1];
 //   CreateVar(5, "d", &m5, &n5, &l5);
-_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output1);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
+readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m5 , n5 , &output1 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
+
   f1 = (double *)malloc(m3*n3*sizeof(double));
   f2 = (double *)malloc(m3*n3*sizeof(double));
   matrix_tran(input3,n3,m3,f1,m3,n3);
   matrix_tran(input4,n3,m3,f2,m3,n3);
-  input2_int = (int*)malloc(sizeof(int) * m2 * n2);
-        for(i = 0 ; i < m2 ; i++)
-        for(j = 0 ; j < n2 ; j++)
-                    input2_int[i + m2 * j] = (int)input2[i + m2 * j];
+  //input2_int = (int*)malloc(sizeof(int) * m2 * n2);
+  //      for(i = 0 ; i < m2 ; i++)
+  //      for(j = 0 ; j < n2 ; j++)
+  //                  input2_int[i + m2 * j] = (int)input2[i + m2 * j];
 
-  cowaverec (input1_r, input1_i, m1*n1, output1, m5*n5, 
+  cowaverec (input1_r, input1_i, m1*n1, output1, m5*n5,
 	     f1, f1+n3, f1+n3*2, f1+n3*3,
-	     f2, f2+n3, f2+n3*2, f2+n3*3, 
-	     n3, input2_int, m2*n2, m2*n2-2, dwtMode);
-  
-  free(input2_int);
+	     f2, f2+n3, f2+n3*2, f2+n3*3,
+	     n3, input2, m2*n2, m2*n2-2, getdwtMode());
+
+  //free(input2_int);
   free(f1);
   free(f2);
-  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
 
   return 0;
 }
@@ -717,21 +545,18 @@ int_dualtree2D(char *fname)
    int l5r, l5c;
    int minlhs=2, maxlhs=2, minrhs=4, maxrhs=4;
   int errCode, flow, calLen, temLen, count, ln, it, stride, val;
-  int val1, val2, stride1, stride2, row, col, total, *pLen; 
+  int val1, val2, stride1, stride2, row, col, total, *pLen;
   double *f1, *f2, *mr, *mi;
-  int * p_input_vector1 = NULL;
-  int * p_input_vector2 = NULL;
-  int * p_input_vector3 = NULL;
-  int * p_input_vector4 = NULL;
   double *input1;
-  double *input2;
+  int *input2;
   double *input3;
   double *input4;
-  SciErr _SciErr;
-  int type;
-      double *output1_r,*output1_i,*output2;
+  //SciErr _SciErr;
+      double *output1_r,*output1_i;
+      int *output2;
+      int readFlag;
 
-      
+
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
@@ -739,106 +564,33 @@ int_dualtree2D(char *fname)
   if (errCode != SUCCESS)
   {
     validate_print (errCode);
-    return 0;			
+    return 0;
   }
 
 //   GetRhsVar(1, "d", &m1, &n1, &l1);
-  		_SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: first input vector must be double\n",fname);	
-		  return -1;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 1,  &m1, &n1 , &input1 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(2, "i", &m2, &n2, &l2);
-    		_SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: second input vector must be double or int\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 2,  &m2, &n2 , &input2 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(3, "d", &m3, &n3, &l3);
-    		_SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_vector3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector3, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 3. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 3,  &m3, &n3 , &input3 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
 //   GetRhsVar(4, "d", &m4, &n4, &l4);
-    		_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector4, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 4. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 4,  &m4, &n4 , &input4 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 
   wave_len_validate (m1, n3, &stride1, &val1);
   wave_len_validate (n1, n3, &stride2, &val2);
@@ -859,7 +611,7 @@ int_dualtree2D(char *fname)
 
   f1 = (double *)malloc(m3*n3*sizeof(double));
   f2 = (double *)malloc(m3*n3*sizeof(double));
-  
+
   matrix_tran(input3,n3,m3,f1,m3,n3);
   matrix_tran(input4,n3,m3,f2,m3,n3);
 
@@ -869,47 +621,45 @@ int_dualtree2D(char *fname)
   m6 = input2[0] + 2;
   n6 = 2;
 //   CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5c);
-  _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output1_r,&output1_i);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
+  readFlag = swt_gwsupport_AllocComplexMatrixOfDoubles (fname, 1, m5, n5, &output1_r,&output1_i);
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 //   CreateVar(6, "i", &m6, &n6, &l6);
-_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &output2);
-	//_SciErr = allocMatrixOfInteger32(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &ptr2);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
+readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (fname, 2,  m6 , n6 , &output2 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
 
-	
+
+
   mr = (double *)malloc(m5*n5*sizeof(double));
   mi = (double *)malloc(m5*n5*sizeof(double));
   for (row = 0; row < m6; row++)
     {
       for (col = 0; col < n6; col++)
-	output2[row + col * m6] = (double)pLen[col + row * n6];
+	output2[row + col * m6] = pLen[col + row * n6];
     }
 
   cowavedec2 (input1, m1, n1, f1, f1+n3, f2, f2+n3,
-	      n3, pLen, mr, total, (int)input2[0], dwtMode);
+	      n3, pLen, mr, total, input2[0], getdwtMode());
 
   cowavedec2 (input1, m1, n1, f1+n3*2, f1+n3*3, f2+n3*2, f2+n3*3,
-	      n3, pLen, mi, total, (int)input2[0], dwtMode);
+	      n3, pLen, mi, total, input2[0], getdwtMode());
 
   copmd (mr,mi,total,pLen[0],pLen[1],output1_r,output1_i);
 
-  
+
   free(pLen);
   free(f1);
   free(f2);
   free(mr);
   free(mi);
 
-  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
-  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
+  //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  //AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
 
   return 0;
 }
@@ -923,18 +673,13 @@ int_idualtree2D(char *fname)
    int minlhs=1, maxlhs=1, minrhs=4, maxrhs=4;
   int errCode, flow, it, val, *pLen, size, row, col, i;
   double *f1, *f2, *mr, *mi, *maxR, *maxI;
-  int * p_input_vector1 = NULL;
-  int * p_input_vector2 = NULL;
-  int * p_input_vector3 = NULL;
-  int * p_input_vector4 = NULL;
   double *input1_r,*input1_i;
-  double *input2;
+  int *input2;
   double *input3;
   double *input4;
-  SciErr _SciErr;
-  int type;
    double *output1;
-   
+   int readFlag;
+
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
@@ -942,107 +687,35 @@ int_idualtree2D(char *fname)
   if (errCode != SUCCESS)
   {
     validate_print (errCode);
-    return 0;			
+    return 0;
   }
 
   it = 1;
 
 //   GetRhsCVar(1, "d", &it, &m1, &n1, &l1r, &l1c);
-    _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: first input vector must be double\n",fname);	
-		  return -1;
-		}
-		_SciErr = getComplexMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1_r,&input1_i);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetComplexMatrixOfDoubles (fname, 1,  &m1, &n1 , &input1_r,&input1_i);
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(2, "i", &m2, &n2, &l2);
-_SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: second input vector must be double or int\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 2,  &m2, &n2 , &input2 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
 //   GetRhsVar(3, "d", &m3, &n3, &l3);
-_SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_vector3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector3, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 3. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 3,  &m3, &n3 , &input3 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
 //   GetRhsVar(4, "d", &m4, &n4, &l4);
-_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector4, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 4. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 4,  &m4, &n4 , &input4 );
+      if(readFlag==SWT_GWSUPPORT_ERROR)
+        {
+          return 0;
+        }
 
   if ((input2[0] < n3) || (input2[m2] < n3))
     {
@@ -1087,12 +760,11 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   n5 = pLen[(m2 - 1) * n2 + 1];
 
 //   CreateVar(5, "d", &m5, &n5, &l5);
-  _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output1);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m5 , n5 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 
   f1 = (double *)malloc(m3*n3*sizeof(double));
   f2 = (double *)malloc(m3*n3*sizeof(double));
@@ -1106,9 +778,9 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   copmr (input1_r,input1_i,m1*n1,pLen[0],pLen[1],mr,mi);
 
   cowaverec2 (mr, m1*n1, f1, f1+n3, f2, f2+n3,
-        n3, maxR, m5, n5, pLen, m2-2, dwtMode);
+        n3, maxR, m5, n5, pLen, m2-2, getdwtMode());
   cowaverec2 (mi, m1*n1, f1+n3*2, f1+n3*3, f2+n3*2, f2+n3*3,
-        n3, maxI, m5, n5, pLen, m2-2, dwtMode);
+        n3, maxI, m5, n5, pLen, m2-2, getdwtMode());
 
   for(i=0;i<m5*n5;i++)
     output1[i] = (maxR[i]+maxI[i])/2;
@@ -1120,7 +792,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   free(maxI);
   free(f1);
   free(f2);
-  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
 
   return 0;
 }
@@ -1134,20 +806,15 @@ int_cplxdual2D(char *fname)
    int l5r, l5c, l7r, l7c;
    int minlhs=3, maxlhs=3, minrhs=4, maxrhs=4;
   int errCode, flow, calLen, temLen, count, ln, it, stride, val;
-  int val1, val2, stride1, stride2, row, col, total, *pLen; 
+  int val1, val2, stride1, stride2, row, col, total, *pLen;
   double *f1, *f2, *mr, *mi, *mrr, *mii;
-  int * p_input_vector1 = NULL;
-  int * p_input_vector2 = NULL;
-  int * p_input_vector3 = NULL;
-  int * p_input_vector4 = NULL;
+  int readFlag;
   double *input1;
-  double *input2;
+  int *input2;
   double *input3;
   double *input4;
-  SciErr _SciErr;
-  int type;
-      double *output1_r,*output1_i,*output2;
-      int *output2_int;
+      double *output1_r,*output1_i;
+      int *output2;
       double *output3_r,*output3_i;
       int i,j;
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
@@ -1157,105 +824,34 @@ int_cplxdual2D(char *fname)
   if (errCode != SUCCESS)
   {
     validate_print (errCode);
-    return 0;			
+    return 0;
   }
 
 //   GetRhsVar(1, "d", &m1, &n1, &l1);
-_SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: first input vector must be double\n",fname);	
-		  return -1;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 1,  &m1, &n1 , &input1 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(2, "i", &m2, &n2, &l2);
-_SciErr = getVarAddressFromPosition(pvApiCtx,2, &p_input_vector2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: second input vector must be double or int\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 2,  &m2, &n2 , &input2 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(3, "d", &m3, &n3, &l3);
-_SciErr = getVarAddressFromPosition(pvApiCtx, 3, &p_input_vector3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector3, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 3. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 3,  &m3, &n3 , &input3 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsVar(4, "d", &m4, &n4, &l4);
-_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector4, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 4. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 4,  &m4, &n4 , &input4 );
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 
   wave_len_validate (m1, n3, &stride1, &val1);
   wave_len_validate (n1, n3, &stride2, &val2);
@@ -1276,7 +872,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
 
   f1 = (double *)malloc(m3*n3*sizeof(double));
   f2 = (double *)malloc(m3*n3*sizeof(double));
-  
+
   matrix_tran(input3,n3,m3,f1,m3,n3);
   matrix_tran(input4,n3,m3,f2,m3,n3);
 
@@ -1288,26 +884,23 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
   m7 = m5;
   n7 = n5;
 //   CreateCVar (5, "d",&it, &m5, &n5, &l5r, &l5c);
-    _SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m5, n5, &output1_r,&output1_i);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
-	_SciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m7, n7, &output3_r,&output3_i);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
+readFlag = swt_gwsupport_AllocComplexMatrixOfDoubles (fname, 1,  m5 , n5 , &output1_r,&output1_i);
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
+  readFlag = swt_gwsupport_AllocComplexMatrixOfDoubles (fname, 2,  m7 , n7 , &output3_r,&output3_i);
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 //   CreateVar(6, "i", &m6, &n6, &l6);
-_SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 3, m6, n6, &output2);
-	//_SciErr = allocMatrixOfInteger32(pvApiCtx, nbInputArgument(pvApiCtx) + 2, m6, n6, &ptr2);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
+readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (fname, 3,  m6 , n6 , &output2);
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
+
 
   mr = (double *)malloc(m5*n5*sizeof(double));
   mi = (double *)malloc(m5*n5*sizeof(double));
@@ -1323,26 +916,26 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 3, m6, n6, &
 
   /* (1,1) */
   cowavedec2a (input1, m1, n1, f1, f1+n3, f1, f1+n3, f2, f2+n3,
-	       f2, f2+n3, n3, pLen, mr, total, (int)input2[0], dwtMode);
+	       f2, f2+n3, n3, pLen, mr, total, (int)input2[0], getdwtMode());
   /* (2,2) */
   cowavedec2a (input1, m1, n1, f1+n3*2, f1+n3*3, f1+n3*2, f1+n3*3,
 	       f2+n3*2, f2+n3*3, f2+n3*2, f2+n3*3,
-	       n3, pLen, mi, total,  (int)input2[0], dwtMode);
+	       n3, pLen, mi, total,  (int)input2[0], getdwtMode());
   /* (1,2) */
-  cowavedec2a (input1, m1, n1, f1, f1+n3, f1+n3*2, f1+n3*3, 
-	       f2, f2+n3, f2+n3*2, f2+n3*3, n3, pLen, mrr, total, 
-	       (int)input2[0], dwtMode);
+  cowavedec2a (input1, m1, n1, f1, f1+n3, f1+n3*2, f1+n3*3,
+	       f2, f2+n3, f2+n3*2, f2+n3*3, n3, pLen, mrr, total,
+	       (int)input2[0], getdwtMode());
   /* (2,1) */
-  cowavedec2a (input1, m1, n1, f1+n3*2, f1+n3*3, f1, f1+n3,  
-	       f2+n3*2, f2+n3*3, f2, f2+n3, n3, pLen, mii, total, 
-	       (int)input2[0], dwtMode);
+  cowavedec2a (input1, m1, n1, f1+n3*2, f1+n3*3, f1, f1+n3,
+	       f2+n3*2, f2+n3*3, f2, f2+n3, n3, pLen, mii, total,
+	       (int)input2[0], getdwtMode());
 
 
   copmd (mr,mi,total,pLen[0],pLen[1],output1_r,output1_i);
 
   copmd (mrr,mii,total,pLen[0],pLen[1],output3_r,output3_i);
 
-	
+
   free(pLen);
   free(f1);
   free(f2);
@@ -1351,9 +944,9 @@ _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 3, m6, n6, &
   free(mrr);
   free(mii);
 
-  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
-  AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
-  AssignOutputVariable(pvApiCtx,3) = nbInputArgument(pvApiCtx) + 3;
+  //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  //AssignOutputVariable(pvApiCtx,2) = nbInputArgument(pvApiCtx) + 2;
+  //AssignOutputVariable(pvApiCtx,3) = nbInputArgument(pvApiCtx) + 3;
 
   return 0;
 }
@@ -1366,18 +959,12 @@ int_icplxdual2D(char *fname)
    int minlhs=1, maxlhs=1, minrhs=5, maxrhs=5;
   int errCode, flow, it, val, *pLen, size, row, col, i;
   double *f1, *f2, *mr, *mi, *maxR, *maxI, *mrr, *mii, *maxRR, *maxII;
- int * p_input_vector1 = NULL;
-  int * p_input_vector2 = NULL;
-  int * p_input_vector3 = NULL;
-  int * p_input_vector4 = NULL;
-  int * p_input_vector5 = NULL;
+  int readFlag;
   double *input1_r,*input1_i;
   double *input2_r,*input2_i;
-  double *input3;
+  int *input3;
   double *input4;
     double *input5;
-  SciErr _SciErr;
-  int type;
    double *output1;
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
@@ -1386,131 +973,44 @@ int_icplxdual2D(char *fname)
   if (errCode != SUCCESS)
   {
     validate_print (errCode);
-    return 0;			
+    return 0;
   }
 
   it = 1;
 
 //   GetRhsCVar(1, "d", &it, &m1, &n1, &l1r, &l1c);
-   _SciErr = getVarAddressFromPosition(pvApiCtx, 1, &p_input_vector1);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector1, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: first input vector must be double\n",fname);	
-		  return -1;
-		}
-		_SciErr = getComplexMatrixOfDouble(pvApiCtx, p_input_vector1, &m1, &n1, &input1_r,&input1_i);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+    readFlag = swt_gwsupport_GetComplexMatrixOfDoubles (fname, 1,  &m1, &n1 ,  &input1_r,&input1_i);
+    if(readFlag==SWT_GWSUPPORT_ERROR)
+      {
+        return 0;
+      }
 //   GetRhsCVar(2, "d", &it, &m2, &n2, &l2r, &l2c);
- _SciErr = getVarAddressFromPosition(pvApiCtx, 2, &p_input_vector2);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector2, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return 0;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: first input vector must be double\n",fname);	
-		  return -1;
-		}
-		_SciErr = getComplexMatrixOfDouble(pvApiCtx, p_input_vector2, &m2, &n2, &input2_r,&input2_i);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetComplexMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2_r,&input2_i);
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
+
 //   GetRhsVar(3, "i", &m3, &n3, &l3);
-_SciErr = getVarAddressFromPosition(pvApiCtx,3, &p_input_vector3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector3, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 3. input vector must be double or int\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector3, &m3, &n3, &input3);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 3,  &m3, &n3 , &input3 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
+
 //   GetRhsVar(4, "d", &m4, &n4, &l4);
-_SciErr = getVarAddressFromPosition(pvApiCtx,4, &p_input_vector4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector4, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 4. input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector4, &m4, &n4, &input4);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 4,  &m4, &n4 , &input4 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
+
 //   GetRhsVar(5, "d", &m5, &n5, &l5);
-_SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-                _SciErr = getVarType(pvApiCtx, p_input_vector5, &type);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
-		if (type!=sci_matrix)
-		{
-		  Scierror (999,"%s: 5 input vector must be double\n",fname);	
-		  return 0;
-		}
-		_SciErr = getMatrixOfDouble(pvApiCtx, p_input_vector5, &m5, &n5, &input5);
-		if(_SciErr.iErr)
-		{
-			printError(&_SciErr, 0);
-			return -1;
-		}
+readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 5,  &m5, &n5 , &input5 );
+if(readFlag==SWT_GWSUPPORT_ERROR)
+  {
+    return 0;
+  }
 
   if ((input3[0] < n4) || (input3[m3] < n4))
     {
@@ -1555,12 +1055,11 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   n6 = pLen[(m3 - 1) * n3 + 1];
 
 //   CreateVar(6, "d", &m6, &n6, &l6);
-    _SciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, m6, n6, &output1);
-	if(_SciErr.iErr)
-	 {
-		printError(&_SciErr, 0);
-		return -1;
-	}
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m6 , n6 , &output1 );
+  if(readFlag==SWT_GWSUPPORT_ERROR)
+    {
+      return 0;
+    }
 
   f1 = (double *)malloc(m4*n4*sizeof(double));
   f2 = (double *)malloc(m4*n4*sizeof(double));
@@ -1579,22 +1078,22 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   copmr (input2_r,input2_i,m1*n1,pLen[0],pLen[1],mrr,mii);
 
   /* (1,1) */
-  cowaverec2a (mr, m1*n1, f1, f1+n4, f1, f1+n4, 
-	       f2, f2+n4, f2, f2+n4, n4, maxR, 
-	       m6, n6, pLen, m3-2, dwtMode);
+  cowaverec2a (mr, m1*n1, f1, f1+n4, f1, f1+n4,
+	       f2, f2+n4, f2, f2+n4, n4, maxR,
+	       m6, n6, pLen, m3-2, getdwtMode());
   /* (2,2) */
-  cowaverec2a (mi, m1*n1, f1+n4*2, f1+n4*3, 
+  cowaverec2a (mi, m1*n1, f1+n4*2, f1+n4*3,
 	       f1+n4*2, f1+n4*3, f2+n4*2, f2+n4*3,
-	       f2+n4*2, f2+n4*3, n4, maxI, m6, n6, 
-	       pLen, m3-2, dwtMode);
+	       f2+n4*2, f2+n4*3, n4, maxI, m6, n6,
+	       pLen, m3-2, getdwtMode());
   /* (1,2) */
   cowaverec2a (mrr, m1*n1, f1, f1+n4, f1+n4*2, f1+n4*3,
 	       f2, f2+n4, f2+n4*2, f2+n4*3,
-	       n4, maxRR, m6, n6, pLen, m3-2, dwtMode);
+	       n4, maxRR, m6, n6, pLen, m3-2, getdwtMode());
   /* (2,2) */
   cowaverec2a (mii, m1*n1, f1+n4*2, f1+n4*3, f1, f1+n4,
 	       f2+n4*2, f2+n4*3, f2, f2+n4,
-	       n4, maxII, m6, n6, pLen, m3-2, dwtMode);
+	       n4, maxII, m6, n6, pLen, m3-2, getdwtMode());
 
   for(i=0;i<m6*n6;i++)
     output1[i] = (maxR[i]+maxI[i]+maxRR[i]+maxII[i])/4;
@@ -1610,7 +1109,7 @@ _SciErr = getVarAddressFromPosition(pvApiCtx,5, &p_input_vector5);
   free(maxII);
   free(f1);
   free(f2);
-  AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
+  //AssignOutputVariable(pvApiCtx,1) = nbInputArgument(pvApiCtx) + 1;
 
   return 0;
 }

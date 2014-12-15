@@ -1,19 +1,45 @@
-// Copyright (C) 2010 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
-// dwt1d  Test 
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+
+
+// dwt1d  Test
 loadmatfile("-mat",get_swt_path()+"tests/unit_tests/Data.mat");
 // detcoef
-[c,l]=wavedec(s1,3,'sym10');
-[cA1,cD1]=dwt(s1,'sym10');
-[cA2,cD2]=dwt(cA1,'sym10');
-[cA3,cD3]=dwt(cA2,'sym10');
-cdd3=detcoef(c,l);
-cd3=detcoef(c,l,3);
-cd2=detcoef(c,l,2);
-cd1=detcoef(c,l,1);
+level=10;
+[c,l]=wavedec(s1,level,'sym10');
+cA=list();
+cD=list();
+[cA(1),cD(1)]=dwt(s1,'sym10');
+for (i=2:level)
+	[cA(i),cD(i)]=dwt(cA(i-1),'sym10');
+end;
 
-assert_checkalmostequal ( cdd3 , cD3 , %eps );
-assert_checkalmostequal ( cd3 , cD3 , %eps );
-assert_checkalmostequal ( cd2 , cD2 , %eps );
-assert_checkalmostequal ( cd1 , cD1 , %eps );
+cddetMax=detcoef(c,l);
+cdet=list();
+for (i=1:level)
+cdet(i)=detcoef(c,l,i);
+end;
 
+
+assert_checkalmostequal ( cddetMax , cD(level) , %eps );
+for (i=1:level)
+	assert_checkalmostequal ( cdet(i) , cD(i) , %eps );
+end;

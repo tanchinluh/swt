@@ -1,6 +1,26 @@
-// Copyright (C) 2010 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
-// dwt1d  Test 
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+
+
+// dwt1d  Test
 
 loadmatfile("-mat",get_swt_path()+"tests/unit_tests/Data.mat");
 
@@ -123,7 +143,7 @@ Hi_D=rand(1,20,'normal');
 caa=dyaddown(wkeep(conv(wextend(1,'symh',x1,length(Lo_D),'b'),Lo_D),(length(x1)+length(Lo_D)-1)));
 cdd=dyaddown(wkeep(conv(wextend(1,'symh',x1,length(Lo_D),'b'),Hi_D),(length(x1)+length(Lo_D)-1)));
 assert_checkalmostequal ( caa , cA , %eps, %eps*10);;
-assert_checkalmostequal ( cdd , cD , %eps, %eps*10);;
+assert_checkalmostequal ( cdd , cD , %eps, %eps*100);;
 [cA,cD]=dwt(x2,Lo_D,Hi_D);
 caa=dyaddown(wkeep(conv(wextend(1,'symh',x2,length(Lo_D),'b'),Lo_D),(length(x2)+length(Lo_D)-1)));
 cdd=dyaddown(wkeep(conv(wextend(1,'symh',x2,length(Lo_D),'b'),Hi_D),(length(x2)+length(Lo_D)-1)));

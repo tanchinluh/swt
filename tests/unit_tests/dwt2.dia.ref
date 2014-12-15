@@ -1,10 +1,28 @@
-// Copyright (C) 2010 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
-// dwt2d  Test 
-// dwt 2d 
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+// dwt2d  Test
+// dwt 2d
 loadmatfile("-mat",get_swt_path()+"tests/unit_tests/Data.mat");
 clear row_low;
-clear row_hi;	
+clear row_hi;
 clear col_low_low;
 clear col_low_hi;
 clear col_hi_low;
@@ -531,7 +549,7 @@ ccv=dyaddown(wkeep(col_hi_low,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 ccd=dyaddown(wkeep(col_hi_hi,[r+length(Lo_D)-1 c+length(Lo_D)-1]),'m');
 assert_checkalmostequal ( cA , cca , %eps, %eps*1000 );
 assert_checkalmostequal ( cH , cch , %eps, %eps*1000 );
-assert_checkalmostequal ( cV , ccv , %eps*100000);
+assert_checkalmostequal ( cV , ccv , %eps*1000);
 assert_checkalmostequal ( cD , ccd , %eps*100000);
 assert_checkalmostequal ( ccA , cca , %eps, %eps*1000 );
 assert_checkalmostequal ( ccH , cch , %eps, %eps*1000 );

@@ -1,6 +1,26 @@
-// Copyright (C) 2012 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
-// wavefun  Test 
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+
+
+// wavefun  Test
 ITER=12;
 // dwt
 // type 1 input
@@ -17,14 +37,14 @@ assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-10 );
 //db1 - db36
 for N=1:36
   wname="db"+sprintf("%d",N);
-  
+
   [phi,psi,xval]=wavefun(wname,ITER);
   assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-10 );
   assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-10  );
   assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-10 );
   tmp=fft(psi);
   assert_checkalmostequal ( real(tmp(1)) , 0 , %eps,1e-10);
-  
+
 end;
 
 //coif family
@@ -83,7 +103,7 @@ end
   assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-7 );
   assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-7  );
   assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-8);
-  
+
   //vaidyanathan
     [phi,psi,xval]=wavefun("vaidyanathan",ITER);
   assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-7 );
@@ -138,56 +158,56 @@ end;
   assert_checkalmostequal ( sum(phi)/(2^ITER) , 1 , %eps, 1e-5 );
   assert_checkalmostequal ( sum(psi.^2)/(2^ITER) , 1 , %eps, 1e-5  );
   assert_checkalmostequal ( sum(psi) , 0 , %eps, 1e-4);
-  
-  
-  
+
+
+
   //cwt
   //sinus
   [psi,xval]=wavefun("sinus",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
   tmp=fft(psi);
   assert_checkalmostequal ( real(tmp(1)) , 0 , %eps,1e-12);
-  //poisson 
+  //poisson
   [psi,xval]=wavefun("poisson",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
 //     tmp=fft(psi);
    assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
-// mexh 
+// mexh
   [psi,xval]=wavefun("mexh",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
-// morl 
+// morl
   [psi,xval]=wavefun("morl",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
-// DOG 
+// DOG
   [psi,xval]=wavefun("DOG",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
-// cmor 
+// cmor
   [psi,xval]=wavefun("cmor",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
-// shan 
+// shan
   [psi,xval]=wavefun("shan",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
-// fbsp 
+// fbsp
   [psi,xval]=wavefun("fbsp",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
-// cauchy 
+// cauchy
   [psi,xval]=wavefun("cauchy",ITER);
   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
-  
+
 gaus_fam={"gaus1", "gaus2", "gaus3", "gaus4","gaus5","gaus6","gaus7", "gaus8"};
 for i=1:max(size(gaus_fam))
 

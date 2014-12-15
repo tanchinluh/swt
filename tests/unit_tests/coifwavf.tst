@@ -1,7 +1,27 @@
-// Copyright (C) 2010 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+
+
 // filter Test
-// 
+//
 
 function F = ref_coifwavf(num)
 
@@ -127,8 +147,8 @@ endfunction
 
 // sym2
 
-// coif1 
-// 
+// coif1
+//
 F = ref_coifwavf(1);
 F2 = coifwavf("coif1");
 F2=F2/sqrt(2);
@@ -137,7 +157,7 @@ F2=F2/sqrt(2);
 assert_checkalmostequal ( F2 , F , %eps, %eps );
 
 // coif2
-// 
+//
 F = ref_coifwavf(2);
 F2 = coifwavf("coif2");
 F2=F2/sqrt(2);
@@ -146,7 +166,7 @@ F2=F2/sqrt(2);
 assert_checkalmostequal ( F2 , F , %eps, %eps );
 
 // coif3
-// 
+//
 F = ref_coifwavf(3);
 F2 = coifwavf("coif3");
 F2=F2/sqrt(2);
@@ -155,7 +175,7 @@ F2=F2/sqrt(2);
 assert_checkalmostequal ( F2 , F , %eps, %eps );
 
 // coif4
-// 
+//
 F = ref_coifwavf(4);
 F2 = coifwavf("coif4");
 F2=F2/sqrt(2);
@@ -164,7 +184,7 @@ F2=F2/sqrt(2);
 assert_checkalmostequal ( F2 , F , %eps, %eps );
 
 // coif5
-// 
+//
 F = ref_coifwavf(5);
 F2 = coifwavf("coif5");
 F2=F2/sqrt(2);
@@ -173,9 +193,9 @@ F2=F2/sqrt(2);
 assert_checkalmostequal ( F2 , F , %eps, %eps );
 
 
-// db20 
+// db20
 for N=1:17
   w=coifwavf("coif"+sprintf("%d",N));
- 
+
   assert_checkalmostequal ( sum(w)-sqrt(2) , 0 , %eps, %eps*10 );
 end;

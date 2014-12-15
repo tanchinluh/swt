@@ -1,15 +1,15 @@
 // This file is released under the 3-clause BSD license. See COPYING-BSD.
 
 function builder_gw_c()
-  CURRENT_PATH = strsubst(get_absolute_file_path("builder_gateway_c.sce"), "\", "/");
+  gateway_path = strsubst(get_absolute_file_path("builder_gateway_c.sce"), "\", "/");
 
 
-  CFLAGS = "-I" + CURRENT_PATH;
+  //CFLAGS = "-I" + CURRENT_PATH;
 
   // PutLhsVar managed by user in sci_sum and in sci_sub
   // if you do not this variable, PutLhsVar is added
   // in gateway generated (default mode in scilab 4.x and 5.x)
-  WITHOUT_AUTO_PUTLHSVAR = %F;
+  //WITHOUT_AUTO_PUTLHSVAR = %F;
 
   FUNCTIONS_GATEWAY = ["wrev", "int_wrev";...
 	  "wrev2", "int_wrev2";...
@@ -21,7 +21,7 @@ function builder_gw_c()
 	  "wkeep", "int_wkeep";...
 	"wextend", "int_wextend";...
 	"wcodemat", "int_wcodemat";...
-	"ind2rgb", "int_ind2rgb";...
+	//"ind2rgb", "int_ind2rgb";...
 	"wrot3", "int_mat3Dtran";...
 	"wrev3", "int_wrev3";...
 	"orthfilt", "int_orthfilt";...
@@ -88,16 +88,41 @@ function builder_gw_c()
 	"meyeraux","int_meyeraux";...
 	"meyer2","int_meyer";
 	];
-  FILES_GATEWAY = ["utility.c","dwt1d.c","dwt2d.c","haar.c","daubechies.c","coiflets.c","bathlets.c","beylkin.c",...
-  "dmey.c","legendre.c","vaidyanathan.c","farras.c","kingsbury.c","symlets.c" ,"bior.c","validate.c","utility_validate.c","dwt_validate.c", ...
-  "swt.c","swt_validate.c", "cwt.c", "cwt_validate.c","dwt3d.c","cowt.c","cowt_validate.c","utility_int.c","dwt_int.c", "dwt1d_int.c", "dwt2d_int.c","swt_int.c",...
-  "cwt_int.c","dwt3d_int.c","cowt_int.c","kiss_fft.c"];    // objects files
-    
+  FILES_GATEWAY = [ "utility_int.c","dwt_int.c", "dwt1d_int.c", "dwt2d_int.c","swt_int.c",...
+  "cwt_int.c","dwt3d_int.c","cowt_int.c"];    // objects files
 
-  tbx_build_gateway("swt_c", FUNCTIONS_GATEWAY, FILES_GATEWAY, CURRENT_PATH, "","",CFLAGS);
+ldflags = ""
+
+    if ( getos() == "Windows" ) then
+        include1 = "../../src/c";
+        include2 = "../../src/gwsupport";
+        include3 = SCI+"/modules/output_stream/includes";
+        cflags = "-DWIN32 "+..
+        " -I"""+include1+""""+..
+        " -I"""+include2+""""+..
+        " -I"""+include3+"""";
+    else
+        include1 = gateway_path;
+        include2 = gateway_path+"../../src/c";
+        include3 = gateway_path+"../../src/gwsupport";
+        cflags = "-I"""+include1+""""+..
+        " -I"""+include2+""""+..
+        " -I"""+include3+"""";
+    end
+    // Caution : the order matters !
+    libs = [
+    "../../src/c/libswtlib"
+    "../../src/gwsupport/libswt_gwsupport"
+    ];
+
+    tbx_build_gateway("swt_c", FUNCTIONS_GATEWAY, FILES_GATEWAY, gateway_path, libs, ldflags, cflags);
+
+
+
+  //tbx_build_gateway("swt_c", FUNCTIONS_GATEWAY, FILES_GATEWAY, CURRENT_PATH, "","",CFLAGS);
 
 endfunction
 
 builder_gw_c();
 clear builder_gw_c; // remove builder_gw_c on stack
-// 
+//

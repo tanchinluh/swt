@@ -83,8 +83,8 @@ wden performs an automatic de-noising process of a one-dimensional signal using 
    <programlisting role="example"><![CDATA[
 snr = 3; init = 2055615866;
 [xref,x] = wnoise(3,11,snr,init);
-lev = 5;
-xd = wden(x,'heursure','s','one',lev,'sym8');
+level = 5;
+xd = wden(x,'heursure','s','one',level,'sym8');
 
    ]]></programlisting>
 </refsection>

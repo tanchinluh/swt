@@ -1,6 +1,26 @@
-// Copyright (C) 2010 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
-// dwt1d  Test 
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+
+
+// dwt1d  Test
 
 loadmatfile("-mat",get_swt_path()+"tests/unit_tests/Data.mat");
 
@@ -76,14 +96,14 @@ for N=1:5
   d0=conv(dyadup(cD),Hi_R);
   x0=wkeep(a0+d0,2*length(cA)-length(Lo_R)+2);
   r=idwt(cA,cD,wname);
-  assert_checkalmostequal ( r , x0 , %eps, %eps  );
+  assert_checkalmostequal ( r , x0 , %eps, %eps*10  );
   [cA,cD]=dwt(s1,wname);
   [Lo_D,Hi_D,Lo_R,Hi_R]=wfilters(wname);
   a0=conv(dyadup(cA),Lo_R);
   d0=conv(dyadup(cD),Hi_R);
   x0=wkeep(a0+d0,2*length(cA)-length(Lo_R)+2);
   r=idwt(cA,cD,wname);
-  assert_checkalmostequal ( r , x0 , %eps, %eps  );
+  assert_checkalmostequal ( r , x0 , %eps, %eps*1  );
 end
 
 
@@ -148,30 +168,30 @@ end;
 
 
 // // type 2
-// [cA,cD]=dwt(x1,'bior3.9');
-// Lo_R=rand(1,50,'normal');
-// Hi_R=rand(1,50,'normal');
-// a0=conv(dyadup(cA),Lo_R);
-// d0=conv(dyadup(cD),Hi_R);
-// x0=wkeep(a0+d0,2*length(cA)-length(Lo_R)+2);
-// r=idwt(cA,cD,Lo_R,Hi_R);
-// assert_checkalmostequal ( r , x0 , %eps, %eps);
-// [cA,cD]=dwt(x2,'bior3.9');
-// Lo_R=rand(1,50,'normal');
-// Hi_R=rand(1,50,'normal');
-// a0=conv(dyadup(cA),Lo_R);
-// d0=conv(dyadup(cD),Hi_R);
-// x0=wkeep(a0+d0,2*length(cA)-length(Lo_R)+2);
-// r=idwt(cA,cD,Lo_R,Hi_R);
-// assert_checkalmostequal ( r , x0 , %eps, %eps);
-// [cA,cD]=dwt(s1,'bior3.9');
-// Lo_R=rand(1,50,'normal');
-// Hi_R=rand(1,50,'normal');
-// a0=conv(dyadup(cA),Lo_R);
-// d0=conv(dyadup(cD),Hi_R);
-// x0=wkeep(a0+d0,2*length(cA)-length(Lo_R)+2);
-// r=idwt(cA,cD,Lo_R,Hi_R);
-// assert_checkalmostequal ( r , x0 , %eps, %eps);
+[cA,cD]=dwt(x1,'bior3.9');
+Lo_R=rand(1,20,'normal');
+Hi_R=rand(1,20,'normal');
+a0=conv(dyadup(cA),Lo_R);
+d0=conv(dyadup(cD),Hi_R);
+x0=wkeep(a0+d0,2*length(cA)-length(Lo_R)+2);
+r=idwt(cA,cD,Lo_R,Hi_R);
+assert_checkalmostequal ( r , x0 , %eps, %eps*10);
+[cA,cD]=dwt(x2,'bior3.9');
+Lo_R=rand(1,20,'normal');
+Hi_R=rand(1,20,'normal');
+a0=conv(dyadup(cA),Lo_R);
+d0=conv(dyadup(cD),Hi_R);
+x0=wkeep(a0+d0,2*length(cA)-length(Lo_R)+2);
+r=idwt(cA,cD,Lo_R,Hi_R);
+assert_checkalmostequal ( r , x0 , %eps, %eps*10);
+[cA,cD]=dwt(s1,'bior3.9');
+Lo_R=rand(1,20,'normal');
+Hi_R=rand(1,20,'normal');
+a0=conv(dyadup(cA),Lo_R);
+d0=conv(dyadup(cD),Hi_R);
+x0=wkeep(a0+d0,2*length(cA)-length(Lo_R)+2);
+r=idwt(cA,cD,Lo_R,Hi_R);
+assert_checkalmostequal ( r , x0 , %eps, %eps*10);
 
 
 // type 3
@@ -181,7 +201,7 @@ r=idwt(cA,cD,'sym8',50);
 a0=conv(dyadup(cA),Lo_R);
 d0=conv(dyadup(cD),Hi_R);
 x0=wkeep(a0+d0,50);
-assert_checkalmostequal ( r , x0 , %eps, %eps);
+assert_checkalmostequal ( r , x0 , %eps, %eps*10);
 [cA,cD]=dwt(x2,'sym8');
 r=idwt(cA,cD,'sym8',50);
 [Lo_D,Hi_D,Lo_R,Hi_R]=wfilters('sym8');
@@ -259,29 +279,29 @@ assert_checkalmostequal ( a8 , x0 , %eps, %eps);
 
 
 // type 6
-// [cA,cD]=dwt(x1,'db7');
-// Lo_R=rand(1,50,'normal');
-// Hi_R=rand(1,50,'normal');
-// a0=idwt(cA,cD,Lo_R,Hi_R,50,'mode','symh');
-// a1=idwt(cA,cD,Lo_R,Hi_R,50,'mode','symw');
-// a2=idwt(cA,cD,Lo_R,Hi_R,50,'mode','asymh');
-// a3=idwt(cA,cD,Lo_R,Hi_R,50,'mode','asymw');
-// a4=idwt(cA,cD,Lo_R,Hi_R,50,'mode','sp0');
-// a5=idwt(cA,cD,Lo_R,Hi_R,50,'mode','sp1');
-// a6=idwt(cA,cD,Lo_R,Hi_R,50,'mode','zpd');
-// a7=idwt(cA,cD,Lo_R,Hi_R,50,'mode','ppd');
-// a8=idwt(cA,cD,Lo_R,Hi_R,50,'mode','per');
-// aa0=conv(dyadup(cA),Lo_R);
-// dd0=conv(dyadup(cD),Hi_R);
-// x0=wkeep(aa0+dd0,50);
-// assert_checkalmostequal ( a0 , x0 , %eps, %eps);
-// assert_checkalmostequal ( a1 , x0 , %eps, %eps);
-// assert_checkalmostequal ( a3 , x0 , %eps, %eps);
-// assert_checkalmostequal ( a4 , x0 , %eps, %eps);
-// assert_checkalmostequal ( a5 , x0 , %eps, %eps);
-// assert_checkalmostequal ( a6 , x0 , %eps, %eps);
-// assert_checkalmostequal ( a7 , x0 , %eps, %eps);
-// assert_checkalmostequal ( a8 , x0 , %eps, %eps);
+[cA,cD]=dwt(x1,'db7');
+Lo_R=rand(1,14,'normal');
+Hi_R=rand(1,14,'normal');
+a0=idwt(cA,cD,Lo_R,Hi_R,50,'mode','symh');
+a1=idwt(cA,cD,Lo_R,Hi_R,50,'mode','symw');
+a2=idwt(cA,cD,Lo_R,Hi_R,50,'mode','asymh');
+a3=idwt(cA,cD,Lo_R,Hi_R,50,'mode','asymw');
+a4=idwt(cA,cD,Lo_R,Hi_R,50,'mode','sp0');
+a5=idwt(cA,cD,Lo_R,Hi_R,50,'mode','sp1');
+a6=idwt(cA,cD,Lo_R,Hi_R,50,'mode','zpd');
+a7=idwt(cA,cD,Lo_R,Hi_R,50,'mode','ppd');
+a8=idwt(cA,cD,Lo_R,Hi_R,50,'mode','per');
+aa0=conv(dyadup(cA),Lo_R);
+dd0=conv(dyadup(cD),Hi_R);
+x0=wkeep(aa0+dd0,50);
+assert_checkalmostequal ( a0 , x0 , %eps, %eps*10);
+assert_checkalmostequal ( a1 , x0 , %eps, %eps*10);
+assert_checkalmostequal ( a3 , x0 , %eps, %eps*10);
+assert_checkalmostequal ( a4 , x0 , %eps, %eps*10);
+assert_checkalmostequal ( a5 , x0 , %eps, %eps*10);
+assert_checkalmostequal ( a6 , x0 , %eps, %eps*10);
+assert_checkalmostequal ( a7 , x0 , %eps, %eps*10);
+assert_checkalmostequal ( a8 , x0 , %eps, %eps*10);
 
 
 // column vector

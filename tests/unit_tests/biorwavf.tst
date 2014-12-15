@@ -1,5 +1,25 @@
-// Copyright (C) 2010 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+
+
 // filter Test
 // biorfilt
 
@@ -114,8 +134,8 @@ endfunction
 
 // sym2
 
-// bior1.1 
-// 
+// bior1.1
+//
 [Rf,Df] = ref_biorwavf(1,1);
 [Rf2,Df2] = biorwavf("bior1.1");
 Rf2=Rf2*(1/sqrt(2));
@@ -124,8 +144,8 @@ Df2=Df2*(1/sqrt(2));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior1.3 
-// 
+// bior1.3
+//
 [Rf,Df] = ref_biorwavf(1,3);
 [Rf2,Df2] = biorwavf("bior1.3");
 Rf2=Rf2*(1/sqrt(2));
@@ -134,8 +154,8 @@ Df2=Df2*(1/sqrt(2));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior1.5 
-// 
+// bior1.5
+//
 [Rf,Df] = ref_biorwavf(1,5);
 [Rf2,Df2] = biorwavf("bior1.5");
 Rf2=Rf2*(1/sqrt(2));
@@ -144,8 +164,8 @@ Df2=Df2*(1/sqrt(2));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior2.2 
-// 
+// bior2.2
+//
 [Rf,Df] = ref_biorwavf(2,2);
 [Rf2,Df2] = biorwavf("bior2.2");
 Rf2=Rf2*(1/sqrt(2));
@@ -155,8 +175,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior2.4 
-// 
+// bior2.4
+//
 [Rf,Df] = ref_biorwavf(2,4);
 [Rf2,Df2] = biorwavf("bior2.4");
 Rf2=Rf2*(1/sqrt(2));
@@ -166,8 +186,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior2.6 
-// 
+// bior2.6
+//
 [Rf,Df] = ref_biorwavf(2,6);
 [Rf2,Df2] = biorwavf("bior2.6");
 Rf2=Rf2*(1/sqrt(2));
@@ -177,8 +197,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior2.8 
-// 
+// bior2.8
+//
 [Rf,Df] = ref_biorwavf(2,8);
 [Rf2,Df2] = biorwavf("bior2.8");
 Rf2=Rf2*(1/sqrt(2));
@@ -188,8 +208,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior3.1 
-// 
+// bior3.1
+//
 [Rf,Df] = ref_biorwavf(3,1);
 [Rf2,Df2] = biorwavf("bior3.1");
 Rf2=Rf2*(1/sqrt(2));
@@ -199,8 +219,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior3.3 
-// 
+// bior3.3
+//
 [Rf,Df] = ref_biorwavf(3,3);
 [Rf2,Df2] = biorwavf("bior3.3");
 Rf2=Rf2*(1/sqrt(2));
@@ -210,8 +230,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior3.5 
-// 
+// bior3.5
+//
 [Rf,Df] = ref_biorwavf(3,5);
 [Rf2,Df2] = biorwavf("bior3.5");
 Rf2=Rf2*(1/sqrt(2));
@@ -221,8 +241,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior3.7 
-// 
+// bior3.7
+//
 [Rf,Df] = ref_biorwavf(3,7);
 [Rf2,Df2] = biorwavf("bior3.7");
 Rf2=Rf2*(1/sqrt(2));
@@ -232,9 +252,9 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// 
-// bior3.9 
-// 
+//
+// bior3.9
+//
 [Rf,Df] = ref_biorwavf(3,9);
 [Rf2,Df2] = biorwavf("bior3.9");
 Rf2=Rf2*(1/sqrt(2));
@@ -244,8 +264,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior4.4 
-// 
+// bior4.4
+//
 [Rf,Df] = ref_biorwavf(4,4);
 [Rf2,Df2] = biorwavf("bior4.4");
 Rf2=Rf2*(1/sqrt(2));
@@ -255,8 +275,8 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps*10000 );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps*10000 );
-// bior5.5 
-// 
+// bior5.5
+//
 [Rf,Df] = ref_biorwavf(5,5);
 [Rf2,Df2] = biorwavf("bior5.5");
 Rf2=Rf2*(1/sqrt(2));
@@ -266,7 +286,7 @@ Df2=Df2(find(Df2~=0));
 
 assert_checkalmostequal ( Rf2 , Rf , %eps, %eps );
 assert_checkalmostequal ( Df2 , Df , %eps, %eps );
-// bior6.8 
+// bior6.8
 [Rf,Df] = ref_biorwavf(6,8);
 [Rf2,Df2] = biorwavf("bior6.8");
 Rf2=Rf2*(1/sqrt(2));

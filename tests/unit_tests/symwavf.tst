@@ -1,5 +1,25 @@
-// Copyright (C) 2010 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+
+
 // filter Test
 // biorfilt
 
@@ -7,7 +27,7 @@ function w = symaux(N)
 
 if N==1  // Haar filters
     w = [0.5 0.5];
-    w = (w/sum(w)); 
+    w = (w/sum(w));
     return
 end
 
@@ -25,7 +45,7 @@ P(1:2:lon) = a;
 if N==1 then
   P = [P,1,P];
 else
-  P = [wrev(P),1,P]; 
+  P = [wrev(P),1,P];
 end;
 //if nargout>1
     Proots = roots(P);
@@ -50,7 +70,7 @@ uZ   = exp(-%i*freqs);
 nbGroupOfRealZ = nbrealzeros/2;
 nbGroupOfImagZ = nbimagzeros/4;
 nbGroupOfZeros = nbGroupOfImagZ+nbGroupOfRealZ;
-pow2NbGroup    = 2^(nbGroupOfZeros-1);   
+pow2NbGroup    = 2^(nbGroupOfZeros-1);
 indImagZ       = [1:nbGroupOfImagZ];
 indRealZ       = [nbGroupOfImagZ+1:nbGroupOfZeros];
 phas           = zeros(pow2NbGroup,nbfr);
@@ -60,10 +80,10 @@ for numG=1:pow2NbGroup;
     tmp = realzeros(indReZ);
     for ii=1:nbGroupOfRealZ
         phas(numG,:) = phas(numG,:) + phasecontrib(uZ,tmp(ii));
-    end                             
+    end
     tmp = rho;
     tmp(indImZ) = 1 ./tmp(indImZ);
-    for ii=1:nbGroupOfImagZ       
+    for ii=1:nbGroupOfImagZ
         phas(numG,:) = phas(numG,:) + phasecontrib(uZ,tmp(ii),teta(ii));
     end
 end
@@ -99,11 +119,11 @@ imagzeros = tmp(:);
 w = real(poly([realzeros;imagzeros;-ones(N,1)],'s'));
 w=coeff(w);
 w=w($:-1:1);
-w = (w/sum(w)); 
+w = (w/sum(w));
 
 endfunction
 
-function [iReZ,iImZ] = getZeroInd(num,nbGrZ,nbGrReZ,indReZ,indImZ) 
+function [iReZ,iImZ] = getZeroInd(num,nbGrZ,nbGrReZ,indReZ,indImZ)
 
 
 bin  = dec2bin(num-1,nbGrZ);
@@ -119,8 +139,8 @@ endfunction
 function F = phasecontrib(Z,R,teta)
 [nargout,nargin]=argn(0);
 select nargin
-  case 2 , V = Z-R;                                  
-  case 3 , V = (Z-R*exp(%i*teta)).*(Z-R*exp(-%i*teta)); 
+  case 2 , V = Z-R;
+  case 3 , V = (Z-R*exp(%i*teta)).*(Z-R*exp(-%i*teta));
 end
 
 F  = atan(imag(V),real(V));
@@ -199,7 +219,7 @@ w2=symwavf("sym"+string(N));
 w2=w2/sqrt(2);
 assert_checkalmostequal ( w , w2 , %eps, %eps*100000 );
 
-// sym11 
+// sym11
 N=11;
 w = symaux(N);
 w2=symwavf("sym"+string(N));
@@ -234,7 +254,7 @@ w = symaux(N);
 w2=symwavf("sym"+string(N));
 w2=w2/sqrt(2);
 assert_checkalmostequal ( w , w2 , %eps, %eps*100000 );
-// sym16 
+// sym16
 N=16;
 w = symaux(N);
 w2=symwavf("sym"+string(N));
@@ -262,11 +282,9 @@ w2=symwavf("sym"+string(N));
 w2=w2/sqrt(2);
 assert_checkalmostequal ( w , w2 , %eps, %eps*100000 );
 
-// sym20 
+// sym20
 N=20;
 w = symaux(N);
 w2=symwavf("sym"+string(N));
 w2=w2/sqrt(2);
 assert_checkalmostequal ( w , w2 , %eps, %eps*100000 );
-
-

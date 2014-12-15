@@ -18,11 +18,14 @@ subdemolist=['one dimensional wavelet transform', 'swt1d.sce';..
 'two dimensional dualtree complex wavelet transform','cowt2d.sce';..
 'continous wavelet transform', 'cwt.sce';..
 'stationary wavelet transform', 'swtswt.sce';..
-'image processing', 'image.sce';
-'Differentiation of noisy Data', 'diff_cwt.dem.sce';
-'S8 Symmlets at Various Scales', 'wavelet_scale.dem.sce';
-'some wavelets', 'wavelet_fam.dem.sce';
-'smoothness of wavelets', 'smoothness_wav.dem.sce'];
+'image processing', 'image.sce';..
+'image denoising', 'imageDenoising.sce';.
+'Differentiation of noisy Data', 'diff_cwt.dem.sce';..
+'S8 Symmlets at Various Scales', 'wavelet_scale.dem.sce';..
+'some wavelets', 'wavelet_fam.dem.sce';..
+'smoothness of wavelets', 'smoothness_wav.dem.sce';..
+'cross-correlation plot between two timeseries as a function of both time and wavelength','semibalance.sce';..
+];
 
 
 subdemolist(:,2) = demopath + subdemolist(:,2);

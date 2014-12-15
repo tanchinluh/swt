@@ -1,5 +1,25 @@
-// Copyright (C) 2010 - H. Nahrstaedt
+// -------------------------------------------------------------------------
+// SWT - Scilab wavelet toolbox
+// Copyright (C) 2010-2014  Holger Nahrstaedt
 //
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//-------------------------------------------------------------------------
+//
+//  <-- NO CHECK ERROR OUTPUT -->
+
+
 // Utility Function Test
 // wextend test
 
@@ -2225,18 +2245,18 @@ b=wextend(2,'per',a,7);
 b1=wextend('2','per',a,7);
 b2=wextend('2d','per',a,7);
 b3=wextend('2D','per',a,7);
-//b4=wextend(2,'per',a',7);
-//b5=wextend('2','per',a',7);
-//b6=wextend('2d','per',a',7);
-//b7=wextend('2D','per',a',7);
+b4=wextend(2,'per',a',7);
+b5=wextend('2','per',a',7);
+b6=wextend('2d','per',a',7);
+b7=wextend('2D','per',a',7);
 b8=wextend(2,'PER',a,7);
 b9=wextend('2','PER',a,7);
 b10=wextend('2d','PER',a,7);
 b11=wextend('2D','PER',a,7);
-//b12=wextend(2,'PER',a',7);
-//b13=wextend('2','PER',a',7);
-//b14=wextend('2d','PER',a',7);
-//b15=wextend('2D','PER',a',7);
+b12=wextend(2,'PER',a',7);
+b13=wextend('2','PER',a',7);
+b14=wextend('2d','PER',a',7);
+b15=wextend('2D','PER',a',7);
 c=zeros(64,66);
 for i=1:50,
 c(i+7,:)=wextend(1,'per',a(i,:),7,'b');
@@ -2251,18 +2271,18 @@ assert_checkalmostequal ( b , c , %eps );
 assert_checkalmostequal ( b1 , c , %eps );
 assert_checkalmostequal ( b2 , c , %eps );
 assert_checkalmostequal ( b3 , c , %eps );
-// assert_checkalmostequal ( b4' , c , %eps );
-// assert_checkalmostequal ( b5' , c , %eps );
-// assert_checkalmostequal ( b6' , c , %eps );
-// assert_checkalmostequal ( b7' , c , %eps );
+assert_checkalmostequal ( b4' , c , %eps );
+assert_checkalmostequal ( b5' , c , %eps );
+assert_checkalmostequal ( b6' , c , %eps );
+assert_checkalmostequal ( b7' , c , %eps );
 assert_checkalmostequal ( b8 , c , %eps );
 assert_checkalmostequal ( b9 , c, %eps );
 assert_checkalmostequal ( b10 , c , %eps );
 assert_checkalmostequal ( b11 , c , %eps );
-// assert_checkalmostequal ( b12' , c , %eps );
-// assert_checkalmostequal ( b13' , c , %eps );
-// assert_checkalmostequal ( b14' , c , %eps );
-// assert_checkalmostequal ( b15' , c , %eps );
+assert_checkalmostequal ( b12' , c , %eps );
+assert_checkalmostequal ( b13' , c , %eps );
+assert_checkalmostequal ( b14' , c , %eps );
+assert_checkalmostequal ( b15' , c , %eps );
 
 
 
@@ -2494,5 +2514,3 @@ assert_checkalmostequal ( b4 , c1 , %eps );
 assert_checkalmostequal ( b5 , c1 , %eps );
 assert_checkalmostequal ( b6 , c2 , %eps );
 assert_checkalmostequal ( b7 , c3 , %eps );
-
-

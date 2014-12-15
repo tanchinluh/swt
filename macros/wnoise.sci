@@ -86,7 +86,7 @@ case 2 //'bumps'
  for n=1:N
    
       t=(n-1)/(N-1);
-      X(n)=sum(hj.*((1+abs((t-tj)./wj)^4)^(-1)));
+      X(n)=sum(hj.*((1+abs((t-tj)./wj).^4).^(-1)));
  end
 case 3 //'heavy sine'
  for n=1:N
