@@ -20,6 +20,7 @@ function [PSI,X]= fbspwavf(LB,UB,N,M,FB,FC)
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // sinus
 // mexihat

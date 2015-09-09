@@ -32,13 +32,13 @@
  #include "sciprint.h"
 
 void
-dualtree_form_validate (int *errCode, int *flow)
+dualtree_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==4) && sci_matrix_vector_real(1)  &&
-      sci_matrix_scalar_real(2) && sci_matrix_matrix_real(3) &&
-      sci_matrix_matrix_real(4) && vector_length_check(3,4) &&
-      matrix_row_length_check(3,4) && matrix_row_length_check(4,4))
+  if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1)  &&
+      sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+      sci_matrix_matrix_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+      matrix_row_length_check(pvApiCtx,3,4) && matrix_row_length_check(pvApiCtx,4,4))
     *flow = 1;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -65,13 +65,13 @@ dualtree_form_validate (int *errCode, int *flow)
 // }
 
 void
-idualtree_form_validate (int *errCode, int *flow)
+idualtree_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==4) && sci_matrix_vector_complex(1)  &&
-      sci_matrix_vector_real(2) && sci_matrix_matrix_real(3) &&
-      sci_matrix_matrix_real(4) && vector_length_check(3,4) &&
-      matrix_row_length_check(3,4) && matrix_row_length_check(4,4))
+  if ((NInputArgument==4) && sci_matrix_vector_complex(pvApiCtx,1)  &&
+      sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+      sci_matrix_matrix_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+      matrix_row_length_check(pvApiCtx,3,4) && matrix_row_length_check(pvApiCtx,4,4))
     *flow = 1;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -80,13 +80,13 @@ idualtree_form_validate (int *errCode, int *flow)
 
 
 void
-dualtree2D_form_validate (int *errCode, int *flow)
+dualtree2D_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==4) && sci_matrix_matrix_real(1)  &&
-      sci_matrix_scalar_real(2) && sci_matrix_matrix_real(3) &&
-      sci_matrix_matrix_real(4) && vector_length_check(3,4) &&
-      matrix_row_length_check(3,4) && matrix_row_length_check(4,4))
+  if ((NInputArgument==4) && sci_matrix_matrix_real(pvApiCtx,1)  &&
+      sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+      sci_matrix_matrix_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+      matrix_row_length_check(pvApiCtx,3,4) && matrix_row_length_check(pvApiCtx,4,4))
     *flow = 1;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -94,14 +94,14 @@ dualtree2D_form_validate (int *errCode, int *flow)
 }
 
 void
-idualtree2D_form_validate (int *errCode, int *flow)
+idualtree2D_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==4) && sci_matrix_vector_complex(1)  &&
-      sci_matrix_matrix_real(2) && sci_matrix_matrix_real(3) &&
-      sci_matrix_matrix_real(4) && vector_length_check(3,4) &&
-      matrix_row_length_check(3,4) && matrix_row_length_check(4,4) &&
-      matrix_col_length_check(2,2))
+  if ((NInputArgument==4) && sci_matrix_vector_complex(pvApiCtx,1)  &&
+      sci_matrix_matrix_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+      sci_matrix_matrix_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+      matrix_row_length_check(pvApiCtx,3,4) && matrix_row_length_check(pvApiCtx,4,4) &&
+      matrix_col_length_check(pvApiCtx,2,2))
     *flow = 1;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -109,15 +109,15 @@ idualtree2D_form_validate (int *errCode, int *flow)
 }
 
 void
-icplxdual2D_form_validate (int *errCode, int *flow)
+icplxdual2D_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==5) && sci_matrix_vector_complex(1)  &&
-      sci_matrix_vector_complex(2)  && vector_length_check(1,2) &&
-      sci_matrix_matrix_real(3) && sci_matrix_matrix_real(4) &&
-      sci_matrix_matrix_real(5) && vector_length_check(4,5) &&
-      matrix_row_length_check(4,4) && matrix_row_length_check(5,4) &&
-      matrix_col_length_check(3,2))
+  if ((NInputArgument==5) && sci_matrix_vector_complex(pvApiCtx,1)  &&
+      sci_matrix_vector_complex(pvApiCtx,2)  && vector_length_check(pvApiCtx,1,2) &&
+      sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4) &&
+      sci_matrix_matrix_real(pvApiCtx,5) && vector_length_check(pvApiCtx,4,5) &&
+      matrix_row_length_check(pvApiCtx,4,4) && matrix_row_length_check(pvApiCtx,5,4) &&
+      matrix_col_length_check(pvApiCtx,3,2))
     *flow = 1;
   else
     *errCode = UNKNOWN_INPUT_ERR;

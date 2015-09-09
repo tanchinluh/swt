@@ -18,5 +18,5 @@ function M=wnorm(X,[MIN],[MAX])
 // 
 // Authors
 // Roger Liu and Isaac Zhi
-// See Also
-// None
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
+

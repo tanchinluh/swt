@@ -18,17 +18,15 @@ function builder_main()
   catch
 	  error(gettext("Scilab 5 or more is required."));
   end
-  if v(2) < 3 then
+  if v(1)==5 & v(2) < 3 then
     // new API in scilab 5.3
     error(gettext('Scilab 5.3 or more is required.'));
   end
 
-  // Check development_tools module avaibility
   // =============================================================================
-
-  if ~with_module('development_tools') then
-    error(msprintf(gettext('%s module not installed."),'development_tools'));
-  end
+  // Uncomment this line to make a debug version of the Toolbox
+  // setenv("DEBUG_SCILAB_DYNAMIC_LINK","YES")
+  //setenv("__USE_DEPRECATED_STACK_FUNCTIONS__","YES")
 
   // Action
   // =============================================================================

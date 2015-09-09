@@ -16,5 +16,6 @@ function Y=qmf(x,[EVEN_ODD])
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // wrev

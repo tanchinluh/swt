@@ -20,8 +20,11 @@
 //  <-- NO CHECK ERROR OUTPUT -->
 
 // appcoef2
-sz=stacksize();
-stacksize(1e7);
+version = getversion("scilab");
+if (version(1)<6) then
+	sz=stacksize();
+	stacksize(1e7);
+end;
 a=rand(500,501,'normal');
 
 [c,s]=wavedec2(a,3,'sym5');
@@ -85,5 +88,8 @@ clear cV3;
 clear cD1;
 clear cD2;
 clear cD3;
-stacksize(sz(1));
-clear sz;
+if (version(1)<6) then
+	stacksize(sz(1));
+	clear sz;
+end;
+clear version;

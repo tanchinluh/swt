@@ -60,9 +60,9 @@ assert_checkalmostequal ( lo_r , Lo_R , %eps );
 assert_checkalmostequal ( hi_d , Hi_D , %eps );
 assert_checkalmostequal ( hi_r , Hi_R , %eps );
 end;
-bior_fam={"bior1.1","bior1.3", "bior1.5", "bior2.2", "bior2.4", "bior2.6",...
+bior_fam=["bior1.1","bior1.3", "bior1.5", "bior2.2", "bior2.4", "bior2.6",...
 "bior2.8", "bior3.1", "bior3.3", "bior3.5", "bior3.7",...
-"bior3.9", "bior4.4", "bior5.5", "bior6.8"};
+"bior3.9", "bior4.4", "bior5.5", "bior6.8"];
 // bior1.1
 for N=1:max(size(bior_fam))
 [Lo_D,Hi_D,Lo_R,Hi_R]=wfilters(bior_fam(N));

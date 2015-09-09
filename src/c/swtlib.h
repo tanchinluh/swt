@@ -215,17 +215,17 @@
     * swt Variable Declaration
     ********************************************/
 
-    void sinus_form_validate(int *errCode);
+
     void sinus(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
 
     void poisson(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
     void mexihat(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
 
-    void mexihat_form_validate(int *errCode);
+    
     void morlet(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
-    void morlet_form_validate(int *errCode);
+    
     void DOGauss(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
-    void DOGauss_form_validate(int *errCode);
+   
     void Gauss(double *x, int sigInLength, double *psi, int sigOutLength, int n, double ys);
     void Gaus1(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
     void Gaus2(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
@@ -235,7 +235,7 @@
     void Gaus6(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
     void Gaus7(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
     void Gaus8(double *x, int sigInLength, double *psi, int sigOutLength, double ys);
-    void Gauss_form_validate(int *errCode);
+    
     void cgauss(double *x, int sigInLength, int p, double *psir, double *psii, int sigOutLength, double ys);
     void cgau1(double *x, int sigInLength, double *psir, double *psii, int sigOutLength, double ys);
     void cgau1_packet(double *x, int sigInLength, double *f, int sigOutLength, double ys);
@@ -255,13 +255,13 @@
     void cgau8(double *x, int sigInLength, double *psir, double *psii, int sigOutLength, double ys);
     void cgau8_packet(double *x, int sigInLength, double *f, int sigOutLength, double ys);
 
-    void cmorlet_form_validate(int *errCode);
+    
     void cmorlet(double *x, int sigInLength,
     double fb, double fc, double *psir, double *psii,
     int sigOutLength, double ys);
     void cmorlet_packet(double *x, int sigInLength,
     double *f, int sigOutLength, double ys);
-    void shanwavf_form_validate(int *errCode);
+
     void shanwavf(double *x, int sigInLength,
     double fb, double fc, double *psir, double *psii,
     int sigOutLength, double ys);
@@ -272,14 +272,14 @@
     int sigOutLength, double ys);
     void fbspwavf_packet(double *x, int sigInLength,
     double *f, int sigOutLength, double ys);
-    void fbspwavf_form_validate(int *errCode);
+
     void cauchy(double *x, int sigInLength,
     double fb, double fc, double *psir, double *psii,
     int sigOutLength, double ys);
     void cauchy_neo(double *x, int sigInLength, double *psir, double *psii, int sigOutLength, double ys);
     void cauchy_packet(double *x, int sigInLength,
     double *f, int sigOutLength, double ys);
-    void cauchy_form_validate(int *errCode);
+   
 
     void meyeraux(double x, double *y);
     void meyer_phi(double *x, int sigInLength,    double lb, double ub, double *phir, double *phii,    int sigOutLength, double ys);
@@ -399,6 +399,8 @@
       {"db34", ORTH, DAUBECHIES, 34, daubechies_analysis_initialize, daubechies_synthesis_initialize},
       {"db35", ORTH, DAUBECHIES, 35, daubechies_analysis_initialize, daubechies_synthesis_initialize},
       {"db36", ORTH, DAUBECHIES, 36, daubechies_analysis_initialize, daubechies_synthesis_initialize},
+      {"db37", ORTH, DAUBECHIES, 37, daubechies_analysis_initialize, daubechies_synthesis_initialize},
+      {"db38", ORTH, DAUBECHIES, 38, daubechies_analysis_initialize, daubechies_synthesis_initialize},
       {"coif1", ORTH, COIFLETS, 1, coiflets_analysis_initialize, coiflets_synthesis_initialize},
       {"coif2", ORTH, COIFLETS, 2, coiflets_analysis_initialize, coiflets_synthesis_initialize},
       {"coif3", ORTH, COIFLETS, 3, coiflets_analysis_initialize, coiflets_synthesis_initialize},
@@ -948,8 +950,7 @@
 
 
 
-             void wavefun_form_validate(int *errCode);
-             void wavefun2_form_validate(int *errCode);
+
 
 
              void cwt_fun_parser(char *wname, int *ind);
@@ -963,8 +964,7 @@
              void cwt_conv_complex_complex (double *a, double *b, int sigInLength,double *c, double *d,
             int filterLen, double *sigOutR, double *sigOutI, int sigOutLength);
 
-             void cwt_form_validate(int *errCode, int *flow);
-             void cwt_content_validate(int *errCode, char *input_string);
+
 
 
              /*********************************************

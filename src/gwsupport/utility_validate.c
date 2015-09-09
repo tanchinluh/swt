@@ -35,10 +35,10 @@
  *-----------------------------------------*/
 
 void
-conv_validate (int *errCode)
+conv_validate (void * pvApiCtx, int *errCode)
 {
-  if ((sci_matrix_vector_real(1) || sci_matrix_scalar_real(1)) &&
-      (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)))
+  if ((sci_matrix_vector_real(pvApiCtx,1) || sci_matrix_scalar_real(pvApiCtx,1)) &&
+      (sci_matrix_vector_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)))
     *errCode = SUCCESS;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -50,9 +50,9 @@ conv_validate (int *errCode)
  *-----------------------------------------*/
 
 void
-wrev_validate (int *errCode)
+wrev_validate (void * pvApiCtx, int *errCode)
 {
-  if (sci_matrix_vector_real(1))
+  if (sci_matrix_vector_real(pvApiCtx,1))
     *errCode = SUCCESS;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -64,13 +64,13 @@ wrev_validate (int *errCode)
  *-----------------------------------------*/
 
 void
-qmf_validate (int *flow, int *errCode)
+qmf_validate (void * pvApiCtx, int *flow, int *errCode, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs == 1) && (sci_matrix_vector_real(1)))
+  if ((NInputArgument == 1) && (sci_matrix_vector_real(pvApiCtx,1)))
     *flow = 1;
-  else if ((Rhs == 2) && (sci_matrix_vector_real(1)) &&
-		       (sci_matrix_scalar_real(2)))
+  else if ((NInputArgument == 2) && (sci_matrix_vector_real(pvApiCtx,1)) &&
+		       (sci_matrix_scalar_real(pvApiCtx,2)))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -83,27 +83,27 @@ qmf_validate (int *flow, int *errCode)
  *-----------------------------------------*/
 
 void
-dyaddown_form_validate (int *flow, int *errCode)
+dyaddown_form_validate (void * pvApiCtx, int *flow, int *errCode, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs == 1) && (sci_matrix_vector_real(1)))
+  if ((NInputArgument == 1) && (sci_matrix_vector_real(pvApiCtx,1)))
     *flow = 1;
-  else if ((Rhs == 1) && (sci_matrix_matrix_real(1)))
+  else if ((NInputArgument == 1) && (sci_matrix_matrix_real(pvApiCtx,1)))
     *flow = 3;
-  else if ((Rhs == 2) && (sci_matrix_vector_real(1)) &&
-	   (sci_matrix_scalar_real(2)))
+  else if ((NInputArgument == 2) && (sci_matrix_vector_real(pvApiCtx,1)) &&
+	   (sci_matrix_scalar_real(pvApiCtx,2)))
     *flow = 2;
-  else if ((Rhs == 2) && (sci_matrix_matrix_real(1)) &&
-	   (sci_matrix_scalar_real(2)))
+  else if ((NInputArgument == 2) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	   (sci_matrix_scalar_real(pvApiCtx,2)))
     *flow = 5;
-  else if ((Rhs == 2) && (sci_matrix_matrix_real(1)) &&
-	   (sci_strings_scalar(2)))
+  else if ((NInputArgument == 2) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	   (sci_strings_scalar(pvApiCtx,2)))
     *flow = 4;
-  else if ((Rhs == 3) && (sci_matrix_matrix_real(1)) &&
-	   (sci_matrix_scalar_real(2)) && (sci_strings_scalar(3)))
+  else if ((NInputArgument == 3) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	   (sci_matrix_scalar_real(pvApiCtx,2)) && (sci_strings_scalar(pvApiCtx,3)))
     *flow = 6;
-  else if ((Rhs == 3) && (sci_matrix_matrix_real(1)) &&
-	   (sci_matrix_scalar_real(3)) && (sci_strings_scalar(2)))
+  else if ((NInputArgument == 3) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	   (sci_matrix_scalar_real(pvApiCtx,3)) && (sci_strings_scalar(pvApiCtx,2)))
     *flow = 7;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -111,7 +111,7 @@ dyaddown_form_validate (int *flow, int *errCode)
 }
 
 void
-dyaddown_content_validate (char *l, int *errCode)
+dyaddown_content_validate (void * pvApiCtx, char *l, int *errCode)
 {
   if (scalar_string_check(l,'r') ||
        scalar_string_check(l,'c') ||
@@ -127,27 +127,27 @@ dyaddown_content_validate (char *l, int *errCode)
  *-----------------------------------------*/
 
 void
-dyadup_form_validate (int *flow, int *errCode)
+dyadup_form_validate (void * pvApiCtx, int *flow, int *errCode, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs == 1) && (sci_matrix_vector_real(1)))
+  if ((NInputArgument == 1) && (sci_matrix_vector_real(pvApiCtx,1)))
     *flow = 1;
-  else if ((Rhs == 1) && (sci_matrix_matrix_real(1)))
+  else if ((NInputArgument == 1) && (sci_matrix_matrix_real(pvApiCtx,1)))
     *flow = 3;
-  else if ((Rhs == 2) && (sci_matrix_vector_real(1)) &&
-	   (sci_matrix_scalar_real(2)))
+  else if ((NInputArgument == 2) && (sci_matrix_vector_real(pvApiCtx,1)) &&
+	   (sci_matrix_scalar_real(pvApiCtx,2)))
     *flow = 2;
-  else if ((Rhs == 2) && (sci_matrix_matrix_real(1)) &&
-	   (sci_matrix_scalar_real(2)))
+  else if ((NInputArgument == 2) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	   (sci_matrix_scalar_real(pvApiCtx,2)))
     *flow = 5;
-  else if ((Rhs == 2) && (sci_matrix_matrix_real(1)) &&
-	   (sci_strings_scalar(2)))
+  else if ((NInputArgument == 2) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	   (sci_strings_scalar(pvApiCtx,2)))
     *flow = 4;
-  else if ((Rhs == 3) && (sci_matrix_matrix_real(1)) &&
-	   (sci_matrix_scalar_real(2)) && (sci_strings_scalar(3)))
+  else if ((NInputArgument == 3) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	   (sci_matrix_scalar_real(pvApiCtx,2)) && (sci_strings_scalar(pvApiCtx,3)))
     *flow = 6;
-  else if ((Rhs == 3) && (sci_matrix_matrix_real(1)) &&
-	   (sci_matrix_scalar_real(3)) && (sci_strings_scalar(2)))
+  else if ((NInputArgument == 3) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	   (sci_matrix_scalar_real(pvApiCtx,3)) && (sci_strings_scalar(pvApiCtx,2)))
     *flow = 7;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -155,7 +155,7 @@ dyadup_form_validate (int *flow, int *errCode)
 }
 
 void
-dyadup_content_validate (char *l, int *errCode)
+dyadup_content_validate (void * pvApiCtx,char *l, int *errCode)
 {
   if (scalar_string_check(l,'r') ||
        scalar_string_check(l,'c') ||
@@ -171,24 +171,24 @@ dyadup_content_validate (char *l, int *errCode)
  * wkeep validation
  *-----------------------------------------*/
 
-void wkeep_form_validate (int *flow, int *errCode)
+void wkeep_form_validate (void * pvApiCtx, int *flow, int *errCode, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==2) && sci_matrix_vector_real(1) &&
-      sci_matrix_scalar_real(2))
+  if ((NInputArgument==2) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_scalar_real(pvApiCtx,2))
     *flow = 1;
-  else if ((Rhs==2) && sci_matrix_matrix_real(1) &&
-	   sci_matrix_vector_real(2) && length_check(2,2))
+  else if ((NInputArgument==2) && sci_matrix_matrix_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && length_check(pvApiCtx,2,2))
     *flow = 2;
-  else if ((Rhs==3) && sci_matrix_vector_real(1) &&
-	   sci_matrix_scalar_real(2) && sci_strings_scalar(3))
+  else if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_scalar_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3))
     *flow = 3;
-  else if ((Rhs==3) && sci_matrix_vector_real(1) &&
-	   sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3))
+  else if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3))
     *flow = 4;
-  else if ((Rhs==3) && sci_matrix_matrix_real(1) &&
-	   sci_matrix_vector_real(2) && length_check(2,2) &&
-	   sci_matrix_vector_real(3) && length_check(3,2))
+  else if ((NInputArgument==3) && sci_matrix_matrix_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && length_check(pvApiCtx,2,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && length_check(pvApiCtx,3,2))
     *flow = 5;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -196,7 +196,7 @@ void wkeep_form_validate (int *flow, int *errCode)
 }
 
 void
-wkeep_content_validate (int flow, int *errCode,
+wkeep_content_validate (void * pvApiCtx, int flow, int *errCode,
 			double *input1, int *int_input2, int *int_input3)
 {
   int res, resRow, resCol;
@@ -206,7 +206,7 @@ wkeep_content_validate (int flow, int *errCode,
     {
       if (int_input2[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      vector_length_compare(1, int_input2[0], &res);
+      vector_length_compare(pvApiCtx,1, int_input2[0], &res);
       if (res == -1)
 	*errCode = LENGTH_DATA_NOT_VALID_FOR_VECTOR_DIMENSION;
       break;
@@ -215,7 +215,7 @@ wkeep_content_validate (int flow, int *errCode,
     {
       if ((int_input2[0] <= 0) || (int_input2[1] <= 0))
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(1, int_input2[0], int_input2[1],
+      matrix_length_compare(pvApiCtx,1, int_input2[0], int_input2[1],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	*errCode = SIZE_DATA_NOT_VALID_FOR_MATRIX_DIMENSION;
@@ -227,13 +227,13 @@ wkeep_content_validate (int flow, int *errCode,
 	*errCode = POSITIVE_INTEGER_ONLY;
       if (int_input3[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      vector_length_compare(1, int_input2[0], &res);
+      vector_length_compare(pvApiCtx,1, int_input2[0], &res);
       if (res == -1)
 	*errCode = LENGTH_DATA_NOT_VALID_FOR_VECTOR_DIMENSION;
-      vector_length_compare(1, int_input3[0], &res);
+      vector_length_compare(pvApiCtx,1, int_input3[0], &res);
       if (res == -1)
 	*errCode = LENGTH_DATA_NOT_VALID_FOR_VECTOR_DIMENSION;
-      vector_length_compare(1, int_input2[0]+int_input3[0], &res);
+      vector_length_compare(pvApiCtx,1, int_input2[0]+int_input3[0], &res);
       if (res == -1)
 	*errCode = LENGTH_DATA_NOT_VALID_FOR_VECTOR_DIMENSION;
       break;
@@ -244,15 +244,15 @@ wkeep_content_validate (int flow, int *errCode,
 	*errCode = POSITIVE_INTEGER_ONLY;
       if ((int_input3[0] <= 0) || (int_input3[1] <= 0))
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(1, int_input2[0], int_input2[1],
+      matrix_length_compare(pvApiCtx,1, int_input2[0], int_input2[1],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	*errCode = SIZE_DATA_NOT_VALID_FOR_MATRIX_DIMENSION;
-      matrix_length_compare(1, int_input3[0], int_input3[1],
+      matrix_length_compare(pvApiCtx,1, int_input3[0], int_input3[1],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	*errCode = SIZE_DATA_NOT_VALID_FOR_MATRIX_DIMENSION;
-      matrix_length_compare(1, int_input2[0]+int_input3[0],
+      matrix_length_compare(pvApiCtx,1, int_input2[0]+int_input3[0],
 			    int_input2[1]+int_input3[1],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
@@ -266,7 +266,7 @@ wkeep_content_validate (int flow, int *errCode,
 }
 
 void
-wkeep_content_validate_string (int flow, int *errCode,
+wkeep_content_validate_string (void * pvApiCtx,int flow, int *errCode,
 double *input1, int *int_input2, char *input_string)
 {
   int res, resRow, resCol;
@@ -276,7 +276,7 @@ double *input1, int *int_input2, char *input_string)
             {
               if (int_input2[0] <= 0)
                 *errCode = POSITIVE_INTEGER_ONLY;
-                vector_length_compare(1, int_input2[0], &res);
+                vector_length_compare(pvApiCtx,1, int_input2[0], &res);
                 if (res == -1)
                   *errCode = LENGTH_DATA_NOT_VALID_FOR_VECTOR_DIMENSION;
                   if ((input_string[0]!='r') && (input_string[0]!='l') &&
@@ -296,20 +296,20 @@ double *input1, int *int_input2, char *input_string)
  *-----------------------------------------*/
 
 void
-wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
+wextend_form_validate (void * pvApiCtx, int *flow, int *errCode, char* l1,int* int_l1, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==4) && sci_strings_scalar(2) &&
-      sci_matrix_vector_real(3) && sci_matrix_scalar_real(4))
+  if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,2) &&
+      sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_scalar_real(pvApiCtx,4))
     {
-      if (sci_matrix_scalar_real(1))
+      if (sci_matrix_scalar_real(pvApiCtx,1))
 	  {
 	     if (int_l1[0]==1)
 	        *flow = 2;
 	     else
 	        *errCode = UNKNOWN_INPUT_ERR;
 	   }
-      else if (sci_strings_scalar(1))
+      else if (sci_strings_scalar(pvApiCtx,1))
 	  {
 	     if ((!strcmp((l1),"1"))  ||
 	         (!strcmp((l1),"1d")) ||
@@ -321,17 +321,17 @@ wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
       else
 	    *errCode = UNKNOWN_INPUT_ERR;
       }
-  else if ((Rhs==4) && sci_strings_scalar(2) &&
-	   sci_matrix_matrix_real(3) && sci_matrix_scalar_real(4))
+  else if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_scalar_real(pvApiCtx,4))
      {
-        if (sci_matrix_scalar_real(1))
+        if (sci_matrix_scalar_real(pvApiCtx,1))
 	      {
 	         if (int_l1[0]==2)
 	           *flow = 4;
 	         else
 	           *errCode = UNKNOWN_INPUT_ERR;
 	       }
-         else if (sci_strings_scalar(1))
+         else if (sci_strings_scalar(pvApiCtx,1))
 	      {
 	         if ((!strcmp((l1),"2"))  ||
 	             (!strcmp((l1),"2d")) ||
@@ -349,18 +349,18 @@ wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
           else
 	           *errCode = UNKNOWN_INPUT_ERR;
        }
-  else if ((Rhs==4) && sci_strings_scalar(2) &&
-	   sci_matrix_matrix_real(3) &&
-	   sci_matrix_vector_real(4) && length_check(4,2))
+  else if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && length_check(pvApiCtx,4,2))
     {
-      if (sci_matrix_scalar_real(1))
+      if (sci_matrix_scalar_real(pvApiCtx,1))
 	{
 	  if (int_l1[0]==2)
 	    *flow = 5;
 	  else
 	    *errCode = UNKNOWN_INPUT_ERR;
 	}
-      else if (sci_strings_scalar(1))
+      else if (sci_strings_scalar(pvApiCtx,1))
 	{
 	  if ((!strcmp((l1),"2"))  ||
 	      (!strcmp((l1),"2d")) ||
@@ -372,11 +372,11 @@ wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
       else
 	*errCode = UNKNOWN_INPUT_ERR;
     }
-  else if ((Rhs==4) && sci_strings_scalar(2) &&
-	   sci_matrix_matrix_real(3) &&
-	   sci_matrix_scalar_real(4) && sci_strings_scalar(1))
+  else if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4) && sci_strings_scalar(pvApiCtx,1))
     {
-		if (sci_strings_scalar(1))
+		if (sci_strings_scalar(pvApiCtx,1))
 		{
            if ((!strcmp((l1),"ar")) ||
 	           (!strcmp((l1),"addrow")))
@@ -390,18 +390,18 @@ wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
 		else
 			*errCode = UNKNOWN_INPUT_ERR;
     }
-  else if ((Rhs==5) && sci_strings_scalar(2) &&
-	   sci_matrix_vector_real(3) &&
-	   sci_matrix_scalar_real(4) && sci_strings_scalar(5))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4) && sci_strings_scalar(pvApiCtx,5))
     {
-      if (sci_matrix_scalar_real(1))
+      if (sci_matrix_scalar_real(pvApiCtx,1))
 	{
 	  if (int_l1[0]==1)
 	    *flow = 1;
 	  else
 	    *errCode = UNKNOWN_INPUT_ERR;
 	}
-      else if (sci_strings_scalar(1))
+      else if (sci_strings_scalar(pvApiCtx,1))
 	{
 	  if ((!strcmp((l1),"1"))  ||
 	      (!strcmp((l1),"1d")) ||
@@ -413,19 +413,19 @@ wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
       else
 	*errCode = UNKNOWN_INPUT_ERR;
     }
-  else if ((Rhs==5) && sci_strings_scalar(2) &&
-	   sci_matrix_matrix_real(3) &&
-	   sci_matrix_vector_real(4) && length_check(4,2) &&
-	   sci_strings_vector(5) && length_check(5,2))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && length_check(pvApiCtx,4,2) &&
+	   sci_strings_vector(pvApiCtx,5) && length_check(pvApiCtx,5,2))
     {
-      if (sci_matrix_scalar_real(1))
+      if (sci_matrix_scalar_real(pvApiCtx,1))
 	{
 	  if (int_l1[0]==2)
 	    *flow = 3;
 	  else
 	    *errCode = UNKNOWN_INPUT_ERR;
 	}
-      else if (sci_strings_scalar(1))
+      else if (sci_strings_scalar(pvApiCtx,1))
 	{
 	  if ((!strcmp((l1),"2"))  ||
 	      (!strcmp((l1),"2d")) ||
@@ -437,19 +437,19 @@ wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
       else
 	*errCode = UNKNOWN_INPUT_ERR;
     }
-  else if ((Rhs==5) && sci_strings_scalar(2) &&
-	   sci_matrix_matrix_real(3) &&
-	   sci_matrix_vector_real(4) && length_check(4,2) &&
-	   sci_strings_scalar(5))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && length_check(pvApiCtx,4,2) &&
+	   sci_strings_scalar(pvApiCtx,5))
     {
-      if (sci_matrix_scalar_real(1))
+      if (sci_matrix_scalar_real(pvApiCtx,1))
 	{
 	  if (int_l1[0]==2)
 	    *flow = 10;
 	  else
 	    *errCode = UNKNOWN_INPUT_ERR;
 	}
-      else if (sci_strings_scalar(1))
+      else if (sci_strings_scalar(pvApiCtx,1))
 	{
 	  if ((!strcmp((l1),"2"))  ||
 	      (!strcmp((l1),"2d")) ||
@@ -461,13 +461,13 @@ wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
       else
 	*errCode = UNKNOWN_INPUT_ERR;
     }
-  else if ((Rhs==5) && sci_strings_scalar(2) &&
-	   sci_matrix_matrix_real(3) &&
-	   sci_matrix_scalar_real(4) &&
-	   sci_strings_scalar(5))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4) &&
+	   sci_strings_scalar(pvApiCtx,5))
     {
 	  //sciprint("enter Rhs==5\n");
-      if (sci_strings_scalar(1))
+      if (sci_strings_scalar(pvApiCtx,1))
 	  {
           if ((!strcmp((l1),"ar")) ||
 	          (!strcmp((l1),"addrow")))
@@ -487,7 +487,7 @@ wextend_form_validate (int *flow, int *errCode, char* l1,int* int_l1)
 }
 
 void
-wextend_content_validate (int flow, int *errCode, char *input_string1,
+wextend_content_validate (void * pvApiCtx, int flow, int *errCode, char *input_string1,
 			  double *input3, int* int_intput4, char *input_string2, char **str)
 {
   int type, res, resRow, resCol;
@@ -503,7 +503,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if (int_intput4[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      vector_length_compare(3, int_intput4[0], &res);
+      vector_length_compare(pvApiCtx,3, int_intput4[0], &res);
       if (res == -1)
 	{
 	  *errCode = LENGTH_DATA_NOT_VALID_FOR_VECTOR_DIMENSION;
@@ -521,7 +521,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if (int_intput4[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      vector_length_compare(3, int_intput4[0], &res);
+      vector_length_compare(pvApiCtx,3, int_intput4[0], &res);
       if (res == -1)
 	{
 	  *errCode = LENGTH_DATA_NOT_VALID_FOR_VECTOR_DIMENSION;
@@ -533,7 +533,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if ((int_intput4[0] <= 0) || (int_intput4[1] <= 0))
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(3, int_intput4[0], int_intput4[1],
+      matrix_length_compare(pvApiCtx,3, int_intput4[0], int_intput4[1],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	{
@@ -553,7 +553,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if (int_intput4[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(3, int_intput4[0], int_intput4[0],
+      matrix_length_compare(pvApiCtx,3, int_intput4[0], int_intput4[0],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	{
@@ -566,7 +566,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if ((int_intput4[0] <= 0) || (int_intput4[1] <= 0))
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(3, int_intput4[0], int_intput4[1],
+      matrix_length_compare(pvApiCtx,3, int_intput4[0], int_intput4[1],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	{
@@ -579,7 +579,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if (int_intput4[0] <= 0)
 	   *errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(3, int_intput4[0], int_intput4[0],
+      matrix_length_compare(pvApiCtx,3, int_intput4[0], int_intput4[0],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	{
@@ -598,7 +598,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if (int_intput4[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(3, int_intput4[0], int_intput4[0],
+      matrix_length_compare(pvApiCtx,3, int_intput4[0], int_intput4[0],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	{
@@ -611,7 +611,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if (int_intput4[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(3, int_intput4[0], int_intput4[0],
+      matrix_length_compare(pvApiCtx,3, int_intput4[0], int_intput4[0],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	{
@@ -630,7 +630,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if (int_intput4[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(3, int_intput4[0], int_intput4[0],
+      matrix_length_compare(pvApiCtx,3, int_intput4[0], int_intput4[0],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	{
@@ -643,7 +643,7 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
     {
       if ((int_intput4[0] <= 0) || (int_intput4[1] <= 0))
 	*errCode = POSITIVE_INTEGER_ONLY;
-      matrix_length_compare(3, int_intput4[0], int_intput4[1],
+      matrix_length_compare(pvApiCtx,3, int_intput4[0], int_intput4[1],
 			    &resRow, &resCol);
       if ((resRow == -1 )||( resCol == -1))
 	{
@@ -668,24 +668,24 @@ wextend_content_validate (int flow, int *errCode, char *input_string1,
 /*-------------------------------------------
  * wcodemat validation
  *-----------------------------------------*/
-void wcodemat_form_validate (int *flow, int *errCode)
+void wcodemat_form_validate (void * pvApiCtx, int *flow, int *errCode, int NInputArgument)
 {
     *errCode = SUCCESS;
-    if ((Rhs==1) && (sci_matrix_matrix_real(1)))
+    if ((NInputArgument==1) && (sci_matrix_matrix_real(pvApiCtx,1)))
 		*flow = 1;
-	else if ((Rhs==2) && (sci_matrix_matrix_real(1)) && sci_matrix_scalar_real(2))
+	else if ((NInputArgument==2) && (sci_matrix_matrix_real(pvApiCtx,1)) && sci_matrix_scalar_real(pvApiCtx,2))
 		*flow = 2;
-	else if ((Rhs==3) && sci_matrix_matrix_real(1) && sci_matrix_scalar_real(2) && sci_strings_scalar(3))
+	else if ((NInputArgument==3) && sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3))
 		*flow = 3;
-	else if ((Rhs==4) && sci_matrix_matrix_real(1) && sci_matrix_scalar_real(2) && sci_strings_scalar(3) &&
-		      sci_matrix_scalar_real(4))
+	else if ((NInputArgument==4) && sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+		      sci_matrix_scalar_real(pvApiCtx,4))
 		*flow = 4;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void wcodemat_content_validate (int *errCode, int flow, int* int_input2)
+void wcodemat_content_validate (void * pvApiCtx, int *errCode, int flow, int* int_input2)
 {
 
 	*errCode = SUCCESS;
@@ -726,25 +726,25 @@ void wcodemat_content_validate (int *errCode, int flow, int* int_input2)
 /*-------------------------------------------
  * wrev2 validation
  *-----------------------------------------*/
-void wrev2_form_validate (int *errCode)
+void wrev2_form_validate (void * pvApiCtx, int *errCode, int NInputArgument)
 {
     *errCode = UNKNOWN_INPUT_ERR;
-    if ((Rhs==2) && (sci_matrix_matrix_real(1)) &&
-	(sci_matrix_scalar_real(2)))
+    if ((NInputArgument==2) && (sci_matrix_matrix_real(pvApiCtx,1)) &&
+	(sci_matrix_scalar_real(pvApiCtx,2)))
       *errCode = SUCCESS;
     return;
 }
 
 
-void wnorm_form_validate (int *flow, int *errCode)
+void wnorm_form_validate (void * pvApiCtx, int *flow, int *errCode, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((sci_matrix_matrix_real(1)) || (sci_matrix_vector_real(1)))
+  if ((sci_matrix_matrix_real(pvApiCtx,1)) || (sci_matrix_vector_real(pvApiCtx,1)))
     {
-      if (Rhs==1)
+      if (NInputArgument==1)
 	*flow = 1;
-      else if ((Rhs==3) && (sci_matrix_scalar_real(2)) &&
-			 (sci_matrix_scalar_real(3)))
+      else if ((NInputArgument==3) && (sci_matrix_scalar_real(pvApiCtx,2)) &&
+			 (sci_matrix_scalar_real(pvApiCtx,3)))
 	*flow=2;
       else
 	*errCode = UNKNOWN_INPUT_ERR;

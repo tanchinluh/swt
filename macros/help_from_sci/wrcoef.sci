@@ -46,5 +46,5 @@ function X=wrcoef(type,c,l,wname,N)
 // upcoef 
 // Authors
 // Roger Liu and Isaac Zhi
-// H. Nahrstaedt - 2010-2013
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 

@@ -6,7 +6,7 @@ function X=idwt3(Y,wname,[S])
 // X=idwt3(Y,Lo_R,Hi_R,[S])
 // X=idwt3(Y,Lo_R1,Hi_R1,Lo_R2,Hi_R2,Lo_R3,Hi_R3,[S])
 // Parameters
-// wname: wavelet name, haar( "haar"), daubechies ("db1" to "db20"), coiflets ("coif1" to "coif5"), symlets ("sym2" to "sym20"), legendre ("leg1" to "leg9"), bathlets("bath4.0" to "bath4.15" and "bath6.0" to "bath6.15"), dmey ("dmey"), beyklin ("beylkin"), vaidyanathan ("vaidyanathan"), biorthogonal B-spline wavelets ("bior1.1" to "bior6.8"), "rbior1.1" to "rbior6.8"
+// wname: wavelet name, haar( "haar"), daubechies ("db1" to "db36"), coiflets ("coif1" to "coif17"), symlets ("sym2" to "sym20"), legendre ("leg1" to "leg9"), bathlets("bath4.0" to "bath4.15" and "bath6.0" to "bath6.15"), dmey ("dmey"), beyklin ("beylkin"), vaidyanathan ("vaidyanathan"), biorthogonal B-spline wavelets ("bior1.1" to "bior6.8"), "rbior1.1" to "rbior6.8"
 // X : reconstructed 3D double matrix
 // Lo_R: lowpass synthesis filter
 // Hi_R: highpass syntheis filter
@@ -23,6 +23,7 @@ function X=idwt3(Y,wname,[S])
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // dwt
 // dwt2

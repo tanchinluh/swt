@@ -39,4 +39,4 @@ function A=appcoef(c,l,wname,[N])
 // 
 // Authors
 // Roger Liu and Isaac Zhi
-// H. Nahrstaedt - 2010-2012
+// Copyright (C) 2010-2015 - Holger Nahrstaedt

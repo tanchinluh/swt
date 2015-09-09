@@ -17,5 +17,6 @@ function Y=wrot3(x,M,N)
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // wrev3

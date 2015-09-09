@@ -14,5 +14,5 @@ function waveletfamilies(c)
 // waveletfamilies('n')
 //
 // Authors
-// Holger Nahrstaedt - 2010-2014
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 //

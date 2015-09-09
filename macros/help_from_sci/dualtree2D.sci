@@ -21,6 +21,7 @@ function [c,s]=dualtree2D(x,J,Faf,af)
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // FSfarras
 // dualfilt1

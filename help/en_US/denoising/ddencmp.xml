@@ -34,7 +34,7 @@
    <title>Parameters</title>
    <variablelist>
    <varlistentry><term>X:</term>
-      <listitem><para> double vector</para></listitem></varlistentry>
+      <listitem><para> double vector or matrix</para></listitem></varlistentry>
    <varlistentry><term>IN1:</term>
       <listitem><para> IN1 is 'den' for de-noising or 'cmp' for compression.</para></listitem></varlistentry>
    <varlistentry><term>IN2:</term>

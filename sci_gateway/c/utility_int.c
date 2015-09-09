@@ -31,7 +31,12 @@
  *-----------------------------------------*/
 
 int
-int_conv (char *fname)
+int_conv 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int minlhs = 1, maxlhs = 1, minrhs = 2, maxrhs = 2;
@@ -45,18 +50,18 @@ int_conv (char *fname)
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   /* Get Input */
   //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //GetRhsVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 2,  &m2, &n2, &input2);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 2,  &m2, &n2, &input2);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-  conv_validate (&errCode);
+  conv_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);	/* Indicate error  */
@@ -66,7 +71,7 @@ int_conv (char *fname)
   m3 = 1;
   n3 = m1 * n1 + m2 * n2 - 1;
   // CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -84,7 +89,12 @@ int_conv (char *fname)
  *-----------------------------------------*/
 
 int
-int_iconv (char *fname)
+int_iconv 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int minlhs = 1, maxlhs = 1, minrhs = 2, maxrhs = 2;
@@ -98,18 +108,18 @@ int_iconv (char *fname)
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
   /* Get Input */
     //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //GetRhsVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 2,  &m2, &n2, &input2);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 2,  &m2, &n2, &input2);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-  conv_validate (&errCode);
+  conv_validate (pvApiCtx, &errCode);
 
   if (errCode != SUCCESS)
     {
@@ -123,7 +133,7 @@ int_iconv (char *fname)
   else
 	  n3 = m2 * n2;
     //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -144,7 +154,12 @@ int_iconv (char *fname)
  *-----------------------------------------*/
 
 int
-int_wrev (char *fname)
+int_wrev 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
@@ -156,14 +171,14 @@ int_wrev (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  wrev_validate (&errCode);
+  wrev_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
       return 0;
     }
     //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -172,7 +187,7 @@ int_wrev (char *fname)
   m2 = m1;
   n2 = n1;
   //CreateVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -189,7 +204,12 @@ int_wrev (char *fname)
  *-----------------------------------------*/
 
 int
-int_qmf (char *fname)
+int_qmf 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 2;
@@ -202,7 +222,7 @@ int_qmf (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  qmf_validate (&flow, &errCode);
+  qmf_validate (pvApiCtx, &flow, &errCode, Rhs);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -210,7 +230,7 @@ int_qmf (char *fname)
     }
 
     //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -222,7 +242,7 @@ int_qmf (char *fname)
       m2 = m1;
       n2 = n1;
       //CreateVar (2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -234,7 +254,7 @@ int_qmf (char *fname)
   case 2:
     {
       //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -242,7 +262,7 @@ int_qmf (char *fname)
       m3 = m1;
       n3 = n1;
         //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -266,7 +286,12 @@ int_qmf (char *fname)
  *-----------------------------------------*/
 
 int
-int_dyaddown (char *fname)
+int_dyaddown 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 3;
@@ -282,7 +307,7 @@ int_dyaddown (char *fname)
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   flow = 0;
-  dyaddown_form_validate (&flow, &errCode);
+  dyaddown_form_validate (pvApiCtx, &flow, &errCode, Rhs);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -293,7 +318,7 @@ int_dyaddown (char *fname)
   case 1:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -309,7 +334,7 @@ int_dyaddown (char *fname)
 	  n2 = n1 / 2;// + (n1%2==0)?0:1;
 	}
             //CreateVar (2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -321,13 +346,13 @@ int_dyaddown (char *fname)
   case 2:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -357,7 +382,7 @@ int_dyaddown (char *fname)
 		  n3 = n1 / 2;
 		}
 		  //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -383,7 +408,7 @@ int_dyaddown (char *fname)
 		//sprintf("%d\n",m3);
 		//sprintf("%d\n",n3);
 		  //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -396,7 +421,7 @@ int_dyaddown (char *fname)
   case 3:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -405,7 +430,7 @@ int_dyaddown (char *fname)
 	  m2 = m1;
       n2 = n1 / 2;
       //CreateVar (2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -418,20 +443,20 @@ int_dyaddown (char *fname)
   case 4:
     {
       //GetRhsVar (1, "d", &m1, &n1, &l1);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string1 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //printf("%c\n",cstk(l2)[0]);
-      dyaddown_content_validate(input_string1, &errCode);
+      dyaddown_content_validate (pvApiCtx, input_string1, &errCode);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -442,7 +467,7 @@ int_dyaddown (char *fname)
 	  m3 = m1 / 2;
 	  n3 = n1;
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -455,7 +480,7 @@ int_dyaddown (char *fname)
 	  m3 = m1;
 	  n3 = n1 / 2;
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -468,7 +493,7 @@ int_dyaddown (char *fname)
 	  m3 = m1 / 2;
 	  n3 = n1 / 2;
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -481,13 +506,13 @@ int_dyaddown (char *fname)
   case 5:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -499,7 +524,7 @@ int_dyaddown (char *fname)
  	    m3 = m1;
         n3 = n1 / 2;
           //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -513,7 +538,7 @@ int_dyaddown (char *fname)
 		if (n1 % 2 != 0)
 			n3 += 1;
           //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -526,25 +551,25 @@ int_dyaddown (char *fname)
   case 6:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string1 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dyaddown_content_validate(input_string1, &errCode);
+      dyaddown_content_validate (pvApiCtx, input_string1, &errCode);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -557,7 +582,7 @@ int_dyaddown (char *fname)
 	      m4 = m1 / 2;
 	      n4 = n1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -570,7 +595,7 @@ int_dyaddown (char *fname)
 	      m4 = m1;
 	      n4 = n1 / 2;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -583,7 +608,7 @@ int_dyaddown (char *fname)
 	      m4 = m1 / 2;
 	      n4 = n1 / 2;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -601,7 +626,7 @@ int_dyaddown (char *fname)
 		  if (m1 % 2 != 0)
 			  m4 += 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -616,7 +641,7 @@ int_dyaddown (char *fname)
 		  if (n1 % 2 != 0)
 			  n4 += 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -633,7 +658,7 @@ int_dyaddown (char *fname)
 		  if (n1 % 2 != 0)
 			  n4 += 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -648,24 +673,24 @@ int_dyaddown (char *fname)
   case 7:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (3, "i", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 3,  &m3, &n3, &int_input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 3,  &m3, &n3, &int_input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dyaddown_content_validate(input_string1, &errCode);
+      dyaddown_content_validate (pvApiCtx, input_string1, &errCode);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -678,7 +703,7 @@ int_dyaddown (char *fname)
 	      m4 = m1 / 2;
 	      n4 = n1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -691,7 +716,7 @@ int_dyaddown (char *fname)
 	      m4 = m1;
 	      n4 = n1 / 2;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -704,7 +729,7 @@ int_dyaddown (char *fname)
 	      m4 = m1 / 2;
 	      n4 = n1 / 2;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -722,7 +747,7 @@ int_dyaddown (char *fname)
 		  if (m1 % 2 != 0)
 			  m4 += 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -737,7 +762,7 @@ int_dyaddown (char *fname)
 		  if (n1 % 2 != 0)
 			  n4 += 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -754,7 +779,7 @@ int_dyaddown (char *fname)
 		  if (n1 % 2 != 0)
 			  n4 += 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -777,7 +802,12 @@ int_dyaddown (char *fname)
  *-----------------------------------------*/
 
 int
-int_dyadup (char *fname)
+int_dyadup 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 3;
@@ -793,7 +823,7 @@ int_dyadup (char *fname)
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   flow = 0;
-  dyadup_form_validate (&flow, &errCode);
+  dyadup_form_validate (pvApiCtx, &flow, &errCode, Rhs);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -804,7 +834,7 @@ int_dyadup (char *fname)
   case 1:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -820,7 +850,7 @@ int_dyadup (char *fname)
 	  n2 = n1 * 2 + 1;
 	}
             //CreateVar (2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -832,13 +862,13 @@ int_dyadup (char *fname)
   case 2:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -856,7 +886,7 @@ int_dyadup (char *fname)
 	      n3 = n1 * 2 - 1;
 	    }
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -876,7 +906,7 @@ int_dyadup (char *fname)
 	      n3 = n1 * 2 + 1;
 	    }
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -889,7 +919,7 @@ int_dyadup (char *fname)
   case 3:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -899,7 +929,7 @@ int_dyadup (char *fname)
 	  m2 = m1;
 	  n2 = n1 * 2 + 1;
             //CreateVar (2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -912,18 +942,18 @@ int_dyadup (char *fname)
   case 4:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dyadup_content_validate(input_string1, &errCode);
+      dyadup_content_validate (pvApiCtx, input_string1, &errCode);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -934,7 +964,7 @@ int_dyadup (char *fname)
 	  m3 = m1 * 2 + 1;
 	  n3 = n1;
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -947,7 +977,7 @@ int_dyadup (char *fname)
 	  m3 = m1;
 	  n3 = n1 * 2 + 1;
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -960,7 +990,7 @@ int_dyadup (char *fname)
 	  m3 = m1 * 2 + 1;
 	  n3 = n1 * 2 + 1;
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -973,13 +1003,13 @@ int_dyadup (char *fname)
   case 5:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -991,7 +1021,7 @@ int_dyadup (char *fname)
 	  m3 = m1;
 	  n3 = n1 * 2 - 1;
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -1006,7 +1036,7 @@ int_dyadup (char *fname)
 	  m3 = m1;
 	  n3 = n1 * 2 + 1;
 	    //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -1020,25 +1050,25 @@ int_dyadup (char *fname)
   case 6:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string1 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dyadup_content_validate(input_string1, &errCode);
+      dyadup_content_validate (pvApiCtx, input_string1, &errCode);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1051,7 +1081,7 @@ int_dyadup (char *fname)
 	      m4 = m1 * 2 - 1;
 	      n4 = n1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1064,7 +1094,7 @@ int_dyadup (char *fname)
 	      m4 = m1;
 	      n4 = n1 * 2 - 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1077,7 +1107,7 @@ int_dyadup (char *fname)
 	      m4 = m1 * 2 - 1;
 	      n4 = n1 * 2 - 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1093,7 +1123,7 @@ int_dyadup (char *fname)
 	      m4 = m1 * 2 + 1;
 	      n4 = n1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1106,7 +1136,7 @@ int_dyadup (char *fname)
 	      m4 = m1;
 	      n4 = n1 * 2 + 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1119,7 +1149,7 @@ int_dyadup (char *fname)
 	      m4 = m1 * 2 + 1;
 	      n4 = n1 * 2 + 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1134,24 +1164,24 @@ int_dyadup (char *fname)
   case 7:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (3, "i", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 3,  &m3, &n3, &int_input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 3,  &m3, &n3, &int_input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dyadup_content_validate(input_string1, &errCode);
+      dyadup_content_validate (pvApiCtx, input_string1, &errCode);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1164,7 +1194,7 @@ int_dyadup (char *fname)
 	      m4 = m1 * 2 - 1;
 	      n4 = n1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1177,7 +1207,7 @@ int_dyadup (char *fname)
 	      m4 = m1;
 	      n4 = n1 * 2 - 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1190,7 +1220,7 @@ int_dyadup (char *fname)
 	      m4 = m1 * 2 - 1;
 	      n4 = n1 * 2 - 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1206,7 +1236,7 @@ int_dyadup (char *fname)
 	      m4 = m1 * 2 + 1;
 	      n4 = n1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1219,7 +1249,7 @@ int_dyadup (char *fname)
 	      m4 = m1;
 	      n4 = n1 * 2 + 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1232,7 +1262,7 @@ int_dyadup (char *fname)
 	      m4 = m1 * 2 + 1;
 	      n4 = n1 * 2 + 1;
 	      //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1255,7 +1285,12 @@ int_dyadup (char *fname)
  *-----------------------------------------*/
 
 int
-int_wkeep (char *fname)
+int_wkeep 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
   static int minlhs = 1, maxlhs = 1, minrhs = 2, maxrhs = 3;
@@ -1270,7 +1305,7 @@ int_wkeep (char *fname)
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   flow = 0;
-  wkeep_form_validate (&flow, &errCode);
+  wkeep_form_validate (pvApiCtx, &flow, &errCode, Rhs);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -1283,18 +1318,18 @@ int_wkeep (char *fname)
   case 1:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      wkeep_content_validate(flow, &errCode, input1, int_input2, NULL);
+      wkeep_content_validate (pvApiCtx, flow, &errCode, input1, int_input2, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1311,7 +1346,7 @@ int_wkeep (char *fname)
 	  n3 = 1;
 	}
         //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -1323,18 +1358,18 @@ int_wkeep (char *fname)
   case 2:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-        wkeep_content_validate(flow, &errCode, input1, int_input2, NULL);
+        wkeep_content_validate (pvApiCtx, flow, &errCode, input1, int_input2, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1343,7 +1378,7 @@ int_wkeep (char *fname)
       m3 = int_input2[0];
       n3 = int_input2[1];
         //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -1355,25 +1390,25 @@ int_wkeep (char *fname)
   case 3:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string1 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-        wkeep_content_validate_string(flow, &errCode, input1, int_input2, input_string1);
+        wkeep_content_validate_string(pvApiCtx,flow, &errCode, input1, int_input2, input_string1);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1390,7 +1425,7 @@ int_wkeep (char *fname)
 	  n4 = 1;
 	}
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1407,24 +1442,24 @@ int_wkeep (char *fname)
   case 4:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (3, "i", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 3,  &m3, &n3, &int_input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 3,  &m3, &n3, &int_input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-        wkeep_content_validate(flow, &errCode, input1, int_input2, int_input3);
+        wkeep_content_validate (pvApiCtx, flow, &errCode, input1, int_input2, int_input3);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1441,7 +1476,7 @@ int_wkeep (char *fname)
 	  n4 = 1;
 	}
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1453,24 +1488,24 @@ int_wkeep (char *fname)
   case 5:
     {
         //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
         //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (3, "i", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 3,  &m3, &n3, &int_input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 3,  &m3, &n3, &int_input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-        wkeep_content_validate(flow, &errCode, input1, int_input2, int_input3);
+        wkeep_content_validate (pvApiCtx, flow, &errCode, input1, int_input2, int_input3);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1479,7 +1514,7 @@ int_wkeep (char *fname)
       m4 = int_input2[0];
       n4 = int_input2[1];
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1500,7 +1535,12 @@ int_wkeep (char *fname)
  *-----------------------------------------*/
 
 int
-int_wextend (char *fname)
+int_wextend 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
 
   static int l1, m1, n1, m2, n2, m3, n3;
@@ -1529,18 +1569,18 @@ int_wextend (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  if (swt_gwsupport_GetType(1) == sci_matrix){
+  if (swt_gwsupport_GetType(pvApiCtx,1) == sci_matrix){
     //GetRhsVar (1, "i", &m1, &n1, &l1);
-    readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 1,  &m1, &n1, &int_input1);
+    readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 1,  &m1, &n1, &int_input1);
     if(readFlag==SWT_GWSUPPORT_ERROR)
       {
         return 0;
       }
 
 
-  } else  if (swt_gwsupport_GetType(1) == sci_strings){
+  } else  if (swt_gwsupport_GetType(pvApiCtx,1) == sci_strings){
     //GetRhsVar (1, "c", &m1, &n1, &l1);
-    readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+    readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
     m1=1;n1=1;
     if(readFlag==SWT_GWSUPPORT_ERROR)
       {
@@ -1552,7 +1592,7 @@ int_wextend (char *fname)
 
   flow = 0;
   //sciprint("before form validate\n");
-  wextend_form_validate (&flow, &errCode,input_string1,int_input1);
+  wextend_form_validate (pvApiCtx, &flow, &errCode,input_string1,int_input1, Rhs);
   //sciprint("flow=%d\n",flow);
   if (errCode != SUCCESS)
     {
@@ -1566,30 +1606,30 @@ int_wextend (char *fname)
   case 1:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (4, "i", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (5, "c", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetScalarString(fname, 5 , &input_string5 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 5 , &input_string5 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1655,7 +1695,7 @@ int_wextend (char *fname)
 	    }
 	}
       //CreateVar (6, "d", &m6, &n6, &l6);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m6 , n6 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m6 , n6 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1672,24 +1712,24 @@ int_wextend (char *fname)
   case 2:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar (4, "i", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, NULL, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, NULL, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1723,7 +1763,7 @@ int_wextend (char *fname)
 	    }
 	}
       //CreateVar (5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m5 , n5 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m5 , n5 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1735,32 +1775,32 @@ int_wextend (char *fname)
   case 3:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (4, "i", &m4, &n4, &l4);
-        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;
           }
       //GetRhsVar (5, "S", &m5, &n5, &str);
-      //readFlag = swt_gwsupport_GetScalarString(fname, 5 , &str );
-      _pstStrings = swt_gwsupport_GetMatrixOfString(  fname, 5, &m5 , &n5);
+      //readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 5 , &str );
+      _pstStrings = swt_gwsupport_GetMatrixOfString(pvApiCtx, fname, 5, &m5 , &n5);
       if(_pstStrings==NULL)
         {
           return 0;
         }
 
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, NULL, _pstStrings);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, NULL, _pstStrings);
 
       if (errCode != SUCCESS)
 	{
@@ -1797,7 +1837,7 @@ int_wextend (char *fname)
 	    n6 = n3 + 2*int_input4[1];
 	}
   //CreateVar (6, "d", &m6, &n6, &l6);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m6 , n6 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m6 , n6 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -1822,24 +1862,24 @@ int_wextend (char *fname)
   case 4:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (4, "i", &m4, &n4, &l4);
-        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;
           }
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, NULL, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, NULL, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1855,7 +1895,7 @@ int_wextend (char *fname)
       else
 	n5 = n3 + 2*int_input4[0];
       //CreateVar (5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m5 , n5 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m5 , n5 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1868,24 +1908,24 @@ int_wextend (char *fname)
   case 5:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (4, "i", &m4, &n4, &l4);
-        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;
           }
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, NULL, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, NULL, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1901,7 +1941,7 @@ int_wextend (char *fname)
       else
 	n5 = n3 + 2*int_input4[1];
       //CreateVar (5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m5 , n5 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m5 , n5 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1914,31 +1954,31 @@ int_wextend (char *fname)
   case 6:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (4, "i", &m4, &n4, &l4);
-        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;
           }
       //GetRhsVar (5, "c", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetScalarString(fname,5 , &input_string5 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname,5 , &input_string5 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
 	  //sciprint("before wextend content validate!\n");
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
 	  //sciprint("after wextend content validate!\n");
       if (errCode != SUCCESS)
 	{
@@ -1962,7 +2002,7 @@ int_wextend (char *fname)
 	}
       n6 = n3;
       //CreateVar (6, "d", &m6, &n6, &l6);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m6 , n6 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m6 , n6 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1976,24 +2016,24 @@ int_wextend (char *fname)
   case 7:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (4, "i", &m4, &n4, &l4);
-        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;
           }
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -2006,7 +2046,7 @@ int_wextend (char *fname)
 	m5 = m3 + 2*int_input4[0];
       n5 = n3;
       //CreateVar (5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m5 , n5 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m5 , n5 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -2019,30 +2059,30 @@ int_wextend (char *fname)
   case 8:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (4, "i", &m4, &n4, &l4);
-        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;
           }
           //GetRhsVar (5, "c", &m5, &n5, &l5);
-          readFlag = swt_gwsupport_GetScalarString(fname,5 , &input_string5 );
+          readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname,5 , &input_string5 );
           if(readFlag==SWT_GWSUPPORT_ERROR)
             {
               return 0;
             }
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -2065,7 +2105,7 @@ int_wextend (char *fname)
 	}
       m6 = m3;
       //CreateVar (6, "d", &m6, &n6, &l6);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m6 , n6 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m6 , n6 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -2078,24 +2118,24 @@ int_wextend (char *fname)
   case 9:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (4, "i", &m4, &n4, &l4);
-        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;
           }
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, NULL, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, NULL, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -2108,7 +2148,7 @@ int_wextend (char *fname)
 	n5 = n3 + 2*int_input4[0];
       m5 = m3;
       //CreateVar (5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m5 , n5 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m5 , n5 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -2121,30 +2161,30 @@ int_wextend (char *fname)
   case 10:
     {
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
         //GetRhsVar (4, "i", &m4, &n4, &l4);
-        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+        readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;
           }
           //GetRhsVar (5, "c", &m5, &n5, &l5);
-          readFlag = swt_gwsupport_GetScalarString(fname,5 , &input_string5 );
+          readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname,5 , &input_string5 );
           if(readFlag==SWT_GWSUPPORT_ERROR)
             {
               return 0;
             }
-      wextend_content_validate (flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
+      wextend_content_validate (pvApiCtx, flow, &errCode, input_string2, input3, int_input4, input_string5, NULL);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -2182,7 +2222,7 @@ int_wextend (char *fname)
 
 
   //CreateVar (6, "d", &m6, &n6, &l6);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m6 , n6 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m6 , n6 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -2204,7 +2244,12 @@ int_wextend (char *fname)
 /*-------------------------------------------
  * wcodemat
  *-----------------------------------------*/
-int_wcodemat (char *fname)
+int int_wcodemat 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int  m1, n1,  m2, n2,  m3, n3;
   static int  m4, n4,  m5, n5;
@@ -2224,7 +2269,7 @@ int_wcodemat (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  wcodemat_form_validate (&flow, &errCode);
+  wcodemat_form_validate (pvApiCtx, &flow, &errCode, Rhs);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -2239,12 +2284,12 @@ int_wcodemat (char *fname)
   case 1:
 	  {
             //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-		  wcodemat_content_validate (&errCode, flow, int_input2);
+		  wcodemat_content_validate (pvApiCtx, &errCode, flow, int_input2);
           if (errCode != SUCCESS)
             {
               validate_print (errCode);
@@ -2256,8 +2301,8 @@ int_wcodemat (char *fname)
 		  typ = 12; //I_UINT16;;
           //CreateVar (2, "I", &m2, &n2, &l2);
 
-      //readFlag = swt_gwsupport_AllocMatrixOfInteger32(fname, 1,  m2 , n2 , &int_output1 );
-      readFlag = swt_gwsupport_AllocMatrixOfUnsignedInteger16(fname, 1,  m2 , n2 , &int_output1 );
+      //readFlag = swt_gwsupport_AllocMatrixOfInteger32(pvApiCtx, fname, 1,  m2 , n2 , &int_output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfUnsignedInteger16(pvApiCtx, fname, 1,  m2 , n2 , &int_output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -2273,18 +2318,18 @@ int_wcodemat (char *fname)
   case 2:
 	  {
             //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
             //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-        wcodemat_content_validate (&errCode, flow, int_input2);
+        wcodemat_content_validate (pvApiCtx, &errCode, flow, int_input2);
           if (errCode != SUCCESS)
             {
               validate_print (errCode);
@@ -2294,8 +2339,8 @@ int_wcodemat (char *fname)
 		  n3 = n1;
 		  typ = 12; //I_UINT16;;
 		  //CreateVar (3, "I", &m3, &n3, &l3);
-      //readFlag = swt_gwsupport_AllocMatrixOfInteger32(fname, 1,  m3 , n3 , &int_output1 );
-      readFlag = swt_gwsupport_AllocMatrixOfUnsignedInteger16(fname, 1,  m3 , n3 , &int_output1 );
+      //readFlag = swt_gwsupport_AllocMatrixOfInteger32(pvApiCtx, fname, 1,  m3 , n3 , &int_output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfUnsignedInteger16(pvApiCtx, fname, 1,  m3 , n3 , &int_output1 );
 
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
@@ -2312,25 +2357,25 @@ int_wcodemat (char *fname)
   case 3:
 	  {
             //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
             //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
           //GetRhsVar (3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string1 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-        wcodemat_content_validate (&errCode, flow, int_input2);
+        wcodemat_content_validate (pvApiCtx, &errCode, flow, int_input2);
           if (errCode != SUCCESS)
             {
               validate_print (errCode);
@@ -2346,8 +2391,8 @@ int_wcodemat (char *fname)
 			  var=malloc(m4*n4*sizeof(double));
 			   typ = 12; //I_UINT16;;
 		      //CreateVar (4, "I", &m4, &n4, &l4);
-          //readFlag = swt_gwsupport_AllocMatrixOfInteger32(fname, 1,  m4 , n4 , &int_output1 );
-          readFlag = swt_gwsupport_AllocMatrixOfUnsignedInteger16(fname, 1,  m4 , n4 , &int_output1 );
+          //readFlag = swt_gwsupport_AllocMatrixOfInteger32(pvApiCtx, fname, 1,  m4 , n4 , &int_output1 );
+          readFlag = swt_gwsupport_AllocMatrixOfUnsignedInteger16(pvApiCtx, fname, 1,  m4 , n4 , &int_output1 );
           if(readFlag==SWT_GWSUPPORT_ERROR)
             {
               return 0;
@@ -2373,31 +2418,31 @@ int_wcodemat (char *fname)
   case 4:
 	  {
 		    //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
             //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
           //GetRhsVar (3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string1 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string1 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
           //GetRhsVar (4, "i", &m4, &n4, &l4);
-          readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 4,  &m4, &n4, &int_input4);
+          readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 4,  &m4, &n4, &int_input4);
           if(readFlag==SWT_GWSUPPORT_ERROR)
             {
               return 0;
             }
-          wcodemat_content_validate (&errCode, flow, int_input2);
+          wcodemat_content_validate (pvApiCtx, &errCode, flow, int_input2);
           if (errCode != SUCCESS)
             {
               validate_print (errCode);
@@ -2411,8 +2456,8 @@ int_wcodemat (char *fname)
 		      n5 = n1;
 			   typ = 12; //I_UINT16;
 		      //CreateVar (5, "I", &m5, &n5, &l5);
-          //readFlag = swt_gwsupport_AllocMatrixOfInteger32(fname, 1,  m5 , n5 , &int_output1 );
-          readFlag = swt_gwsupport_AllocMatrixOfUnsignedInteger16(fname, 1,  m5 , n5 , &int_output1 );
+          //readFlag = swt_gwsupport_AllocMatrixOfInteger32(pvApiCtx, fname, 1,  m5 , n5 , &int_output1 );
+          readFlag = swt_gwsupport_AllocMatrixOfUnsignedInteger16(pvApiCtx, fname, 1,  m5 , n5 , &int_output1 );
           if(readFlag==SWT_GWSUPPORT_ERROR)
             {
               return 0;
@@ -2447,7 +2492,12 @@ int_wcodemat (char *fname)
   return 0;
 }
 //
-// int_ind2rgb (char *fname)
+// int_ind2rgb (char *fname
+//#ifdef _SCILAB6_
+//, void* pvApiCtx)
+//#else
+//)
+//#endif
 // {
 //   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
 //   static int minlhs = 1, maxlhs = 1, minrhs = 2, maxrhs = 2;
@@ -2544,7 +2594,7 @@ int_wcodemat (char *fname)
 //   // CreateListVarFromPtr(3,1,"S",&ms,&ns,Str);
 //   // CreateListVarFromPtr(3,2,"I",&mi,&ni,&ssi);
 //   // CreateListVarFromPtr(3,3,"d",&m3, &n3, &var);
-//    readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var );
+//    readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var );
 //   if(readFlag==SWT_GWSUPPORT_ERROR)
 //     {
 //       return 0;
@@ -2557,7 +2607,12 @@ int_wcodemat (char *fname)
 
 
 int
-int_mat3Dtran (char *fname)
+int_mat3Dtran 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3, mL2, nL2, s4;
   static int it3, mL3, nL3, lL3, lcL3, mL1, nL1, s3, l4, m4, n4;
@@ -2594,7 +2649,7 @@ int_mat3Dtran (char *fname)
   // FreeRhsSVar(Str2);
   // GetListRhsVar(1,2,"I",&mL2,&nL2,&M);
   // GetListRhsCVar(1,3,"d",&it3,&mL3,&nL3,&lL3,&lcL3);
-  readFlag = swt_gwsupport_GetRealHypermatofdouble (fname, 1,  &dims1 , &ndims1 , &input1 );
+  readFlag = swt_gwsupport_GetRealHypermatofdouble (pvApiCtx, fname, 1,  &dims1 , &ndims1 , &input1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -2606,7 +2661,7 @@ int_mat3Dtran (char *fname)
       }
 
     //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -2619,7 +2674,7 @@ int_mat3Dtran (char *fname)
     }
 
   //GetRhsVar (3, "i", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &int_input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &int_input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -2862,7 +2917,7 @@ int_mat3Dtran (char *fname)
   // CreateListVarFromPtr(4,1,"S",&ms,&ns,Str);
   // CreateListVarFromPtr(4,2,"I",&mi,&ni,&ssi);
   // CreateListVarFromPtr(4,3,"d",&m4, &n4, &var3);
-  readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+  readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -2874,7 +2929,12 @@ int_mat3Dtran (char *fname)
 }
 
 int
-int_wrev3 (char *fname)
+int_wrev3 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3, mL2, nL2, s4;
   static int it3, mL3, nL3, lL3, lcL3, mL1, nL1, s3, l4, m4, n4;
@@ -2911,7 +2971,7 @@ int_wrev3 (char *fname)
   // FreeRhsSVar(Str2);
   // GetListRhsVar(1,2,"I",&mL2,&nL2,&M);
   // GetListRhsCVar(1,3,"d",&it3,&mL3,&nL3,&lL3,&lcL3);
-  readFlag = swt_gwsupport_GetRealHypermatofdouble (fname, 1,  &dims1 , &ndims1 , &input1 );
+  readFlag = swt_gwsupport_GetRealHypermatofdouble (pvApiCtx, fname, 1,  &dims1 , &ndims1 , &input1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -2923,7 +2983,7 @@ int_wrev3 (char *fname)
       }
 
     //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -3067,7 +3127,7 @@ int_wrev3 (char *fname)
   // CreateListVarFromPtr(3,1,"S",&ms,&ns,Str);
   // CreateListVarFromPtr(3,2,"I",&mi,&ni,&ssi);
   // CreateListVarFromPtr(3,3,"d",&m3, &n3, &var3);
-  readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+  readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -3079,7 +3139,12 @@ int_wrev3 (char *fname)
 }
 
 int
-int_wrev2(char *fname)
+int_wrev2
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int m1, n1, m2, n2, m3, n3;
   static int minlhs=1, maxlhs=1, minrhs=2, maxrhs=2;
@@ -3093,7 +3158,7 @@ int_wrev2(char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  wrev2_form_validate (&errCode);
+  wrev2_form_validate (pvApiCtx, &errCode, Rhs);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -3101,13 +3166,13 @@ int_wrev2(char *fname)
     }
 
     //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
     //GetRhsVar (2, "i", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger( fname, 2,  &m2, &n2, &int_input2);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger(pvApiCtx, fname, 2,  &m2, &n2, &int_input2);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -3124,7 +3189,7 @@ int_wrev2(char *fname)
   n3 = n1;
 
     //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -3169,7 +3234,12 @@ int_wrev2(char *fname)
 }
 
 int
-int_wnorm (char *fname)
+int_wnorm 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 3;
@@ -3188,13 +3258,13 @@ int_wnorm (char *fname)
 
   /* Get Input */
     //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   flow = 1;
-  wnorm_form_validate (&flow, &errCode);
+  wnorm_form_validate (pvApiCtx, &flow, &errCode, Rhs);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);	/* Indicate error  */
@@ -3207,7 +3277,7 @@ int_wnorm (char *fname)
       m2 = m1;
       n2 = n1;
             //CreateVar (2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -3221,19 +3291,19 @@ int_wnorm (char *fname)
       m4 = m1;
       n4 = n1;
       //GetRhsVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 2,  &m2, &n2, &input2);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 2,  &m2, &n2, &input2);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
       //GetRhsVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 3,  &m3, &n3, &input3);
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 3,  &m3, &n3, &input3);
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m4 , n4 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m4 , n4 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -3255,7 +3325,12 @@ int_wnorm (char *fname)
 
 
 int
-int_waveletfamilies (char *fname)
+int_waveletfamilies 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
     int l1, m1, n1;
    int minlhs = 1, maxlhs = 1, minrhs = 0, maxrhs = 1;
@@ -3302,7 +3377,7 @@ int_waveletfamilies (char *fname)
 
   } else {
   //   GetRhsVar (1, "c", &m1, &n1, &l1);
-     readFlag = swt_gwsupport_GetScalarString(fname,1 , &input_string );
+     readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname,1 , &input_string );
      m1=1;n1=1;
      if(readFlag==SWT_GWSUPPORT_ERROR)
        {

@@ -92,10 +92,10 @@
  *-----------------------------------------*/
 
 void
-orthfilt_form_validate (int *errCode)
+orthfilt_form_validate (void * pvApiCtx, int *errCode)
 {
   *errCode = SUCCESS;
-  if (!sci_matrix_vector_real(1))
+  if (!sci_matrix_vector_real(pvApiCtx,1))
     *errCode = UNKNOWN_INPUT_ERR;
   return;
 }
@@ -105,10 +105,10 @@ orthfilt_form_validate (int *errCode)
  *-----------------------------------------*/
 
 void
-biorfilt_form_validate (int *errCode)
+biorfilt_form_validate (void * pvApiCtx, int *errCode)
 {
   *errCode = SUCCESS;
-  if ((!sci_matrix_vector_real(1)) || (!sci_matrix_vector_real(2)))
+  if ((!sci_matrix_vector_real(pvApiCtx,1)) || (!sci_matrix_vector_real(pvApiCtx,2)))
     *errCode = UNKNOWN_INPUT_ERR;
   return;
 }
@@ -118,16 +118,16 @@ biorfilt_form_validate (int *errCode)
  *-----------------------------------------*/
 
 void
-dbwavf_form_validate (int *errCode)
+dbwavf_form_validate (void * pvApiCtx, int *errCode)
 {
   *errCode = SUCCESS;
-  if (!sci_strings_scalar(1))
+  if (!sci_strings_scalar(pvApiCtx,1))
     *errCode = UNKNOWN_INPUT_ERR;
   return;
 }
 
 void
-dbwavf_content_validate (int *errCode, char *wname)
+dbwavf_content_validate (void * pvApiCtx, int *errCode, char *wname)
 {
   int type;
   *errCode = SUCCESS;
@@ -143,16 +143,16 @@ dbwavf_content_validate (int *errCode, char *wname)
  *-----------------------------------------*/
 
 void
-coifwavf_form_validate (int *errCode)
+coifwavf_form_validate (void * pvApiCtx, int *errCode)
 {
   *errCode = SUCCESS;
-  if (!sci_strings_scalar(1))
+  if (!sci_strings_scalar(pvApiCtx,1))
     *errCode = UNKNOWN_INPUT_ERR;
   return;
 }
 
 void
-coifwavf_content_validate (int *errCode, char *wname)
+coifwavf_content_validate (void * pvApiCtx, int *errCode, char *wname)
 {
   int type;
   *errCode = SUCCESS;
@@ -169,16 +169,16 @@ coifwavf_content_validate (int *errCode, char *wname)
  *-----------------------------------------*/
 
 void
-symwavf_form_validate (int *errCode)
+symwavf_form_validate (void * pvApiCtx, int *errCode)
 {
   *errCode = SUCCESS;
-  if (!sci_strings_scalar(1))
+  if (!sci_strings_scalar(pvApiCtx,1))
     *errCode = UNKNOWN_INPUT_ERR;
   return;
 }
 
 void
-symwavf_content_validate (int *errCode, char *wname)
+symwavf_content_validate (void * pvApiCtx, int *errCode, char *wname)
 {
   int type;
   *errCode = SUCCESS;
@@ -193,16 +193,16 @@ symwavf_content_validate (int *errCode, char *wname)
  *-----------------------------------------*/
 
 void
-legdwavf_form_validate (int *errCode)
+legdwavf_form_validate (void * pvApiCtx, int *errCode)
 {
   *errCode = SUCCESS;
-  if (!sci_strings_scalar(1))
+  if (!sci_strings_scalar(pvApiCtx,1))
     *errCode = UNKNOWN_INPUT_ERR;
   return;
 }
 
 void
-legdwavf_content_validate (int *errCode, char *wname)
+legdwavf_content_validate (void * pvApiCtx, int *errCode, char *wname)
 {
   int type;
   *errCode = SUCCESS;
@@ -218,16 +218,16 @@ legdwavf_content_validate (int *errCode, char *wname)
  *-----------------------------------------*/
 
 void
-biorwavf_form_validate (int *errCode)
+biorwavf_form_validate (void * pvApiCtx, int *errCode)
 {
   *errCode = SUCCESS;
-  if (!sci_strings_scalar(1))
+  if (!sci_strings_scalar(pvApiCtx,1))
     *errCode = UNKNOWN_INPUT_ERR;
   return;
 }
 
 void
-biorwavf_content_validate (int *errCode, char *wname)
+biorwavf_content_validate (void * pvApiCtx, int *errCode, char *wname)
 {
   int type;
   *errCode = SUCCESS;
@@ -242,16 +242,16 @@ biorwavf_content_validate (int *errCode, char *wname)
  *-----------------------------------------*/
 
 void
-rbiorwavf_form_validate (int *errCode)
+rbiorwavf_form_validate (void * pvApiCtx, int *errCode)
 {
   *errCode = SUCCESS;
-  if (!sci_strings_scalar(1))
+  if (!sci_strings_scalar(pvApiCtx,1))
     *errCode = UNKNOWN_INPUT_ERR;
   return;
 }
 
 void
-rbiorwavf_content_validate (int *errCode, char *wname)
+rbiorwavf_content_validate (void * pvApiCtx, int *errCode, char *wname)
 {
   int type;
   *errCode = SUCCESS;
@@ -267,27 +267,27 @@ rbiorwavf_content_validate (int *errCode, char *wname)
  *-----------------------------------------*/
 
 void
-wfilters_form_validate (int *errCode, int *flow, char *input_string1)
+wfilters_form_validate (void * pvApiCtx, int *errCode, int *flow, char *input_string1, int NInputArgument, int NOutputArgument)
 {
 
   *errCode = SUCCESS;
-  if ((Rhs==2) && (!sci_strings_scalar(2)))
+  if ((NInputArgument==2) && (!sci_strings_scalar(pvApiCtx,2)))
     {
       *errCode = UNKNOWN_INPUT_ERR;
       return;
     }
-  if ((Rhs==1) && sci_strings_scalar(1) && (Lhs==4))
+  if ((NInputArgument==1) && sci_strings_scalar(pvApiCtx,1) && (NOutputArgument==4))
     *flow = 1;
-  else if ((Rhs==2) && sci_strings_scalar(1) && (Lhs==2) &&
+  else if ((NInputArgument==2) && sci_strings_scalar(pvApiCtx,1) && (NOutputArgument==2) &&
   input_string1[0]=='d')
     *flow = 2;
-  else if ((Rhs==2) && sci_strings_scalar(1) && (Lhs==2) &&
+  else if ((NInputArgument==2) && sci_strings_scalar(pvApiCtx,1) && (NOutputArgument==2) &&
   input_string1[0]=='r')
     *flow = 3;
-  else if ((Rhs==2) && sci_strings_scalar(1) && (Lhs==2) &&
+  else if ((NInputArgument==2) && sci_strings_scalar(pvApiCtx,1) && (NOutputArgument==2) &&
   input_string1[0]=='l')
     *flow = 4;
-  else if ((Rhs==2) && sci_strings_scalar(1) && (Lhs==2) &&
+  else if ((NInputArgument==2) && sci_strings_scalar(pvApiCtx,1) && (NOutputArgument==2) &&
   input_string1[0]=='h')
     *flow = 5;
   else
@@ -296,7 +296,7 @@ wfilters_form_validate (int *errCode, int *flow, char *input_string1)
 }
 
 void
-wfilters_content_validate(int *errCode, char *wname)
+wfilters_content_validate(void * pvApiCtx, int *errCode, char *wname)
 {
   int typ1, typ2, typ3, typ4, typ5, typ6, typ7, typ8, typ9, typ10, typ11;
   *errCode = SUCCESS;
@@ -323,13 +323,13 @@ wfilters_content_validate(int *errCode, char *wname)
  *-----------------------------------------*/
 
 void
-wmaxlev_form_validate(int *errCode)
+wmaxlev_form_validate(void * pvApiCtx, int *errCode)
 {
   *errCode = UNKNOWN_INPUT_ERR;
-  if (sci_matrix_scalar_real(1) && sci_strings_scalar(2))
+  if (sci_matrix_scalar_real(pvApiCtx,1) && sci_strings_scalar(pvApiCtx,2))
     *errCode = SUCCESS;
-  else if (sci_matrix_vector_real(1) &&
-	   sci_strings_scalar(2) && length_check(1,2))
+  else if (sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) && length_check(pvApiCtx,1,2))
     *errCode = SUCCESS;
   return;
 }
@@ -339,24 +339,24 @@ wmaxlev_form_validate(int *errCode)
  *-----------------------------------------*/
 
 void
-dwt_form_validate(int *errCode, int *flow)
+dwt_form_validate(void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==2) && sci_matrix_vector_real(1) &&
-      sci_strings_scalar(2))
+  if ((NInputArgument==2) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_strings_scalar(pvApiCtx,2))
     *flow = 1;
-  else if ((Rhs==3) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) &&
-	   sci_matrix_vector_real(3) && vector_length_check(2,3))
+  else if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && vector_length_check(pvApiCtx,2,3))
     *flow = 2;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_strings_scalar(2) && sci_strings_scalar(3) &&
-	   sci_strings_scalar(4))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4))
     *flow = 3;
-  else if ((Rhs==5) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   vector_length_check(2,3) &&
-	   sci_strings_scalar(4) && sci_strings_scalar(5))
+  else if ((NInputArgument==5) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   vector_length_check(pvApiCtx,2,3) &&
+	   sci_strings_scalar(pvApiCtx,4) && sci_strings_scalar(pvApiCtx,5))
     *flow = 4;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -364,7 +364,7 @@ dwt_form_validate(int *errCode, int *flow)
 }
 
 void
-dwt_content_validate(int *errCode, int flow, char * string1, char * string2, char * string3)
+dwt_content_validate(void * pvApiCtx, int *errCode, int flow, char * string1, char * string2, char * string3)
 {
   int type;
 
@@ -372,7 +372,7 @@ dwt_content_validate(int *errCode, int flow, char * string1, char * string2, cha
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode, string1);
+      wfilters_content_validate(pvApiCtx,errCode, string1);
       break;
     }
   case 2:
@@ -381,7 +381,7 @@ dwt_content_validate(int *errCode, int flow, char * string1, char * string2, cha
     }
   case 3:
     {
-      wfilters_content_validate(errCode, string1);
+      wfilters_content_validate(pvApiCtx,errCode, string1);
       extension_check(string3,&type);
       if (!type)
 	*errCode = EXTENSION_OPT_NOT_VALID;
@@ -410,97 +410,97 @@ dwt_content_validate(int *errCode, int flow, char * string1, char * string2, cha
  *-----------------------------------------*/
 
 void
-idwt_form_validate (int *errCode, int *flow)
+idwt_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
 
-  if ((Rhs==3) && sci_matrix_vector_real(1) &&
-      sci_matrix_vector_real(2) && sci_strings_scalar(3) &&
-      vector_length_check(1,2))
+  if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_vector_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+      vector_length_check(pvApiCtx,1,2))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && vector_length_check(1,2) &&
-	   sci_matrix_vector_real(3) && sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && vector_length_check(pvApiCtx,1,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4))
     *flow = 2;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && vector_length_check(1,2) &&
-	   sci_strings_scalar(3) && sci_matrix_scalar_real(4))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && vector_length_check(pvApiCtx,1,2) &&
+	   sci_strings_scalar(pvApiCtx,3) && sci_matrix_scalar_real(pvApiCtx,4))
     *flow = 3;
-  else if ((Rhs==5) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && vector_length_check(1,2) &&
-	   sci_matrix_vector_real(3) && sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4) && sci_matrix_scalar_real(5))
+  else if ((NInputArgument==5) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && vector_length_check(pvApiCtx,1,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4) && sci_matrix_scalar_real(pvApiCtx,5))
     *flow = 4;
-  else if ((Rhs==5) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && vector_length_check(1,2) &&
-	   sci_strings_scalar(3) && sci_strings_scalar(4) &&
-	   sci_strings_scalar(5))
+  else if ((NInputArgument==5) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && vector_length_check(pvApiCtx,1,2) &&
+	   sci_strings_scalar(pvApiCtx,3) && sci_strings_scalar(pvApiCtx,4) &&
+	   sci_strings_scalar(pvApiCtx,5))
     *flow = 5;
-  else if ((Rhs==6) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && vector_length_check(1,2) &&
-	   sci_strings_scalar(3) && sci_matrix_scalar_real(4) &&
-	   sci_strings_scalar(5) && sci_strings_scalar(6))
+  else if ((NInputArgument==6) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && vector_length_check(pvApiCtx,1,2) &&
+	   sci_strings_scalar(pvApiCtx,3) && sci_matrix_scalar_real(pvApiCtx,4) &&
+	   sci_strings_scalar(pvApiCtx,5) && sci_strings_scalar(pvApiCtx,6))
     *flow = 6;
-  else if ((Rhs==6) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && vector_length_check(1,2) &&
-	   sci_matrix_vector_real(3) && sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4) && sci_strings_scalar(5) &&
-	   sci_strings_scalar(6))
+  else if ((NInputArgument==6) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && vector_length_check(pvApiCtx,1,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4) && sci_strings_scalar(pvApiCtx,5) &&
+	   sci_strings_scalar(pvApiCtx,6))
     *flow = 7;
-  else if ((Rhs==7) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && vector_length_check(1,2) &&
-	   sci_matrix_vector_real(3) && sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4) && sci_matrix_scalar_real(5) &&
-	   sci_strings_scalar(6) && sci_strings_scalar(7))
+  else if ((NInputArgument==7) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && vector_length_check(pvApiCtx,1,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4) && sci_matrix_scalar_real(pvApiCtx,5) &&
+	   sci_strings_scalar(pvApiCtx,6) && sci_strings_scalar(pvApiCtx,7))
     *flow = 8;
-  else if ((Rhs==3) &&
-	   ((sci_matrix_vector_real(1) && sci_matrix_void(2)) ||
-	    (sci_matrix_void(1) && sci_matrix_vector_real(2))) &&
-	   sci_strings_scalar(3))
+  else if ((NInputArgument==3) &&
+	   ((sci_matrix_vector_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2)) ||
+	    (sci_matrix_void(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2))) &&
+	   sci_strings_scalar(pvApiCtx,3))
     *flow = 1;
-  else if ((Rhs==4) &&
-	   ((sci_matrix_vector_real(1) && sci_matrix_void(2)) ||
-	    (sci_matrix_void(1) && sci_matrix_vector_real(2))) &&
-	   sci_matrix_vector_real(3) && sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4))
+  else if ((NInputArgument==4) &&
+	   ((sci_matrix_vector_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2)) ||
+	    (sci_matrix_void(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2))) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4))
     *flow = 2;
-  else if ((Rhs==4) &&
-	   ((sci_matrix_vector_real(1) && sci_matrix_void(2)) ||
-	    (sci_matrix_void(1) && sci_matrix_vector_real(2))) &&
-	   sci_strings_scalar(3) && sci_matrix_scalar_real(4))
+  else if ((NInputArgument==4) &&
+	   ((sci_matrix_vector_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2)) ||
+	    (sci_matrix_void(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2))) &&
+	   sci_strings_scalar(pvApiCtx,3) && sci_matrix_scalar_real(pvApiCtx,4))
     *flow = 3;
-  else if ((Rhs==5) &&
-	   ((sci_matrix_vector_real(1) && sci_matrix_void(2)) ||
-	    (sci_matrix_void(1) && sci_matrix_vector_real(2))) &&
-	   sci_matrix_vector_real(3) && sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4) && sci_matrix_scalar_real(5))
+  else if ((NInputArgument==5) &&
+	   ((sci_matrix_vector_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2)) ||
+	    (sci_matrix_void(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2))) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4) && sci_matrix_scalar_real(pvApiCtx,5))
     *flow = 4;
-  else if ((Rhs==5) &&
-	   ((sci_matrix_vector_real(1) && sci_matrix_void(2)) ||
-	    (sci_matrix_void(1) && sci_matrix_vector_real(2))) &&
-	   sci_strings_scalar(3) && sci_strings_scalar(4) &&
-	   sci_strings_scalar(5))
+  else if ((NInputArgument==5) &&
+	   ((sci_matrix_vector_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2)) ||
+	    (sci_matrix_void(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2))) &&
+	   sci_strings_scalar(pvApiCtx,3) && sci_strings_scalar(pvApiCtx,4) &&
+	   sci_strings_scalar(pvApiCtx,5))
     *flow = 5;
-  else if ((Rhs==6) &&
-	   ((sci_matrix_vector_real(1) && sci_matrix_void(2)) ||
-	    (sci_matrix_void(1) && sci_matrix_vector_real(2))) &&
-	   sci_strings_scalar(3) && sci_matrix_scalar_real(4) &&
-	   sci_strings_scalar(5) && sci_strings_scalar(6))
+  else if ((NInputArgument==6) &&
+	   ((sci_matrix_vector_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2)) ||
+	    (sci_matrix_void(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2))) &&
+	   sci_strings_scalar(pvApiCtx,3) && sci_matrix_scalar_real(pvApiCtx,4) &&
+	   sci_strings_scalar(pvApiCtx,5) && sci_strings_scalar(pvApiCtx,6))
     *flow = 6;
-  else if ((Rhs==6) &&
-	   ((sci_matrix_vector_real(1) && sci_matrix_void(2)) ||
-	    (sci_matrix_void(1) && sci_matrix_vector_real(2))) &&
-	   sci_matrix_vector_real(3) && sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4) && sci_strings_scalar(5) &&
-	   sci_strings_scalar(6))
+  else if ((NInputArgument==6) &&
+	   ((sci_matrix_vector_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2)) ||
+	    (sci_matrix_void(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2))) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4) && sci_strings_scalar(pvApiCtx,5) &&
+	   sci_strings_scalar(pvApiCtx,6))
     *flow = 7;
-  else if ((Rhs==7) &&
-	   ((sci_matrix_vector_real(1) && sci_matrix_void(2)) ||
-	    (sci_matrix_void(1) && sci_matrix_vector_real(2))) &&
-	   sci_matrix_vector_real(3) && sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4) && sci_matrix_scalar_real(5) &&
-	   sci_strings_scalar(6) && sci_strings_scalar(7))
+  else if ((NInputArgument==7) &&
+	   ((sci_matrix_vector_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2)) ||
+	    (sci_matrix_void(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2))) &&
+	   sci_matrix_vector_real(pvApiCtx,3) && sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4) && sci_matrix_scalar_real(pvApiCtx,5) &&
+	   sci_strings_scalar(pvApiCtx,6) && sci_strings_scalar(pvApiCtx,7))
     *flow = 8;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -508,7 +508,7 @@ idwt_form_validate (int *errCode, int *flow)
 }
 
 void
-idwt_content_validate (int *errCode, int flow,
+idwt_content_validate (void * pvApiCtx, int *errCode, int flow,
 		       char * l3, int* l4, int* l5, char* l4_string, char* l5_string, char* l6, char* l7)
 {
   int type;
@@ -517,7 +517,7 @@ idwt_content_validate (int *errCode, int flow,
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode, (l3));
+      wfilters_content_validate(pvApiCtx,errCode, (l3));
       break;
     }
   case 2:
@@ -526,7 +526,7 @@ idwt_content_validate (int *errCode, int flow,
     }
   case 3:
     {
-      wfilters_content_validate(errCode, (l3));
+      wfilters_content_validate(pvApiCtx,errCode, (l3));
       if ((l4)[0] <= 0)
 	*errCode = POSITIVE_INTEGER_ONLY;
       break;
@@ -539,7 +539,7 @@ idwt_content_validate (int *errCode, int flow,
     }
   case 5:
     {
-      wfilters_content_validate(errCode, (l3));
+      wfilters_content_validate(pvApiCtx,errCode, (l3));
       if (strcmp(l4_string,"mode"))
 	*errCode = UNKNOWN_INPUT_ERR;
       extension_check(l5_string,&type);
@@ -549,7 +549,7 @@ idwt_content_validate (int *errCode, int flow,
     }
   case 6:
     {
-      wfilters_content_validate(errCode, (l3));
+      wfilters_content_validate(pvApiCtx,errCode, (l3));
       if (strcmp(l5_string,"mode"))
 	*errCode = UNKNOWN_INPUT_ERR;
       extension_check((l6),&type);
@@ -590,17 +590,17 @@ idwt_content_validate (int *errCode, int flow,
  *-----------------------------------------*/
 
 void
-wavedec_form_validate(int *errCode, int *flow)
+wavedec_form_validate(void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && (sci_matrix_vector_real(1))&&
-      sci_matrix_scalar_real(2) && sci_strings_scalar(3))
+  if ((NInputArgument==3) && (sci_matrix_vector_real(pvApiCtx,1))&&
+      sci_matrix_scalar_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_scalar_real(2) &&
-	   sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_scalar_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -608,13 +608,13 @@ wavedec_form_validate(int *errCode, int *flow)
 }
 
 void
-wavedec_content_validate(int *errCode, int flow, int* int1, char* string1)
+wavedec_content_validate(void * pvApiCtx, int *errCode, int flow, int* int1, char* string1)
 {
   *errCode = SUCCESS;
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,string1);
+      wfilters_content_validate(pvApiCtx,errCode,string1);
       if (int1[0]<=0)
 	*errCode = POSITIVE_INTEGER_ONLY;
       break;
@@ -636,17 +636,17 @@ wavedec_content_validate(int *errCode, int flow, int* int1, char* string1)
  *-----------------------------------------*/
 
 void
-waverec_form_validate(int *errCode, int *flow)
+waverec_form_validate(void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && (sci_matrix_vector_real(1))&&
-      sci_matrix_vector_real(2) && sci_strings_scalar(3))
+  if ((NInputArgument==3) && (sci_matrix_vector_real(pvApiCtx,1))&&
+      sci_matrix_vector_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) &&
-	   sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) &&
-	   vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) &&
+	   vector_length_check(pvApiCtx,3,4))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -654,13 +654,13 @@ waverec_form_validate(int *errCode, int *flow)
 }
 
 void
-waverec_content_validate(int *errCode, int flow, char* l3)
+waverec_content_validate(void * pvApiCtx, int *errCode, int flow, char* l3)
 {
   *errCode = SUCCESS;
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       break;
     }
   case 2:
@@ -678,27 +678,27 @@ waverec_content_validate(int *errCode, int flow, char* l3)
  *-----------------------------------------*/
 
 void
-wrcoef_form_validate(int *errCode, int *flow)
+wrcoef_form_validate(void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
 
-  if ((Rhs==4) && sci_strings_scalar(1) &&
-      sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-      sci_strings_scalar(4))
+  if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,1) &&
+      sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+      sci_strings_scalar(pvApiCtx,4))
     *flow = 1;
-  else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   sci_strings_scalar(4) && sci_matrix_scalar_real(5))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4) && sci_matrix_scalar_real(pvApiCtx,5))
     *flow = 2;
-  else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && sci_matrix_vector_real(5) &&
-	   vector_length_check(4,5))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   vector_length_check(pvApiCtx,4,5))
     *flow = 3;
-  else if ((Rhs==6) && sci_strings_scalar(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && sci_matrix_vector_real(5) &&
-	   sci_matrix_scalar_real(6) && vector_length_check(4,5))
+  else if ((NInputArgument==6) && sci_strings_scalar(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_scalar_real(pvApiCtx,6) && vector_length_check(pvApiCtx,4,5))
     *flow = 4;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -706,13 +706,13 @@ wrcoef_form_validate(int *errCode, int *flow)
 }
 
 void
-wrcoef_content_validate (int *errCode, int flow, char *l1, char* l4, int *l5, int* l6)
+wrcoef_content_validate (void * pvApiCtx, int *errCode, int flow, char *l1, char* l4, int *l5, int* l6)
 {
   *errCode = SUCCESS;
   switch (flow){
   case 1:
     {
-      wfilters_content_validate(errCode,(l4));
+      wfilters_content_validate(pvApiCtx,errCode,(l4));
       if (scalar_string_check((l1),'a') ||
 	  scalar_string_check((l1),'d'))
 	*errCode = SUCCESS;
@@ -722,7 +722,7 @@ wrcoef_content_validate (int *errCode, int flow, char *l1, char* l4, int *l5, in
     }
   case 2:
     {
-      wfilters_content_validate(errCode,(l4));
+      wfilters_content_validate(pvApiCtx,errCode,(l4));
       if (scalar_string_check((l1),'a') ||
 	  scalar_string_check((l1),'d'))
 	*errCode = SUCCESS;
@@ -769,24 +769,24 @@ wrcoef_content_validate (int *errCode, int flow, char *l1, char* l4, int *l5, in
  *-----------------------------------------*/
 
 void
-appcoef_form_validate (int *errCode, int *flow)
+appcoef_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && sci_matrix_vector_real(1) &&
-      sci_matrix_vector_real(2) && sci_strings_scalar(3))
+  if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_vector_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && sci_strings_scalar(3) &&
-	   sci_matrix_scalar_real(4) )
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4) )
     *flow = 2;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4))
     *flow = 3;
-  else if ((Rhs==5) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4) &&
-	   sci_matrix_scalar_real(5))
+  else if ((NInputArgument==5) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+	   sci_matrix_scalar_real(pvApiCtx,5))
     *flow = 4;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -794,18 +794,18 @@ appcoef_form_validate (int *errCode, int *flow)
 }
 
 void
-appcoef_content_validate (int *errCode, int flow, char* input3)
+appcoef_content_validate (void * pvApiCtx, int *errCode, int flow, char* input3)
 {
   *errCode = SUCCESS;
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,(input3));
+      wfilters_content_validate(pvApiCtx,errCode,(input3));
       break;
     }
   case 2:
     {
-      wfilters_content_validate(errCode,(input3));
+      wfilters_content_validate(pvApiCtx,errCode,(input3));
       break;
     }
   case 3:
@@ -827,14 +827,14 @@ appcoef_content_validate (int *errCode, int flow, char* input3)
  *-----------------------------------------*/
 
 void
-detcoef_form_validate (int *errCode, int *flow)
+detcoef_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==2) && sci_matrix_vector_real(1) &&
-      sci_matrix_vector_real(2))
+  if ((NInputArgument==2) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_vector_real(pvApiCtx,2))
     *flow = 1;
-  else if ((Rhs==3) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_scalar_real(3))
+  else if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -846,11 +846,11 @@ detcoef_form_validate (int *errCode, int *flow)
  *-----------------------------------------*/
 
 void
-wenergy_form_validate (int *errCode)
+wenergy_form_validate (void * pvApiCtx, int *errCode, int NInputArgument)
 {
   *errCode = UNKNOWN_INPUT_ERR;
-  if ((Rhs==2) && sci_matrix_vector_real(1) &&
-      sci_matrix_vector_real(2))
+  if ((NInputArgument==2) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_vector_real(pvApiCtx,2))
     *errCode = SUCCESS;
   return;
 }
@@ -860,33 +860,33 @@ wenergy_form_validate (int *errCode)
  *-----------------------------------------*/
 
 void
-upcoef_form_validate (int *errCode, int *flow)
+upcoef_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && sci_strings_scalar(1) &&
-      (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3))
+  if ((NInputArgument==3) && sci_strings_scalar(pvApiCtx,1) &&
+      (sci_matrix_vector_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_strings_scalar(pvApiCtx,3))
     *flow = 5;
-  else if ((Rhs==4) && sci_strings_scalar(1) &&
-	   (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3) &&
-	   sci_matrix_scalar_real(4))
+  else if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_vector_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_strings_scalar(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4))
     *flow = 1;
-  else if ((Rhs==4) && sci_strings_scalar(1) &&
-	   (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_vector_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4))
     *flow = 6;
-  else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3) &&
-	   sci_matrix_scalar_real(4) && sci_matrix_scalar_real(5))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_vector_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_strings_scalar(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4) && sci_matrix_scalar_real(pvApiCtx,5))
     *flow = 2;
-  else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4) &&
-	   sci_matrix_scalar_real(5))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_vector_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+	   sci_matrix_scalar_real(pvApiCtx,5))
     *flow = 3;
-  else if ((Rhs==6) && sci_strings_scalar(1) &&
-	   (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4) &&
-	   sci_matrix_scalar_real(5) && sci_matrix_scalar_real(6))
+  else if ((NInputArgument==6) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_vector_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+	   sci_matrix_scalar_real(pvApiCtx,5) && sci_matrix_scalar_real(pvApiCtx,6))
     *flow = 4;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -894,7 +894,7 @@ upcoef_form_validate (int *errCode, int *flow)
 }
 
 void
-upcoef_content_validate (int *errCode, int flow, char* l1,
+upcoef_content_validate (void * pvApiCtx, int *errCode, int flow, char* l1,
 			 char* input3, int* l4, int* l5, int* l6)
 {
   *errCode = SUCCESS;
@@ -906,7 +906,7 @@ upcoef_content_validate (int *errCode, int flow, char* l1,
 	*errCode = SUCCESS;
       else
 	*errCode = OPT_CHAR_NOT_VALID;
-      wfilters_content_validate(errCode,(input3));
+      wfilters_content_validate(pvApiCtx,errCode,(input3));
       if ((l4)[0]<=0)
 	*errCode = POSITIVE_INTEGER_ONLY;
       break;
@@ -918,7 +918,7 @@ upcoef_content_validate (int *errCode, int flow, char* l1,
 	*errCode = SUCCESS;
       else
 	*errCode = OPT_CHAR_NOT_VALID;
-      wfilters_content_validate(errCode,(input3));
+      wfilters_content_validate(pvApiCtx,errCode,(input3));
       if ((l4)[0]<=0)
 	*errCode = POSITIVE_INTEGER_ONLY;
       if ((l5)[0]<=0)
@@ -956,7 +956,7 @@ upcoef_content_validate (int *errCode, int flow, char* l1,
 	*errCode = SUCCESS;
       else
 	*errCode = OPT_CHAR_NOT_VALID;
-      wfilters_content_validate(errCode,(input3));
+      wfilters_content_validate(pvApiCtx,errCode,(input3));
       break;
     }
   case 6:
@@ -979,15 +979,15 @@ upcoef_content_validate (int *errCode, int flow, char* l1,
  *-----------------------------------------*/
 
 void
-upwlev_form_validate (int *errCode, int *flow)
+upwlev_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && sci_matrix_vector_real(1) &&
-      sci_matrix_vector_real(2) && sci_strings_scalar(3))
+  if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_vector_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -995,13 +995,13 @@ upwlev_form_validate (int *errCode, int *flow)
 }
 
 void
-upwlev_content_validate (int *errCode, int flow,char* l3)
+upwlev_content_validate (void * pvApiCtx, int *errCode, int flow,char* l3)
 {
   *errCode = SUCCESS;
   switch (flow){
   case 1:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       break;
     }
   case 2:
@@ -1019,24 +1019,24 @@ upwlev_content_validate (int *errCode, int flow,char* l3)
  *-----------------------------------------*/
 
 void
-dwt2_form_validate (int *errCode, int *flow)
+dwt2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==2) && sci_matrix_matrix_real(1) &&
-      sci_strings_scalar(2))
+  if ((NInputArgument==2) && sci_matrix_matrix_real(pvApiCtx,1) &&
+      sci_strings_scalar(pvApiCtx,2))
     *flow = 1;
-  else if ((Rhs==3) && sci_matrix_matrix_real(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   vector_length_check(2,3))
+  else if ((NInputArgument==3) && sci_matrix_matrix_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   vector_length_check(pvApiCtx,2,3))
     *flow = 2;
-  else if ((Rhs==4) && sci_matrix_matrix_real(1) &&
-	   sci_strings_scalar(2) && sci_strings_scalar(3) &&
-	   sci_strings_scalar(4))
+  else if ((NInputArgument==4) && sci_matrix_matrix_real(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4))
     *flow = 3;
-  else if ((Rhs==5) && sci_matrix_matrix_real(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_vector_real(3) &&
-	   vector_length_check(2,3) && sci_strings_scalar(4) &&
-	   sci_strings_scalar(5))
+  else if ((NInputArgument==5) && sci_matrix_matrix_real(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   vector_length_check(pvApiCtx,2,3) && sci_strings_scalar(pvApiCtx,4) &&
+	   sci_strings_scalar(pvApiCtx,5))
     *flow = 4;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1044,7 +1044,7 @@ dwt2_form_validate (int *errCode, int *flow)
 }
 
 void
-dwt2_content_validate (int *errCode, int flow,  char* l2,
+dwt2_content_validate (void * pvApiCtx, int *errCode, int flow,  char* l2,
 char*  l3, char*  l4, char*  l5)
 {
   int type;
@@ -1052,7 +1052,7 @@ char*  l3, char*  l4, char*  l5)
   switch (flow){
   case 1:
     {
-      wfilters_content_validate(errCode,(l2));
+      wfilters_content_validate(pvApiCtx,errCode,(l2));
       break;
     }
   case 2:
@@ -1061,7 +1061,7 @@ char*  l3, char*  l4, char*  l5)
     }
   case 3:
     {
-      wfilters_content_validate(errCode,(l2));
+      wfilters_content_validate(pvApiCtx,errCode,(l2));
       if (strcmp((l3),"mode"))
 	*errCode = UNKNOWN_INPUT_ERR;
       extension_check((l4),&type);
@@ -1089,64 +1089,64 @@ char*  l3, char*  l4, char*  l5)
  *-----------------------------------------*/
 
 void
-idwt2_form_validate (int *errCode, int *flow)
+idwt2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
-  if (sci_matrix_matrix_real(1) && sci_matrix_matrix_real(2) &&
-      sci_matrix_matrix_real(3) && sci_matrix_matrix_real(4) &&
-      matrix_length_check(1,2) && matrix_length_check(1,3) &&
-      matrix_length_check(1,4))
+  if (sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_matrix_real(pvApiCtx,2) &&
+      sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4) &&
+      matrix_length_check(pvApiCtx,1,2) && matrix_length_check(pvApiCtx,1,3) &&
+      matrix_length_check(pvApiCtx,1,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_matrix_real(1) && sci_matrix_void(2) &&
-	   sci_matrix_void(3) && sci_matrix_void(4))
+  else if (sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2) &&
+	   sci_matrix_void(pvApiCtx,3) && sci_matrix_void(pvApiCtx,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_void(1) && sci_matrix_matrix_real(2) &&
-	   sci_matrix_void(3) && sci_matrix_void(4))
+  else if (sci_matrix_void(pvApiCtx,1) && sci_matrix_matrix_real(pvApiCtx,2) &&
+	   sci_matrix_void(pvApiCtx,3) && sci_matrix_void(pvApiCtx,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_void(1) && sci_matrix_void(2) &&
-	   sci_matrix_matrix_real(3) && sci_matrix_void(4))
+  else if (sci_matrix_void(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_void(pvApiCtx,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_void(1) && sci_matrix_void(2) &&
-	   sci_matrix_void(3) && sci_matrix_matrix_real(4))
+  else if (sci_matrix_void(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2) &&
+	   sci_matrix_void(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_matrix_real(1) && sci_matrix_matrix_real(2) &&
-	   sci_matrix_void(3) && sci_matrix_void(4) &&
-	   matrix_length_check(1,2))
+  else if (sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_matrix_real(pvApiCtx,2) &&
+	   sci_matrix_void(pvApiCtx,3) && sci_matrix_void(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,1,2))
     *errCode = SUCCESS;
-  else if (sci_matrix_matrix_real(1) && sci_matrix_void(2) &&
-	   sci_matrix_matrix_real(3) && sci_matrix_void(4) &&
-	   matrix_length_check(1,3))
+  else if (sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_void(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,1,3))
     *errCode = SUCCESS;
-  else if (sci_matrix_matrix_real(1) && sci_matrix_void(2) &&
-	   sci_matrix_void(3) && sci_matrix_matrix_real(4) &&
-	   matrix_length_check(1,4))
+  else if (sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2) &&
+	   sci_matrix_void(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,1,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_void(1) && sci_matrix_matrix_real(2) &&
-	   sci_matrix_matrix_real(3) && sci_matrix_void(4) &&
-	   matrix_length_check(2,3))
+  else if (sci_matrix_void(pvApiCtx,1) && sci_matrix_matrix_real(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_void(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,2,3))
     *errCode = SUCCESS;
-  else if (sci_matrix_void(1) && sci_matrix_matrix_real(2) &&
-	   sci_matrix_void(3) && sci_matrix_matrix_real(4) &&
-	   matrix_length_check(2,4))
+  else if (sci_matrix_void(pvApiCtx,1) && sci_matrix_matrix_real(pvApiCtx,2) &&
+	   sci_matrix_void(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,2,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_void(1) && sci_matrix_void(2) &&
-	   sci_matrix_matrix_real(3) && sci_matrix_matrix_real(4) &&
-	   matrix_length_check(3,4))
+  else if (sci_matrix_void(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,3,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_matrix_real(1) && sci_matrix_matrix_real(2) &&
-	   sci_matrix_matrix_real(3) && sci_matrix_void(4) &&
-	   matrix_length_check(1,2) && matrix_length_check(1,3))
+  else if (sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_matrix_real(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_void(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,1,2) && matrix_length_check(pvApiCtx,1,3))
     *errCode = SUCCESS;
-  else if (sci_matrix_matrix_real(1) && sci_matrix_matrix_real(2) &&
-	   sci_matrix_void(3) && sci_matrix_matrix_real(4) &&
-	   matrix_length_check(1,2) && matrix_length_check(1,4))
+  else if (sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_matrix_real(pvApiCtx,2) &&
+	   sci_matrix_void(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,1,2) && matrix_length_check(pvApiCtx,1,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_matrix_real(1) && sci_matrix_void(2) &&
-	   sci_matrix_matrix_real(3) && sci_matrix_matrix_real(4) &&
-	   matrix_length_check(1,3) && matrix_length_check(1,4))
+  else if (sci_matrix_matrix_real(pvApiCtx,1) && sci_matrix_void(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,1,3) && matrix_length_check(pvApiCtx,1,4))
     *errCode = SUCCESS;
-  else if (sci_matrix_void(1) && sci_matrix_matrix_real(2) &&
-	   sci_matrix_matrix_real(3) && sci_matrix_matrix_real(4) &&
-	   matrix_length_check(2,3) && matrix_length_check(2,4))
+  else if (sci_matrix_void(pvApiCtx,1) && sci_matrix_matrix_real(pvApiCtx,2) &&
+	   sci_matrix_matrix_real(pvApiCtx,3) && sci_matrix_matrix_real(pvApiCtx,4) &&
+	   matrix_length_check(pvApiCtx,2,3) && matrix_length_check(pvApiCtx,2,4))
     *errCode = SUCCESS;
   else
     {
@@ -1154,33 +1154,33 @@ idwt2_form_validate (int *errCode, int *flow)
       return;
     }
 
-  if ((Rhs==5) && sci_strings_scalar(5))
+  if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,5))
     *flow = 1;
-  else if ((Rhs==6) && sci_matrix_vector_real(5) &&
-	   sci_matrix_vector_real(6) && vector_length_check(5,6))
+  else if ((NInputArgument==6) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) && vector_length_check(pvApiCtx,5,6))
     *flow = 2;
-  else if ((Rhs==6) && sci_strings_scalar(5) &&
-	   sci_matrix_vector_real(6) && length_check(6,2))
+  else if ((NInputArgument==6) && sci_strings_scalar(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) && length_check(pvApiCtx,6,2))
     *flow = 3;
-  else if ((Rhs==7) && sci_matrix_vector_real(5) &&
-	   sci_matrix_vector_real(6) && vector_length_check(5,6) &&
-	   sci_matrix_vector_real(7) && length_check(7,2))
+  else if ((NInputArgument==7) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) && vector_length_check(pvApiCtx,5,6) &&
+	   sci_matrix_vector_real(pvApiCtx,7) && length_check(pvApiCtx,7,2))
     *flow = 4;
-  else if ((Rhs==7) && sci_strings_scalar(5) &&
-	   sci_strings_scalar(6) && sci_strings_scalar(7))
+  else if ((NInputArgument==7) && sci_strings_scalar(pvApiCtx,5) &&
+	   sci_strings_scalar(pvApiCtx,6) && sci_strings_scalar(pvApiCtx,7))
     *flow = 5;
-  else if ((Rhs==8) && sci_matrix_vector_real(5) &&
-	   sci_matrix_vector_real(6) && vector_length_check(5,6) &&
-	   sci_strings_scalar(7) && sci_strings_scalar(8))
+  else if ((NInputArgument==8) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) && vector_length_check(pvApiCtx,5,6) &&
+	   sci_strings_scalar(pvApiCtx,7) && sci_strings_scalar(pvApiCtx,8))
     *flow = 6;
-  else if ((Rhs==8) && sci_strings_scalar(5) &&
-	   sci_matrix_vector_real(6) && length_check(6,2) &&
-	   sci_strings_scalar(7) && sci_strings_scalar(8))
+  else if ((NInputArgument==8) && sci_strings_scalar(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) && length_check(pvApiCtx,6,2) &&
+	   sci_strings_scalar(pvApiCtx,7) && sci_strings_scalar(pvApiCtx,8))
     *flow = 7;
-  else if ((Rhs==9) && sci_matrix_vector_real(5) &&
-	   sci_matrix_vector_real(6) && vector_length_check(5,6) &&
-	   sci_matrix_vector_real(7) && length_check(7,2) &&
-	   sci_strings_scalar(8) && sci_strings_scalar(9))
+  else if ((NInputArgument==9) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) && vector_length_check(pvApiCtx,5,6) &&
+	   sci_matrix_vector_real(pvApiCtx,7) && length_check(pvApiCtx,7,2) &&
+	   sci_strings_scalar(pvApiCtx,8) && sci_strings_scalar(pvApiCtx,9))
     *flow = 8;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1193,14 +1193,14 @@ idwt2_form_validate (int *errCode, int *flow)
  *-----------------------------------------*/
 
 void
-idwt2_content_validate (int *errCode, int flow,  char* l5, int* l6,char* l6_char, int* l7,char* l7_char,char* l8,char* l9)
+idwt2_content_validate (void * pvApiCtx, int *errCode, int flow,  char* l5, int* l6,char* l6_char, int* l7,char* l7_char,char* l8,char* l9)
 {
   int type;
   *errCode = SUCCESS;
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,(l5));
+      wfilters_content_validate(pvApiCtx,errCode,(l5));
       break;
     }
   case 2:
@@ -1209,7 +1209,7 @@ idwt2_content_validate (int *errCode, int flow,  char* l5, int* l6,char* l6_char
     }
   case 3:
     {
-      wfilters_content_validate(errCode,(l5));
+      wfilters_content_validate(pvApiCtx,errCode,(l5));
       if (((l6)[0]<=0) || ((l6)[1]<=0))
 	*errCode = POSITIVE_INTEGER_ONLY;
       break;
@@ -1222,7 +1222,7 @@ idwt2_content_validate (int *errCode, int flow,  char* l5, int* l6,char* l6_char
     }
   case 5:
     {
-      wfilters_content_validate(errCode,(l5));
+      wfilters_content_validate(pvApiCtx,errCode,(l5));
       if (strcmp(l6_char,"mode"))
 	*errCode = UNKNOWN_INPUT_ERR;
       extension_check(l7_char,&type);
@@ -1241,7 +1241,7 @@ idwt2_content_validate (int *errCode, int flow,  char* l5, int* l6,char* l6_char
     }
   case 7:
     {
-      wfilters_content_validate(errCode,(l5));
+      wfilters_content_validate(pvApiCtx,errCode,(l5));
       if (strcmp(l7_char,"mode"))
 	*errCode = UNKNOWN_INPUT_ERR;
       extension_check((l8),&type);
@@ -1273,15 +1273,15 @@ idwt2_content_validate (int *errCode, int flow,  char* l5, int* l6,char* l6_char
  *-----------------------------------------*/
 
 void
-wavedec2_form_validate (int *errCode, int *flow)
+wavedec2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && sci_matrix_matrix_real(1) &&
-      sci_matrix_scalar_real(2) && sci_strings_scalar(3))
+  if ((NInputArgument==3) && sci_matrix_matrix_real(pvApiCtx,1) &&
+      sci_matrix_scalar_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_matrix_real(1) &&
-	   sci_matrix_scalar_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_matrix_matrix_real(pvApiCtx,1) &&
+	   sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1289,7 +1289,7 @@ wavedec2_form_validate (int *errCode, int *flow)
 }
 
 void
-wavedec2_content_validate (int *errCode, int flow, int* l2,   char* l3)
+wavedec2_content_validate (void * pvApiCtx, int *errCode, int flow, int* l2,   char* l3)
 {
   *errCode = SUCCESS;
   switch (flow){
@@ -1297,7 +1297,7 @@ wavedec2_content_validate (int *errCode, int flow, int* l2,   char* l3)
     {
       if ((l2)[0]<=0)
 	*errCode = POSITIVE_INTEGER_ONLY;
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       break;
     }
   case 2:
@@ -1317,17 +1317,17 @@ wavedec2_content_validate (int *errCode, int flow, int* l2,   char* l3)
  *-----------------------------------------*/
 
 void
-waverec2_form_validate (int *errCode, int *flow)
+waverec2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && sci_matrix_vector_real(1) &&
-      sci_matrix_matrix_real(2) && sci_strings_scalar(3) &&
-      matrix_col_length_check(2,2))
+  if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_matrix_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+      matrix_col_length_check(pvApiCtx,2,2))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_matrix_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && matrix_length_check(3,4) &&
-	   matrix_col_length_check(2,2))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_matrix_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && matrix_length_check(pvApiCtx,3,4) &&
+	   matrix_col_length_check(pvApiCtx,2,2))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1335,13 +1335,13 @@ waverec2_form_validate (int *errCode, int *flow)
 }
 
 void
-waverec2_content_validate (int *errCode, int flow, char *l3)
+waverec2_content_validate (void * pvApiCtx, int *errCode, int flow, char *l3)
 {
   *errCode = SUCCESS;
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       break;
     }
   case 2:
@@ -1359,14 +1359,14 @@ waverec2_content_validate (int *errCode, int flow, char *l3)
  *-----------------------------------------*/
 
 void
-wenergy2_form_validate (int *errCode, int *flow)
+wenergy2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument, int NOutputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==2) && (Lhs==4) && sci_matrix_vector_real(1) &&
-      sci_matrix_matrix_real(2) && matrix_col_length_check(2,2))
+  if ((NInputArgument==2) && (NOutputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_matrix_real(pvApiCtx,2) && matrix_col_length_check(pvApiCtx,2,2))
     *flow = 1;
-  else if ((Rhs==2) && (Lhs==2) && sci_matrix_vector_real(1) &&
-	   sci_matrix_matrix_real(2) && matrix_col_length_check(2,2))
+  else if ((NInputArgument==2) && (NOutputArgument==2) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_matrix_real(pvApiCtx,2) && matrix_col_length_check(pvApiCtx,2,2))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1378,11 +1378,11 @@ wenergy2_form_validate (int *errCode, int *flow)
  *-----------------------------------------*/
 
 void
-detcoef2_form_validate (int *errCode, int *flow)
+detcoef2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
-  if ((Rhs==4) && sci_strings_scalar(1) &&
-      sci_matrix_vector_real(2) && sci_matrix_matrix_real(3) &&
-      sci_matrix_scalar_real(4) && matrix_col_length_check(3,2))
+  if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,1) &&
+      sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+      sci_matrix_scalar_real(pvApiCtx,4) && matrix_col_length_check(pvApiCtx,3,2))
     *errCode = SUCCESS;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1391,7 +1391,7 @@ detcoef2_form_validate (int *errCode, int *flow)
 
 
 void
-detcoef2_content_validate (int *errCode, int flow, char* l1)
+detcoef2_content_validate (void * pvApiCtx, int *errCode, int flow, char* l1)
 {
   if ((!strcmp((l1),"a")) || (!strcmp((l1),"h")) ||
       (!strcmp((l1),"v")) || (!strcmp((l1),"d")) ||
@@ -1409,26 +1409,26 @@ detcoef2_content_validate (int *errCode, int flow, char* l1)
  *-----------------------------------------*/
 
 void
-appcoef2_form_validate (int *errCode, int *flow)
+appcoef2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && sci_matrix_vector_real(1) &&
-      sci_matrix_matrix_real(2) && sci_strings_scalar(3) &&
-      matrix_col_length_check(2,2))
+  if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_matrix_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+      matrix_col_length_check(pvApiCtx,2,2))
     *flow = 2;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_matrix_real(2) && sci_strings_scalar(3) &&
-	   sci_matrix_scalar_real(4) && matrix_col_length_check(2,2))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_matrix_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4) && matrix_col_length_check(pvApiCtx,2,2))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_matrix_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) &&
-	   matrix_col_length_check(2,2) && vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_matrix_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) &&
+	   matrix_col_length_check(pvApiCtx,2,2) && vector_length_check(pvApiCtx,3,4))
     *flow = 3;
-  else if ((Rhs==5) && sci_matrix_vector_real(1) &&
-	   sci_matrix_matrix_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && sci_matrix_scalar_real(5) &&
-	   vector_length_check(3,4) && matrix_col_length_check(2,2))
+  else if ((NInputArgument==5) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_matrix_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && sci_matrix_scalar_real(pvApiCtx,5) &&
+	   vector_length_check(pvApiCtx,3,4) && matrix_col_length_check(pvApiCtx,2,2))
     *flow = 4;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1437,20 +1437,20 @@ appcoef2_form_validate (int *errCode, int *flow)
 
 
 void
-appcoef2_content_validate (int *errCode, int flow, char* l3, int* l4, int* l5)
+appcoef2_content_validate (void * pvApiCtx, int *errCode, int flow, char* l3, int* l4, int* l5)
 {
   *errCode = SUCCESS;
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       if ((l4)[0]<0)
 	*errCode = POSITIVE_INTEGER_ONLY;
       break;
     }
   case 2:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       break;
     }
   case 3:
@@ -1475,34 +1475,34 @@ appcoef2_content_validate (int *errCode, int flow, char* l3, int* l4, int* l5)
  *-----------------------------------------*/
 
 void
-wrcoef2_form_validate (int *errCode, int *flow)
+wrcoef2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==4) && sci_strings_scalar(1) &&
-      sci_matrix_vector_real(2) && sci_matrix_matrix_real(3) &&
-      sci_strings_scalar(4) && matrix_col_length_check(3,2))
+  if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,1) &&
+      sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+      sci_strings_scalar(pvApiCtx,4) && matrix_col_length_check(pvApiCtx,3,2))
     *flow = 3;
-  else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_matrix_real(3) &&
-	   sci_strings_scalar(4) && sci_matrix_scalar_real(5) &&
-	   matrix_col_length_check(3,2))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4) && sci_matrix_scalar_real(pvApiCtx,5) &&
+	   matrix_col_length_check(pvApiCtx,3,2))
     *flow = 1;
-  else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_matrix_real(3) &&
-	   sci_matrix_vector_real(4) && sci_matrix_vector_real(5) &&
-	   vector_length_check(4,5) && matrix_col_length_check(3,2))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   vector_length_check(pvApiCtx,4,5) && matrix_col_length_check(pvApiCtx,3,2))
     *flow = 4;
-  else if ((Rhs==6) && sci_strings_scalar(1) &&
-	   sci_matrix_vector_real(2) && sci_matrix_matrix_real(3) &&
-	   sci_matrix_vector_real(4) && sci_matrix_vector_real(5) &&
-	   vector_length_check(4,5) &&
-	   matrix_col_length_check(3,2) && sci_matrix_scalar_real(6))
+  else if ((NInputArgument==6) && sci_strings_scalar(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) && sci_matrix_matrix_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   vector_length_check(pvApiCtx,4,5) &&
+	   matrix_col_length_check(pvApiCtx,3,2) && sci_matrix_scalar_real(pvApiCtx,6))
     *flow = 2;
   return;
 }
 
 void
-wrcoef2_content_validate (int *errCode, int flow, char* l1,  char* l4, int* l5, int* l6)
+wrcoef2_content_validate (void * pvApiCtx, int *errCode, int flow, char* l1,  char* l4, int* l5, int* l6)
 {
   if (scalar_string_check((l1),'a') ||
       scalar_string_check((l1),'h') ||
@@ -1517,7 +1517,7 @@ wrcoef2_content_validate (int *errCode, int flow, char* l1,  char* l4, int* l5, 
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,(l4));
+      wfilters_content_validate(pvApiCtx,errCode,(l4));
       if ((l5)[0]<=0)
 	*errCode = POSITIVE_INTEGER_ONLY;
       if (scalar_string_check((l1),'a') ||
@@ -1537,7 +1537,7 @@ wrcoef2_content_validate (int *errCode, int flow, char* l1,  char* l4, int* l5, 
     }
   case 3:
     {
-      wfilters_content_validate(errCode,(l4));
+      wfilters_content_validate(pvApiCtx,errCode,(l4));
       break;
     }
   case 4:
@@ -1555,17 +1555,17 @@ wrcoef2_content_validate (int *errCode, int flow, char* l1,  char* l4, int* l5, 
  *-----------------------------------------*/
 
 void
-upwlev2_form_validate (int *errCode, int *flow)
+upwlev2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && sci_matrix_vector_real(1) &&
-      sci_matrix_matrix_real(2) && sci_strings_scalar(3) &&
-      matrix_col_length_check(2,2))
+  if ((NInputArgument==3) && sci_matrix_vector_real(pvApiCtx,1) &&
+      sci_matrix_matrix_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) &&
+      matrix_col_length_check(pvApiCtx,2,2))
     *flow = 1;
-  else if ((Rhs==4) && sci_matrix_vector_real(1) &&
-	   sci_matrix_matrix_real(2) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4) &&
-	   matrix_col_length_check(2,2))
+  else if ((NInputArgument==4) && sci_matrix_vector_real(pvApiCtx,1) &&
+	   sci_matrix_matrix_real(pvApiCtx,2) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+	   matrix_col_length_check(pvApiCtx,2,2))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1573,13 +1573,13 @@ upwlev2_form_validate (int *errCode, int *flow)
 }
 
 void
-upwlev2_content_validate (int *errCode, int flow, char *l3)
+upwlev2_content_validate (void * pvApiCtx, int *errCode, int flow, char *l3)
 {
   *errCode = SUCCESS;
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       break;
     }
   case 2:
@@ -1597,35 +1597,35 @@ upwlev2_content_validate (int *errCode, int flow, char *l3)
  *-----------------------------------------*/
 
 void
-upcoef2_form_validate (int *errCode, int *flow)
+upcoef2_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==3) && sci_strings_scalar(1) &&
-      (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2) || sci_matrix_vector_real(2)) && sci_strings_scalar(3))
+  if ((NInputArgument==3) && sci_strings_scalar(pvApiCtx,1) &&
+      (sci_matrix_matrix_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2) || sci_matrix_vector_real(pvApiCtx,2)) && sci_strings_scalar(pvApiCtx,3))
     *flow = 5;
-  else if ((Rhs==4) && sci_strings_scalar(1) &&
-	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3) &&
-	   sci_matrix_scalar_real(4))
+  else if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_matrix_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_strings_scalar(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4))
     *flow = 3;
-  else if ((Rhs==4) && sci_strings_scalar(1) &&
-	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4))
+  else if ((NInputArgument==4) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_matrix_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4))
     *flow = 6;
-  else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3) &&
-	   sci_matrix_scalar_real(4) && sci_matrix_vector_real(5) &&
-	   length_check(5,2))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_matrix_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_strings_scalar(pvApiCtx,3) &&
+	   sci_matrix_scalar_real(pvApiCtx,4) && sci_matrix_vector_real(pvApiCtx,5) &&
+	   length_check(pvApiCtx,5,2))
     *flow = 1;
-  else if ((Rhs==5) && sci_strings_scalar(1) &&
-	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4) &&
-	   sci_matrix_scalar_real(5))
+  else if ((NInputArgument==5) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_matrix_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+	   sci_matrix_scalar_real(pvApiCtx,5))
     *flow = 4;
-  else if ((Rhs==6) && sci_strings_scalar(1) &&
-	   (sci_matrix_matrix_real(2) || sci_matrix_scalar_real(2)) && sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) && vector_length_check(3,4) &&
-	   sci_matrix_scalar_real(5) && sci_matrix_vector_real(6) &&
-	   length_check(6,2))
+  else if ((NInputArgument==6) && sci_strings_scalar(pvApiCtx,1) &&
+	   (sci_matrix_matrix_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) && vector_length_check(pvApiCtx,3,4) &&
+	   sci_matrix_scalar_real(pvApiCtx,5) && sci_matrix_vector_real(pvApiCtx,6) &&
+	   length_check(pvApiCtx,6,2))
     *flow = 2;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1633,7 +1633,7 @@ upcoef2_form_validate (int *errCode, int *flow)
 }
 
 void
-upcoef2_content_validate (int *errCode, int flow, char* l1,  char* l3, int* l4, int* l5, int* l6)
+upcoef2_content_validate (void * pvApiCtx, int *errCode, int flow, char* l1,  char* l3, int* l4, int* l5, int* l6)
 {
   if ((!strcmp((l1),"a")) || (!strcmp((l1),"h")) ||
       (!strcmp((l1),"v")) || (!strcmp((l1),"d")))
@@ -1646,7 +1646,7 @@ upcoef2_content_validate (int *errCode, int flow, char* l1,  char* l3, int* l4, 
   switch (flow) {
   case 1:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       if (((l4)[0]<=0) || ((l5)[0]<=0) ||
 	  ((l5)[1]<=0))
 	*errCode = POSITIVE_INTEGER_ONLY;
@@ -1661,7 +1661,7 @@ upcoef2_content_validate (int *errCode, int flow, char* l1,  char* l3, int* l4, 
     }
   case 3:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       if ((l4)[0]<=0)
 	*errCode = POSITIVE_INTEGER_ONLY;
       break;
@@ -1674,7 +1674,7 @@ upcoef2_content_validate (int *errCode, int flow, char* l1,  char* l3, int* l4, 
     }
   case 5:
     {
-      wfilters_content_validate(errCode,(l3));
+      wfilters_content_validate(pvApiCtx,errCode,(l3));
       break;
     }
   case 6:
@@ -1691,64 +1691,64 @@ upcoef2_content_validate (int *errCode, int flow, char* l1,  char* l3, int* l4, 
  * dwt3 validation
  *-----------------------------------------*/
 void
-dwt3_form_validate (int *errCode, int *flow)
+dwt3_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==2) && sci_mlist_check(1) &&
-      sci_strings_scalar(2))
+  if ((NInputArgument==2) && sci_mlist_check(pvApiCtx,1) &&
+      sci_strings_scalar(pvApiCtx,2))
     *flow = 1;
-  else if ((Rhs==3) && sci_mlist_check(1) &&
-	   sci_matrix_vector_real(2) &&
-	   sci_matrix_vector_real(3) &&
-	   vector_length_check(2,3))
+  else if ((NInputArgument==3) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   vector_length_check(pvApiCtx,2,3))
     *flow = 2;
-  else if ((Rhs==4) && sci_mlist_check(1) &&
-	   sci_strings_scalar(2) &&
-	   sci_strings_scalar(3) &&
-	   sci_strings_scalar(4))
+  else if ((NInputArgument==4) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) &&
+	   sci_strings_scalar(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4))
     *flow = 3;
-  else if ((Rhs==5) && sci_mlist_check(1) &&
-	   sci_matrix_vector_real(2) &&
-           sci_matrix_vector_real(3) &&
-	   vector_length_check(2,3) &&
-	   sci_strings_scalar(4) &&
-	   sci_strings_scalar(5))
+  else if ((NInputArgument==5) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+           sci_matrix_vector_real(pvApiCtx,3) &&
+	   vector_length_check(pvApiCtx,2,3) &&
+	   sci_strings_scalar(pvApiCtx,4) &&
+	   sci_strings_scalar(pvApiCtx,5))
     *flow = 4;
-  else if ((Rhs==4) && sci_mlist_check(1) &&
-	   sci_strings_scalar(2) &&
-	   sci_strings_scalar(3) &&
-	   sci_strings_scalar(4))
+  else if ((NInputArgument==4) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) &&
+	   sci_strings_scalar(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4))
     *flow = 5;
-  else if ((Rhs==7) && sci_mlist_check(1) &&
-	   sci_matrix_vector_real(2) &&
-	   sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) &&
-	   sci_matrix_vector_real(5) &&
-	   sci_matrix_vector_real(6) &&
-	   sci_matrix_vector_real(7) &&
-	   vector_length_check(2,3) &&
-	   vector_length_check(4,5) &&
-	   vector_length_check(6,7))
+  else if ((NInputArgument==7) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) &&
+	   sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) &&
+	   sci_matrix_vector_real(pvApiCtx,7) &&
+	   vector_length_check(pvApiCtx,2,3) &&
+	   vector_length_check(pvApiCtx,4,5) &&
+	   vector_length_check(pvApiCtx,6,7))
     *flow = 6;
-  else if ((Rhs==6) && sci_mlist_check(1) &&
-	   sci_strings_scalar(2) &&
-	   sci_strings_scalar(3) &&
-	   sci_strings_scalar(4) &&
-	   sci_strings_scalar(5) &&
-	   sci_strings_scalar(6) )
+  else if ((NInputArgument==6) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) &&
+	   sci_strings_scalar(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4) &&
+	   sci_strings_scalar(pvApiCtx,5) &&
+	   sci_strings_scalar(pvApiCtx,6) )
     *flow = 7;
-  else if ((Rhs==9) && sci_mlist_check(1) &&
-	   sci_matrix_vector_real(2) &&
-	   sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) &&
-	   sci_matrix_vector_real(5) &&
-	   sci_matrix_vector_real(6) &&
-	   sci_matrix_vector_real(7) &&
-	   vector_length_check(2,3) &&
-	   vector_length_check(4,5) &&
-	   vector_length_check(6,7) &&
-	   sci_strings_scalar(8) &&
-	   sci_strings_scalar(9) )
+  else if ((NInputArgument==9) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) &&
+	   sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) &&
+	   sci_matrix_vector_real(pvApiCtx,7) &&
+	   vector_length_check(pvApiCtx,2,3) &&
+	   vector_length_check(pvApiCtx,4,5) &&
+	   vector_length_check(pvApiCtx,6,7) &&
+	   sci_strings_scalar(pvApiCtx,8) &&
+	   sci_strings_scalar(pvApiCtx,9) )
     *flow = 8;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1756,14 +1756,14 @@ dwt3_form_validate (int *errCode, int *flow)
 }
 
 void
-dwt3_content_validate (int *errCode, int flow, char* l2,  char* l3, char* l4, char* l5, char* l6,      char* l8, char* l9)
+dwt3_content_validate (void * pvApiCtx, int *errCode, int flow, char* l2,  char* l3, char* l4, char* l5, char* l6,      char* l8, char* l9)
 {
   int type, err1, err2, err3;
   *errCode = SUCCESS;
   switch (flow){
   case 1:
     {
-      wfilters_content_validate(errCode,(l2));
+      wfilters_content_validate(pvApiCtx,errCode,(l2));
       break;
     }
   case 2:
@@ -1772,7 +1772,7 @@ dwt3_content_validate (int *errCode, int flow, char* l2,  char* l3, char* l4, ch
     }
   case 3:
     {
-      wfilters_content_validate(errCode,(l2));
+      wfilters_content_validate(pvApiCtx,errCode,(l2));
       if (strcmp((l3),"mode"))
 	*errCode = UNKNOWN_INPUT_ERR;
       extension_check((l4),&type);
@@ -1791,9 +1791,9 @@ dwt3_content_validate (int *errCode, int flow, char* l2,  char* l3, char* l4, ch
     }
   case 5:
     {
-      wfilters_content_validate(&err1,(l2));
-      wfilters_content_validate(&err2,(l3));
-      wfilters_content_validate(&err3,(l4));
+      wfilters_content_validate(pvApiCtx,&err1,(l2));
+      wfilters_content_validate(pvApiCtx,&err2,(l3));
+      wfilters_content_validate(pvApiCtx,&err3,(l4));
       if ((err1 != SUCCESS) || (err1 != SUCCESS) ||
 	  (err1 != SUCCESS))
 	*errCode = WAVELET_NAME_NOT_VALID;
@@ -1806,9 +1806,9 @@ dwt3_content_validate (int *errCode, int flow, char* l2,  char* l3, char* l4, ch
     }
   case 7:
     {
-      wfilters_content_validate(&err1,(l2));
-      wfilters_content_validate(&err2,(l3));
-      wfilters_content_validate(&err3,(l4));
+      wfilters_content_validate(pvApiCtx,&err1,(l2));
+      wfilters_content_validate(pvApiCtx,&err2,(l3));
+      wfilters_content_validate(pvApiCtx,&err3,(l4));
       if ((err1 != SUCCESS) || (err1 != SUCCESS) ||
 	  (err1 != SUCCESS))
 	*errCode = WAVELET_NAME_NOT_VALID;
@@ -1839,64 +1839,64 @@ dwt3_content_validate (int *errCode, int flow, char* l2,  char* l3, char* l4, ch
  * idwt3 validation
  *-----------------------------------------*/
 void
-idwt3_form_validate (int *errCode, int *flow)
+idwt3_form_validate (void * pvApiCtx, int *errCode, int *flow, int NInputArgument)
 {
   *errCode = SUCCESS;
-  if ((Rhs==2) && sci_mlist_check(1) &&
-      sci_strings_scalar(2))
+  if ((NInputArgument==2) && sci_mlist_check(pvApiCtx,1) &&
+      sci_strings_scalar(pvApiCtx,2))
     *flow = 1;
-  else if ((Rhs==3) && sci_mlist_check(1) &&
-	   sci_strings_scalar(2) &&
-	   sci_matrix_vector_real(3) &&
-	   length_check(3,3))
+  else if ((NInputArgument==3) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   length_check(pvApiCtx,3,3))
     *flow = 2;
-  else if ((Rhs==3) && sci_mlist_check(1) &&
-	   sci_matrix_vector_real(2) &&
-	   sci_matrix_vector_real(3) &&
-	   vector_length_check(2,3))
+  else if ((NInputArgument==3) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   vector_length_check(pvApiCtx,2,3))
     *flow = 3;
-  else if ((Rhs==4) && sci_mlist_check(1) &&
-	   sci_matrix_vector_real(2) &&
-           sci_matrix_vector_real(3) &&
-	   vector_length_check(2,3) &&
-	   sci_matrix_vector_real(4) &&
-	   length_check(4,3))
+  else if ((NInputArgument==4) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+           sci_matrix_vector_real(pvApiCtx,3) &&
+	   vector_length_check(pvApiCtx,2,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) &&
+	   length_check(pvApiCtx,4,3))
     *flow = 4;
-  else if ((Rhs==4) && sci_mlist_check(1) &&
-	   sci_strings_scalar(2) &&
-	   sci_strings_scalar(3) &&
-	   sci_strings_scalar(4))
+  else if ((NInputArgument==4) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) &&
+	   sci_strings_scalar(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4))
     *flow = 5;
-  else if ((Rhs==5) && sci_mlist_check(1) &&
-	   sci_strings_scalar(2) &&
-	   sci_strings_scalar(3) &&
-	   sci_strings_scalar(4) &&
-	   sci_matrix_vector_real(5) &&
-	   length_check(5,3))
+  else if ((NInputArgument==5) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_strings_scalar(pvApiCtx,2) &&
+	   sci_strings_scalar(pvApiCtx,3) &&
+	   sci_strings_scalar(pvApiCtx,4) &&
+	   sci_matrix_vector_real(pvApiCtx,5) &&
+	   length_check(pvApiCtx,5,3))
     *flow = 6;
-  else if ((Rhs==7) && sci_mlist_check(1) &&
-	   sci_matrix_vector_real(2) &&
-	   sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) &&
-	   sci_matrix_vector_real(5) &&
-	   sci_matrix_vector_real(6) &&
-	   sci_matrix_vector_real(7) &&
-	   vector_length_check(2,3) &&
-	   vector_length_check(4,5) &&
-	   vector_length_check(6,7))
+  else if ((NInputArgument==7) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) &&
+	   sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) &&
+	   sci_matrix_vector_real(pvApiCtx,7) &&
+	   vector_length_check(pvApiCtx,2,3) &&
+	   vector_length_check(pvApiCtx,4,5) &&
+	   vector_length_check(pvApiCtx,6,7))
     *flow = 7;
-  else if ((Rhs==8) && sci_mlist_check(1) &&
-	   sci_matrix_vector_real(2) &&
-	   sci_matrix_vector_real(3) &&
-	   sci_matrix_vector_real(4) &&
-	   sci_matrix_vector_real(5) &&
-	   sci_matrix_vector_real(6) &&
-	   sci_matrix_vector_real(7) &&
-	   vector_length_check(2,3) &&
-	   vector_length_check(4,5) &&
-	   vector_length_check(6,7) &&
-	   sci_matrix_vector_real(8) &&
-	   length_check(8,3))
+  else if ((NInputArgument==8) && sci_mlist_check(pvApiCtx,1) &&
+	   sci_matrix_vector_real(pvApiCtx,2) &&
+	   sci_matrix_vector_real(pvApiCtx,3) &&
+	   sci_matrix_vector_real(pvApiCtx,4) &&
+	   sci_matrix_vector_real(pvApiCtx,5) &&
+	   sci_matrix_vector_real(pvApiCtx,6) &&
+	   sci_matrix_vector_real(pvApiCtx,7) &&
+	   vector_length_check(pvApiCtx,2,3) &&
+	   vector_length_check(pvApiCtx,4,5) &&
+	   vector_length_check(pvApiCtx,6,7) &&
+	   sci_matrix_vector_real(pvApiCtx,8) &&
+	   length_check(pvApiCtx,8,3))
     *flow = 8;
   else
     *errCode = UNKNOWN_INPUT_ERR;
@@ -1904,7 +1904,7 @@ idwt3_form_validate (int *errCode, int *flow)
 }
 
 void
-idwt3_content_validate (int *errCode, int flow,
+idwt3_content_validate (void * pvApiCtx, int *errCode, int flow,
 			char* l2,	char* char_l3,int* l3, char* char_l4,int* l4, int* l5,
 			int* l8)
 {
@@ -1913,12 +1913,12 @@ idwt3_content_validate (int *errCode, int flow,
   switch (flow){
   case 1:
     {
-      wfilters_content_validate(errCode,(l2));
+      wfilters_content_validate(pvApiCtx,errCode,(l2));
       break;
     }
   case 2:
     {
-      wfilters_content_validate(errCode,(l2));
+      wfilters_content_validate(pvApiCtx,errCode,(l2));
       if (((l3)[0]<=0) || ((l3)[1]<=0) || ((l3)[2]<=0))
 	{
 	  *errCode = UNKNOWN_INPUT_ERR;
@@ -1939,9 +1939,9 @@ idwt3_content_validate (int *errCode, int flow,
     }
   case 5:
     {
-      wfilters_content_validate(&err1,(l2));
-      wfilters_content_validate(&err2,char_l3);
-      wfilters_content_validate(&err3,char_l4);
+      wfilters_content_validate(pvApiCtx,&err1,(l2));
+      wfilters_content_validate(pvApiCtx,&err2,char_l3);
+      wfilters_content_validate(pvApiCtx,&err3,char_l4);
       if ((err1 != SUCCESS) || (err1 != SUCCESS) ||
 	  (err1 != SUCCESS))
 	*errCode = WAVELET_NAME_NOT_VALID;
@@ -1949,9 +1949,9 @@ idwt3_content_validate (int *errCode, int flow,
     }
   case 6:
     {
-      wfilters_content_validate(&err1,(l2));
-      wfilters_content_validate(&err2,char_l3);
-      wfilters_content_validate(&err3,char_l4);
+      wfilters_content_validate(pvApiCtx,&err1,(l2));
+      wfilters_content_validate(pvApiCtx,&err2,char_l3);
+      wfilters_content_validate(pvApiCtx,&err3,char_l4);
       if ((err1 != SUCCESS) || (err1 != SUCCESS) ||
 	  (err1 != SUCCESS))
 	*errCode = WAVELET_NAME_NOT_VALID;

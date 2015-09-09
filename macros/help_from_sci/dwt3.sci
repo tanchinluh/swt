@@ -6,7 +6,7 @@ function Y=dwt3(x,wname,['mode',extMethod])
 // Y=dwt3(x,Lo_D,Hi_D,['mode',extMethod])
 // Y=dwt3(x,Lo_D1,Hi_D1,Lo_D2,Hi_D2,Lo_D3,Hi_D3,['mode',extMethod])
 // Parameters
-// wname: wavelet name, haar( "haar"), daubechies ("db1" to "db20"), coiflets ("coif1" to "coif5"), symlets ("sym2" to "sym20"), legendre ("leg1" to "leg9"), bathlets("bath4.0" to "bath4.15" and "bath6.0" to "bath6.15"), dmey ("dmey"), beyklin ("beylkin"), vaidyanathan ("vaidyanathan"), biorthogonal B-spline wavelets ("bior1.1" to "bior6.8"), "rbior1.1" to "rbior6.8"
+// wname: wavelet name, haar( "haar"), daubechies ("db1" to "db36"), coiflets ("coif1" to "coif17"), symlets ("sym2" to "sym20"), legendre ("leg1" to "leg9"), bathlets("bath4.0" to "bath4.15" and "bath6.0" to "bath6.15"), dmey ("dmey"), beyklin ("beylkin"), vaidyanathan ("vaidyanathan"), biorthogonal B-spline wavelets ("bior1.1" to "bior6.8"), "rbior1.1" to "rbior6.8"
 // x: 3D double matrix
 // Lo_D: lowpass analysis filter
 // Hi_D: highpass analysis filter
@@ -22,6 +22,7 @@ function Y=dwt3(x,wname,['mode',extMethod])
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // dwt
 // dwt2

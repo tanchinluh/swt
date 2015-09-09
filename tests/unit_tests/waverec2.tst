@@ -23,8 +23,11 @@
 // dwt2d  Test 2
 
 // waverec2
+version = getversion("scilab");
+if (version(1)<6) then
 sz=stacksize();
 stacksize(1e7);
+end;
 
 a=rand(500,501,'normal');
 
@@ -269,9 +272,9 @@ end;
 
 
 // bior1.1
-bior_fam={"bior1.1","bior1.3", "bior1.5", "bior2.2", "bior2.4", "bior2.6",...
+bior_fam=["bior1.1","bior1.3", "bior1.5", "bior2.2", "bior2.4", "bior2.6",...
 "bior2.8", "bior3.1", "bior3.3", "bior3.5", "bior3.7",...
-"bior3.9", "bior4.4", "bior5.5", "bior6.8"};
+"bior3.9", "bior4.4", "bior5.5", "bior6.8"];
 // bior1.1
 for N=1:max(size(bior_fam))
 [Lo_R,Hi_R]=wfilters(bior_fam(N),'r');
@@ -397,6 +400,8 @@ clear y2;
 clear y3;
 clear Lo_R;
 clear Hi_R;
-
+if (version(1)<6) then
 stacksize(sz(1));
 clear sz;
+end;
+clear version;

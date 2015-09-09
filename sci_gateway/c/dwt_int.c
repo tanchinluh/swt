@@ -30,7 +30,12 @@
  *-----------------------------------------*/
 
 int
-int_orthfilt (char *fname)
+int_orthfilt 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int l4, m4, n4, l5, m5, n5;
@@ -47,14 +52,14 @@ int_orthfilt (char *fname)
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
 //  GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
 
 
-  orthfilt_form_validate(&errCode);
+  orthfilt_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -71,7 +76,7 @@ int_orthfilt (char *fname)
   n5 = n1 * m1;
 
   //CreateVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -79,7 +84,7 @@ int_orthfilt (char *fname)
 
 
   //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &output2 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m3 , n3 , &output2 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -87,7 +92,7 @@ int_orthfilt (char *fname)
 
 
   //CreateVar (4, "d", &m4, &n4, &l4);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 3,  m4 , n4 , &output3 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 3,  m4 , n4 , &output3 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -95,7 +100,7 @@ int_orthfilt (char *fname)
 
 
   //CreateVar (5, "d", &m5, &n5, &l5);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 4,  m5 , n5 , &output4 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 4,  m5 , n5 , &output4 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -112,7 +117,12 @@ int_orthfilt (char *fname)
 }
 
 int
-int_biorfilt (char *fname)
+int_biorfilt 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int l4, m4, n4, l5, m5, n5, l6, m6, n6;
@@ -129,7 +139,7 @@ int_biorfilt (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  biorfilt_form_validate(&errCode);
+  biorfilt_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -137,13 +147,13 @@ int_biorfilt (char *fname)
     }
 
   //GetRhsVar (1, "d", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 1,  &m1, &n1, &input1);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 1,  &m1, &n1, &input1);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //GetRhsVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoubles( fname, 2,  &m2, &n2, &input2);
+  readFlag = swt_gwsupport_GetRealMatrixOfDoubles(pvApiCtx, fname, 2,  &m2, &n2, &input2);
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -159,25 +169,25 @@ int_biorfilt (char *fname)
   n6 = n1 * m1;
 
   //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //CreateVar (4, "d", &m4, &n4, &l4);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m4 , n4 , &output2 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //CreateVar (5, "d", &m5, &n5, &l5);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 3,  m5 , n5 , &output3 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 3,  m5 , n5 , &output3 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //CreateVar (6, "d", &m6, &n6, &l6);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 4,  m6 , n6 , &output4 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 4,  m6 , n6 , &output4 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -200,7 +210,12 @@ int_biorfilt (char *fname)
  *-----------------------------------------*/
 
 int
-int_dbwavf (char *fname)
+int_dbwavf 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
@@ -213,7 +228,7 @@ int_dbwavf (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  dbwavf_form_validate(&errCode);
+  dbwavf_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -221,13 +236,13 @@ int_dbwavf (char *fname)
     }
 
   //GetRhsVar (1, "c", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
   m1=1;n1=1;
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-  dbwavf_content_validate(&errCode,input_string1);
+  dbwavf_content_validate (pvApiCtx, &errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -239,7 +254,7 @@ int_dbwavf (char *fname)
   m2 = 1;
   n2 = pWaveStruct.length;
   //CreateVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -253,7 +268,12 @@ int_dbwavf (char *fname)
 
 
 int
-int_coifwavf (char *fname)
+int_coifwavf 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
@@ -266,7 +286,7 @@ int_coifwavf (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  coifwavf_form_validate(&errCode);
+  coifwavf_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -274,13 +294,13 @@ int_coifwavf (char *fname)
     }
 
   //GetRhsVar (1, "c", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
   m1=1;n1=1;
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-  coifwavf_content_validate(&errCode,input_string1);
+  coifwavf_content_validate (pvApiCtx, &errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -292,7 +312,7 @@ int_coifwavf (char *fname)
   m2 = 1;
   n2 = pWaveStruct.length;
   //CreateVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -305,7 +325,12 @@ int_coifwavf (char *fname)
 
 
 int
-int_symwavf (char *fname)
+int_symwavf 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
@@ -318,7 +343,7 @@ int_symwavf (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  symwavf_form_validate(&errCode);
+  symwavf_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -326,13 +351,13 @@ int_symwavf (char *fname)
     }
 
   //GetRhsVar (1, "c", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
   m1=1;n1=1;
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-  symwavf_content_validate(&errCode,input_string1);
+  symwavf_content_validate (pvApiCtx, &errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -344,7 +369,7 @@ int_symwavf (char *fname)
   m2 = 1;
   n2 = pWaveStruct.length;
   //CreateVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -356,7 +381,12 @@ int_symwavf (char *fname)
 }
 
 int
-int_legdwavf (char *fname)
+int_legdwavf 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2;
   static int minlhs = 1, maxlhs = 1, minrhs = 1, maxrhs = 1;
@@ -369,7 +399,7 @@ int_legdwavf (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  legdwavf_form_validate(&errCode);
+  legdwavf_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -377,13 +407,13 @@ int_legdwavf (char *fname)
     }
 
   //GetRhsVar (1, "c", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
   m1=1;n1=1;
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-  legdwavf_content_validate(&errCode,input_string1);
+  legdwavf_content_validate (pvApiCtx, &errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -395,7 +425,7 @@ int_legdwavf (char *fname)
   m2 = 1;
   n2 = pWaveStruct.length;
   //CreateVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -407,7 +437,12 @@ int_legdwavf (char *fname)
 }
 
 int
-int_biorwavf (char *fname)
+int_biorwavf 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int minlhs = 2, maxlhs = 2, minrhs = 1, maxrhs = 1;
@@ -421,7 +456,7 @@ int_biorwavf (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  biorwavf_form_validate(&errCode);
+  biorwavf_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -429,13 +464,13 @@ int_biorwavf (char *fname)
     }
 
 //  GetRhsVar (1, "c", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
   m1=1;n1=1;
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-  biorwavf_content_validate(&errCode,input_string1);
+  biorwavf_content_validate (pvApiCtx, &errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -449,13 +484,13 @@ int_biorwavf (char *fname)
   m3 = 1;
   n3 = pWaveStruct.length;
   //CreateVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &output2 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m3 , n3 , &output2 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -474,7 +509,12 @@ int_biorwavf (char *fname)
 }
 
 int
-int_rbiorwavf (char *fname)
+int_rbiorwavf 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int minlhs = 2, maxlhs = 2, minrhs = 1, maxrhs = 1;
@@ -488,7 +528,7 @@ int_rbiorwavf (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  rbiorwavf_form_validate(&errCode);
+  rbiorwavf_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -496,13 +536,13 @@ int_rbiorwavf (char *fname)
     }
 
   //GetRhsVar (1, "c", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
   m1=1;n1=1;
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
-  rbiorwavf_content_validate(&errCode,input_string1);
+  rbiorwavf_content_validate (pvApiCtx, &errCode,input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -516,13 +556,13 @@ int_rbiorwavf (char *fname)
   m3 = 1;
   n3 = pWaveStruct.length;
   //CreateVar (2, "d", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //CreateVar (3, "d", &m3, &n3, &l3);
-  readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &output2 );
+  readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m3 , n3 , &output2 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -541,7 +581,12 @@ int_rbiorwavf (char *fname)
 }
 
 int
-int_wfilters (char *fname)
+int_wfilters 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int l4, m4, n4, l5, m5, n5;
@@ -561,7 +606,7 @@ int_wfilters (char *fname)
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
   errCode = SUCCESS;
-  if (swt_gwsupport_GetType(1)!=sci_strings)
+  if (swt_gwsupport_GetType(pvApiCtx, 1)!=sci_strings)
     errCode = UNKNOWN_INPUT_ERR;
   if (errCode != SUCCESS)
     {
@@ -570,7 +615,7 @@ int_wfilters (char *fname)
     }
 
   //GetRhsVar (1, "c", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+  readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
   m1=1;n1=1;
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
@@ -580,7 +625,7 @@ int_wfilters (char *fname)
 
   if (Rhs==2)
     {
-      if (swt_gwsupport_GetType(2)!=sci_strings)
+      if (swt_gwsupport_GetType(pvApiCtx, 2)!=sci_strings)
 	errCode = UNKNOWN_INPUT_ERR;
       if (errCode != SUCCESS)
 	{
@@ -588,7 +633,7 @@ int_wfilters (char *fname)
 	  return 0;
 	}
       //GetRhsVar (2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
@@ -596,13 +641,13 @@ int_wfilters (char *fname)
         }
     }
 
-  wfilters_form_validate(&errCode, &flow, input_string2);
+  wfilters_form_validate (pvApiCtx, &errCode, &flow, input_string2,Rhs,Lhs);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
       return 0;
     }
-  wfilters_content_validate(&errCode, input_string1);
+  wfilters_content_validate (pvApiCtx, &errCode, input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -627,25 +672,25 @@ int_wfilters (char *fname)
       n4 = pWaveStruct.length;
       n5 = pWaveStruct.length;
       //CreateVar (2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m2 , n2 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m2 , n2 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //CreateVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m3 , n3 , &output2 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m3 , n3 , &output2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 3,  m4 , n4 , &output3 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 3,  m4 , n4 , &output3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //CreateVar (5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 4,  m5 , n5 , &output4 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 4,  m5 , n5 , &output4 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -673,13 +718,13 @@ int_wfilters (char *fname)
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
       //CreateVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m4 , n4 , &output2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -702,13 +747,13 @@ int_wfilters (char *fname)
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
       //CreateVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m4 , n4 , &output2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -731,13 +776,13 @@ int_wfilters (char *fname)
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
       //CreateVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m4 , n4 , &output2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -763,13 +808,13 @@ int_wfilters (char *fname)
       n3 = pWaveStruct.length;
       n4 = pWaveStruct.length;
       //CreateVar (3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 1,  m3 , n3 , &output1 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //CreateVar (4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_AllocMatrixOfDoubles (fname, 2,  m4 , n4 , &output2 );
+      readFlag = swt_gwsupport_AllocMatrixOfDoubles (pvApiCtx, fname, 2,  m4 , n4 , &output2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -792,7 +837,12 @@ int_wfilters (char *fname)
 
 
 int
-int_wmaxlev (char *fname)
+int_wmaxlev 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int minlhs = 1, maxlhs = 1, minrhs = 2, maxrhs = 2;
@@ -810,7 +860,7 @@ int_wmaxlev (char *fname)
   CheckInputArgument(pvApiCtx,minrhs, maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs, maxlhs);
 
-  wmaxlev_form_validate(&errCode);
+  wmaxlev_form_validate (pvApiCtx, &errCode);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -818,20 +868,20 @@ int_wmaxlev (char *fname)
     }
 
   //GetRhsVar (1, "i", &m1, &n1, &l1);
-  readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 1,  &m1 , &n1 , &input1 );
+  readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (pvApiCtx, fname, 1,  &m1 , &n1 , &input1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
   //GetRhsVar (2, "c", &m2, &n2, &l2);
-  readFlag = swt_gwsupport_GetScalarString(fname,2 , &input_string1 );
+  readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname,2 , &input_string1 );
   m2=1;n2=1;
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
     }
 
-  wfilters_content_validate(&errCode, input_string1);
+  wfilters_content_validate (pvApiCtx, &errCode, input_string1);
   if (errCode != SUCCESS)
     {
       validate_print (errCode);
@@ -843,14 +893,14 @@ int_wmaxlev (char *fname)
   syn_fun = wi[ii].synthesis;
   (*syn_fun)(member, &pWaveStruct);
   filter_clear();
-  if (sci_matrix_scalar_real(1))
+  if (sci_matrix_scalar_real(pvApiCtx,1))
     {
       if (input1[0] <= 0)
 	{
 	  sciprint("Input integer must be positive!\n");
 	  return 0;
 	}
-      wave_len_validate(input1[0], pWaveStruct.length,
+      wave_len_validate (input1[0], pWaveStruct.length,
 			&stride, &val);
       if (val == 0)
 	{
@@ -863,7 +913,7 @@ int_wmaxlev (char *fname)
 	  m3 = 1;
 	  n3 = 1;
 	  //CreateVar (3, "i", &m3, &n3, &l3);
-    readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (fname, 1,  m3 , n3 , &output1 );
+    readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
     if(readFlag==SWT_GWSUPPORT_ERROR)
       {
         return 0;
@@ -885,7 +935,7 @@ int_wmaxlev (char *fname)
 	    sciprint("Input integer must be positive!\n");
 	    return 0;
 	}
-    wave_len_validate(input1[0], pWaveStruct.length,
+    wave_len_validate ( input1[0], pWaveStruct.length,
 			&stride1, &val1);
     if (val1 == 0)
 	{
@@ -893,7 +943,7 @@ int_wmaxlev (char *fname)
 		("The wavelet you select is not appropriate for that row size of the matrix!\n");
 		return 0;
 	}
-    wave_len_validate (input1[1], pWaveStruct.length,
+    wave_len_validate ( input1[1], pWaveStruct.length,
 		&stride2, &val2);
 
     if (val2 == 0)
@@ -907,7 +957,7 @@ int_wmaxlev (char *fname)
     m3 = 1;
     n3 = 1;
     //CreateVar (3, "i", &m3, &n3, &l3);
-    readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (fname, 1,  m3 , n3 , &output1 );
+    readFlag = swt_gwsupport_AllocMatrixOfDoublesAsInteger (pvApiCtx, fname, 1,  m3 , n3 , &output1 );
     if(readFlag==SWT_GWSUPPORT_ERROR)
       {
         return 0;
@@ -925,7 +975,12 @@ int_wmaxlev (char *fname)
 
 
 int
-int_dwtmode (char *fname)
+int_dwtmode 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3;
   static int minlhs = 0, maxlhs = 1, minrhs = 0, maxrhs = 2;
@@ -949,11 +1004,11 @@ int_dwtmode (char *fname)
   else if (Rhs == 1)
     {
       //GetMatrixdims(1,&row,&col);
-      if (sci_strings_scalar(1))
+      if (sci_strings_scalar(pvApiCtx,1))
 	{
 	//sciprint("before GetVAR\n");
 	  //GetRhsVar(1, "c", &m1, &n1, &l1);
-    readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+    readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
     m1=1;n1=1;
     if(readFlag==SWT_GWSUPPORT_ERROR)
       {
@@ -985,18 +1040,18 @@ int_dwtmode (char *fname)
     {
       //      GetMatrixdims(1, &row1, &col1);
       //GetMatrixdims(2, &row2, &col2);
-      /*      if ((swt_gwsupport_GetType(1) == sci_strings) && (swt_gwsupport_GetType(2) == sci_strings) && (is_scalar(row1,col1)) && (is_scalar(row2,col2)))*/
-      if (sci_strings_scalar(1) && sci_strings_scalar(2))
+      /*      if ((swt_gwsupport_GetType(pvApiCtx, 1) == sci_strings) && (swt_gwsupport_GetType(pvApiCtx, 2) == sci_strings) && (is_scalar(row1,col1)) && (is_scalar(row2,col2)))*/
+      if (sci_strings_scalar(pvApiCtx, 1) && sci_strings_scalar(pvApiCtx, 2))
 	{
 	  //GetRhsVar(1, "c", &m1, &n1, &l1);
-    readFlag = swt_gwsupport_GetScalarString(fname, 1 , &input_string1 );
+    readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 1 , &input_string1 );
     m1=1;n1=1;
     if(readFlag==SWT_GWSUPPORT_ERROR)
       {
         return 0;
       }
 	  //GetRhsVar(2, "c", &m2, &n2, &l2);
-    readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+    readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
     m2=1;n2=1;
     if(readFlag==SWT_GWSUPPORT_ERROR)
       {
@@ -1021,7 +1076,7 @@ int_dwtmode (char *fname)
 	      //printf("after dwt_parse\n");
 	      //printf("%s\n",Str[0]);
 	      //CreateVarFromPtr(3,"S", &m3, &n3, Str);
-        readFlag = swt_gwsupport_CreateMatrixOfString (fname, 1,  m3 , n3 , Str );
+        readFlag = swt_gwsupport_CreateMatrixOfString (pvApiCtx, fname, 1,  m3 , n3 , Str );
         if(readFlag==SWT_GWSUPPORT_ERROR)
           {
             return 0;

@@ -35,16 +35,16 @@
  * Haar
  *-----------------------------------------*/
 
-/*void haar_form_validate(int *errCode)
+/*void haar_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void haar_content_validate(int *errCode, int l1, int l2, int l3)
+void haar_content_validate(void * pvApiCtx, int *errCode, int l1, int l2, int l3)
 {
     *errCode = SUCCESS;
 	if ((stk(l1)[0]>=stk(l2)[0]) || (istk(l3)[0]<2))
@@ -56,16 +56,16 @@ void haar_content_validate(int *errCode, int l1, int l2, int l3)
  * Sinus
  *-----------------------------------------*/
 
-void sinus_form_validate(int *errCode)
+void sinus_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void sinus_content_validate(int *errCode, double* input1, double* input2, int* input3)
+void sinus_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2))
@@ -77,16 +77,16 @@ void sinus_content_validate(int *errCode, double* input1, double* input2, int* i
  * Poisson
  *-----------------------------------------*/
 
-void poisson_form_validate(int *errCode)
+void poisson_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void poisson_content_validate(int *errCode, double* input1, double* input2, int* input3)
+void poisson_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2))
@@ -98,16 +98,16 @@ void poisson_content_validate(int *errCode, double* input1, double* input2, int*
  * Mexican Hat
  *-----------------------------------------*/
 
-void mexihat_form_validate(int *errCode)
+void mexihat_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void mexihat_content_validate(int *errCode, double* input1, double* input2, int* input3)
+void mexihat_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2))
@@ -119,16 +119,16 @@ void mexihat_content_validate(int *errCode, double* input1, double* input2, int*
  * Morlet
  *-----------------------------------------*/
 
-void morlet_form_validate(int *errCode)
+void morlet_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void morlet_content_validate(int *errCode, double* input1, double* input2, int* input3)
+void morlet_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2))
@@ -140,16 +140,16 @@ void morlet_content_validate(int *errCode, double* input1, double* input2, int* 
  * DOG
  *-----------------------------------------*/
 
-void DOGauss_form_validate(int *errCode)
+void DOGauss_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void DOGauss_content_validate(int *errCode, double* input1, double* input2, int* input3)
+void DOGauss_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2))
@@ -161,16 +161,16 @@ void DOGauss_content_validate(int *errCode, double* input1, double* input2, int*
  * Gauss
  *-----------------------------------------*/
 
-void Gauss_form_validate(int *errCode)
+void Gauss_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3) && sci_matrix_scalar_real(4))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3) && sci_matrix_scalar_real(pvApiCtx,4))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void Gauss_content_validate(int *errCode, double* input1, double* input2, int* input3, int* input4)
+void Gauss_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3, int* input4)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2) || (input4[0]>8))
@@ -184,17 +184,17 @@ void Gauss_content_validate(int *errCode, double* input1, double* input2, int* i
  * Complex Morlet
  *-----------------------------------------*/
 
-void cmorlet_form_validate(int *errCode)
+void cmorlet_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3) &&
-		sci_matrix_scalar_real(4) && sci_matrix_scalar_real(5))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3) &&
+		sci_matrix_scalar_real(pvApiCtx,4) && sci_matrix_scalar_real(pvApiCtx,5))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void cmorlet_content_validate(int *errCode, double* input1, double* input2, int* input3, double* input4 , double* input5)
+void cmorlet_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3, double* input4 , double* input5)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2))
@@ -206,17 +206,17 @@ void cmorlet_content_validate(int *errCode, double* input1, double* input2, int*
  * Complex Shannon
  *-----------------------------------------*/
 
-void shanwavf_form_validate(int *errCode)
+void shanwavf_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3) &&
-		sci_matrix_scalar_real(4) && sci_matrix_scalar_real(5))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3) &&
+		sci_matrix_scalar_real(pvApiCtx,4) && sci_matrix_scalar_real(pvApiCtx,5))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void shanwavf_content_validate(int *errCode, double* input1, double* input2, int* input3, double* input4 , double* input5)
+void shanwavf_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3, double* input4 , double* input5)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2))
@@ -228,17 +228,17 @@ void shanwavf_content_validate(int *errCode, double* input1, double* input2, int
  * Frequency B-Spline
  *-----------------------------------------*/
 
-void fbspwavf_form_validate(int *errCode)
+void fbspwavf_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3) &&
-		sci_matrix_scalar_real(4) && sci_matrix_scalar_real(5))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3) &&
+		sci_matrix_scalar_real(pvApiCtx,4) && sci_matrix_scalar_real(pvApiCtx,5))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void fbspwavf_content_validate(int *errCode, double* input1, double* input2, int* input3, int* input4, double* input5, double* input6)
+void fbspwavf_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3, int* input4, double* input5, double* input6)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2) || (input4[0]<1))
@@ -250,17 +250,17 @@ void fbspwavf_content_validate(int *errCode, double* input1, double* input2, int
  * Complex Cauchy
  *-----------------------------------------*/
 
-void cauchy_form_validate(int *errCode)
+void cauchy_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_matrix_scalar_real(1) && sci_matrix_scalar_real(2) && sci_matrix_scalar_real(3)) //&&
-//		sci_matrix_scalar_real(4) && sci_matrix_scalar_real(5))
+    if (sci_matrix_scalar_real(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2) && sci_matrix_scalar_real(pvApiCtx,3)) //&&
+//		sci_matrix_scalar_real(pvApiCtx,4) && sci_matrix_scalar_real(pvApiCtx,5))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void cauchy_content_validate(int *errCode, double* input1, double* input2, int* input3)
+void cauchy_content_validate(void * pvApiCtx, int *errCode, double* input1, double* input2, int* input3)
 {
     *errCode = SUCCESS;
 	if ((input1[0]>=input2[0]) || (input3[0]<2))
@@ -271,16 +271,16 @@ void cauchy_content_validate(int *errCode, double* input1, double* input2, int* 
 /*-------------------------------------------
  * wavefun
  *-----------------------------------------*/
-void wavefun_form_validate(int *errCode)
+void wavefun_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_strings_scalar(1) && sci_matrix_scalar_real(2))
+    if (sci_strings_scalar(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void wavefun_content_validate(int *errCode, char *input_string, int* input2)
+void wavefun_content_validate(void * pvApiCtx, int *errCode, char *input_string, int* input2)
 {
 	int ind1, ind2;
     *errCode = SUCCESS;
@@ -302,16 +302,16 @@ void wavefun_content_validate(int *errCode, char *input_string, int* input2)
 /*-------------------------------------------
  * wavefun2
  *-----------------------------------------*/
-void wavefun2_form_validate(int *errCode)
+void wavefun2_form_validate(void * pvApiCtx, int *errCode)
 {
-    if (sci_strings_scalar(1) && sci_matrix_scalar_real(2))
+    if (sci_strings_scalar(pvApiCtx,1) && sci_matrix_scalar_real(pvApiCtx,2))
 		*errCode = SUCCESS;
 	else
 		*errCode = UNKNOWN_INPUT_ERR;
 	return;
 }
 
-void wavefun2_content_validate(int *errCode, char *input_string, int* input2)
+void wavefun2_content_validate(void * pvApiCtx, int *errCode, char *input_string, int* input2)
 {
 	int ind1;
     *errCode = SUCCESS;
@@ -333,14 +333,14 @@ void wavefun2_content_validate(int *errCode, char *input_string, int* input2)
 /*-------------------------------------------
  * cwt
  *-----------------------------------------*/
-void cwt_form_validate(int *errCode, int *flow)
+void cwt_form_validate(void * pvApiCtx, int *errCode, int *flow)
 {
-    if (sci_matrix_vector_real(1) && (sci_matrix_vector_real(2) || sci_matrix_scalar_real(2)) && sci_strings_scalar(3) )
+    if (sci_matrix_vector_real(pvApiCtx,1) && (sci_matrix_vector_real(pvApiCtx,2) || sci_matrix_scalar_real(pvApiCtx,2)) && sci_strings_scalar(pvApiCtx,3) )
 	{
 		*errCode = SUCCESS;
 		*flow = 1;
 	}
-	else if (sci_matrix_vector_complex(1) && sci_matrix_vector_real(2) && sci_strings_scalar(3) )
+	else if (sci_matrix_vector_complex(pvApiCtx,1) && sci_matrix_vector_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3) )
 	{
         *errCode = SUCCESS;
 		*flow = 2;
@@ -350,7 +350,7 @@ void cwt_form_validate(int *errCode, int *flow)
 	return;
 }
 
-void cwt_content_validate(int *errCode, char *input_string)
+void cwt_content_validate(void * pvApiCtx, int *errCode, char *input_string)
 {
 	int ind1, ind2;
     *errCode = SUCCESS;

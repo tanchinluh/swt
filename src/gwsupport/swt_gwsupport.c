@@ -29,11 +29,11 @@
 //#include "stack-c.h"
 #include "Scierror.h"
 //#include "localization.h"
-#include "warningmode.h"
+//#include "warningmode.h"
 #include "sciprint.h"
 
 
-int swt_gwsupport_GetRealMatrixOfDoubles( char * fname, int ivar, int * _piRows , int * _piCols, double** _pdblReal )
+int swt_gwsupport_GetRealMatrixOfDoubles(void* pvApiCtx, char * fname, int ivar, int * _piRows , int * _piCols, double** _pdblReal )
 {
   int iType = 0;
   int iComplex = 0;
@@ -68,7 +68,7 @@ int swt_gwsupport_GetRealMatrixOfDoubles( char * fname, int ivar, int * _piRows 
 }
 
 
-int swt_gwsupport_GetComplexMatrixOfDoubles( char * fname, int ivar, int * _piRows , int * _piCols, double** _pdblReal , double** _pdblImag )
+int swt_gwsupport_GetComplexMatrixOfDoubles( void* pvApiCtx, char * fname, int ivar, int * _piRows , int * _piCols, double** _pdblReal , double** _pdblImag )
 {
   int iType = 0;
   int iComplex = 0;
@@ -103,7 +103,7 @@ int swt_gwsupport_GetComplexMatrixOfDoubles( char * fname, int ivar, int * _piRo
         }
 
 
-int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int * _piRows , int * _piCols, int** _pdblReal )
+int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( void* pvApiCtx, char * fname, int ivar, int * _piRows , int * _piCols, int** _pdblReal )
 {
   int iType = 0;
   int iComplex = 0;
@@ -137,7 +137,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
       return SWT_GWSUPPORT_OK;
     }
 
-    int swt_gwsupport_GetRealHypermatofdouble( char * fname, int ivar, int ** _dims , int *_ndims, double** _pdblReal )
+    int swt_gwsupport_GetRealHypermatofdouble( void* pvApiCtx, char * fname, int ivar, int ** _dims , int *_ndims, double** _pdblReal )
     {
       int iType = 0;
       int iComplex = 0;
@@ -159,7 +159,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
           }
           return SWT_GWSUPPORT_OK;
         }
-    // int swt_gwsupport_GetRealMatrixOfUnsignedInteger16( char * fname, int ivar, int * _piRows , int * _piCols, unsigned short** _pusData16 )
+    // int swt_gwsupport_GetRealMatrixOfUnsignedInteger16( void* pvApiCtx, char * fname, int ivar, int * _piRows , int * _piCols, unsigned short** _pusData16 )
     // {
     //   SciErr sciErr;
     //   int *_piAddress;
@@ -190,7 +190,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
     //           }
     //           return SWT_GWSUPPORT_OK;
     //         }
-    char ** swt_gwsupport_GetMatrixOfString( char * fname, int ivar, int * _piRows , int * _piCols)
+    char ** swt_gwsupport_GetMatrixOfString( void* pvApiCtx, char * fname, int ivar, int * _piRows , int * _piCols)
     {
       SciErr sciErr;
       int *_piAddress;
@@ -256,7 +256,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
             }
 
 
-    int swt_gwsupport_GetScalarString( char * fname, int ivar , char** mystring )
+    int swt_gwsupport_GetScalarString( void* pvApiCtx, char * fname, int ivar , char** mystring )
     {
       int *_piAddress;
       int iRet = 0;
@@ -277,7 +277,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
           return SWT_GWSUPPORT_OK;
         }
 
-        int swt_gwsupport_AllocMatrixOfDoubles ( char * fname, int ovar , int _piRows , int _piCols , double ** _pdblReal )
+        int swt_gwsupport_AllocMatrixOfDoubles ( void* pvApiCtx, char * fname, int ovar , int _piRows , int _piCols , double ** _pdblReal )
         {
           SciErr sciErr;
           sciErr = allocMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + ovar, _piRows, _piCols, _pdblReal);
@@ -290,7 +290,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
             return SWT_GWSUPPORT_OK;
           }
 
-          int swt_gwsupport_AllocComplexMatrixOfDoubles ( char * fname, int ovar , int _piRows , int _piCols , double** _pdblReal, double** _pdblImg )
+          int swt_gwsupport_AllocComplexMatrixOfDoubles ( void* pvApiCtx, char * fname, int ovar , int _piRows , int _piCols , double** _pdblReal, double** _pdblImg )
           {
             SciErr sciErr;
             sciErr = allocComplexMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + ovar, _piRows, _piCols, _pdblReal,_pdblImg);
@@ -303,7 +303,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
               return SWT_GWSUPPORT_OK;
             }
 
-          int swt_gwsupport_AllocMatrixOfDoublesAsInteger ( char * fname, int ovar , int _piRows , int _piCols , int ** _pdblReal )
+          int swt_gwsupport_AllocMatrixOfDoublesAsInteger ( void* pvApiCtx, char * fname, int ovar , int _piRows , int _piCols , int ** _pdblReal )
           {
             SciErr sciErr;
             sciErr = allocMatrixOfDoubleAsInteger(pvApiCtx, nbInputArgument(pvApiCtx) + ovar, _piRows, _piCols, _pdblReal);
@@ -315,7 +315,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
               AssignOutputVariable(pvApiCtx,ovar) = nbInputArgument(pvApiCtx)+ovar;
               return SWT_GWSUPPORT_OK;
             }
-            int swt_gwsupport_AllocMatrixOfUnsignedInteger16 ( char * fname, int ovar , int _piRows , int _piCols , unsigned short** _pusData16)
+            int swt_gwsupport_AllocMatrixOfUnsignedInteger16 ( void* pvApiCtx, char * fname, int ovar , int _piRows , int _piCols , unsigned short** _pusData16)
             {
               SciErr sciErr;
               sciErr = allocMatrixOfUnsignedInteger16(pvApiCtx, nbInputArgument(pvApiCtx) + ovar, _piRows, _piCols, _pusData16);
@@ -327,7 +327,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
                 AssignOutputVariable(pvApiCtx,ovar) = nbInputArgument(pvApiCtx)+ovar;
                 return SWT_GWSUPPORT_OK;
               }
-              int swt_gwsupport_AllocMatrixOfInteger32 ( char * fname, int ovar , int _piRows , int _piCols , int** _piData32)
+              int swt_gwsupport_AllocMatrixOfInteger32 ( void* pvApiCtx, char * fname, int ovar , int _piRows , int _piCols , int** _piData32)
               {
                 SciErr sciErr;
                 sciErr = allocMatrixOfInteger32(pvApiCtx, nbInputArgument(pvApiCtx) + ovar, _piRows, _piCols, _piData32);
@@ -339,7 +339,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
                   AssignOutputVariable(pvApiCtx,ovar) = nbInputArgument(pvApiCtx)+ovar;
                   return SWT_GWSUPPORT_OK;
                 }
-            int swt_gwsupport_CreateMatrixOfString ( char * fname, int ovar , int _piRows , int _piCols , char ** pstData )
+            int swt_gwsupport_CreateMatrixOfString ( void* pvApiCtx, char * fname, int ovar , int _piRows , int _piCols , char ** pstData )
             {
               SciErr sciErr;
               sciErr = createMatrixOfString(pvApiCtx, nbInputArgument(pvApiCtx) + ovar, _piRows, _piCols, pstData);
@@ -353,7 +353,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
                 return SWT_GWSUPPORT_OK;
               }
 
-              int swt_gwsupport_CreateHypermatOfDouble ( char * fname, int ovar , int* dims , int ndims, double* pdblReal)
+              int swt_gwsupport_CreateHypermatOfDouble ( void* pvApiCtx, char * fname, int ovar , int* dims , int ndims, double* pdblReal)
               {
                 SciErr sciErr;
                 sciErr = createHypermatOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + ovar, dims, ndims, pdblReal);
@@ -368,7 +368,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
                 }
 
 
-              int swt_gwsupport_GetType(int ivar)
+              int swt_gwsupport_GetType( void* pvApiCtx, int ivar)
               {
                 SciErr sciErr;
                 int *_piAddress;
@@ -393,7 +393,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
 
               }
 
-            int swt_gwsupport_GetMatrixdims(int ivar, int * _piRows , int * _piCols){
+            int swt_gwsupport_GetMatrixdims( void* pvApiCtx, int ivar, int * _piRows , int * _piCols){
 
               SciErr sciErr;
               int *_piAddress;
@@ -418,7 +418,7 @@ int swt_gwsupport_GetRealMatrixOfDoublesAsInteger( char * fname, int ivar, int *
             }
 
 
-            int swt_gwsupport_IsVarComplex(int ivar)
+            int swt_gwsupport_IsVarComplex( void* pvApiCtx, int ivar)
             {
               SciErr sciErr;
               int *_piAddress;

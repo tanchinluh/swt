@@ -23,8 +23,11 @@
 // dwt2d  Test 2
 
 // upwlev2
+version = getversion("scilab");
+if (version(1)<6) then
 sz=stacksize();
 stacksize(1e7);
+end;
 a=rand(500,501,'normal');
 
 [c3,s3]=wavedec2(a,3,'sym5');
@@ -90,6 +93,8 @@ clear c11;
 clear s22;
 clear s11;
 clear a1;
-
+if (version(1)<6) then
 stacksize(sz(1));
 clear sz;
+end;
+clear version;

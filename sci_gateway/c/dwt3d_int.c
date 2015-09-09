@@ -25,7 +25,12 @@
 // #include <stack-c.h>
 
 int
-int_dwt3 (char *fname)
+int_dwt3 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
   static int l5, m5, n5, l6, m6, n6, l7, m7, n7, l8, m8, n8;
@@ -78,7 +83,7 @@ int_dwt3 (char *fname)
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
-  dwt3_form_validate(&errCode,&flow);
+  dwt3_form_validate (pvApiCtx, &errCode,&flow, Rhs);
   if (errCode != SUCCESS)
   {
     validate_print (errCode);
@@ -109,7 +114,7 @@ int_dwt3 (char *fname)
   //     Scierror(999,"Argument %d dimension error\r\n",1);
   //     return 0;
   //   }
-  readFlag = swt_gwsupport_GetRealHypermatofdouble (fname, 1,  &dims1 , &ndims1 , &input1 );
+  readFlag = swt_gwsupport_GetRealHypermatofdouble (pvApiCtx, fname, 1,  &dims1 , &ndims1 , &input1 );
   if(readFlag==SWT_GWSUPPORT_ERROR)
     {
       return 0;
@@ -124,14 +129,14 @@ int_dwt3 (char *fname)
    {
 
      //GetRhsVar(2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
      //GetRhsVar(3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string3 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string3 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
@@ -173,13 +178,13 @@ int_dwt3 (char *fname)
     {
       //printf("flow 1\n");
       //GetRhsVar(2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dwt3_content_validate(&errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
+      dwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
 
       if (errCode != SUCCESS)
 	{
@@ -191,9 +196,9 @@ int_dwt3 (char *fname)
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
 
-      wave_len_validate (row, pWaveStruct.length, &stride1, &val1);
-      wave_len_validate (col, pWaveStruct.length, &stride2, &val2);
-      wave_len_validate (sli, pWaveStruct.length, &stride3, &val3);
+      wave_len_validate ( row, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( col, pWaveStruct.length, &stride2, &val2);
+      wave_len_validate ( sli, pWaveStruct.length, &stride3, &val3);
       if ((val1 == 0) || (val2 == 0) || (val3 == 0))
 	{
 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
@@ -229,7 +234,7 @@ int_dwt3 (char *fname)
       //CreateListVarFromPtr(3,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(3,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(3,3,"d",&m3, &n3, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 4 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 4 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -242,18 +247,18 @@ int_dwt3 (char *fname)
     {
       //sciprint("flow 2\n");
       //GetRhsVar(2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname, 2,  &m2, &n2 , &input2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,3,  &m3, &n3 , &input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,3,  &m3, &n3 , &input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dwt3_content_validate(&errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
+      dwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -291,7 +296,7 @@ int_dwt3 (char *fname)
       //CreateListVarFromPtr(4,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(4,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(4,3,"d",&m4, &n4, &var4);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 4 , var4 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 4 , var4 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -304,13 +309,13 @@ int_dwt3 (char *fname)
     {
       //sciprint("flow 3\n");
       //GetRhsVar(4, "c", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetScalarString(fname, 4 , &input_string4 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 4 , &input_string4 );
       m4=1;n4=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dwt3_content_validate(&errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
+      dwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -323,9 +328,9 @@ int_dwt3 (char *fname)
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
 
-      wave_len_validate (row, pWaveStruct.length, &stride1, &val1);
-      wave_len_validate (col, pWaveStruct.length, &stride2, &val2);
-      wave_len_validate (sli, pWaveStruct.length, &stride3, &val3);
+      wave_len_validate ( row, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( col, pWaveStruct.length, &stride2, &val2);
+      wave_len_validate ( sli, pWaveStruct.length, &stride3, &val3);
       if ((val1 == 0) || (val2 == 0) || (val3 == 0))
 	{
 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
@@ -360,7 +365,7 @@ int_dwt3 (char *fname)
       //CreateListVarFromPtr(5,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(5,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(5,3,"d",&m5, &n5, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 4 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 4 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -374,32 +379,32 @@ int_dwt3 (char *fname)
     {
       //sciprint("flow 4\n");
       //GetRhsVar(2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname, 2,  &m2, &n2 , &input2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,3,  &m3, &n3 , &input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,3,  &m3, &n3 , &input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "c", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetScalarString(fname, 4 , &input_string4 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 4 , &input_string4 );
       m4=1;n4=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(5, "c", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetScalarString(fname, 5 , &input_string5 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 5 , &input_string5 );
       m5=1;n5=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dwt3_content_validate(&errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
+      dwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -438,7 +443,7 @@ int_dwt3 (char *fname)
       //CreateListVarFromPtr(6,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(6,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(6,3,"d",&m6, &n6, &var4);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 4 , var4 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 4 , var4 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -452,13 +457,13 @@ int_dwt3 (char *fname)
     {
       //sciprint("flow 5\n");
       //GetRhsVar(4, "c", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetScalarString(fname, 4 , &input_string4 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 4 , &input_string4 );
       m4=1;n4=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dwt3_content_validate(&errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
+      dwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -469,7 +474,7 @@ int_dwt3 (char *fname)
       wavelet_fun_parser (input_string2, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
-      wave_len_validate (col, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( col, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (column length) is not valid for selected decompostion level and wavelets!\n");
@@ -487,7 +492,7 @@ int_dwt3 (char *fname)
       wavelet_fun_parser (input_string3, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
-      wave_len_validate (row, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( row, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (row length) is not valid for selected decompostion level and wavelets!\n");
@@ -505,7 +510,7 @@ int_dwt3 (char *fname)
       wavelet_fun_parser (input_string4, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
-      wave_len_validate (sli, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( sli, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (slice length) is not valid for selected decompostion level and wavelets!\n");
@@ -547,7 +552,7 @@ int_dwt3 (char *fname)
       //CreateListVarFromPtr(5,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(5,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(5,3,"d",&m5, &n5, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 4 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 4 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -562,42 +567,42 @@ int_dwt3 (char *fname)
     {
       //sciprint("flow 6\n");
       //GetRhsVar(2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname, 2,  &m2, &n2 , &input2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,3,  &m3, &n3 , &input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,3,  &m3, &n3 , &input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,4,  &m4, &n4 , &input4 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,4,  &m4, &n4 , &input4 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,5,  &m5, &n5 , &input5 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,5,  &m5, &n5 , &input5 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(6, "d", &m6, &n6, &l6);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,6,  &m6, &n6 , &input6 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,6,  &m6, &n6 , &input6 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(7, "d", &m7, &n7, &l7);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,7,  &m7, &n7 , &input7 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,7,  &m7, &n7 , &input7 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dwt3_content_validate(&errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
+      dwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -633,7 +638,7 @@ int_dwt3 (char *fname)
       //CreateListVarFromPtr(8,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(8,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(8,3,"d",&m8, &n8, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 4 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 4 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -646,41 +651,41 @@ int_dwt3 (char *fname)
     {
       //sciprint("flow 7\n");
       //GetRhsVar(2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string3 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string3 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "c", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetScalarString(fname, 4 , &input_string4 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 4 , &input_string4 );
       m4=1;n4=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(5, "c", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetScalarString(fname, 5 , &input_string5 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 5 , &input_string5 );
       m5=1;n5=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(6, "c", &m6, &n6, &l6);
-       readFlag = swt_gwsupport_GetScalarString(fname, 6 , &input_string6 );
+       readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 6 , &input_string6 );
       m6=1;n5=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dwt3_content_validate(&errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
+      dwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -693,7 +698,7 @@ int_dwt3 (char *fname)
       wavelet_fun_parser (input_string2, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
-      wave_len_validate (col, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( col, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (column length) is not valid for selected decompostion level and wavelets!\n");
@@ -711,7 +716,7 @@ int_dwt3 (char *fname)
       wavelet_fun_parser (input_string3, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
-      wave_len_validate (row, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( row, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (row length) is not valid for selected decompostion level and wavelets!\n");
@@ -729,7 +734,7 @@ int_dwt3 (char *fname)
       wavelet_fun_parser (input_string4, &ii);
       ana_fun = wi[ii].analysis;
       (*ana_fun)(member, &pWaveStruct);
-      wave_len_validate (sli, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( sli, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (slice length) is not valid for selected decompostion level and wavelets!\n");
@@ -771,7 +776,7 @@ int_dwt3 (char *fname)
       //CreateListVarFromPtr(7,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(7,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(7,3,"d",&m7, &n7, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 4 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 4 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -785,56 +790,56 @@ int_dwt3 (char *fname)
     {
       //sciprint("flow 8\n");
       //GetRhsVar(2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname, 2,  &m2, &n2 , &input2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,3,  &m3, &n3 , &input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,3,  &m3, &n3 , &input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,4,  &m4, &n4 , &input4 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,4,  &m4, &n4 , &input4 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,5,  &m5, &n5 , &input5 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,5,  &m5, &n5 , &input5 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(6, "d", &m6, &n6, &l6);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,6,  &m6, &n6 , &input6 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,6,  &m6, &n6 , &input6 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(7, "d", &m7, &n7, &l7);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,7,  &m7, &n7 , &input7 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,7,  &m7, &n7 , &input7 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(8, "c", &m8, &n8, &l8);
-      readFlag = swt_gwsupport_GetScalarString(fname,8 , &input_string8 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname,8 , &input_string8 );
       m8=1;n8=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(9, "c", &m9, &n9, &l9);
-      readFlag = swt_gwsupport_GetScalarString(fname,9 , &input_string9 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname,9 , &input_string9 );
       m9=1;n9=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      dwt3_content_validate(&errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
+      dwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,input_string4,input_string5,input_string6,input_string8,input_string9);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -874,7 +879,7 @@ int_dwt3 (char *fname)
       //CreateListVarFromPtr(10,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(10,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(10,3,"d",&m10, &n10, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 4 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 4 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -892,7 +897,12 @@ int_dwt3 (char *fname)
 }
 
 int
-int_idwt3 (char *fname)
+int_idwt3 
+#ifdef _SCILAB6_
+(char *fname, void* pvApiCtx)
+#else
+(char *fname)
+#endif
 {
   static int l1, m1, n1, l2, m2, n2, l3, m3, n3, l4, m4, n4;
   static int l5, m5, n5, l6, m6, n6, l7, m7, n7, l8, m8, n8;
@@ -945,7 +955,7 @@ int_idwt3 (char *fname)
   CheckInputArgument(pvApiCtx,minrhs,maxrhs);
   CheckOutputArgument(pvApiCtx,minlhs,maxlhs);
 
-  idwt3_form_validate(&errCode,&flow);
+  idwt3_form_validate (pvApiCtx, &errCode,&flow, Rhs);
   if (errCode != SUCCESS)
   {
     validate_print (errCode);
@@ -983,7 +993,7 @@ int_idwt3 (char *fname)
   //     return 0;
   //   }
 
-    readFlag = swt_gwsupport_GetRealHypermatofdouble (fname, 1,  &dims1 , &ndims1 , &input1 );
+    readFlag = swt_gwsupport_GetRealHypermatofdouble (pvApiCtx, fname, 1,  &dims1 , &ndims1 , &input1 );
     if(readFlag==SWT_GWSUPPORT_ERROR)
       {
         return 0;
@@ -1020,13 +1030,13 @@ int_idwt3 (char *fname)
   case 1:
     {
       //GetRhsVar(2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      idwt3_content_validate(&errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
+      idwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
 
       if (errCode != SUCCESS)
 	{
@@ -1039,9 +1049,9 @@ int_idwt3 (char *fname)
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
 
-      wave_len_validate (row, pWaveStruct.length, &stride1, &val1);
-      wave_len_validate (col, pWaveStruct.length, &stride2, &val2);
-      wave_len_validate (sli, pWaveStruct.length, &stride3, &val3);
+      wave_len_validate ( row, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( col, pWaveStruct.length, &stride2, &val2);
+      wave_len_validate ( sli, pWaveStruct.length, &stride3, &val3);
       if ((val1 == 0) || (val2 == 0) || (val3 == 0))
 	{
 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
@@ -1077,7 +1087,7 @@ int_idwt3 (char *fname)
       //CreateListVarFromPtr(3,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(3,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(3,3,"d",&m3, &n3, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1090,19 +1100,19 @@ int_idwt3 (char *fname)
     {
       //sciprint("flow 2\n");
       //GetRhsVar(2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "i", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 3,  &m3, &n3 , &int_input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (pvApiCtx, fname, 3,  &m3, &n3 , &int_input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      idwt3_content_validate(&errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
+      idwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1114,9 +1124,9 @@ int_idwt3 (char *fname)
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
 
-      wave_len_validate (row, pWaveStruct.length, &stride1, &val1);
-      wave_len_validate (col, pWaveStruct.length, &stride2, &val2);
-      wave_len_validate (sli, pWaveStruct.length, &stride3, &val3);
+      wave_len_validate ( row, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( col, pWaveStruct.length, &stride2, &val2);
+      wave_len_validate ( sli, pWaveStruct.length, &stride3, &val3);
       if ((val1 == 0) || (val2 == 0) || (val3 == 0))
 	{
 	  sciprint("Input signal is not valid for selected decompostion level and wavelets!\n");
@@ -1160,7 +1170,7 @@ int_idwt3 (char *fname)
       //CreateListVarFromPtr(4,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(4,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(4,3,"d",&m4, &n4, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1173,18 +1183,18 @@ int_idwt3 (char *fname)
     {
       //sciprint("flow 3\n");
       ////GetRhsVar(2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname, 2,  &m2, &n2 , &input2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,3,  &m3, &n3 , &input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,3,  &m3, &n3 , &input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      idwt3_content_validate(&errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
+      idwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1222,7 +1232,7 @@ int_idwt3 (char *fname)
       //CreateListVarFromPtr(4,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(4,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(4,3,"d",&m4, &n4, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1235,24 +1245,24 @@ int_idwt3 (char *fname)
     {
       //sciprint("flow 4\n");
       //GetRhsVar(2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname, 2,  &m2, &n2 , &input2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,3,  &m3, &n3 , &input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,3,  &m3, &n3 , &input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "i", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname,4,  &m4, &n4 , &int_input4 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (pvApiCtx, fname,4,  &m4, &n4 , &int_input4 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      idwt3_content_validate(&errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
+      idwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1298,7 +1308,7 @@ int_idwt3 (char *fname)
       //CreateListVarFromPtr(5,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(5,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(5,3,"d",&m5, &n5, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1312,27 +1322,27 @@ int_idwt3 (char *fname)
       //sciprint("flow 5\n");
 
       //GetRhsVar(2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string3 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string3 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "c", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetScalarString(fname, 4 , &input_string4 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 4 , &input_string4 );
       m4=1;n4=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      idwt3_content_validate(&errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
+      idwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1343,7 +1353,7 @@ int_idwt3 (char *fname)
       wavelet_fun_parser (input_string2, &ii);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      wave_len_validate (col, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( col, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (column length) is not valid for selected decompostion level and wavelets!\n");
@@ -1360,7 +1370,7 @@ int_idwt3 (char *fname)
       wavelet_fun_parser (input_string3, &ii);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      wave_len_validate (row, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( row, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (row length) is not valid for selected decompostion level and wavelets!\n");
@@ -1377,7 +1387,7 @@ int_idwt3 (char *fname)
       wavelet_fun_parser (input_string4, &ii);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      wave_len_validate (sli, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( sli, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (slice length) is not valid for selected decompostion level and wavelets!\n");
@@ -1418,7 +1428,7 @@ int_idwt3 (char *fname)
       //CreateListVarFromPtr(5,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(5,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(5,3,"d",&m5, &n5, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1432,33 +1442,33 @@ int_idwt3 (char *fname)
     {
       //sciprint("flow 6\n");
       //GetRhsVar(2, "c", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetScalarString(fname, 2 , &input_string2 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 2 , &input_string2 );
       m2=1;n2=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "c", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetScalarString(fname, 3 , &input_string3 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 3 , &input_string3 );
       m3=1;n3=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "c", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetScalarString(fname, 4 , &input_string4 );
+      readFlag = swt_gwsupport_GetScalarString(pvApiCtx, fname, 4 , &input_string4 );
       m4=1;n4=1;
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(5, "i", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname, 5,  &m5, &n5, &int_input5 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (pvApiCtx, fname, 5,  &m5, &n5, &int_input5 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      idwt3_content_validate(&errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
+      idwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1469,7 +1479,7 @@ int_idwt3 (char *fname)
       wavelet_fun_parser (input_string2, &ii);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      wave_len_validate (col, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( col, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (column length) is not valid for selected decompostion level and wavelets!\n");
@@ -1494,7 +1504,7 @@ int_idwt3 (char *fname)
       wavelet_fun_parser (input_string3, &ii);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      wave_len_validate (row, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( row, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (row length) is not valid for selected decompostion level and wavelets!\n");
@@ -1516,7 +1526,7 @@ int_idwt3 (char *fname)
       wavelet_fun_parser (input_string4, &ii);
       syn_fun = wi[ii].synthesis;
       (*syn_fun)(member, &pWaveStruct);
-      wave_len_validate (sli, pWaveStruct.length, &stride1, &val1);
+      wave_len_validate ( sli, pWaveStruct.length, &stride1, &val1);
       if (val1 == 0)
 	{
 	  sciprint("Input signal (slice length) is not valid for selected decompostion level and wavelets!\n");
@@ -1562,7 +1572,7 @@ int_idwt3 (char *fname)
       //CreateListVarFromPtr(6,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(6,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(6,3,"d",&m6, &n6, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1575,42 +1585,42 @@ int_idwt3 (char *fname)
     {
       //sciprint("flow 7\n");
       //GetRhsVar(2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname, 2,  &m2, &n2 , &input2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,3,  &m3, &n3 , &input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,3,  &m3, &n3 , &input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,4,  &m4, &n4 , &input4 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,4,  &m4, &n4 , &input4 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,5,  &m5, &n5 , &input5 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,5,  &m5, &n5 , &input5 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(6, "d", &m6, &n6, &l6);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,6,  &m6, &n6 , &input6 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,6,  &m6, &n6 , &input6 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(7, "d", &m7, &n7, &l7);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,7,  &m7, &n7 , &input7 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,7,  &m7, &n7 , &input7 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      idwt3_content_validate(&errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
+      idwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1648,7 +1658,7 @@ int_idwt3 (char *fname)
       //CreateListVarFromPtr(8,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(8,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(8,3,"d",&m8, &n8, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si ,3 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si ,3 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
@@ -1661,48 +1671,48 @@ int_idwt3 (char *fname)
     {
       //sciprint("flow 8\n");
       //GetRhsVar(2, "d", &m2, &n2, &l2);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname, 2,  &m2, &n2 , &input2 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname, 2,  &m2, &n2 , &input2 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(3, "d", &m3, &n3, &l3);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,3,  &m3, &n3 , &input3 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,3,  &m3, &n3 , &input3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(4, "d", &m4, &n4, &l4);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,4,  &m4, &n4 , &input4 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,4,  &m4, &n4 , &input4 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(5, "d", &m5, &n5, &l5);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,5,  &m5, &n5 , &input5 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,5,  &m5, &n5 , &input5 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(6, "d", &m6, &n6, &l6);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,6,  &m6, &n6 , &input6 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,6,  &m6, &n6 , &input6 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(7, "d", &m7, &n7, &l7);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (fname,7,  &m7, &n7 , &input7 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoubles (pvApiCtx, fname,7,  &m7, &n7 , &input7 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
       //GetRhsVar(8, "i", &m8, &n8, &l8);
-      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (fname,8,  &m8, &n8, &int_input8 );
+      readFlag = swt_gwsupport_GetRealMatrixOfDoublesAsInteger (pvApiCtx, fname,8,  &m8, &n8, &int_input8 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;
         }
-      idwt3_content_validate(&errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
+      idwt3_content_validate (pvApiCtx, &errCode,flow,input_string2,input_string3,int_input3,input_string4,int_input4,int_input5,int_input8);
       if (errCode != SUCCESS)
 	{
 	  validate_print (errCode);
@@ -1751,7 +1761,7 @@ int_idwt3 (char *fname)
       //CreateListVarFromPtr(9,1,"S",&ms,&ns,Str);
       //CreateListVarFromPtr(9,2,"I",&mi,&ni,&ssi);
       //CreateListVarFromPtr(9,3,"d",&m9, &n9, &var3);
-      readFlag = swt_gwsupport_CreateHypermatOfDouble (fname, 1,  si , 3 , var3 );
+      readFlag = swt_gwsupport_CreateHypermatOfDouble (pvApiCtx, fname, 1,  si , 3 , var3 );
       if(readFlag==SWT_GWSUPPORT_ERROR)
         {
           return 0;

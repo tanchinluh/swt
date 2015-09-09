@@ -19,7 +19,7 @@ function [Lo_D,Hi_D,Lo_R,Hi_R]=biorfilt(DF,RF)
 // 
 // Authors
 // Roger Liu and Isaac Zhi
-// H. Nahrstaedt - 2010-2012
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // orthfilt
 // wfilters

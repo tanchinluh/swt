@@ -81,9 +81,9 @@ end;
 
 
 // bior1.1
-bior_fam={"bior1.1","bior1.3", "bior1.5", "bior2.2", "bior2.4", "bior2.6",...
+bior_fam=["bior1.1","bior1.3", "bior1.5", "bior2.2", "bior2.4", "bior2.6",...
 "bior2.8", "bior3.1", "bior3.3", "bior3.5", "bior3.7",...
-"bior3.9", "bior4.4", "bior5.5", "bior6.8"};
+"bior3.9", "bior4.4", "bior5.5", "bior6.8"];
 // bior1.1
 for i=1:max(size(bior_fam))
 [cA1,cD1]=dwt(s1,bior_fam(i));

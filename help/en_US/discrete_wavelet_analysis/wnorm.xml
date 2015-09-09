@@ -65,12 +65,7 @@ imshow(m); // funtion provided by SIP or SIVP toolbox
    <title>Authors</title>
    <simplelist type="vert">
    <member>Roger Liu and Isaac Zhi</member>
-   </simplelist>
-</refsection>
-
-<refsection>
-   <title>See also</title>
-   <simplelist type="inline">
+   <member>Copyright (C) 2010-2015 - Holger Nahrstaedt</member>
    </simplelist>
 </refsection>
 </refentry>

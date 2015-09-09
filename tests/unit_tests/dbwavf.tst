@@ -343,23 +343,9 @@ w2=dbwavf("db"+sprintf("%d",N));
 w2=w2/sqrt(2);
 assert_checkalmostequal ( w , w2 , %eps, %eps*10000 );
 
-// db19
-N=19;
-w = dbaux(N);
-w2=dbwavf("db"+sprintf("%d",N));
-w2=w2/sqrt(2);
-assert_checkalmostequal ( w , w2 , %eps, %eps*10000 );
 
 // db20
-N=20;
-w = dbaux(N);
-w2=dbwavf("db"+sprintf("%d",N));
-w2=w2/sqrt(2);
-assert_checkalmostequal ( w , w2 , %eps, %eps*100000 );
-
-
-// db20
-for N=21:36
+for N=19:36
   w = dbaux(N);
   w2=dbwavf("db"+sprintf("%d",N));
   w2=w2/sqrt(2);
@@ -374,3 +360,34 @@ for N=1:36
   assert_checkalmostequal ( sum(w)-sqrt(2),0 , %eps, %eps*10 );
 
 end;
+
+//    - sumEven = sum_k^{N-1} h_{2k} = 1/sqrt(2);
+//    - sumOdd  = sum_k^{N-1} h_{2k+1} = 1/sqrt(2);
+//    - For each integer m = 0, 1, ..., N-1:
+//         sum_{k=2m}^{2N-1+2m} h_{k} h_{k-2m}
+//         = 1 if m=0,
+//         = 0 otherwise.
+
+// db2- 36
+for N=1:29	
+
+  w=dbwavf("db"+sprintf("%d",N));
+  assert_checkalmostequal(sum(w(1:2:$)),1. /sqrt(2),%eps,%eps);
+  assert_checkalmostequal(sum(w(2:2:$)),1. /sqrt(2),%eps,%eps);
+  m=0;
+  assert_checkalmostequal(sum(w(2*m+1:(2*N+2*m)).*w(1:2*N)),1,%eps,%eps);
+  for m = 1:N-2
+    assert_checkalmostequal(sum(w(2*m+1:(2*N)).*w(1:2*(N)-2*m)),0,%eps,%eps);
+  end;
+ end;
+ for N=30:36
+
+  w=dbwavf("db"+sprintf("%d",N));
+  assert_checkalmostequal(sum(w(1:2:$)),1. /sqrt(2),%eps,%eps*10);
+  assert_checkalmostequal(sum(w(2:2:$)),1. /sqrt(2),%eps,%eps*10);
+  m=0;
+  assert_checkalmostequal(sum(w(2*m+1:(2*N+2*m)).*w(1:2*N)),1,%eps,%eps);
+  for m = 1:N-2
+    assert_checkalmostequal(sum(w(2*m+1:(2*N)).*w(1:2*(N)-2*m)),0,%eps,%eps);
+  end;
+ end;

@@ -17,6 +17,7 @@ function [Faf,Fsf]=FSfarras('f')
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // dualfilt1
 // dualtree

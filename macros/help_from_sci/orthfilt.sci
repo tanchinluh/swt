@@ -18,6 +18,7 @@ function [Lo_D,Hi_D,Lo_R,Hi_R]=orthfilt(w)
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // biorfilt
 // wfilters

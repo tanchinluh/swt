@@ -32,7 +32,7 @@
    <title>Parameters</title>
    <variablelist>
    <varlistentry><term>wname :</term>
-      <listitem><para> wavelet name, 'db1' to 'db20'</para></listitem></varlistentry>
+      <listitem><para> wavelet name, 'db1' to 'db36'</para></listitem></varlistentry>
    <varlistentry><term>F :</term>
       <listitem><para> scaling filter</para></listitem></varlistentry>
    </variablelist>
@@ -59,6 +59,7 @@ F=dbwavf('db2');
    <title>Authors</title>
    <simplelist type="vert">
    <member>Roger Liu and Isaac Zhi</member>
+   <member>Copyright (C) 2010-2015 - Holger Nahrstaedt</member>
    </simplelist>
 </refsection>
 

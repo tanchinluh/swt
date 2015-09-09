@@ -16,6 +16,7 @@ function Y=wrev3(x,M)
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // wrev
 // wrev2

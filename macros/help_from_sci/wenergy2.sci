@@ -21,6 +21,7 @@ function [Ea,Ed]=wenergy2(c,s)
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // wavedec2
 // waverec2

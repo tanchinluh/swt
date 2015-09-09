@@ -3,7 +3,7 @@
 
 Wavelet Toolbox containing FWT, CWT and SWT utility functions.
 
-SWT (version 0.2.0 For Scilab 5)
+SWT (version 0.3.0 For Scilab 5 and 6)
 ======================
 
 This toolbox is aimed to mimic matlab wavelet toolbox. Most of the functions are similiar to their counterparts in Matlab equivalents.
@@ -16,4 +16,4 @@ AUTHORS
 
 Principal author: Roger Liu <rogeruclan@gmail.com> from China P.R.
 Co-author: Isaac Zhi <QFWFQzhi@gmail.com> from China P.R.
-Holger Nahrstaedt 2010 - 2014
+Holger Nahrstaedt 2010 - 2015

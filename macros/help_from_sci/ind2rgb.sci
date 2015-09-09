@@ -22,5 +22,6 @@ function rgb = ind2rgb(ind,cmap)
 // 
 // Authors
 // Roger Liu and Isaac Zhi
+// Copyright (C) 2010-2015 - Holger Nahrstaedt
 // See Also
 // wcodemat

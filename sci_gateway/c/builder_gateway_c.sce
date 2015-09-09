@@ -1,8 +1,8 @@
 // This file is released under the 3-clause BSD license. See COPYING-BSD.
 
 function builder_gw_c()
-  gateway_path = strsubst(get_absolute_file_path("builder_gateway_c.sce"), "\", "/");
-
+  //gateway_path = strsubst(get_absolute_file_path("builder_gateway_c.sce"), "\", "/");
+	gateway_path = get_absolute_file_path("builder_gateway_c.sce");
 
   //CFLAGS = "-I" + CURRENT_PATH;
 
@@ -91,13 +91,18 @@ function builder_gw_c()
   FILES_GATEWAY = [ "utility_int.c","dwt_int.c", "dwt1d_int.c", "dwt2d_int.c","swt_int.c",...
   "cwt_int.c","dwt3d_int.c","cowt_int.c"];    // objects files
 
-ldflags = ""
-
+	ldflags = ""
+	scilab6_flag =""
+	v = getversion("scilab");
+	if (v(1)>5) then
+		scilab6_flag ="-D_SCILAB6_ "
+	end;
     if ( getos() == "Windows" ) then
-        include1 = "../../src/c";
-        include2 = "../../src/gwsupport";
-        include3 = SCI+"/modules/output_stream/includes";
-        cflags = "-DWIN32 "+..
+        include1 = "..\..\src\c";
+        include2 = "..\..\src\gwsupport";
+        include3 = SCI+"\modules\output_stream\includes";
+
+        cflags = scilab6_flag + "-DWIN32 "+..
         " -I"""+include1+""""+..
         " -I"""+include2+""""+..
         " -I"""+include3+"""";
@@ -105,7 +110,7 @@ ldflags = ""
         include1 = gateway_path;
         include2 = gateway_path+"../../src/c";
         include3 = gateway_path+"../../src/gwsupport";
-        cflags = "-I"""+include1+""""+..
+        cflags = scilab6_flag + "-I"""+include1+""""+..
         " -I"""+include2+""""+..
         " -I"""+include3+"""";
     end

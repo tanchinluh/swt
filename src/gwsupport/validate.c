@@ -36,10 +36,10 @@
 /*-------------------------------------------
  * Dimension Checking
  *-----------------------------------------*/
-int void_check (int number, int *type)
+int void_check (void * pvApiCtx, int number, int *type)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number,&row,&col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number,&row,&col);
   if ((row==0) && (col==0))
     *type = 1;
   else
@@ -47,10 +47,10 @@ int void_check (int number, int *type)
   return 1;
 }
 
-int scalar_check (int number, int *type)
+int scalar_check (void * pvApiCtx,int number, int *type)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number,&row,&col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number,&row,&col);
   if ((row==1) && (col==1))
     *type = 1;
   else
@@ -58,10 +58,10 @@ int scalar_check (int number, int *type)
   return 1;
 }
 
-int vector_check (int number, int *type)
+int vector_check (void * pvApiCtx,int number, int *type)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number,&row,&col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number,&row,&col);
   if ((row==1) && (col>1))
     *type = 1;
   else if ((row>1) && (col==1))
@@ -71,10 +71,10 @@ int vector_check (int number, int *type)
   return 1;
 }
 
-int matrix_check (int number, int *type)
+int matrix_check (void * pvApiCtx,int number, int *type)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number,&row,&col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number,&row,&col);
   if ((row>1) && (col>1))
     *type = 1;
   else
@@ -82,56 +82,56 @@ int matrix_check (int number, int *type)
   return 1;
 }
 
-int real_or_complex (int number, int *type)
+int real_or_complex (void * pvApiCtx,int number, int *type)
 {
   // int il, lw;
   // lw = number + Top - Rhs;
   // il = iadr(*Lstk(lw));
   // *type = *istk(il+3); // 0 if real, 1 if complex
-  if (swt_gwsupport_IsVarComplex(number))
+  if (swt_gwsupport_IsVarComplex(pvApiCtx, number))
     *type=1;
   else
     *type=0;
   return 1;
 }
 
-int sci_matrix_vector_real (int number)
+int sci_matrix_vector_real (void * pvApiCtx,int number)
 {
   int typ1, typ2;
-  vector_check(number, &typ1);
-  real_or_complex(number, &typ2);
-  if (typ1 && (!typ2) && (swt_gwsupport_GetType(number)==sci_matrix))
+  vector_check(pvApiCtx,number, &typ1);
+  real_or_complex(pvApiCtx,number, &typ2);
+  if (typ1 && (!typ2) && (swt_gwsupport_GetType(pvApiCtx, number)==sci_matrix))
     return 1;
   else
     return 0;
 }
 
-int sci_matrix_vector_complex (int number)
+int sci_matrix_vector_complex (void * pvApiCtx,int number)
 {
   int typ1, typ2;
-  vector_check(number, &typ1);
-  real_or_complex(number, &typ2);
-  if (typ1 && typ2 && (swt_gwsupport_GetType(number)==sci_matrix))
+  vector_check(pvApiCtx, number, &typ1);
+  real_or_complex(pvApiCtx, number, &typ2);
+  if (typ1 && typ2 && (swt_gwsupport_GetType(pvApiCtx, number)==sci_matrix))
     return 1;
   else
     return 0;
 }
 
-int sci_matrix_matrix_complex (int number)
+int sci_matrix_matrix_complex (void * pvApiCtx,int number)
 {
   int typ1, typ2;
-  matrix_check(number, &typ1);
-  real_or_complex(number, &typ2);
-  if (typ1 && typ2 && (swt_gwsupport_GetType(number)==sci_matrix))
+  matrix_check(pvApiCtx, number, &typ1);
+  real_or_complex(pvApiCtx, number, &typ2);
+  if (typ1 && typ2 && (swt_gwsupport_GetType(pvApiCtx, number)==sci_matrix))
     return 1;
   else
     return 0;
 }
 
 
-int sci_mlist_check (int number)
+int sci_mlist_check (void * pvApiCtx,int number)
 {
-	if (swt_gwsupport_GetType(number)==sci_mlist)
+	if (swt_gwsupport_GetType(pvApiCtx, number)==sci_mlist)
 		return 1;
 	else
 		return 0;
@@ -141,60 +141,60 @@ int sci_mlist_check (int number)
 //{
 //  int typ1, typ2;
 //  typ1 = sci_mlist_check (number);
-//  real_or_complex(number, &typ2);
+//  real_or_complex(pvApiCtx, number, &typ2);
 //  if (typ1 && (!typ2))
 //    return 1;
 //  else
 //    return 0;
 //}
 
-int sci_matrix_scalar_real (int number)
+int sci_matrix_scalar_real (void * pvApiCtx,int number)
 {
   int typ1, typ2;
-  scalar_check(number, &typ1);
-  real_or_complex(number, &typ2);
-  if (typ1 && (!typ2) && (swt_gwsupport_GetType(number)==sci_matrix))
+  scalar_check(pvApiCtx, number, &typ1);
+  real_or_complex(pvApiCtx, number, &typ2);
+  if (typ1 && (!typ2) && (swt_gwsupport_GetType(pvApiCtx, number)==sci_matrix))
     return 1;
   else
     return 0;
 }
 
-int sci_matrix_void (int number)
+int sci_matrix_void (void * pvApiCtx,int number)
 {
   int type;
-  void_check(number, &type);
-  if (type && (swt_gwsupport_GetType(number)==sci_matrix))
+  void_check(pvApiCtx, number, &type);
+  if (type && (swt_gwsupport_GetType(pvApiCtx, number)==sci_matrix))
     return 1;
   else
     return 0;
 }
 
-int sci_matrix_matrix_real (int number)
+int sci_matrix_matrix_real (void * pvApiCtx,int number)
 {
   int typ1, typ2;
-  matrix_check(number, &typ1);
-  real_or_complex(number, &typ2);
-  if (typ1 && (!typ2) && (swt_gwsupport_GetType(number)==sci_matrix))
+  matrix_check(pvApiCtx, number, &typ1);
+  real_or_complex(pvApiCtx, number, &typ2);
+  if (typ1 && (!typ2) && (swt_gwsupport_GetType(pvApiCtx, number)==sci_matrix))
     return 1;
   else
     return 0;
 }
 
-int sci_strings_scalar (int number)
+int sci_strings_scalar (void * pvApiCtx,int number)
 {
   int typ1;
-  scalar_check(number, &typ1);
-  if (typ1 && (swt_gwsupport_GetType(number)==sci_strings))
+  scalar_check(pvApiCtx, number, &typ1);
+  if (typ1 && (swt_gwsupport_GetType(pvApiCtx, number)==sci_strings))
     return 1;
   else
     return 0;
 }
 
-int sci_strings_vector (int number)
+int sci_strings_vector (void * pvApiCtx,int number)
 {
   int typ1;
-  vector_check(number, &typ1);
-  if (typ1 && (swt_gwsupport_GetType(number)==sci_strings))
+  vector_check(pvApiCtx, number, &typ1);
+  if (typ1 && (swt_gwsupport_GetType(pvApiCtx, number)==sci_strings))
     return 1;
   else
     return 0;
@@ -211,31 +211,31 @@ int scalar_string_check(char *l, char c)
     return 0;
 }
 
-int length_check(int number, int leng)
+int length_check(void * pvApiCtx,int number, int leng)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number,&row,&col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number,&row,&col);
   if (row*col == leng)
     return 1;
   else
     return 0;
 }
 
-int vector_length_check(int number1, int number2)
+int vector_length_check(void * pvApiCtx,int number1, int number2)
 {
   int row1, col1, row2, col2;
-  swt_gwsupport_GetMatrixdims(number1, &row1, &col1);
-  swt_gwsupport_GetMatrixdims(number2, &row2, &col2);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number1, &row1, &col1);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number2, &row2, &col2);
   if ((row1*col1)==(row2*col2))
     return 1;
   else
     return 0;
 }
 
-int vector_length_compare(int number, int leng, int *res)
+int vector_length_compare(void * pvApiCtx,int number, int leng, int *res)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number,&row,&col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number,&row,&col);
   if (row*col == leng)
     *res = 0;
   else if (row*col > leng)
@@ -245,11 +245,11 @@ int vector_length_compare(int number, int leng, int *res)
   return 1;
 }
 
-int matrix_length_compare(int number, int rowLeng, int colLeng,
+int matrix_length_compare(void * pvApiCtx,int number, int rowLeng, int colLeng,
 			   int *resRow, int *resCol)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number,&row,&col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number,&row,&col);
   if (row == rowLeng)
     *resRow = 0;
   else if (row > rowLeng)
@@ -266,10 +266,10 @@ int matrix_length_compare(int number, int rowLeng, int colLeng,
 }
 
 int
-matrix_col_length_check(int number, int leng)
+matrix_col_length_check(void * pvApiCtx,int number, int leng)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number, &row, &col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number, &row, &col);
   if (col==leng)
     return 1;
   else
@@ -277,10 +277,10 @@ matrix_col_length_check(int number, int leng)
 }
 
 int
-matrix_row_length_check(int number, int leng)
+matrix_row_length_check(void * pvApiCtx,int number, int leng)
 {
   int row, col;
-  swt_gwsupport_GetMatrixdims(number, &row, &col);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number, &row, &col);
   if (row==leng)
     return 1;
   else
@@ -288,11 +288,11 @@ matrix_row_length_check(int number, int leng)
 }
 
 int
-matrix_length_check (int number1, int number2)
+matrix_length_check (void * pvApiCtx,int number1, int number2)
 {
   int row1, col1, row2, col2;
-  swt_gwsupport_GetMatrixdims(number1, &row1, &col1);
-  swt_gwsupport_GetMatrixdims(number2, &row2, &col2);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number1, &row1, &col1);
+  swt_gwsupport_GetMatrixdims(pvApiCtx, number2, &row2, &col2);
   if ((row1==row2) && (col1==col2))
     return 1;
   else
