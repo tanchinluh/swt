@@ -67,7 +67,8 @@ powof (double x, double alpha)
 	}
       else
 	{
-	  Scierror (999,"Attempt to compute x^alpha with x<0 : complex valued result\n");
+	  //Scierror (999,"Attempt to compute x^alpha with x<0 : complex valued result\n");
+	  fprintf(stderr, "Error: Attempt to compute x^alpha with x<0 : complex valued result\n");
 	  return 0;
 	}
     }
