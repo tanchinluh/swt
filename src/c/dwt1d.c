@@ -33,7 +33,7 @@ void
 filter_clear ()
 {
   int count;
-  for(count=0;count<30;count++)
+  for(count=0;count<80;count++)
     {
       LowDecomFilCoef[count] = 0;
       LowReconFilCoef[count] = 0;
