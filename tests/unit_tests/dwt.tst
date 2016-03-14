@@ -32,19 +32,19 @@ s1=s1(:)';
 [Lo_D,Hi_D,Lo_R,Hi_R]=wfilters('haar');
 caa=dyaddown(wkeep(conv(wextend(1,'symh',x1,length(Lo_D),'b'),Lo_D),(length(x1)+length(Lo_D)-1)));
 cdd=dyaddown(wkeep(conv(wextend(1,'symh',x1,length(Lo_D),'b'),Hi_D),(length(x1)+length(Lo_D)-1)));
-assert_checkalmostequal ( caa , cA ,  %eps, %eps)
-assert_checkalmostequal ( cdd , cD ,  %eps, %eps*10)
+assert_checkalmostequal ( caa , cA ,  %eps, %eps);
+assert_checkalmostequal ( cdd , cD ,  %eps, %eps*10);
 
 [cA,cD]=dwt(x2,'haar');
 caa=dyaddown(wkeep(conv(wextend(1,'symh',x2,length(Lo_D),'b'),Lo_D),(length(x2)+length(Lo_D)-1)));
 cdd=dyaddown(wkeep(conv(wextend(1,'symh',x2,length(Lo_D),'b'),Hi_D),(length(x2)+length(Lo_D)-1)));
-assert_checkalmostequal ( caa , cA ,  %eps, %eps*10)
-assert_checkalmostequal ( cdd , cD ,  %eps, %eps*10)
+assert_checkalmostequal ( caa , cA ,  %eps, %eps*10);
+assert_checkalmostequal ( cdd , cD ,  %eps, %eps*10);
 [cA,cD]=dwt(s1,'haar');
 caa=dyaddown(wkeep(conv(wextend(1,'symh',s1,length(Lo_D),'b'),Lo_D),(length(s1)+length(Lo_D)-1)));
 cdd=dyaddown(wkeep(conv(wextend(1,'symh',s1,length(Lo_D),'b'),Hi_D),(length(s1)+length(Lo_D)-1)));
-assert_checkalmostequal ( caa , cA ,  %eps, %eps*10)
-assert_checkalmostequal ( cdd , cD ,  %eps, %eps*10)
+assert_checkalmostequal ( caa , cA ,  %eps, %eps*10);
+assert_checkalmostequal ( cdd , cD ,  %eps, %eps*10);
 
 // db1 - db36
 for N=1:30

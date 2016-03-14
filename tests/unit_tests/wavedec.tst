@@ -122,7 +122,7 @@ end;
 // type 3
 // asymh
 for i=1:max(size(bior_fam))
-dwtmode('asymh');
+dwtmode('asymh','nodisp');
 [cA1,cD1]=dwt(s1,bior_fam(i),'mode','asymh');
 [cA2,cD2]=dwt(cA1,bior_fam(i),'mode','asymh');
 [cA3,cD3]=dwt(cA2,bior_fam(i),'mode','asymh');
@@ -134,7 +134,7 @@ assert_checkalmostequal ( c , c0 , %eps );
 assert_checkalmostequal ( l , l0 , %eps );
 
 // symw
-dwtmode('symw');
+dwtmode('symw','nodisp');
 [cA1,cD1]=dwt(s1,bior_fam(i),'mode','symw');
 [cA2,cD2]=dwt(cA1,bior_fam(i),'mode','symw');
 [cA3,cD3]=dwt(cA2,bior_fam(i),'mode','symw');
@@ -147,7 +147,7 @@ assert_checkalmostequal ( l , l0 , %eps );
 
 
 // asymw
-dwtmode('asymw');
+dwtmode('asymw','nodisp');
 [cA1,cD1]=dwt(s1,bior_fam(i),'mode','asymw');
 [cA2,cD2]=dwt(cA1,bior_fam(i),'mode','asymw');
 [cA3,cD3]=dwt(cA2,bior_fam(i),'mode','asymw');
@@ -160,7 +160,7 @@ assert_checkalmostequal ( l , l0 , %eps );
 
 
 // zpd
-dwtmode('zpd');
+dwtmode('zpd','nodisp');
 [cA1,cD1]=dwt(s1,bior_fam(i),'mode','zpd');
 [cA2,cD2]=dwt(cA1,bior_fam(i),'mode','zpd');
 [cA3,cD3]=dwt(cA2,bior_fam(i),'mode','zpd');
@@ -173,7 +173,7 @@ assert_checkalmostequal ( l , l0 , %eps );
 
 
 // sp0
-dwtmode('sp0');
+dwtmode('sp0','nodisp');
 [cA1,cD1]=dwt(s1,bior_fam(i),'mode','sp0');
 [cA2,cD2]=dwt(cA1,bior_fam(i),'mode','sp0');
 [cA3,cD3]=dwt(cA2,bior_fam(i),'mode','sp0');
@@ -186,7 +186,7 @@ assert_checkalmostequal ( l , l0 , %eps );
 
 
 // sp1
-dwtmode('sp1');
+dwtmode('sp1','nodisp');
 [cA1,cD1]=dwt(s1,bior_fam(i),'mode','sp1');
 [cA2,cD2]=dwt(cA1,bior_fam(i),'mode','sp1');
 [cA3,cD3]=dwt(cA2,bior_fam(i),'mode','sp1');
@@ -199,7 +199,7 @@ assert_checkalmostequal ( l , l0 , %eps );
 
 
 // ppd
-dwtmode('ppd');
+dwtmode('ppd','nodisp');
 [cA1,cD1]=dwt(s1,bior_fam(i),'mode','ppd');
 [cA2,cD2]=dwt(cA1,bior_fam(i),'mode','ppd');
 [cA3,cD3]=dwt(cA2,bior_fam(i),'mode','ppd');
@@ -211,7 +211,7 @@ assert_checkalmostequal ( c , c0 , %eps );
 assert_checkalmostequal ( l , l0 , %eps );
 
 // per
-dwtmode('per');
+dwtmode('per','nodisp');
 [cA1,cD1]=dwt(s1,bior_fam(i),'mode','per');
 [cA2,cD2]=dwt(cA1,bior_fam(i),'mode','per');
 [cA3,cD3]=dwt(cA2,bior_fam(i),'mode','per');
@@ -222,5 +222,5 @@ l0=[length(cA3) length(cD3) length(cD2) length(cD1) length(s1)];
 assert_checkalmostequal ( c , c0 , %eps );
 assert_checkalmostequal ( l , l0 , %eps );
 
-dwtmode("symh");
+dwtmode("symh",'nodisp');
 end;

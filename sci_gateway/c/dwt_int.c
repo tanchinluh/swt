@@ -1085,6 +1085,13 @@ int_dwtmode
 	      //AssignOutputVariable(pvApiCtx,1) = 3;
 	      //FreeRhsSVar(Str);
 	    }
+	  else if (!strcmp(input_string2,"nodisp"))
+		  dwt_write(input_string1,&errCode);
+	      if (errCode != SUCCESS)
+		{
+		  validate_print (errCode);
+		  return 0;
+		}
 	  else
 	    {
 	      sciprint("Unrecognized Input Pattern or parameter not valid for the algorithm! Please refer to help pages!\n");

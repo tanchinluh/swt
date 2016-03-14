@@ -25,7 +25,7 @@
 
 
 a='asymh';
-dwtmode(a);
+dwtmode(a,'nodisp');
 ST=dwtmode('status','nodisp');
 b=(ST==a);
 x=rand(1,50,'normal');
@@ -41,7 +41,7 @@ assert_checktrue(b);
 
 
 a='sp1';
-dwtmode(a);
+dwtmode(a,'nodisp');
 ST=dwtmode('status','nodisp');
 b=(ST==a);
 x=rand(1,50,'normal');
@@ -56,4 +56,4 @@ assert_checkalmostequal ( x , x0 , %eps*1000 );
 assert_checktrue(b);
 
 
-dwtmode("symh");
+dwtmode("symh",'nodisp');
