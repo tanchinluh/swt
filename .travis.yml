@@ -1,13 +1,10 @@
+dist: trusty
 language: cpp
 os:
   - linux
 before_install:
   - sudo apt-get update -qq
-  - wget http://www.scilab.org/download/5.5.2/scilab-5.5.2.bin.linux-x86_64.tar.gz -O scilab.tar.gz;
-  - tar xfz scilab.tar.gz;
-  - export PATH="$PWD/scilab-5.5.2/bin:$PATH";
-  - mkdir $PWD/tmp;
-  - export TMPDIR="$PWD/tmp";
+  - sudo apt-get install -y scilab
   - scilab -version; true
 script:
   - scilab -nwni -e 'result = exec("builder.sce", "errcatch"); exit(result)'
