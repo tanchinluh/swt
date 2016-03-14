@@ -319,9 +319,11 @@ end;
 [Lo_R,Hi_R]=wfilters('bior3.9','r');
 [c,s]=wavedec2(a,3,'bior3.9');
 dwtmode('ppd');
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!     WARNING: Change DWT Extension Mode   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 **********************************************
 **    DWT Extension Mode: Periodic Padding  **
 **********************************************
@@ -349,18 +351,22 @@ cA2=idwt2(cA3,cH3,cV3,cD3,'bior3.9',size(cH2));
 cA1=idwt2(cA2,cH2,cV2,cD2,'bior3.9',size(cH1));
 r0=idwt2(cA1,cH1,cV1,cD1,'bior3.9',size(a));
 dwtmode('spd');
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!     WARNING: Change DWT Extension Mode   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 **********************************************
 ** DWT Extension Mode: order 1 smooth padding*
 **********************************************
 y2=waverec2(c,s,'bior3.9');
 y3=waverec2(c,s,Lo_R,Hi_R);
 dwtmode('symh');
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!     WARNING: Change DWT Extension Mode   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 **********************************************
 ** DWT Extension Mode: Half Symmetrization  **
 **********************************************
@@ -401,4 +407,3 @@ if (version(1)<6) then
 stacksize(sz(1));
 clear sz;
 end;
-clear version;

@@ -226,21 +226,21 @@ N=1;
 w = dbaux(N);
 w2=dbwavf("db"+sprintf("%d",N));
 w2=w2/sqrt(2);
-assert_checkalmostequal ( w , w2 , %eps, %eps );
+assert_checkalmostequal ( w , w2 , %eps, %eps*10 );
 
 // db2
 N=2;
 w = dbaux(N);
 w2=dbwavf("db"+sprintf("%d",N));
 w2=w2/sqrt(2);
-assert_checkalmostequal ( w , w2 , %eps, %eps );
+assert_checkalmostequal ( w , w2 , %eps, %eps*10 );
 
 // db3
 N=3;
 w = dbaux(N);
 w2=dbwavf("db"+sprintf("%d",N));
 w2=w2/sqrt(2);
-assert_checkalmostequal ( w , w2 , %eps, %eps );
+assert_checkalmostequal ( w , w2 , %eps, %eps*10 );
 // db4
 N=4;
 w = dbaux(N);
@@ -252,7 +252,7 @@ N=5;
 w = dbaux(N);
 w2=dbwavf("db"+sprintf("%d",N));
 w2=w2/sqrt(2);
-assert_checkalmostequal ( w , w2 , %eps, %eps );
+assert_checkalmostequal ( w , w2 , %eps, %eps*10 );
 // db6
 N=6;
 w = dbaux(N);
@@ -292,7 +292,7 @@ N=11;
 w = dbaux(N);
 w2=dbwavf("db"+sprintf("%d",N));
 w2=w2/sqrt(2);
-assert_checkalmostequal ( w , w2 , %eps, %eps*100 );
+assert_checkalmostequal ( w , w2 , %eps, %eps*1000 );
 
 // db12
 N=12;
