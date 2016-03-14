@@ -1057,7 +1057,7 @@ int_dwtmode
       {
         return 0;
       }
-	  if ((!strcmp(input_string1,"status")) && (!strcmp(input_string2,"nodisp")))
+	  if ((strcmp(input_string1,"status")==0) && (strcmp(input_string2,"nodisp")==0))
 	    {
 	      m3 = 1;
 	      n3 = 1;
@@ -1085,13 +1085,15 @@ int_dwtmode
 	      //AssignOutputVariable(pvApiCtx,1) = 3;
 	      //FreeRhsSVar(Str);
 	    }
-	  else if (!strcmp(input_string2,"nodisp"))
+	  else if (strcmp(input_string2,"nodisp")==0 )
+	  {
 		  dwt_write(input_string1,&errCode);
 	      if (errCode != SUCCESS)
 		{
 		  validate_print (errCode);
 		  return 0;
 		}
+	  }
 	  else
 	    {
 	      sciprint("Unrecognized Input Pattern or parameter not valid for the algorithm! Please refer to help pages!\n");
