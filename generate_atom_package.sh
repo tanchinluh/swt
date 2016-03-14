@@ -1,2 +1,2 @@
 #!/bin/sh
-git archive --format zip --output ../swt-src.zip master 
+git archive --prefix = swt/ --format zip --output ../swt-src.zip master 
