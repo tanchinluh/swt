@@ -21,14 +21,12 @@ function test_runfromdemo ( demoscript , modulename )
   cwd = pwd();
   mprintf("Running unit tests for module : %s\n",modulename );
   mprintf("Current directory : %s\n",pwd());
-    if ( atomsIsLoaded(modulename) ) then
-      loaded = atomsGetLoaded();
-      imodule = find(loaded(:,1)=="uncprb");
-      version = loaded(imodule,2);
-      test_run(version);
-    else
-	  test_run("./");
-    end
+  test_files = dir(demopath+"/tests/unit_tests/*.tst")
+  max(size(test_files.name))
+  for i=1:max(size(test_files.name))
+    mprintf("Running %d. of %d tests: %s\n",i,max(size(test_files.name)),basename(test_files.name(i)))
+	exec(test_files.name(i));
+  end;
   cd(cwd);
 
 endfunction
