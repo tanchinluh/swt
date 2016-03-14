@@ -1394,4 +1394,3 @@ if (version(1)<6) then
 stacksize(sz(1));
 clear sz;
 end;
-clear version;
