@@ -3,13 +3,12 @@ language: cpp
 os:
   - linux
   - osx
-addons:
-  apt:
-    packages:
-      - scilab
 before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y scilab; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install install; fi
+  - scilab -version; true
 script:
   - scilab -nwni -e 'result = exec("builder.sce", "errcatch"); exit(result)'
   - scilab -nwni -e 'result = exec("loader.sce", "errcatch"); exec("runtests.sce", "errcatch"); exit(result)'
