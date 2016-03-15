@@ -127,26 +127,26 @@ end;
 
 // type 3
 for i=1:max(size(bior_fam))
-dwtmode("symh");
+dwtmode("symh",'nodisp');
 [c,l]=wavedec(s1,3,bior_fam(i));
 a0=waverec(c,l,bior_fam(i));
-dwtmode("symw");
+dwtmode("symw",'nodisp');
 a1=waverec(c,l,bior_fam(i));
-dwtmode("asymh");
+dwtmode("asymh",'nodisp');
 a2=waverec(c,l,bior_fam(i));
-dwtmode("asymw");
+dwtmode("asymw",'nodisp');
 a3=waverec(c,l,bior_fam(i));
-dwtmode("zpd");
+dwtmode("zpd",'nodisp');
 a4=waverec(c,l,bior_fam(i));
-dwtmode("sp0");
+dwtmode("sp0",'nodisp');
 a5=waverec(c,l,bior_fam(i));
-dwtmode("sp1");
+dwtmode("sp1",'nodisp');
 a6=waverec(c,l,bior_fam(i));
-dwtmode("ppd");
+dwtmode("ppd",'nodisp');
 a7=waverec(c,l,bior_fam(i));
-dwtmode("per");
+dwtmode("per",'nodisp');
 a8=waverec(c,l,bior_fam(i));
-dwtmode("symh");
+dwtmode("symh",'nodisp');
 
 assert_checkalmostequal ( a0 , a1 , %eps );
 assert_checkalmostequal ( a0 , a2 , %eps );

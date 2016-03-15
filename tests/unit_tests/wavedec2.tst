@@ -1353,7 +1353,7 @@ clear ss;
 
 
 // per
-dwtmode('per');
+dwtmode('per','nodisp');
 a=rand(500,501,'normal');
 [Lo_D,Hi_D]=wfilters('bior3.9','d');
 [c1,s1]=wavedec2(a,3,'bior3.9');
@@ -1389,7 +1389,7 @@ clear cD3;
 clear cc;
 clear ss;
 
-dwtmode('symh');
+dwtmode('symh','nodisp');
 if (version(1)<6) then
 stacksize(sz(1));
 clear sz;
