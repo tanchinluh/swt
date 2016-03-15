@@ -21,7 +21,10 @@
  * -------------------------------------------------------------------------
  */
 #include "swtlib.h"
-  #include "kiss_fft.h"
+#include "kiss_fft.h"
+
+int fftshift (double *vector_in, double *vector_out, int vector_length);
+int ifft (int Signal_Length, int Nfft, double *sig_real, double *sig_imag);
 
 
 /*void haar(double *x, int sigInLength, double *psi, int sigOutLength, double ys)
@@ -67,7 +70,8 @@ powof (double x, double alpha)
 	}
       else
 	{
-	  Scierror (999,"Attempt to compute x^alpha with x<0 : complex valued result\n");
+	  //Scierror (999,"Attempt to compute x^alpha with x<0 : complex valued result\n");
+	  fprintf(stderr, "Error: Attempt to compute x^alpha with x<0 : complex valued result\n");
 	  return 0;
 	}
     }
