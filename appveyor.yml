@@ -1,0 +1,7 @@
+install:
+  - choco install -y scilab
+
+ build:
+  - scilab -nwni -e 'result = exec("builder.sce", "errcatch"); exit(result)'
+  - scilab -nwni -e 'result = exec("loader.sce", "errcatch"); exec("runtests.sce", "errcatch"); exit(result)'
+  - scilab -nwni -e 'result = exec("cleaner.sce", "errcatch"); exit(result)'
