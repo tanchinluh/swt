@@ -1,6 +1,3 @@
-environment:
-
-
 install:
   - choco install -y scilab
   - scilab -nwni -e "result = exec("""builder.sce""", """errcatch"""); exit(result)"

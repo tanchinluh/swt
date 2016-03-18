@@ -6,16 +6,15 @@ os:
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y scilab; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export SCILAB = scilab; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget http://www.scilab.org/download/5.5.2/scilab-5.5.2.1-x86_64.dmg; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then hdiutil mount scilab-5.5.2.1-x86_64.dmg; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export SCILAB='/Volumes/InstallBuilder Enterprise/scilab-5.5.2.app/Contents/MacOS/bin/scilab'; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then scilab -version; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then '/Volumes/InstallBuilder Enterprise/scilab-5.5.2.app/Contents/MacOS/bin/scilab' -version; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then '/Volumes/scilab-5.5.2/scilab-5.5.2.app/Contents/MacOS/bin/scilab' -version; fi
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then scilab -nwni -e 'result = exec("builder.sce", "errcatch"); exit(result)'; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then scilab -nwni -e 'result = exec("cleaner.sce", "errcatch"); exit(result)'; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then scilab -nwni -e 'result = exec("loader.sce", "errcatch"); exec("runtests.sce", "errcatch"); exit(result)'; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then '/Volumes/InstallBuilder Enterprise/scilab-5.5.2.app/Contents/MacOS/bin/scilab' -nwni -e 'result = exec("builder.sce", "errcatch"); exit(result)'; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then '/Volumes/InstallBuilder Enterprise/scilab-5.5.2.app/Contents/MacOS/bin/scilab' -nwni -e 'result = exec("cleaner.sce", "errcatch"); exit(result)'; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then '/Volumes/InstallBuilder Enterprise/scilab-5.5.2.app/Contents/MacOS/bin/scilab' -nwni -e 'result = exec("loader.sce", "errcatch"); exec("runtests.sce", "errcatch"); exit(result)'; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then '/Volumes/scilab-5.5.2/scilab-5.5.2.app/Contents/MacOS/bin/scilab' -nwni -e 'result = exec("builder.sce", "errcatch"); exit(result)'; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then '/Volumes/scilab-5.5.2/scilab-5.5.2.app/Contents/MacOS/bin/scilab' -nwni -e 'result = exec("cleaner.sce", "errcatch"); exit(result)'; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then '/Volumes/scilab-5.5.2/scilab-5.5.2.app/Contents/MacOS/bin/scilab' -nwni -e 'result = exec("loader.sce", "errcatch"); exec("runtests.sce", "errcatch"); exit(result)'; fi
