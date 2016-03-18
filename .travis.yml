@@ -6,8 +6,6 @@ os:
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y scilab; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew wget; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget http://www.scilab.org/download/5.5.2/scilab-5.5.2.1-x86_64.dmg; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then hdiutil mount scilab-5.5.2.1-x86_64.dmg; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export PATH=$PATH:/Volumes/InstallBuilder Enterprise/scilab-5.5.2.app/Contents/MacOS/bin; fi
