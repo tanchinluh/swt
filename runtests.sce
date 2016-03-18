@@ -27,7 +27,7 @@ function test_runfromdemo ( demoscript , modulename )
     mprintf("Running %d. of %d tests: %s\n",i,max(size(test_files.name)),basename(test_files.name(i)))
 	ierr = exec(test_files.name(i), 'errcatch');
 	if ierr ~= 0 then
-		 mprintf("Error number detected: %d\n",ierr);
+		 mprintf("Error number detected: %d : %s\n",ierr, lasterror());
 	end;
   end;
   cd(cwd);

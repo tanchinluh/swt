@@ -1,6 +1,6 @@
 install:
   - choco install -y scilab
   - setx path "%path%;C:\Program Files\scilab-5.5.2\bin\"
-  - scilex.exe -nwni -e "result = exec("""builder.sce""", """errcatch"""); exit(result)"
-  - scilex.exe -nwni -e "result = exec("""loader.sce""", """errcatch"""); exec("""runtests.sce""", """errcatch"""); exit(result)"
-  - scilex.exe -nwni -e "result = exec("""cleaner.sce""", """errcatch"2"); exit(result)"
+  - Scilex.exe -nwni -e "result = exec("""builder.sce""", """errcatch"""); exit(result)"
+  - Scilex.exe -nwni -e "result = exec("""loader.sce""", """errcatch"""); exec("""runtests.sce""", """errcatch"""); exit(result)"
+  - Scilex.exe -nwni -e "result = exec("""cleaner.sce""", """errcatch"2"); exit(result)"
