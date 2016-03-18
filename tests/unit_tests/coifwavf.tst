@@ -154,7 +154,7 @@ F2 = coifwavf("coif1");
 F2=F2/sqrt(2);
 
 
-assert_checkalmostequal ( F2 , F , %eps, %eps );
+assert_checkalmostequal ( F2 , F , %eps, %eps*10 );
 
 // coif2
 //
@@ -163,7 +163,7 @@ F2 = coifwavf("coif2");
 F2=F2/sqrt(2);
 
 
-assert_checkalmostequal ( F2 , F , %eps, %eps );
+assert_checkalmostequal ( F2 , F , %eps, %eps*10 );
 
 // coif3
 //
@@ -172,7 +172,7 @@ F2 = coifwavf("coif3");
 F2=F2/sqrt(2);
 
 
-assert_checkalmostequal ( F2 , F , %eps, %eps );
+assert_checkalmostequal ( F2 , F , %eps, %eps*10 );
 
 // coif4
 //
@@ -181,7 +181,7 @@ F2 = coifwavf("coif4");
 F2=F2/sqrt(2);
 
 
-assert_checkalmostequal ( F2 , F , %eps, %eps );
+assert_checkalmostequal ( F2 , F , %eps, %eps*10 );
 
 // coif5
 //
@@ -190,7 +190,7 @@ F2 = coifwavf("coif5");
 F2=F2/sqrt(2);
 
 
-assert_checkalmostequal ( F2 , F , %eps, %eps );
+assert_checkalmostequal ( F2 , F , %eps, %eps*10 );
 
 
 // db20

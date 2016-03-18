@@ -32,7 +32,7 @@ s1=s1(:)';
 [Lo_D,Hi_D,Lo_R,Hi_R]=wfilters('haar');
 caa=dyaddown(wkeep(conv(wextend(1,'symh',x1,length(Lo_D),'b'),Lo_D),(length(x1)+length(Lo_D)-1)));
 cdd=dyaddown(wkeep(conv(wextend(1,'symh',x1,length(Lo_D),'b'),Hi_D),(length(x1)+length(Lo_D)-1)));
-assert_checkalmostequal ( caa , cA ,  %eps, %eps);
+assert_checkalmostequal ( caa , cA ,  %eps, %eps*10);
 assert_checkalmostequal ( cdd , cD ,  %eps, %eps*10);
 
 [cA,cD]=dwt(x2,'haar');
@@ -86,7 +86,7 @@ for N=1:10
   caa=dyaddown(wkeep(conv(wextend(1,'symh',s1,length(Lo_D),'b'),Lo_D),(length(s1)+length(Lo_D)-1)));
   cdd=dyaddown(wkeep(conv(wextend(1,'symh',s1,length(Lo_D),'b'),Hi_D),(length(s1)+length(Lo_D)-1)));
   assert_checkalmostequal ( caa , cA , %eps, %eps*10  );
-  assert_checkalmostequal ( cdd , cD , %eps, %eps  );
+  assert_checkalmostequal ( cdd , cD , %eps, %eps*10  );
 end;
 
 

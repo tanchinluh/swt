@@ -164,47 +164,47 @@ end;
   //cwt
   //sinus
   [psi,xval]=wavefun("sinus",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
   tmp=fft(psi);
   assert_checkalmostequal ( real(tmp(1)) , 0 , %eps,1e-12);
   //poisson
   [psi,xval]=wavefun("poisson",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //     tmp=fft(psi);
    assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
 // mexh
   [psi,xval]=wavefun("mexh",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
 // morl
   [psi,xval]=wavefun("morl",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
 // DOG
   [psi,xval]=wavefun("DOG",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
 // cmor
   [psi,xval]=wavefun("cmor",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
 // shan
   [psi,xval]=wavefun("shan",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
 // fbsp
   [psi,xval]=wavefun("fbsp",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
 // cauchy
   [psi,xval]=wavefun("cauchy",ITER);
-  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+  assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //     tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-12);
 
@@ -212,7 +212,7 @@ gaus_fam=["gaus1", "gaus2", "gaus3", "gaus4","gaus5","gaus6","gaus7", "gaus8"];
 for i=1:max(size(gaus_fam))
 
   [psi,xval]=wavefun(gaus_fam(i),ITER);
-   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //      tmp=fft(psi);
  assert_checkalmostequal ( sum(diff(psi)) , 0 , %eps,1e-5);
 end;
@@ -221,7 +221,7 @@ cgaus_fam=["cgau1", "cgau2", "cgau3", "cgau4","cgau5","cgau6","cgau7", "cgau8"];
 for i=1:max(size(cgaus_fam))
 
   [psi,xval]=wavefun(cgaus_fam(i),ITER);
-   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps);
+   assert_checkalmostequal ( max(size(psi))/(2^ITER) , 1 , %eps, %eps*10);
 //      tmp=fft(psi);
  assert_checkalmostequal ( real(sum(diff(psi))) , 0 , %eps,1e-7);
 end;
