@@ -22,6 +22,7 @@
  */
 #include "swtlib.h"
 #include "kiss_fft.h"
+#include <string.h>
 
 int fftshift (double *vector_in, double *vector_out, int vector_length);
 int ifft (int Signal_Length, int Nfft, double *sig_real, double *sig_imag);

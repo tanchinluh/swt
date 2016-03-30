@@ -22,6 +22,7 @@
  */
 
 #include "swtlib.h"
+#include <string.h>
 
 /*-------------------------------------------
  * Matrix Transposition Operation
