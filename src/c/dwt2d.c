@@ -22,6 +22,7 @@
  */
 
 #include "swtlib.h"
+#include <string.h>
 
 void
 dwt2D (double *matrixIn, int matrixInRow, int matrixInCol,
