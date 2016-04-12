@@ -44,14 +44,14 @@
 	   *flow = 1;
    else if ((NOutputArgument==1) && (NInputArgument==4) && (sci_matrix_vector_real(pvApiCtx,1)) &&
 	   sci_matrix_scalar_real(pvApiCtx,2) && (sci_matrix_vector_real(pvApiCtx,3)) &&
-	   (sci_matrix_vector_real(pvApiCtx,1)) && vector_length_check(pvApiCtx,3,4))
+	   (sci_matrix_vector_real(pvApiCtx,4)) && vector_length_check(pvApiCtx,3,4))
 	   *flow = 2;
    else if ((NOutputArgument==2) && (NInputArgument==3) && (sci_matrix_vector_real(pvApiCtx,1)) &&
 	   sci_matrix_scalar_real(pvApiCtx,2) && sci_strings_scalar(pvApiCtx,3))
 	   *flow = 3;
    else if ((NOutputArgument==2) && (NInputArgument==4) && (sci_matrix_vector_real(pvApiCtx,1)) &&
 	   sci_matrix_scalar_real(pvApiCtx,2) && (sci_matrix_vector_real(pvApiCtx,3)) &&
-	   (sci_matrix_vector_real(pvApiCtx,1)) && vector_length_check(pvApiCtx,3,4))
+	   (sci_matrix_vector_real(pvApiCtx,4)) && vector_length_check(pvApiCtx,3,4))
 	   *flow = 4;
    else
 	   *errCode = UNKNOWN_INPUT_ERR;
