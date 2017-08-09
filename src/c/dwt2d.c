@@ -805,7 +805,7 @@ detcoef2 (double *coef, int sigInLength, double *coefOut,
 	  int sigOutLength, int *pLen, int stride, int level,
 	  char *coefType)
 {
-  int row, col, sta;
+  int row, col, sta = 0;
   int *pH, *pV, *pD;
 
   pH = malloc (stride * sizeof (int));
@@ -816,11 +816,11 @@ detcoef2 (double *coef, int sigInLength, double *coefOut,
     {
       sta = pH[stride - level];
     }
-  if (strcmp (coefType, "v") == 0)
+  else if (strcmp (coefType, "v") == 0)
     {
       sta = pV[stride - level];
     }
-  if (strcmp (coefType, "d") == 0)
+  else if (strcmp (coefType, "d") == 0)
     {
       sta = pD[stride - level];
     }
@@ -869,7 +869,7 @@ wrcoef2 (double *coef, int sigInLength, double *lowRe,
 	 int matrixOutRow, int matrixOutCol, int *pLen,
 	 int stride, int level, char *type, extend_method extMethod)
 {
-  int count, total, sta, si;
+  int count, total, sta = 0, si = 0;
   double *coefTemp;
   int *pH, *pV, *pD;
 
@@ -889,19 +889,19 @@ wrcoef2 (double *coef, int sigInLength, double *lowRe,
       sta = pH[stride - level];
       si = (pLen[(stride - level + 1) * 2]) * (pLen[(stride - level + 1) * 2 + 1]);
     }
-  if (strcmp (type, "v") == 0)
+  else if (strcmp (type, "v") == 0)
     {
       sta = pV[stride - level];
       si = (pLen[(stride - level + 1) * 2]) * (pLen[(stride - level + 1) * 2 + 1]);
     }
-  if (strcmp (type, "d") == 0)
+  else if (strcmp (type, "d") == 0)
     {
       sta = pD[stride - level];
       si = (pLen[(stride - level + 1) * 2]) * (pLen[(stride - level + 1) * 2 + 1]);
     }
-  if (strcmp (type, "a") == 0)
+  else if (strcmp (type, "a") == 0)
     {
-      sta = 0;
+      //sta = 0;
       si = (pLen[0]) * (pLen[1]);
       if (level != stride)
 	{

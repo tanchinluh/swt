@@ -1111,14 +1111,13 @@ wrcoef (double *sigIn, int sigInLength, double *lowRe, double *hiRe,
 {
 
   int count = 0;
-  int startCount, endCount, leng;
+  int startCount, endCount, leng = 0;
   double *sigOutTemp;
 
   sigOutTemp = malloc (sigInLength * sizeof (double));
 
   if (level != 0)
     {
-      leng = 0;
       for (count = 0; count < level; count++)
 	leng += waveDecLengthArray[stride - count];
     }
