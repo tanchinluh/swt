@@ -788,10 +788,10 @@ void meyer_phi(double *x, int sigInLength,
 		xhat_r[count]=0;
 		xhat_i[count]=0;
 		xhat=0;
-	        if (abs(x[count]) <(2*PI/3))
+	        if (fabs(x[count]) <(2*PI/3))
 		  xhat=1;
-		if (abs(x[count]) >=(2*PI/3) && abs(x[count]) <(4*PI/3)){
-		  meyeraux(3/2/PI*abs(x[count])-1,&con);
+		if (fabs(x[count]) >=(2*PI/3) && fabs(x[count]) <(4*PI/3)){
+		  meyeraux(3/2/PI*fabs(x[count])-1,&con);
 		  xhat=cos(PI/2*con);
 		}
 
