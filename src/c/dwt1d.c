@@ -1038,7 +1038,7 @@ detcoef (double *sigIn, int sigInLength, int *waveDecLengthArray,
       for (count = 0; count < level; count++){
            //sciprint("tmp %d",tmp);
 			     leng +=waveDecLengthArray[stride - count];;
-			printf("");
+			//printf("");
 
 		  }
   }
