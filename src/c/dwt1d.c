@@ -1038,7 +1038,7 @@ detcoef (double *sigIn, int sigInLength, int *waveDecLengthArray,
       for (count = 0; count < level; count++){
            //sciprint("tmp %d",tmp);
 			     leng +=waveDecLengthArray[stride - count];;
-			printf("");
+			//printf("");
 
 		  }
   }
@@ -1111,14 +1111,13 @@ wrcoef (double *sigIn, int sigInLength, double *lowRe, double *hiRe,
 {
 
   int count = 0;
-  int startCount, endCount, leng;
+  int startCount, endCount, leng = 0;
   double *sigOutTemp;
 
   sigOutTemp = malloc (sigInLength * sizeof (double));
 
   if (level != 0)
     {
-      leng = 0;
       for (count = 0; count < level; count++)
 	leng += waveDecLengthArray[stride - count];
     }
@@ -1164,7 +1163,7 @@ upwlev (double *coefArray, int coefLen, int *waveDecLengthArray,
 	int stride, extend_method extMethod)
 {
   int count, pos1;
-  char c='a';
+  //char c='a';
   double *app, *det;
 
   //printf("enter upwlev!\n");

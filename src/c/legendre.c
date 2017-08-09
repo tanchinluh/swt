@@ -151,9 +151,9 @@ static const double legd9[18] = {
 void
 legendre_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-//   double *pFilterCoef;
+  //double *pFilterCoef;
   //double sum;
-  int count;
+  //int count;
 
 
   switch (member)
@@ -255,9 +255,9 @@ legendre_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 legendre_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-//   double *pFilterCoef;
+  //double *pFilterCoef;
   //double sum;
-  int count;
+  //int count;
 
 
   switch (member)

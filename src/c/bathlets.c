@@ -462,8 +462,7 @@ bathlets_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 bathlets_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-
-  double *pFilterCoef;
+  //double *pFilterCoef;
 
   switch (member)
     {

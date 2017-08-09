@@ -245,7 +245,7 @@ static const double hm6_68[18] = {
 void
 sp_bior_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef, *pFilterCoefMirror;
+  //double *pFilterCoef, *pFilterCoefMirror;
 
   switch (member) {
   case 11:
@@ -430,7 +430,7 @@ sp_bior_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 sp_bior_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef, *pFilterCoefMirror;
+  //double *pFilterCoef, *pFilterCoefMirror;
 
 
   switch (member) {
@@ -616,7 +616,7 @@ sp_bior_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 sp_rbior_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef, *pFilterCoefMirror;
+  //double *pFilterCoef, *pFilterCoefMirror;
 
   switch (member) {
   case 11:
@@ -801,7 +801,7 @@ sp_rbior_analysis_initialize (int member, swt_wavelet *pWaveStruct)
 void
 sp_rbior_synthesis_initialize (int member, swt_wavelet *pWaveStruct)
 {
-  double *pFilterCoef, *pFilterCoefMirror;
+  //double *pFilterCoef, *pFilterCoefMirror;
 
 
   switch (member) {
