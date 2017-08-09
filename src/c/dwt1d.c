@@ -1164,7 +1164,7 @@ upwlev (double *coefArray, int coefLen, int *waveDecLengthArray,
 	int stride, extend_method extMethod)
 {
   int count, pos1;
-  char c='a';
+  //char c='a';
   double *app, *det;
 
   //printf("enter upwlev!\n");

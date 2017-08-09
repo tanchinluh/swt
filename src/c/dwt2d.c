@@ -316,7 +316,7 @@ idwt2D (double *matrixInApprox, double *matrixInColDetail,
 	int matrixOutRow, int matrixOutCol, extend_method extMethod)
 {
   int row, col;
-  int filterOutLength;
+  //int filterOutLength;
   int matrixInRowM, matrixInColM;
   char c='b';
   double *matrixOutApproxPre, *matrixOutDetailPre;
@@ -350,7 +350,7 @@ idwt2D (double *matrixInApprox, double *matrixInColDetail,
 	      matrixInDetailM, matrixInRowM, matrixInColM,
 	      extMethod, &c, &c);
 
-  filterOutLength = 2 * matrixInRowM + filterLen - 1;
+  //filterOutLength = 2 * matrixInRowM + filterLen - 1;
 
   /* Approx Calculation */
   matrixOutApproxPre = malloc (matrixOutRow * matrixInColM * sizeof (double));
@@ -385,7 +385,7 @@ idwt2D (double *matrixInApprox, double *matrixInColDetail,
   free (matrixInDetailM);
 
   /* Final Inverse Transform */
-  filterOutLength = 2 * matrixInColM + filterLen - 1;
+  //filterOutLength = 2 * matrixInColM + filterLen - 1;
   matrixOutPre = malloc (matrixOutRow * matrixOutCol * sizeof (double));
   for (row = 0; row < matrixOutRow; row++)
     idwt_neo ((matrixOutApproxTemp + row * matrixInColM),
@@ -411,9 +411,9 @@ idwt2D_neo (double *matrixInApprox, double *matrixInColDetail,
 	int matrixOutRow, int matrixOutCol)
 {
   int row, col;
-  int filterOutLength;
+  //int filterOutLength;
   int matrixInRowM, matrixInColM;
-  char c='b';
+  //char c='b';
   double *matrixOutApproxPre, *matrixOutDetailPre;
   double *matrixOutApproxTemp, *matrixOutDetailTemp;
   double *matrixOutPre;
@@ -445,7 +445,7 @@ idwt2D_neo (double *matrixInApprox, double *matrixInColDetail,
 	//      matrixInDetailM, matrixInRowM, matrixInColM,
 	  //    extMethod, &c, &c);
 
-  filterOutLength = 2 * matrixInRowM + filterLen - 1;
+  //filterOutLength = 2 * matrixInRowM + filterLen - 1;
 
   /* Approx Calculation */
   matrixOutApproxPre = malloc (matrixOutRow * matrixInColM * sizeof (double));
@@ -480,7 +480,7 @@ idwt2D_neo (double *matrixInApprox, double *matrixInColDetail,
   //free (matrixInDetailM);
 
   /* Final Inverse Transform */
-  filterOutLength = 2 * matrixInColM + filterLen - 1;
+  //filterOutLength = 2 * matrixInColM + filterLen - 1;
   matrixOutPre = malloc (matrixOutRow * matrixOutCol * sizeof (double));
   for (row = 0; row < matrixOutRow; row++)
     idwt_neo ((matrixOutApproxTemp + row * matrixInColM),
@@ -1394,9 +1394,9 @@ idwt2D_neo_a (double *matrixInApprox, double *matrixInColDetail,
 	      int matrixOutRow, int matrixOutCol)
 {
   int row, col;
-  int filterOutLength;
+  //int filterOutLength;
   int matrixInRowM, matrixInColM;
-  char c='b';
+  //char c='b';
   double *matrixOutApproxPre, *matrixOutDetailPre;
   double *matrixOutApproxTemp, *matrixOutDetailTemp;
   double *matrixOutPre;
@@ -1405,7 +1405,7 @@ idwt2D_neo_a (double *matrixInApprox, double *matrixInColDetail,
   matrixInColM = matrixInCol;// + 2 * (filterLen - 1);
 
 
-  filterOutLength = 2 * matrixInRowM + filterLen - 1;
+  //filterOutLength = 2 * matrixInRowM + filterLen - 1;
 
   /* Approx Calculation */
   matrixOutApproxPre = malloc (matrixOutRow * matrixInColM * sizeof (double));
@@ -1436,7 +1436,7 @@ idwt2D_neo_a (double *matrixInApprox, double *matrixInColDetail,
   free (matrixOutDetailPre);
 
   /* Final Inverse Transform */
-  filterOutLength = 2 * matrixInColM + filterLen - 1;
+  //filterOutLength = 2 * matrixInColM + filterLen - 1;
   matrixOutPre = malloc (matrixOutRow * matrixOutCol * sizeof (double));
   for (row = 0; row < matrixOutRow; row++)
     idwt_neo ((matrixOutApproxTemp + row * matrixInColM),

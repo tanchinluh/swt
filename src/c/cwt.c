@@ -672,7 +672,7 @@ void fbspwavf(double *x, int sigInLength,int m,
 			double fb, double fc, double *psir, double *psii,
 			int sigOutLength, double ys)
 {
-	int count, i;
+	int count /*, i*/;
 	double con, econ;
 
 	con = sqrt(fb);
