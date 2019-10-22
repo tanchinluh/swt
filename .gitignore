@@ -30,3 +30,28 @@
 
 # Debug files
 *.dSYM/
+
+# Scilab Binary
+*.bin
+lib
+
+# Help files and images
+*.html
+*.png
+
+# Scilab files 
+*loader*.sce
+cleaner*.sce
+
+# Others
+*.def
+*.exp
+*.mak
+
+# Others folders
+/help
+/jar
+
+# Module specified autogen
+swt_*
+
